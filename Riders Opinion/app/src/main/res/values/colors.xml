@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dark_brown">#451308</color>
+    <color name="white">#fff</color>
+    <color name="light_brown">#D1622A</color>
+    <color name="pink_color_edit_text_hint">#e5af93</color>
+    <color name="ten_of_black">#1A000000</color>
+    <color name="twenty_of_black">#33000000</color>
+    <color name="fourty_of_black">#66000000</color>
+    <color name="light_yellow">#F8E541</color>
+</resources>

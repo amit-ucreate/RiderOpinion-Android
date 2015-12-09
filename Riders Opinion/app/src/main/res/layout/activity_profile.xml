@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_brown">
+
+
+        <TextView
+            android:id="@+id/tvTitleToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="PROFILE"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="16dp"
+            android:src="@drawable/menu_icon" />
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/sdvDisplayPicture"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="center"
+                app:placeholderImage="@color/twenty_of_black"
+                app:roundAsCircle="true" />
+
+            <EditText
+                android:id="@+id/etName"
+                android:layout_marginTop="32dp"
+                android:hint="Enter Name"
+                android:text="XYZ ROCKSS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp" />
+
+            <EditText
+                android:id="@+id/etAddress"
+                android:hint="Enter Address"
+                android:text="H.No.293, Sector 28, Chandigarh"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:inputType="phone"
+                android:hint="Enter Phone No."
+                android:text="9813198131"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp" />
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:hint="Enter Email"
+                android:inputType="textEmailAddress"
+                android:text="x@x.com"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp" />
+
+            <EditText
+                android:id="@+id/etBikeBrand"
+                android:hint="Enter Bike Brand Name"
+                android:text="ROYAL ENFIELD"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp" />
+
+            <EditText
+                android:id="@+id/etBikeModel"
+                android:hint="Enter Bike Model"
+                android:text="CLASSIC 350"
+                android:padding="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp" />
+
+            <TextView
+                android:id="@+id/tvUpdate"
+                android:text="UPDATE"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:background="@color/light_brown"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lvSlidingMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@color/light_brown"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark_brown"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvDp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    app:placeholderImage="@color/white"
+                    app:roundAsCircle="true" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/sdvDp"
+                    android:singleLine="true"
+                    android:text="XYZ ROCKSS"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/title_text_size" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/tvName"
+                    android:layout_below="@id/tvName"
+                    android:layout_toLeftOf="@id/sdvDp"
+                    android:text="H.No.293, Sector 28, Chandigarh"
+                    android:textColor="@android:color/white" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvDestinations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:text="RIDING DESTINATIONS"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+            <TextView
+                android:id="@+id/tvEvents"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:text="RIDING EVENTS"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+            <TextView
+                android:id="@+id/tvModifyBike"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:text="MODIFY YOUR BIKE"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+            <TextView
+                android:id="@+id/tvMeetAndPlanRide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:text="MEET 'N' PLAN A RIDE"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+            <TextView
+                android:id="@+id/tvHealthyRiding"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:text="HEALTHY RIDING"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+            <TextView
+                android:id="@+id/tvGetDirections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:text="GET DIRECTIONS"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+            <TextView
+                android:id="@+id/tvNotifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:text="NOTIFICATIONS"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+            <TextView
+                android:id="@+id/tvSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingTop="8dp"
+                android:text="SETTINGS"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+        </LinearLayout>
+
+    </android.support.v4.widget.DrawerLayout>
+
+
+</LinearLayout>

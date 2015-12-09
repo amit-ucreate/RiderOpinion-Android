@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.nutsuser.ridersdomain">
+
+    <permission
+        android:name="com.nutsuser.ridersdomain.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.nutsuser.ridersdomain.permission.MAPS_RECEIVE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- Required to show current location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".activities.FirstPageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activities.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MainScreenActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.GetDirections"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.DestinationsListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activities.DestinationsDetailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.PlanRideActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.EventsListActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <activity
+            android:name=".activities.ModifyBikeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name=".activities.HealthyRidingActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.FilterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.MapActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.EventDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.ModifiersListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ModifierDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PlannedRidingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.PlanRideDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ModifierAddressActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".activities.ChatListScreen"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <!-- Goolge Maps API Key -->
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyBdpnys7Inem7uaSsA5TxxXv2nz7Xz81Tw" />
+
+    </application>
+
+</manifest>

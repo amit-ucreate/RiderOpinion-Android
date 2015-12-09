@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginBottom="55dp">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_brown">
+
+
+        <TextView
+            android:id="@+id/tvTitleToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="RIDING GEARS"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="16dp"
+            android:src="@drawable/menu_icon" />
+
+        <ImageView
+            android:id="@+id/ivFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="16dp"
+            android:src="@drawable/icon_filter" />
+
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvBikeName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/icon_rides"
+                android:drawablePadding="8dp"
+                android:drawableRight="@drawable/icon_profile_down_arrow"
+                android:padding="8dp"
+                android:text="HARLEY DAVIDSON-STREET 750"
+                android:textColor="@color/light_brown" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sdvSponsoredAdImage1"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="4dp"
+                        app:placeholderImage="@color/twenty_of_black" />
+
+                    <TextView
+                        android:id="@+id/tvSponsoredAdTitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/sdvSponsoredAdImage1"
+                        android:layout_toRightOf="@id/sdvSponsoredAdImage1"
+                        android:text="Hotel Whispering Winds"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvSponsoredAdReviews1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvSponsoredAdTitle1"
+                        android:layout_toRightOf="@id/sdvSponsoredAdImage1"
+                        android:text="72 Reviews"
+                        android:textSize="11sp" />
+
+
+                    <ImageView
+                        android:id="@+id/ivStar1Add1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews1"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/tvSponsoredAdReviews1"
+                        android:src="@drawable/icon_star_full_small" />
+
+                    <ImageView
+                        android:id="@+id/ivStar2Add1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews1"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toRightOf="@id/ivStar1Add1"
+                        android:src="@drawable/icon_star_full_small" />
+
+                    <ImageView
+                        android:id="@+id/ivStar3Add1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews1"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toRightOf="@id/ivStar2Add1"
+                        android:src="@drawable/icon_star_full_small" />
+
+                    <ImageView
+                        android:id="@+id/ivStar4Add1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews1"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toRightOf="@id/ivStar3Add1"
+                        android:src="@drawable/icon_star_half_small" />
+
+                    <ImageView
+                        android:id="@+id/ivStar5Add1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews1"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toRightOf="@id/ivStar4Add1"
+                        android:src="@drawable/icon_star_empty_small" />
+
+
+                    <TextView
+                        android:id="@+id/tvSponsoredAdLocation1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvSponsoredAdReviews1"
+                        android:layout_toRightOf="@id/sdvSponsoredAdImage1"
+                        android:text="Kasauli, India"
+                        android:textSize="11sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sdvSponsoredAdImage2"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginRight="4dp"
+                        app:placeholderImage="@color/twenty_of_black" />
+
+                    <TextView
+                        android:id="@+id/tvSponsoredAdTitle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/sdvSponsoredAdImage2"
+                        android:text="Hotel Whispering Winds"
+                        android:textSize="11sp" />
+
+                    <TextView
+                        android:id="@+id/tvSponsoredAdReviews2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvSponsoredAdTitle2"
+                        android:layout_toRightOf="@id/sdvSponsoredAdImage2"
+                        android:text="72 Reviews"
+                        android:textSize="11sp" />
+
+                    <ImageView
+                        android:id="@+id/ivStar1Add2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews2"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/tvSponsoredAdReviews2"
+                        android:src="@drawable/icon_star_full_small" />
+
+                    <ImageView
+                        android:id="@+id/ivStar2Add2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews2"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toRightOf="@id/ivStar1Add2"
+                        android:src="@drawable/icon_star_full_small" />
+
+                    <ImageView
+                        android:id="@+id/ivStar3Add2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews2"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toRightOf="@id/ivStar2Add2"
+                        android:src="@drawable/icon_star_full_small" />
+
+                    <ImageView
+                        android:id="@+id/ivStar4Add2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews2"
+                        android:layout_marginBottom="4dp"
+                        android:layout_toRightOf="@id/ivStar3Add2"
+                        android:src="@drawable/icon_star_half_small" />
+
+                    <ImageView
+                        android:id="@+id/ivStar5Add2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@id/tvSponsoredAdReviews2"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_toRightOf="@id/ivStar4Add2"
+                        android:src="@drawable/icon_star_empty_small" />
+
+                    <TextView
+                        android:id="@+id/tvSponsoredAdLocation2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvSponsoredAdReviews2"
+                        android:layout_toRightOf="@id/sdvSponsoredAdImage2"
+                        android:text="Kasauli, India"
+                        android:textSize="11sp" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <ListView
+                android:id="@+id/lvDealers"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:divider="@color/ten_of_black"
+                android:dividerHeight="2dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lvSlidingMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="#8A3C16"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlProfile"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@color/dark_brown"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/icon_menu_edit"
+                    android:layout_centerInParent="true"
+
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    />
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/icon_menu_logout"
+                    android:layout_centerInParent="true"
+
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    />
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:singleLine="true"
+                    android:gravity="top|center"
+
+                    android:layout_alignParentTop="true"
+                    android:text="VISHAL SHAHI"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/title_text_size" />
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvDp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_below="@+id/tvName"
+                    android:layout_centerInParent="true"
+                    app:placeholderImage="@color/white"
+                    app:roundAsCircle="true" />
+
+
+
+                <!--  <TextView
+                      android:id="@+id/tvAddress"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_alignLeft="@id/tvName"
+                      android:layout_below="@id/tvName"
+                      android:layout_toLeftOf="@id/sdvDp"
+                      android:text="H.No.293, Sector 28, Chandigarh"
+                      android:textColor="@android:color/white" />-->
+
+
+            </RelativeLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white">
+
+
+
+                <GridView
+                    android:id="@+id/gridView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/rlProfile"
+                    android:numColumns="2"
+
+                    android:horizontalSpacing="1dp"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="1dp">
+
+                </GridView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#8555"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+
+        android:id="@+id/mainbanner">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BANNER 50 PX HEIGHT"
+            android:gravity="center"
+            android:textSize="22sp"
+            android:layout_gravity="center_vertical|center"
+            android:textColor="@android:color/white"/>
+    </FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_brown">
+
+
+        <TextView
+            android:id="@+id/tvTitleToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="RIDING GEARS"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvModifierName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:drawableRight="@drawable/icon_batch"
+                android:gravity="center"
+                android:text="EMPIRE AUTO SALES"
+                android:textSize="@dimen/title_text_size" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivFavorite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:padding="12dp"
+                    android:src="@drawable/icon_star_full" />
+
+                <ImageView
+                    android:id="@+id/ivVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/ivFavorite"
+                    android:padding="12dp"
+                    android:src="@drawable/icon_video" />
+
+                <ImageView
+                    android:id="@+id/ivStar1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/icon_star_full_small" />
+
+                <ImageView
+                    android:id="@+id/ivStar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/ivStar1"
+                    android:layout_toRightOf="@id/ivStar1"
+                    android:src="@drawable/icon_star_full_small" />
+
+                <ImageView
+                    android:id="@+id/ivStar3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/ivStar1"
+                    android:layout_toRightOf="@id/ivStar2"
+                    android:src="@drawable/icon_star_full_small" />
+
+                <ImageView
+                    android:id="@+id/ivStar4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/ivStar1"
+                    android:layout_toRightOf="@id/ivStar3"
+                    android:src="@drawable/icon_star_full_small" />
+
+                <ImageView
+                    android:id="@+id/ivStar5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/ivStar1"
+                    android:layout_toRightOf="@id/ivStar4"
+                    android:src="@drawable/icon_star_full_small" />
+
+                <TextView
+                    android:id="@+id/tvReviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@id/ivStar1"
+                    android:layout_below="@id/ivStar1"
+                    android:layout_toLeftOf="@id/ivVideo"
+                    android:textSize="@dimen/date_text_size" />
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvLabelAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:text="ADDRESS"
+                android:textColor="@color/light_brown" />
+
+            <TextView
+                android:id="@+id/tvModifierAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="E91, Phase 8, Mohali, Punjab, India" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvLabelPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PHONE"
+                        android:textColor="@color/light_brown" />
+
+                    <TextView
+                        android:id="@+id/tvPhone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="9814123456 \n0172-2456654" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvLabelTiming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TIMINGS"
+                        android:textColor="@color/light_brown" />
+
+                    <TextView
+                        android:id="@+id/tvTiming"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00am-08:00pm" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="320dp"
+                android:layout_marginTop="12dp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

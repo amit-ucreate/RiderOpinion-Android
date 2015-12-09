@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:layout_marginTop="8dp">
+
+    <ImageView
+        android:id="@+id/ivStar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="8dp"
+        android:src="@drawable/icon_star_full" />
+
+    <ImageView
+        android:id="@+id/ivMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/ivStar"
+        android:padding="8dp"
+        android:src="@drawable/icon_map" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_toLeftOf="@id/ivMap"
+        android:text="3-Day Ride from Chandigarh to New Delhi(Stopover at Karnal)"
+        android:textColor="@color/dark_brown" />
+
+    <TextView
+        android:id="@+id/tvPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/icon_get_direction"
+        android:drawablePadding="8dp"
+        android:text="New Delhi"
+        android:textColor="@color/dark_brown" />
+
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvPlace"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:drawableLeft="@drawable/icon_calendar"
+        android:drawablePadding="8dp"
+        android:text="15 sept 2015" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tvDate"
+        android:layout_marginLeft="32dp"
+        android:layout_toRightOf="@id/tvDate"
+        android:drawableLeft="@drawable/icon_time"
+        android:drawablePadding="8dp"
+        android:text="5:00-5:30" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/light_brown"
+        android:gravity="center"
+        android:paddingBottom="16dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="16dp"
+        android:src="@drawable/right_arrow" />
+
+</RelativeLayout>

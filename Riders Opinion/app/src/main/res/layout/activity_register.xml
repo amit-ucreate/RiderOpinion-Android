@@ -1,0 +1,138 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/tvTagRiders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/logo_small"
+            android:text="Riders"
+            android:textSize="@dimen/register_rider_text_size"
+            android:textColor="@color/dark_brown" />
+
+        <TextView
+            android:id="@+id/tvTagOpinion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="opinion"
+            android:textSize="@dimen/register_rider_text_size"
+            android:textColor="@color/light_brown" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="ENTER YOUR DETAILS"
+            android:textStyle="bold"
+            android:textSize="@dimen/title_text_size"
+            android:textColor="@color/dark_brown" />
+
+        <EditText
+            android:id="@+id/edPhoneNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/white"
+            android:hint="Phone Number"
+            android:inputType="phone"
+            android:padding="8dp"
+            android:textColorHint="@color/pink_color_edit_text_hint"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/white"
+            android:hint="Email Address"
+            android:inputType="textEmailAddress"
+            android:padding="8dp"
+            android:textColorHint="@color/pink_color_edit_text_hint"
+            android:textSize="16sp" />
+
+        <!--<EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/white"
+            android:padding="8dp"
+            android:hint="Vehicle Type"
+            android:textColorHint="@color/pink_color_edit_text_hint"
+            android:textSize="16sp" />-->
+
+        <EditText
+            android:id="@+id/edBrandName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/white"
+            android:padding="8dp"
+            android:hint="Brand Name"
+            android:textColorHint="@color/pink_color_edit_text_hint"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edModelName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/white"
+            android:padding="8dp"
+            android:hint="Model Name"
+            android:textColorHint="@color/pink_color_edit_text_hint"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvExplore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="12dp"
+            android:background="@color/light_brown"
+            android:paddingBottom="8dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingTop="8dp"
+            android:text="Explore"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:src="@drawable/taketour"
+        android:padding="12dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>
