@@ -26,13 +26,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                ChatFragment tab1 = new ChatFragment();
+                RecentsFragment tab1 = new RecentsFragment();
                 return tab1;
             case 1:
                 ContactsFragment tab2 = new ContactsFragment();
                 return tab2;
             case 2:
-                RecentsFragment tab3 = new RecentsFragment();
+                ChatFragment tab3 = new ChatFragment();
                 return tab3;
             case 3:
                 SettingFragment tab4 = new SettingFragment();

@@ -99,6 +99,11 @@
             android:screenOrientation="portrait" />
         <activity android:name=".activities.ChatListScreen"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".activities.NotificationScreen"
+            android:screenOrientation="portrait">
+
         </activity>
 
         <!-- Goolge Maps API Key -->
