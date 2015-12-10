@@ -39,7 +39,7 @@
 
                 android:drawablePadding="8dp"
                 android:layout_marginLeft="5dp"
-                android:text="3-Day Ride from Chandigarh"
+                android:text="SMART BIKERS"
                 android:textColor="#CD411E"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

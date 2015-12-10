@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.view.View;
+import android.widget.TextView;
 
 import com.nutsuser.ridersdomain.R;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -17,7 +20,10 @@ import butterknife.OnClick;
 public class MainScreenActivity extends BaseActivity {
 
     private Activity activity;
-
+    @Bind(R.id.tv_TagRiders)
+    TextView tv_TagRiders;
+    @Bind(R.id.tv_TagOpinion)
+    TextView tv_TagOpinion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +39,13 @@ public class MainScreenActivity extends BaseActivity {
 
             }
         }, 300);
+        String text = "<font color=#D1622A>Divided</font> <font color=#000000>By Boundaries</font>";
+        String text_ = "<font color=#D1622A>United</font> <font color=#000000>By Throttles</font>";
+        tv_TagRiders.setText(Html.fromHtml(text));
+        tv_TagOpinion.setText(Html.fromHtml(text_));
     }
 
-    @OnClick({R.id.ivRidingDestination, R.id.ivPlanRide, R.id.ivRidingEvents, R.id.ivModifyBike, R.id.ivHealthyRides, R.id.ivSettings})
+    @OnClick({R.id.ivRidingDestination, R.id.ivPlanRide, R.id.ivRidingEvents, R.id.ivModifyBike, R.id.ivHealthyRides, R.id.ivSettings,R.id.ivGetDirections})
     void click(View view) {
         switch (view.getId()) {
             case R.id.ivRidingDestination:
@@ -48,6 +58,11 @@ public class MainScreenActivity extends BaseActivity {
                 //if (!prefsManager.isLoginDone())
                  //   startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
                 startActivity(new Intent(MainScreenActivity.this, PlanRideActivity.class));
+                break;
+            case R.id.ivGetDirections:
+                //if (!prefsManager.isLoginDone())
+                //   startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+                startActivity(new Intent(MainScreenActivity.this, GetDirections.class));
                 break;
 
             case R.id.ivRidingEvents:

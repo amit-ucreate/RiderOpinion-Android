@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 
@@ -24,6 +25,11 @@ public class FirstPageActivity extends BaseActivity {
     @Bind(R.id.tvTagOpinion)
     TextView tvTagOpinion;
 
+    @Bind(R.id.tv_TagRiders)
+    TextView tv_TagRiders;
+    @Bind(R.id.tv_TagOpinion)
+    TextView tv_TagOpinion;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +38,10 @@ public class FirstPageActivity extends BaseActivity {
         activity = FirstPageActivity.this;
         ButterKnife.bind(activity);
         setFontsToViews();
+        String text = "<font color=#D1622A>Divided</font> <font color=#000000>By Boundaries</font>";
+        String text_ = "<font color=#D1622A>United</font> <font color=#000000>By Throttles</font>";
+        tv_TagRiders.setText(Html.fromHtml(text));
+        tv_TagOpinion.setText(Html.fromHtml(text_));
 
     }
 

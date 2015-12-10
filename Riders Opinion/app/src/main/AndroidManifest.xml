@@ -105,7 +105,9 @@
             android:screenOrientation="portrait">
 
         </activity>
-
+        <activity
+            android:name=".activities.ChatScreen"
+            android:screenOrientation="portrait" />
         <!-- Goolge Maps API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

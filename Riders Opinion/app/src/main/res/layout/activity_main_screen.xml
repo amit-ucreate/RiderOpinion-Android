@@ -5,6 +5,7 @@
     android:background="@drawable/background">
 
     <LinearLayout
+        android:id="@+id/llstartlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
@@ -27,7 +28,34 @@
             android:textColor="@color/light_brown"
             android:textSize="@dimen/register_rider_text_size" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lltextlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/llstartlayout"
+        android:orientation="vertical"
+        android:layout_marginTop="1dp">
+        <TextView
+            android:id="@+id/tv_TagRiders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/date_text_size"
+            android:layout_marginBottom="-12dp"
+            android:textColor="@color/dark_brown"
+            android:text="Divided By Boundaries" />
 
+        <TextView
+            android:id="@+id/tv_TagOpinion"
+            android:layout_marginTop="8dp"
+            android:textSize="@dimen/date_text_size"
+            android:textColor="@color/light_brown"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_height="wrap_content"
+            android:text="United By Throttles" />
+        </LinearLayout>
     <ImageView
         android:id="@+id/ivSettings"
         android:padding="16dp"
