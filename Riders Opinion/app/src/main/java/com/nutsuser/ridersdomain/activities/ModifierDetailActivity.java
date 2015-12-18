@@ -164,7 +164,9 @@ public class ModifierDetailActivity extends BaseActivity {
     void click(View view) {
         switch (view.getId()) {
             case R.id.ivGetLocation:
-                startActivity(new Intent(activity, ModifierAddressActivity.class));
+                Intent mIntent=new Intent(activity, ModifierAddressActivity.class);
+                startActivity(mIntent);
+                //startActivity(new Intent(activity, ModifierAddressActivity.class));
                 break;
             case R.id.ivFilter:
                 startActivity(new Intent(activity, FilterActivity.class));

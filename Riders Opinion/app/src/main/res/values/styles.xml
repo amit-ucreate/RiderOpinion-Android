@@ -3,6 +3,23 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-    </style>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/black_transparent</item>
+        <item name="colorPrimary">@color/light_brown</item>
+        <item name="colorPrimaryDark">@color/light_brown</item>
+        <item name="colorAccent">@color/light_brown</item>
 
+    </style>
+    <style name="TranslucentBlack" parent="android:Theme.Translucent">
+        <item name="android:windowBackground">@color/black_transparent</item>
+    </style>
+    <style name="Theme_trans" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+
+    </style>
+    <style name="Theme_Transparent" parent="android:Theme.NoTitleBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@drawable/theme_transparent</item>
+    </style>
 </resources>

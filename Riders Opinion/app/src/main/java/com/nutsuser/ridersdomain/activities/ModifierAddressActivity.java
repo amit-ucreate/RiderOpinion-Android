@@ -1,11 +1,16 @@
 package com.nutsuser.ridersdomain.activities;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +20,7 @@ import com.nutsuser.ridersdomain.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by user on 10/5/2015.
@@ -22,13 +28,14 @@ import butterknife.ButterKnife;
 public class ModifierAddressActivity extends BaseActivity {
 
     private Activity activity;
-    @Bind(R.id.toolbar)
+   /* @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.tvTitleToolbar)
-    TextView tvTitleToolbar;
+    TextView tvTitleToolbar;*/
     // Google Map
     private GoogleMap googleMap;
-
+@Bind(R.id.ivcross)
+    ImageView ivcross;
     @Bind(R.id.tvLabelAddress)
     TextView tvLabelAddress;
     @Bind(R.id.tvModifierAddress)
@@ -49,11 +56,14 @@ public class ModifierAddressActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //settheme();
         setContentView(R.layout.activity_modifier_address);
+      // getWindow().setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.black_transparent)));
         activity = this;
         ButterKnife.bind(this);
-        overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
-        setupActionBar();
+        //overridePendingTransition(R.anim.trans_left_in, R.anim.trans_left_out);
+       // setupActionBar();
         setFonts();
         tvReviews.setText("102,678 ewviews & opinions");
     }
@@ -72,7 +82,7 @@ public class ModifierAddressActivity extends BaseActivity {
 
     private void setFonts() {
         Typeface typefaceNormal = Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF");
-        tvTitleToolbar.setTypeface(typefaceNormal);
+     //   tvTitleToolbar.setTypeface(typefaceNormal);
         tvReviews.setTypeface(typefaceNormal);
         tvLabelAddress.setTypeface(typefaceNormal);
         tvModifierName.setTypeface(typefaceNormal);
@@ -99,7 +109,7 @@ public class ModifierAddressActivity extends BaseActivity {
     }
 
     private void setupActionBar() {
-        setSupportActionBar(toolbar);
+      //  setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -119,5 +129,14 @@ public class ModifierAddressActivity extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    @OnClick({R.id.ivcross})
+    void click(View view) {
+        switch (view.getId()) {
+            case R.id.ivcross:
+               finish();
+                //startActivity(new Intent(activity, ModifierAddressActivity.class));
+                break;
 
+        }
+    }
 }

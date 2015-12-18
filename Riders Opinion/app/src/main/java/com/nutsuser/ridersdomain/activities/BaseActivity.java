@@ -6,11 +6,13 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.utils.PrefsManager;
 
 /**
@@ -48,5 +50,9 @@ public class BaseActivity extends AppCompatActivity {
             //noinspection deprecation
             return new int[]{d.getWidth(), d.getHeight()};
         }
+    }
+    public void settheme(){
+        setTheme(R.style.Theme_trans);
+        Log.e("BASE ","THEME CALL");
     }
 }

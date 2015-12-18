@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <!--<android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,28 +21,52 @@
             android:textSize="@dimen/title_text_size"
             android:textStyle="bold" />
 
-    </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>-->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="35dp"
+        android:background="@color/white">
+        <!--<ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center_horizontal"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_popup_close"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvModifierName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="12dp"
-                android:drawableRight="@drawable/icon_batch"
-                android:gravity="center"
-                android:text="EMPIRE AUTO SALES"
-                android:textSize="@dimen/title_text_size" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvModifierName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:drawableRight="@drawable/icon_batch"
+                    android:gravity="center"
+                    android:text="EMPIRE AUTO SALES"
+                    android:textSize="@dimen/title_text_size" />
+                <ImageView
+                    android:id="@+id/ivcross"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_popup_close"/>
+            </FrameLayout>
+
+
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -186,8 +210,13 @@
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="320dp"
-                android:layout_marginTop="12dp" />
+                android:layout_height="250dp"
+                android:layout_marginTop="10dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@android:color/white"
+                ></View>
 
         </LinearLayout>
 

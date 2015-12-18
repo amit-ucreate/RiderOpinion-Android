@@ -8,4 +8,6 @@
     <color name="twenty_of_black">#33000000</color>
     <color name="fourty_of_black">#66000000</color>
     <color name="light_yellow">#F8E541</color>
+    <color name="black_transparent">#99000000</color>
+
 </resources>

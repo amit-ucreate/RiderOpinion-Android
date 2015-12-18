@@ -135,8 +135,35 @@
             android:src="@drawable/get_directions" />
 
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/llBottom_Layout"
+        android:layout_below="@+id/llBottomLayout"
+        android:gravity="center_vertical"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <ImageView
+            android:id="@+id/ivTakeTour"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_take_tour_menu" />
+
+        <ImageView
+
+            android:id="@+id/ivLiveDream"
+            android:layout_width="0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_live_drem_menu" />
+
+    </LinearLayout>
 
 
+
+<!--
 <FrameLayout
     android:layout_width="match_parent"
     android:layout_height="120dp"
@@ -153,6 +180,7 @@
         android:layout_gravity="center_vertical|center"
         android:textColor="@android:color/white"/>
 </FrameLayout>
+-->
 
 
 </RelativeLayout>
