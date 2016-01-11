@@ -62,9 +62,11 @@ public class CustomGridAdapter extends BaseAdapter {
         rowView = inflater.inflate(R.layout.gridview_list, null);
         holder.tv=(TextView) rowView.findViewById(R.id.textView1);
         holder.img=(ImageView) rowView.findViewById(R.id.imageView1);
+    holder.tv.setText(result[position]);
 
-        holder.tv.setText(result[position]);
-        holder.img.setImageResource(imageId[position]);
+    holder.img.setImageResource(imageId[position]);
+
+
 
        /* rowView.setOnClickListener(new View.OnClickListener() {
 

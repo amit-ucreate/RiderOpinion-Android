@@ -27,12 +27,12 @@ public class RegisterActivity extends BaseActivity {
     TextView tvTagOpinion;
     @Bind(R.id.edPhoneNo)
     EditText edTagPhoneNo;
-    @Bind(R.id.edEmailAddress)
+  /*  @Bind(R.id.edEmailAddress)
     EditText edTagEmailAddress;
     @Bind(R.id.edBrandName)
     EditText edTagBrandName;
     @Bind(R.id.edModelName)
-    EditText edTagModelName;
+    EditText edTagModelName;*/
 
 
     @Override
@@ -53,6 +53,7 @@ public class RegisterActivity extends BaseActivity {
     void click(View view) {
         switch (view.getId()) {
             case R.id.tvExplore:
+                startActivity(new Intent(RegisterActivity.this, AfterRegisterScreen.class));
                 finish();
                 break;
         }

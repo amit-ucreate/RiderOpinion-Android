@@ -59,13 +59,19 @@
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="55dp"
+
         android:layout_below="@id/toolbar">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
 
         <ScrollView
-
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -466,13 +472,134 @@
                     android:paddingRight="12dp"
                     android:paddingTop="8dp"
                     android:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book" />
+                <RelativeLayout
+                    android:id="@+id/getdirectionlayout"
+                    android:layout_below="@+id/tvDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp">
+
+                    <ImageView
+                        android:id="@+id/ivMap2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/icon_map_big" />
+
+                    <TextView
+                        android:id="@+id/tvPlace3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_toRightOf="@id/ivMap2"
+                        android:drawableRight="@drawable/icon_get_direction"
+                        android:text="CHANDIGARH" />
+
+                    <View
+                        android:id="@+id/viewLine2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_brown"
+                        android:layout_below="@id/tvPlace3"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_toRightOf="@id/ivMap2" />
+
+                    <TextView
+                        android:layout_marginTop="8dp"
+                        android:id="@+id/tvPlace4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/viewLine2"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="12dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_toRightOf="@id/ivMap2"
+                        android:drawableRight="@drawable/icon_get_direction"
+                        android:text="SHIMLA" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:id="@+id/view_direction"
+                    android:layout_below="@+id/getdirectionlayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@color/light_brown" />
+
+                <fragment
+                    android:id="@+id/map"
+                    android:layout_marginTop="8dp"
+                    android:name="com.google.android.gms.maps.MapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+
+                    android:layout_below="@+id/view_direction"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/rv_properties"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/map"
+                    >
+                    <TextView
+                        android:id="@+id/tv_Eatables"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginLeft="60dp"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@drawable/icon_eating_joints"
+                        android:padding="16dp"
+                        android:text="12" />
+
+                    <TextView
+                        android:id="@+id/tv_PetrolPump"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_Eatables"
+                        android:layout_toRightOf="@id/tv_Eatables"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@drawable/icon_petrol_pump"
+                        android:padding="16dp"
+                        android:text="18" />
+
+
+                    <TextView
+                        android:id="@+id/tv_ServiceCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_Eatables"
+                        android:layout_toRightOf="@id/tv_PetrolPump"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@drawable/icon_mechanic"
+                        android:padding="16dp"
+                        android:text="8" />
+
+                    <TextView
+                        android:id="@+id/tv_FirstAid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/tv_Eatables"
+                        android:layout_toRightOf="@id/tv_ServiceCenter"
+                        android:drawablePadding="8dp"
+                        android:drawableTop="@drawable/icon_firstaid"
+                        android:padding="16dp"
+                        android:text="12" />
+                </RelativeLayout>
 
 
                 <TextView
                     android:id="@+id/tvRouteReview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvDesc"
+                    android:layout_below="@id/rv_properties"
                     android:layout_margin="12dp"
                     android:text="ROUTE REVIEW"
                     android:textColor="@color/light_brown" />
@@ -482,7 +609,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_below="@id/tvDesc"
+                    android:layout_below="@id/rv_properties"
                     android:padding="4dp"
                     android:src="@drawable/icon_grid_view_sel" />
 
@@ -490,7 +617,7 @@
                     android:id="@+id/ivWeather"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/tvDesc"
+                    android:layout_below="@id/rv_properties"
                     android:layout_toLeftOf="@id/ivGridView"
                     android:padding="4dp"
                     android:src="@drawable/icon_image_view_sel" />
@@ -516,7 +643,18 @@
             </RelativeLayout>
 
         </ScrollView>
-
+            <TextView
+                android:id="@+id/tvSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#8555"
+                android:textColor="@android:color/white"
+                android:text="BANNER 50 PX HEIGHT"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:padding="12dp"
+                />
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/lvSlidingMenu"
             android:layout_width="match_parent"
@@ -594,6 +732,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:background="@android:color/white">
 
 
@@ -611,12 +750,20 @@
                     android:verticalSpacing="1dp">
 
                 </GridView>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"
+                    ></View>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#8A3C16"></FrameLayout>
             </LinearLayout>
         </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 
-    <FrameLayout
+   <!-- <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="#8555"
@@ -632,6 +779,6 @@
             android:textSize="22sp"
             android:layout_gravity="center_vertical|center"
             android:textColor="@android:color/white"/>
-    </FrameLayout>
+    </FrameLayout>-->
 
 </RelativeLayout>

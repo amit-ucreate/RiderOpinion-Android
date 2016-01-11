@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    swipe:leftEdgeSwipeOffset="0dp"
+    swipe:rightEdgeSwipeOffset="0dp">
+
+    <!--Bottom View For Right to Left-->
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:weightSum="2">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/light_brown">
+            <ImageView
+                android:id="@+id/ivimage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center|center_horizontal"
+                android:src="@drawable/ic_swipe_route_review"/>
+
+            <TextView
+                android:id="@+id/tvEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:text="ROUTE REVIEW"
+                android:textColor="@color/white" />
+
+        </FrameLayout>
+<View
+    android:layout_width="1dp"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    ></View>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/light_brown">
+            <ImageView
+                android:id="@+id/ivroutereview"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center|center_horizontal"
+android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_swipe_chats"/>
+            <TextView
+                android:id="@+id/tvShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="15dp"
+android:textStyle="bold"
+                android:text="CHATS"
+                android:textColor="@color/white"/>
+
+
+        </FrameLayout>
+
+
+
+
+    </LinearLayout>
+
+
+    <!-- Another Bottom View For Left to Right -->
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper1"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <ImageButton
+            android:id="@+id/btnLocation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:src="@drawable/ic_map" />
+    </LinearLayout>
+
+    <!-- Top View,  Row itemView of RecyclerView -->
+
+    <RelativeLayout
+
+        android:layout_marginBottom="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+       <!-- <ImageView
+            android:id="@+id/ivStar"
+            android:src="@drawable/icon_add_favorites"
+            android:padding="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />-->
+
+        <ImageView
+            android:id="@+id/ivMap"
+            android:src="@drawable/icon_map"
+            android:padding="12dp"
+            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@id/ivStar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="12dp"
+            android:id="@+id/tvTitle"
+            android:text="3-Day Ride from Chandigarh To New Delhi(Stopover at Karnal)"
+            android:maxLines="2"
+            android:textColor="@color/dark_brown"
+            android:ellipsize="end"
+            android:layout_toLeftOf="@id/ivMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_below="@id/ivMap"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="70dp">
+
+            <!-- <com.facebook.drawee.view.SimpleDraweeView
+                 android:id="@+id/sdvPostImage"
+                 app:placeholderImage="@color/twenty_of_black"
+                 android:layout_width="0dip"
+                 android:layout_weight="1"
+                 android:padding="8dp"
+                 android:layout_height="match_parent" />-->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/icon_calendar"
+                    android:drawablePadding="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="15 september 2015"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_brown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/icon_time"
+                    android:drawablePadding="8dp"
+                    android:text="05:00 PM"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_brown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/icon_get_direction"
+                    android:drawablePadding="8dp"
+                    android:text="New Delhi"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_brown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp">
+
+                    <ImageView
+                        android:id="@+id/ivPeopleIcon"
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/icon_profile_group" />
+
+                    <TextView
+                        android:id="@+id/tvNumberOfRiders"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/ivPeopleIcon"
+                        android:text="125 Riders"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:id="@+id/tvLabelHaveJoined"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tvNumberOfRiders"
+                        android:layout_toRightOf="@id/ivPeopleIcon"
+                        android:text="have Joined"
+                        android:textStyle="bold"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+    </RelativeLayout>
+
+
+</com.daimajia.swipe.SwipeLayout>
+

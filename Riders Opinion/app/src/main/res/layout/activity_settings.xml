@@ -91,7 +91,7 @@
         android:layout_below="@id/tvLabelDistance"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="Select the distance between which you want to get notified about an event" />
+        android:text="Select the distance between which you want to get notified about an event(M-Meter,KM-Kilometer)" />
 
 
     <LinearLayout

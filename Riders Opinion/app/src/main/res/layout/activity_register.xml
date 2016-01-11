@@ -5,6 +5,7 @@
     android:background="@drawable/background">
 
     <LinearLayout
+        android:id="@+id/lltop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -29,16 +30,18 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llcreatelayout"
+        android:layout_below="@+id/lltop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="ENTER YOUR DETAILS"
+            android:text="Create your account"
             android:textStyle="bold"
             android:textSize="@dimen/title_text_size"
             android:textColor="@color/dark_brown" />
@@ -51,40 +54,31 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
-            android:hint="Phone Number"
-            android:inputType="phone"
-            android:padding="8dp"
-            android:textColorHint="@color/pink_color_edit_text_hint"
-            android:textSize="16sp" />
-
-        <EditText
-            android:id="@+id/edEmailAddress"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="12dp"
-            android:background="@android:color/white"
-            android:hint="Email Address"
+            android:hint="EMAIL ADDRESS"
             android:inputType="textEmailAddress"
             android:padding="8dp"
             android:textColorHint="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
-
-        <!--<EditText
+        <AutoCompleteTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
+            android:ems="10"
+            android:hint="LOCATION"
             android:padding="8dp"
-            android:hint="Vehicle Type"
             android:textColorHint="@color/pink_color_edit_text_hint"
-            android:textSize="16sp" />-->
+            android:textSize="16sp"
+            >
+            <requestFocus />
+        </AutoCompleteTextView>
+
+
 
         <EditText
-            android:id="@+id/edBrandName"
+            android:id="@+id/edPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -92,22 +86,10 @@
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
             android:padding="8dp"
-            android:hint="Brand Name"
+            android:hint="PASSWORD"
             android:textColorHint="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/edModelName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="12dp"
-            android:background="@android:color/white"
-            android:padding="8dp"
-            android:hint="Model Name"
-            android:textColorHint="@color/pink_color_edit_text_hint"
-            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/tvExplore"
@@ -125,14 +107,64 @@
             android:textSize="16sp" />
 
     </LinearLayout>
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/llcreatelayout"
+    android:id="@+id/tvOR"
+    android:text="or"
+    android:textSize="18sp"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="5dp"
+    android:textColor="@android:color/black"/>
+    <FrameLayout
+        android:id="@+id/flFacebook"
+        android:layout_width="match_parent"
+        android:layout_marginTop="5dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/tvOR"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_fb_button_bg"
+        >
+<ImageView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:background="@drawable/ic_facebook_icon"
+    android:layout_gravity="left|center_vertical"
+    android:layout_marginLeft="35dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login with Facebook"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
+    </FrameLayout>
+    <FrameLayout
+        android:id="@+id/flTwitter"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_below="@+id/flFacebook"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/ic_twitter_button_bg"
+        >
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_twitter_icon"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="35dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login with Twitter"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"/>
 
-    <!--<ImageView
-        android:src="@drawable/taketour"
-        android:padding="12dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />-->
-
+    </FrameLayout>
 
 </RelativeLayout>

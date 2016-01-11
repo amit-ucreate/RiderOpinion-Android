@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/swipe"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    swipe:leftEdgeSwipeOffset="0dp"
+    swipe:rightEdgeSwipeOffset="0dp">
+
+    <!--Bottom View For Right to Left-->
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:weightSum="2">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#BA4C11">
+            <ImageView
+                android:id="@+id/ivimage"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center|center_horizontal"
+                android:src="@drawable/ic_swipe_accept"/>
+
+            <TextView
+                android:id="@+id/tvEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:textSize="13sp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:layout_marginBottom="12dp"
+                android:textStyle="bold"
+                android:text="ACCEPT"
+                android:textColor="@color/white" />
+
+        </FrameLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            ></View>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#D1622A">
+            <ImageView
+                android:id="@+id/ivroutereview"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_swipe_decline"/>
+            <TextView
+                android:id="@+id/tvShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="12dp"
+                android:textStyle="bold"
+                android:text="DECLINE"
+                android:textColor="@color/white"/>
+
+
+        </FrameLayout>
+
+
+
+
+    </LinearLayout>
+
+
+    <!-- Another Bottom View For Left to Right -->
+
+    <LinearLayout
+        android:id="@+id/bottom_wrapper1"
+        android:layout_width="80dp"
+        android:layout_height="match_parent"
+        android:weightSum="1">
+
+        <ImageButton
+            android:id="@+id/btnLocation"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:src="@drawable/ic_map" />
+    </LinearLayout>
+
+    <!-- Top View,  Row itemView of RecyclerView -->
+
+    <RelativeLayout
+        android:layout_marginBottom="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp">
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/sdvPostImage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/ic_dummy_publicprofile"
+                android:layout_centerInParent="true"
+                app:roundAsCircle="true"  />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="90dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VISHAL SHAHI"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#CD411E"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Smart Boy"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:textColor="#CD411E"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STREET 750"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="#CD411E"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="4dp"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </RelativeLayout>
+
+
+</com.daimajia.swipe.SwipeLayout>
+

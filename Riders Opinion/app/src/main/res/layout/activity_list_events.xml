@@ -389,6 +389,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
+
                 android:background="@android:color/white">
 
 
@@ -406,7 +408,15 @@
                     android:verticalSpacing="1dp">
 
                 </GridView>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"
+                    ></View>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#8A3C16"></FrameLayout>
             </LinearLayout>
         </LinearLayout>
 

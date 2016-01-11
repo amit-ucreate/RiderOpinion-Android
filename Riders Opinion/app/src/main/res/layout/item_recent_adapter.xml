@@ -19,9 +19,10 @@
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginTop="7dp"
+            android:background="@drawable/ic_dummy_publicprofile"
 
             android:layout_centerInParent="true"
-            app:placeholderImage="@color/white"
+
             app:roundAsCircle="true"  />
 
         <LinearLayout

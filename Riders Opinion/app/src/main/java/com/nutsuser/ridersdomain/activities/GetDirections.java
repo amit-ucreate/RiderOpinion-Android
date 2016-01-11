@@ -74,14 +74,17 @@ public class GetDirections extends BaseActivity {
     TextView tvName;
     private Marker customMarker;
     private LatLng markerLatLng;
-    public static String [] prgmNameList={"Riding Destinations","Meet 'N' Plan A Ride","Riding Events \n    ","Modifly Your Bikes","Healthy Riding","Get Directions","Notifications","Settings"};
-    public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_get_direction,R.drawable.icon_menu_notification,R.drawable.icon_menu_settings};
-    public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
+   // public static String [] prgmNameList={"Riding Destinations","Meet 'N' Plan A Ride","Riding Events \n    ","Modifly Your Bikes","Healthy Riding","Get Directions","Notifications","Settings"};
+   // public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_get_direction,R.drawable.icon_menu_notification,R.drawable.icon_menu_settings};
+  // public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
     private final LatLng HAMBURG = new LatLng(53.558, 9.927);
     private Marker marker;
     private Hashtable<String, String> markers;
     public ImageLoader imageLoader;
     public DisplayImageOptions options;
+    public static String [] prgmNameList={"My Rides","My Messages","My Friends","Chats","Favourite Destination","Notifications","Settings","    \n"};
+    public static int [] prgmImages={R.drawable.ic_menu_fav_destinations,R.drawable.ic_menu_my_messages,R.drawable.ic_menu_my_friends,R.drawable.ic_menu_menu_chats,R.drawable.ic_menu_fav_destinations,R.drawable.ic_menu_menu_notifications,R.drawable.ic_menu_menu_settings,R.drawable.ic_menu_menu_blank_icon};
+    public static Class [] classList={MyRidesRecyclerView.class,ChatListScreen.class,MyFriends.class,ChatListScreen.class,FavouriteDesination.class,Notification.class,SettingsActivity.class,SettingsActivity.class};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,8 +99,14 @@ public class GetDirections extends BaseActivity {
         gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.e("positiuon:", "" + classList[position]);
-                intentCalling(classList[position]);
+                if(position==7){
+
+                }
+                else{
+                    Log.e("positiuon:", "" + classList[position]);
+                    intentCalling(classList[position]);
+                }
+
             }
         });
         initImageLoader();
@@ -143,7 +152,7 @@ public class GetDirections extends BaseActivity {
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
     @Override
@@ -240,14 +249,21 @@ public class GetDirections extends BaseActivity {
        // map.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
         map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
 
-        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener()
-        {
+        map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker)
-            {
+            public boolean onMarkerClick(com.google.android.gms.maps.model.Marker marker) {
 
                 marker.showInfoWindow();
                 return true;
+            }
+        });
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+
+                Log.e("ID:", "" + marker.getId());
+
+                startActivity(new Intent(activity, PublicProfileScreen.class));
             }
         });
 
@@ -271,6 +287,8 @@ public class GetDirections extends BaseActivity {
             }
             return null;
         }
+
+
 
         @Override
         public View getInfoWindow(final Marker marker) {
@@ -324,7 +342,8 @@ public class GetDirections extends BaseActivity {
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("","CLICKED");
+                    Log.e("", "CLICKED");
+                 //   startActivity(new Intent(activity, PublicProfileScreen.class));
                 }
             });
 

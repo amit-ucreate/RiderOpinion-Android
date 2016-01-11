@@ -350,41 +350,40 @@
                     app:roundAsCircle="true" />
 
 
-
-                <!--  <TextView
-                      android:id="@+id/tvAddress"
-                      android:layout_width="match_parent"
-                      android:layout_height="wrap_content"
-                      android:layout_alignLeft="@id/tvName"
-                      android:layout_below="@id/tvName"
-                      android:layout_toLeftOf="@id/sdvDp"
-                      android:text="H.No.293, Sector 28, Chandigarh"
-                      android:textColor="@android:color/white" />-->
-
-
             </RelativeLayout>
+
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_below="@+id/rlProfile"
                 android:background="@android:color/white">
-
-
 
                 <GridView
                     android:id="@+id/gridView1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:layout_below="@+id/rlProfile"
                     android:numColumns="2"
-
                     android:horizontalSpacing="1dp"
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="1dp">
 
                 </GridView>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"
+                    ></View>
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#8A3C16"></FrameLayout>
             </LinearLayout>
+
         </LinearLayout>
 
     </android.support.v4.widget.DrawerLayout>

@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginBottom="55dp">
+       >
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -263,6 +263,17 @@
                 android:layout_weight="1"
                 android:divider="@color/ten_of_black"
                 android:dividerHeight="2dp" />
+            <TextView
+                android:id="@+id/tvSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#8555"
+                android:textColor="@android:color/white"
+                android:text="BANNER 50 PX HEIGHT"
+                android:gravity="center"
+                android:textSize="22sp"
+                android:padding="12dp"
+                />
 
 
         </LinearLayout>
@@ -344,6 +355,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"
                 android:background="@android:color/white">
 
 
@@ -361,27 +373,19 @@
                     android:verticalSpacing="1dp">
 
                 </GridView>
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"
+                    ></View>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#8A3C16"></FrameLayout>
             </LinearLayout>
         </LinearLayout>
 
     </android.support.v4.widget.DrawerLayout>
 </LinearLayout>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#8555"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
 
-        android:id="@+id/mainbanner">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BANNER 50 PX HEIGHT"
-            android:gravity="center"
-            android:textSize="22sp"
-            android:layout_gravity="center_vertical|center"
-            android:textColor="@android:color/white"/>
-    </FrameLayout>
 </RelativeLayout>
