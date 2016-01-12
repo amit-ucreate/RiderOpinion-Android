@@ -13,6 +13,16 @@
         android:background="@color/light_brown"
         android:elevation="8dp"
         android:minHeight="?attr/actionBarSize">
+        <TextView
+            android:id="@+id/tvTitleToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="My Rides"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold" />
+
 
     </android.support.v7.widget.Toolbar>
     <LinearLayout

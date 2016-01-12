@@ -1,6 +1,7 @@
 package com.nutsuser.ridersdomain.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.PagerAdapter;
@@ -23,16 +25,18 @@ public class ChatListScreen extends AppCompatActivity {
     ///ContactsFragment mContactsFragment;
     //RecentsFragment mRecentsFragment;
    // SettingFragment mSettingFragment;
+    TextView mTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_fragment);
-
+        mTextView=(TextView)findViewById(R.id.tvTitleToolbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_home);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
 
@@ -56,23 +60,23 @@ public class ChatListScreen extends AppCompatActivity {
                 Log.e("pos: ", "" + tab.getPosition());
                 if(tab.getPosition()==1){
                     tab.setIcon(R.drawable.notification_icon_contacts_active);
-
-                    getSupportActionBar().setTitle("CONTACTS");
+                    mTextView.setText("CONTACTS");
+                   // getSupportActionBar().setTitle("CONTACTS");
                 }
                 else if(tab.getPosition()==0){
                     tab.setIcon(R.drawable.notification_icon_recents_active);
-
-                    getSupportActionBar().setTitle("RECENT");
+                    mTextView.setText("RECENT");
+                    //  getSupportActionBar().setTitle("RECENT");
                 }
                 else if(tab.getPosition()==2){
                     tab.setIcon(R.drawable.notification_icon_chats_active);
-
-                    getSupportActionBar().setTitle("CHATS");
+                    mTextView.setText("CHATS");
+                  //  getSupportActionBar().setTitle("CHATS");
                 }
                 else if(tab.getPosition()==3){
                     tab.setIcon(R.drawable.notification_icon_settings_active);
-
-                    getSupportActionBar().setTitle("SETTINGS");
+                    mTextView.setText("SETTINGS");
+                    //getSupportActionBar().setTitle("SETTINGS");
                 }
 
             }
@@ -117,7 +121,12 @@ public class ChatListScreen extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                finish();
+              //  finish();
+                Intent intent = new Intent(ChatListScreen.this, MainScreenActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("MainScreen","OPEN");
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);

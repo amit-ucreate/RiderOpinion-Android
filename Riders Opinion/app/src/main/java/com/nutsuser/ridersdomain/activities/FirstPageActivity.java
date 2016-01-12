@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,6 +30,8 @@ public class FirstPageActivity extends BaseActivity {
     TextView tv_TagRiders;
     @Bind(R.id.tv_TagOpinion)
     TextView tv_TagOpinion;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +58,10 @@ public class FirstPageActivity extends BaseActivity {
     void click(View view) {
         switch (view.getId()) {
             case R.id.ivStart:
-                startActivity(new Intent(activity, MainScreenActivity.class));
+                Intent intent=new Intent(activity,MainScreenActivity.class);
+                intent.putExtra("MainScreen", "CLOSED");
+                startActivity(intent);
+
                 break;
         }
     }

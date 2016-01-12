@@ -22,8 +22,8 @@
             android:background="@color/light_brown">
             <ImageView
                 android:id="@+id/ivimage"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginBottom="10dp"
                 android:layout_gravity="center|center_horizontal"
                 android:src="@drawable/ic_swipe_route_review"/>
@@ -39,6 +39,7 @@
                 android:gravity="center"
                 android:layout_marginBottom="5dp"
                 android:textStyle="bold"
+                android:textSize="15sp"
                 android:text="ROUTE REVIEW"
                 android:textColor="@color/white" />
 
@@ -56,10 +57,10 @@
             android:background="@color/light_brown">
             <ImageView
                 android:id="@+id/ivroutereview"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center|center_horizontal"
-android:layout_marginBottom="5dp"
+                android:layout_marginBottom="5dp"
                 android:src="@drawable/ic_swipe_chats"/>
             <TextView
                 android:id="@+id/tvShare"
@@ -68,23 +69,16 @@ android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:gravity="center"
+                android:textSize="15sp"
                 android:layout_gravity="bottom|center_horizontal"
                 android:layout_marginBottom="15dp"
-android:textStyle="bold"
+                android:textStyle="bold"
                 android:text="CHATS"
                 android:textColor="@color/white"/>
-
-
         </FrameLayout>
-
-
-
-
     </LinearLayout>
 
-
     <!-- Another Bottom View For Left to Right -->
-
     <LinearLayout
         android:id="@+id/bottom_wrapper1"
         android:layout_width="80dp"
@@ -105,7 +99,7 @@ android:textStyle="bold"
 
     <RelativeLayout
 
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="4dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -222,21 +216,10 @@ android:textStyle="bold"
                         android:layout_toRightOf="@id/ivPeopleIcon"
                         android:text="have Joined"
                         android:textStyle="bold"/>
-
                 </RelativeLayout>
-
             </LinearLayout>
-
-
-
-
         </LinearLayout>
-
-
-
-
     </RelativeLayout>
-
 
 </com.daimajia.swipe.SwipeLayout>
 

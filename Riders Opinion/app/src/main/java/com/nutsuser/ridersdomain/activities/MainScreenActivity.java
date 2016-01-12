@@ -24,6 +24,7 @@ public class MainScreenActivity extends BaseActivity {
     TextView tv_TagRiders;
     @Bind(R.id.tv_TagOpinion)
     TextView tv_TagOpinion;
+    String mStringOpenClosed;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +35,15 @@ public class MainScreenActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               if (!prefsManager.isLoginDone())
-                    startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+               if (!prefsManager.isLoginDone()){
+                   Intent intent = getIntent();
+                   mStringOpenClosed= intent.getStringExtra("MainScreen");
+                   if(mStringOpenClosed.matches("CLOSED")){
+                       startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+                   }
+
+               }
+
 
             }
         }, 300);

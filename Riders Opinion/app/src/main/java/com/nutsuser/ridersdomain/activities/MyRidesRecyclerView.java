@@ -9,6 +9,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -79,7 +81,7 @@ public class MyRidesRecyclerView extends AppCompatActivity {
             setSupportActionBar(toolbar);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_home);
-            getSupportActionBar().setTitle("My Rides");
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
         loadData();
@@ -127,8 +129,6 @@ public class MyRidesRecyclerView extends AppCompatActivity {
             mDataSet.add(new Student("Student " + i, "androidstudent" + i + "@gmail.com"));
 
         }
-
-
     }
     @OnClick({R.id.bt_past, R.id.bt_upcoming})
     void click(View view) {
@@ -166,5 +166,23 @@ public class MyRidesRecyclerView extends AppCompatActivity {
 
         }
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+               // finish();
+                Intent intent = new Intent(MyRidesRecyclerView.this, MainScreenActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("MainScreen","OPEN");
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
