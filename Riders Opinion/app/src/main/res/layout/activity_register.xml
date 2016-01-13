@@ -60,6 +60,7 @@
             android:textColorHint="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
         <AutoCompleteTextView
+            android:id="@+id/autoCompleteTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"

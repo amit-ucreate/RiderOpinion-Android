@@ -6,6 +6,7 @@
         android:name="com.nutsuser.ridersdomain.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
+
     <uses-permission android:name="com.nutsuser.ridersdomain.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -133,7 +134,7 @@
         <!-- Goolge Maps API Key -->
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBdpnys7Inem7uaSsA5TxxXv2nz7Xz81Tw" />
+            android:value="AIzaSyCDCBI5Wa-btgeiVHK-EOiQaPwx6-x73n8" />
 
     </application>
 
