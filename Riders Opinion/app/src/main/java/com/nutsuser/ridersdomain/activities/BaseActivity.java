@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.nutsuser.ridersdomain.R;
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
 import com.nutsuser.ridersdomain.utils.PrefsManager;
 
 /**
@@ -54,5 +54,11 @@ public class BaseActivity extends AppCompatActivity {
     public void settheme(){
         setTheme(R.style.Theme_trans);
         Log.e("BASE ","THEME CALL");
+    }
+    public boolean isNetworkConnected(){
+        if(ApplicationGlobal.isNetworkConnected(this))
+            return true;
+        else
+            return false;
     }
 }

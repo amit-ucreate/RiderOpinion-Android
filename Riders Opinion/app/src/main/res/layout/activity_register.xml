@@ -54,7 +54,7 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
-            android:hint="EMAIL ADDRESS"
+            android:hint="EMAIL ADDRESS OR PHONE NO"
             android:inputType="textEmailAddress"
             android:padding="8dp"
             android:textColorHint="@color/pink_color_edit_text_hint"

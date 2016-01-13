@@ -11,7 +11,9 @@ public class RestClient {
     //live  http://services.whenyoumove.com/APIServices.svc
 
     private static API REST_CLIENT;
-    private static String ROOT = "";
+     static String ROOT = "http://ridersopininon.herokuapp.com/index.php/";
+
+
 
     static {
         setupRestClient();

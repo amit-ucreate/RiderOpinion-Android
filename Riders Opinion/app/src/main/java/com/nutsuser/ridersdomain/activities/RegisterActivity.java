@@ -3,12 +3,10 @@ package com.nutsuser.ridersdomain.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -23,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+
 import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.location.places.Place;
@@ -32,13 +31,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.PlaceArrayAdapter;
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
+import com.nutsuser.ridersdomain.web.api.RestClient;
 import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -47,7 +48,7 @@ import butterknife.OnClick;
 
 public class RegisterActivity extends BaseActivity implements
         GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks {
+        GoogleApiClient.ConnectionCallbacks  {
 
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
@@ -63,13 +64,14 @@ public class RegisterActivity extends BaseActivity implements
     TextView tvTagOpinion;
     @Bind(R.id.edPhoneNo)
     EditText edTagPhoneNo;
-  /*  @Bind(R.id.edEmailAddress)
-    EditText edTagEmailAddress;
-    @Bind(R.id.edBrandName)
+    @Bind(R.id.edPassword)
+    EditText edTagPassword;
+    /*@Bind(R.id.edBrandName)
     EditText edTagBrandName;
     @Bind(R.id.edModelName)
     EditText edTagModelName;*/
   Map<String, String> params;
+    String mStringlong,mStringlat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class RegisterActivity extends BaseActivity implements
         mPlaceArrayAdapter = new PlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
                 BOUNDS_MOUNTAIN_VIEW, null);
         mAutocompleteTextView.setAdapter(mPlaceArrayAdapter);
+
     }
     private AdapterView.OnItemClickListener mAutocompleteClickListener
             = new AdapterView.OnItemClickListener() {
@@ -105,7 +108,7 @@ public class RegisterActivity extends BaseActivity implements
             Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
         }
     };
-    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
+   private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
             = new ResultCallback<PlaceBuffer>() {
         @Override
         public void onResult(PlaceBuffer places) {
@@ -121,8 +124,8 @@ public class RegisterActivity extends BaseActivity implements
            // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
            // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
           //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
-            String mStringlong =""+Html.fromHtml(place.getLatLng().longitude + "");
-            String mStringlat =""+Html.fromHtml(place.getLatLng().latitude + "");
+             mStringlong =""+Html.fromHtml(place.getLatLng().longitude + "");
+             mStringlat =""+Html.fromHtml(place.getLatLng().latitude + "");
             Log.e("Long:",""+mStringlong);
             Log.e("Latitude:",""+mStringlat);
           //  mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
@@ -131,6 +134,7 @@ public class RegisterActivity extends BaseActivity implements
                // mAttTextView.setText(Html.fromHtml(attributions.toString()));
             }
         }
+
     };
     private void setFontsToViews() {
         tvTagRiders.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT EXTRA LIGHT.TTF"));
@@ -141,8 +145,54 @@ public class RegisterActivity extends BaseActivity implements
     void click(View view) {
         switch (view.getId()) {
             case R.id.tvExplore:
-                startActivity(new Intent(RegisterActivity.this, AfterRegisterScreen.class));
-                finish();
+                if(isNetworkConnected()){
+                    try {
+                        if(edTagPhoneNo.getText().toString().trim().equals("")){
+                            showToast("Email and Phone No blank");
+                        }
+                        else if(edTagPassword.getText().toString().trim().equals("")){
+                            showToast("Password blank");
+                        }
+                        else if(mAutocompleteTextView.getText().toString().trim().equals("")){
+                            showToast("location blank");
+                        }
+                        else{
+                            Log.e("","ESLE");
+                            if(edTagPhoneNo.getText().toString().contains("@")){
+                                Log.e("IF","MATCHED");
+                                boolean check=validEmail(edTagPhoneNo.getText().toString());
+                                Log.e("IF: :",""+check);
+                                if(check){
+                                    showToast("EMAIL CORRECT");
+                                    Log.e("IF","MATCHED CALLING");
+                                    registerInfo(edTagPhoneNo.getText().toString(),mStringlat, mStringlong, edTagPassword.getText().toString(), "fgejfgryj4376535yg");
+                                }
+                            }
+                            else{
+                                Log.e("ELSE","PHONE MATCHED");
+                                boolean check=validPhone(edTagPhoneNo.getText().toString());
+                                Log.e("ELSE:",""+check);
+                                if(check){
+                                    showToast("PHONE CORRECT");
+                                    Log.e("ELSE","PHONE MATCHED API");
+                                    registerInfo(edTagPhoneNo.getText().toString(),mStringlat, mStringlong, edTagPassword.getText().toString(), "fgejfgryj4376535yg");
+                                }
+                            }
+
+                        }
+
+                    }
+                    catch (Exception e){
+                       // Rollbar.reportException(e, "critical", "Login Start");
+                    }
+                }
+
+                else{
+                    showToast("Internet Not Connected");
+                }
+
+               // startActivity(new Intent(RegisterActivity.this, AfterRegisterScreen.class));
+               // finish();
                 break;
         }
     }
@@ -159,7 +209,7 @@ public class RegisterActivity extends BaseActivity implements
         return new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-
+Log.e("response: ",""+response);
             }
         };
     }
@@ -171,32 +221,31 @@ public class RegisterActivity extends BaseActivity implements
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                Log.e("error: ",""+error);
             }
         };
     }
+    private boolean validEmail(String email) {
+        Pattern pattern = Patterns.EMAIL_ADDRESS;
+        return pattern.matcher(email).matches();
 
+    }
+    private boolean validPhone(String phone) {
+        Pattern pattern = Patterns.PHONE;
+        return pattern.matcher(phone).matches();
+
+    }
     /**
-     * Store user info to params.
+     * Register info .
      */
-    public void saveInfoToParams(String strlogintype) {
-        params = new HashMap<String, String>();
-       /* params.put("City", "");
-        params.put("AccountId", "");
-        params.put("DeviceOS", "");
-        params.put("DeviceUDID", "9E0806EB-ECDC-472A-976F-40FF22ED128");
-        params.put("Email", "");
-        params.put("FirstName", "");
-        params.put("LastName", "");
-        params.put("LoginType", "");
-        params.put("MobileNumber", "");
-        params.put("TeamId", "1");
-        params.put("TokenID", "");*/
+    public void registerInfo(String utypeid, String latitude, String longitude, String password, String devicetoken) {
+
 
         try {
+            Log.e("URL: ",""+ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
             RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                   "URL", params,
+                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android", null,
                     volleyErrorListener(), volleySuccessListener()
             );
 
