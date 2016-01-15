@@ -59,6 +59,8 @@
             android:padding="8dp"
             android:textColorHint="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
+
+
         <EditText
             android:id="@+id/edVehiclesOwned"
             android:layout_width="match_parent"
@@ -67,14 +69,13 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
-            android:ems="10"
-            android:hint="VEHICLES OWNED"
+            android:hint="VEHICLE OWNED"
+            android:editable="false"
+
             android:padding="8dp"
             android:textColorHint="@color/pink_color_edit_text_hint"
-            android:textSize="16sp"
-            >
-            <requestFocus />
-        </EditText>
+            android:textSize="16sp" />
+
 
 
 

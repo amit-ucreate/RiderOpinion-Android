@@ -147,7 +147,7 @@ public class RegisterActivity extends BaseActivity implements
             case R.id.tvExplore:
                 if(isNetworkConnected()){
                     try {
-                        if(edTagPhoneNo.getText().toString().trim().equals("")){
+                      /*  if(edTagPhoneNo.getText().toString().trim().equals("")){
                             showToast("Email and Phone No blank");
                         }
                         else if(edTagPassword.getText().toString().trim().equals("")){
@@ -179,7 +179,9 @@ public class RegisterActivity extends BaseActivity implements
                                 }
                             }
 
-                        }
+                        }*/
+                        startActivity(new Intent(RegisterActivity.this, AfterRegisterScreen.class));
+                        finish();
 
                     }
                     catch (Exception e){
@@ -191,8 +193,7 @@ public class RegisterActivity extends BaseActivity implements
                     showToast("Internet Not Connected");
                 }
 
-               // startActivity(new Intent(RegisterActivity.this, AfterRegisterScreen.class));
-               // finish();
+
                 break;
         }
     }
