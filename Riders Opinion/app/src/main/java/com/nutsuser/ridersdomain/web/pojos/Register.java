@@ -16,13 +16,7 @@ public class Register {
         this.success = success;
     }
 
-    public List<RegisterDetails> getData() {
-        return data;
-    }
 
-    public void setData(List<RegisterDetails> data) {
-        this.data = data;
-    }
 
     public String getMessage() {
         return message;
@@ -34,6 +28,14 @@ public class Register {
 
     String success;
     String message;
-    private List<RegisterDetails> data = new ArrayList<RegisterDetails>();
 
+    private RegisterDetails data;
+
+    public RegisterDetails getData() {
+        return data;
+    }
+
+    public void setData(RegisterDetails data) {
+        this.data = data;
+    }
 }

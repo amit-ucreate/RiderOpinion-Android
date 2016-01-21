@@ -29,6 +29,7 @@ import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.AdapterDestination;
 import com.nutsuser.ridersdomain.adapter.CustomGridAdapter;
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
 import com.nutsuser.ridersdomain.utils.CustomizeDialog;
 import com.nutsuser.ridersdomain.utils.PrefsManager;
 import com.nutsuser.ridersdomain.utils.RecyclerItemClickListener;
@@ -129,6 +130,8 @@ public class DestinationsListActivity extends BaseActivity {
             }
         });
 
+        vechiclemodelinfo();
+
     }
     public void intentCalling(Class name){
         Intent mIntent=new Intent(DestinationsListActivity.this,name);
@@ -210,7 +213,7 @@ public class DestinationsListActivity extends BaseActivity {
             //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
             RequestQueue requestQueue = Volley.newRequestQueue(DestinationsListActivity.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    "http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken="+AccessToken, null,
+                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_ridingdestination+"userId=75&longitude=0.000000&latitude=0.000000&accessToken="+AccessToken, null,
                     volleyModelErrorListener(), volleyModelSuccessListener()
             );
 

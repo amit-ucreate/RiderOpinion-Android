@@ -1,7 +1,9 @@
 package com.nutsuser.ridersdomain.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.web.pojos.RidingDestinationDetails;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -26,7 +29,7 @@ public class AdapterDestination extends RecyclerView.Adapter<AdapterDestination.
     private ArrayList<RidingDestinationDetails> mRidingDestinationDetailses;
     public AdapterDestination(Context context,ArrayList<RidingDestinationDetails> mRidingDestinationDetailses) {
         mContext = context;
-        mRidingDestinationDetailses=mRidingDestinationDetailses;
+        this.mRidingDestinationDetailses=mRidingDestinationDetailses;
     }
 
     @Override
@@ -48,6 +51,14 @@ public class AdapterDestination extends RecyclerView.Adapter<AdapterDestination.
         holder.tvFirstAid.setText(mRidingDestinationDetailses.get(position).getHospitals());
         holder.tvBikes.setText(mRidingDestinationDetailses.get(position).getRiders());
         holder.tvOffers.setText(mRidingDestinationDetailses.get(position).getOffers());
+        String jsonInString = mRidingDestinationDetailses.get(position).getImages().toString();
+        jsonInString = jsonInString.replace("\\\"", "\"");
+        jsonInString = jsonInString.replace("\"{", "{");
+        jsonInString = jsonInString.replace("}\"", "}");
+        Log.e("jsonInString: ", ""+jsonInString);
+        Uri imageUri = Uri.parse(jsonInString);
+        holder.sdv.setImageURI(imageUri);
+
     }
 
     @Override

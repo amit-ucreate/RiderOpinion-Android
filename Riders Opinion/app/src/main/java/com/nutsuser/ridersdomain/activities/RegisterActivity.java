@@ -78,7 +78,7 @@ public class RegisterActivity extends BaseActivity implements
     PrefsManager prefsManager;
     CustomizeDialog mCustomizeDialog;
 
-    private ArrayList<RegisterDetails> mRegisterDetailses = new ArrayList<RegisterDetails>();
+
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
@@ -101,7 +101,7 @@ public class RegisterActivity extends BaseActivity implements
     EditText edTagModelName;*/
     Map<String, String> params;
     String mStringlong, mStringlat;
-
+RegisterDetails mRegisterDetails;
 
     private static final int TAG_LOGIN_DEFAULT= 3;
     private static final int TAG_LOGIN_FACEBOOK = 1;
@@ -389,10 +389,10 @@ public class RegisterActivity extends BaseActivity implements
                 }.getType();
                 Register register = new Gson().fromJson(response.toString(), type);
                 if (register.getSuccess().equals("1")) {
-                    mRegisterDetailses.clear();
-                    mRegisterDetailses.addAll(register.getData());
+                   // mRegisterDetailses.clear();
+                    mRegisterDetails=register.getData();
                     prefsManager.setLoginDone(true);
-                    prefsManager.setToken(mRegisterDetailses.get(0).getAccessToken());
+                    prefsManager.setToken(mRegisterDetails.getAccessToken());
                     startActivity(new Intent(RegisterActivity.this, AfterRegisterScreen.class));
                     finish();
 
@@ -453,13 +453,13 @@ public class RegisterActivity extends BaseActivity implements
      * Register info .
      */
     public void registerInfo(String utypeid, String latitude, String longitude, String password, String devicetoken) {
-
+//http://ridersopininon.herokuapp.com/index.php/riders/signup?utypeid=jaswant123@gmail.com&latitude=768.0000&longitude=126.0000&password=111111&deviceToken=ioel3343&OS=android&loginType=default
         showProgressDialog();
         try {
             Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_sigup + "utypeid=" + utypeid + "&latitude=" + latitude + "&longitude=" + longitude + "&password=" + password + "&deviceToken=" + devicetoken + "&OS=Android");
             RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_sigup + "utypeid=" + utypeid + "&latitude=" + latitude + "&longitude=" + longitude + "&password=" + password + "&deviceToken=" + devicetoken + "&OS=Android", null,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_sigup + "utypeid=" + utypeid + "&latitude=" + latitude + "&longitude=" + longitude + "&password=" + password + "&deviceToken=" + devicetoken + "&OS=Android&loginType=default", null,
                     volleyErrorListener(), volleySuccessListener()
             );
 

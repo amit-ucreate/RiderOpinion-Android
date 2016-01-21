@@ -20,6 +20,7 @@ import java.io.IOException;
 public class ApplicationGlobal {
 
     public static String baseurl_sigup="riders/signup?";
+    public static String baseurl_ridingdestination="ridingDestination?";
     public static String ROOT = "http://ridersopininon.herokuapp.com/index.php/";
 
     public static String TAG_LOGIN_FACEBOOK="facebook";// facebook
