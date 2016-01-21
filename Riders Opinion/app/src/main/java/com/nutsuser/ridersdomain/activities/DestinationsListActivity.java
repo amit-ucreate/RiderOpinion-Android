@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,10 +18,30 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.AdapterDestination;
 import com.nutsuser.ridersdomain.adapter.CustomGridAdapter;
+import com.nutsuser.ridersdomain.utils.CustomizeDialog;
+import com.nutsuser.ridersdomain.utils.PrefsManager;
 import com.nutsuser.ridersdomain.utils.RecyclerItemClickListener;
+import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
+import com.nutsuser.ridersdomain.web.pojos.RidingDestination;
+import com.nutsuser.ridersdomain.web.pojos.RidingDestinationDetails;
+import com.nutsuser.ridersdomain.web.pojos.VehicleModel;
+import com.nutsuser.ridersdomain.web.pojos.VehicleModelDetails;
+
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +52,10 @@ import butterknife.OnClick;
  */
 public class DestinationsListActivity extends BaseActivity {
 
+    PrefsManager prefsManager;
+    CustomizeDialog mCustomizeDialog;
+    String AccessToken;
+    private ArrayList<RidingDestinationDetails> mRidingDestinationDetailses = new ArrayList<RidingDestinationDetails>();
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     private Activity activity;
@@ -83,7 +108,7 @@ public class DestinationsListActivity extends BaseActivity {
         setFontsToTextViews();
         mDrawerLayout.closeDrawer(lvSlidingMenu);
         rvDestinations.setLayoutManager(new LinearLayoutManager(activity));
-        rvDestinations.setAdapter(new AdapterDestination(activity));
+
         rvDestinations.addOnItemTouchListener(new RecyclerItemClickListener(activity, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -170,6 +195,98 @@ public class DestinationsListActivity extends BaseActivity {
 
         }
     }
+
+//http://ridersopininon.herokuapp.com/index.php/riders/vehicle
+    /**
+     * Register info .
+     */
+    public void vechiclemodelinfo() {
+        showProgressDialog();
+        Log.e("riding destination","riding destination");
+        try {
+            prefsManager=new PrefsManager(DestinationsListActivity.this);
+            AccessToken=prefsManager.getToken();
+            //http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken=eddfbf2bf4046e90fc768d8e319a4355
+            //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
+            RequestQueue requestQueue = Volley.newRequestQueue(DestinationsListActivity.this);
+            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
+                    "http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken="+AccessToken, null,
+                    volleyModelErrorListener(), volleyModelSuccessListener()
+            );
+
+            requestQueue.add(loginTaskRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    /**
+     * Implement success listener on execute api url.
+     */
+    public Response.Listener<JSONObject> volleyModelSuccessListener() {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {dismissProgressDialog();
+                Log.e("Model response:",""+response);
+
+                Type type = new TypeToken<RidingDestination>() {
+                }.getType();
+               RidingDestination mRidingDestination = new Gson().fromJson(response.toString(), type);
+
+                mRidingDestinationDetailses.clear();
+
+
+                if (mRidingDestination.getSuccess().equals("1")){
+                    mRidingDestinationDetailses.addAll(mRidingDestination.getData());
+                    rvDestinations.setAdapter(new AdapterDestination(DestinationsListActivity.this,mRidingDestinationDetailses));
+                }
+
+            }
+        };
+    }
+
+    /**
+     * Implement Volley error listener here.
+     */
+    public Response.ErrorListener volleyModelErrorListener() {
+        dismissProgressDialog();
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error: ", "" + error);
+            }
+        };
+    }
+
+    public  void showProgressDialog() {
+
+        mCustomizeDialog = new CustomizeDialog(DestinationsListActivity.this);
+        mCustomizeDialog.setCancelable(false);
+        mCustomizeDialog.show();
+        Log.e("HERE", "HERE");
+    }
+
+    public  void dismissProgressDialog() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mCustomizeDialog != null && mCustomizeDialog.isShowing()) {
+                    mCustomizeDialog.dismiss();
+                    mCustomizeDialog = null;
+                }
+            }
+        }, 300);
+
+
+    }
+
+
+
+
+
+
 
 
 }

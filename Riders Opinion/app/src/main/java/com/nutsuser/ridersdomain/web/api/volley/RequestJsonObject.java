@@ -58,6 +58,7 @@ public class RequestJsonObject extends Request<JSONObject> {
     public Map<String, String> getHeaders() throws AuthFailureError {
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json; charset=utf-8");
+        headers.put("token", "ffb1c885-7264-4901-84bc-afc741d7a091");
         return headers;
     }
 

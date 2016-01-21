@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "riders-opinion-1194",
+    "project_number": "832644158870",
+    "name": "Riders Opinion"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:832644158870:android:8525eaf40ecc8460",
+        "client_id": "android:com.nutsuser.ridersdomain",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.nutsuser.ridersdomain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "832644158870-vhc6o0kfl6tc1fqe764sbg167a0fsrr6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nutsuser.ridersdomain",
+            "certificate_hash": "C331A68FC340A4821858FC9F0FFB042ACBE528EC"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}

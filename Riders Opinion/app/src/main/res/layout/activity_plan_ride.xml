@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-   >
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
@@ -47,14 +46,27 @@
         android:layout_below="@id/toolbar"
         android:layout_weight="1">
 
+        <!--<ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </ScrollView>-->
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/tv_rideTag"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableRight="@drawable/icon_down_arrow"
@@ -62,6 +74,8 @@
                 android:text="RIDE TYPE" />
 
             <View
+                android:id="@+id/v_TagStart"
+                android:layout_below="@+id/tv_rideTag"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="12dp"
@@ -69,12 +83,16 @@
                 android:background="@color/light_brown" />
 
             <TextView
+                android:id="@+id/tv_TagDate"
+                android:layout_below="@+id/v_TagStart"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
                 android:text="11 Oct 2015/ 5:30-16:30" />
 
             <View
+                android:layout_below="@+id/tv_TagDate"
+                android:id="@+id/v_TagView"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="12dp"
@@ -82,9 +100,11 @@
                 android:background="@color/light_brown" />
 
             <RelativeLayout
+                android:id="@+id/rl_add"
+                android:layout_below="@+id/v_TagView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginLeft="12dp">
 
                 <ImageView
@@ -93,8 +113,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:src="@drawable/icon_map_big" />
-
-                <TextView
+                <AutoCompleteTextView
                     android:id="@+id/tvPlace1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -102,8 +121,12 @@
                     android:layout_marginRight="12dp"
                     android:layout_marginBottom="8dp"
                     android:layout_toRightOf="@id/ivMap"
+                    android:hint="start"
                     android:drawableRight="@drawable/icon_get_direction"
-                    android:text="CHANDIGARH" />
+                    >
+                    <requestFocus />
+                </AutoCompleteTextView>
+
 
                 <View
                     android:id="@+id/viewLine"
@@ -115,7 +138,7 @@
                     android:layout_marginRight="12dp"
                     android:layout_toRightOf="@id/ivMap" />
 
-                <TextView
+                <AutoCompleteTextView
                     android:id="@+id/tvPlace2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -126,12 +149,19 @@
                     android:layout_marginRight="12dp"
                     android:layout_toRightOf="@id/ivMap"
                     android:drawableRight="@drawable/icon_get_direction"
-                    android:text="SHIMLA" />
+                    android:hint="SHIMLA"
+                    >
+                    <requestFocus />
+                </AutoCompleteTextView>
+
+
 
 
             </RelativeLayout>
 
             <View
+                android:id="@+id/v_afteradddress"
+                android:layout_below="@+id/rl_add"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="12dp"
@@ -139,6 +169,8 @@
                 android:background="@color/light_brown" />
 
             <TextView
+                android:layout_below="@+id/v_afteradddress"
+                android:id="@+id/tv_route_haults"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
@@ -146,6 +178,8 @@
                 android:textColor="@color/light_brown" />
 
             <RelativeLayout
+                android:id="@+id/rl_routehaults"
+                android:layout_below="@+id/tv_route_haults"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp">
@@ -195,6 +229,8 @@
             </RelativeLayout>
 
             <View
+                android:id="@+id/v_tag_belowroutehaults"
+                android:layout_below="@+id/rl_routehaults"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
                 android:layout_marginLeft="12dp"
@@ -202,17 +238,21 @@
                 android:background="@color/light_brown" />
 
             <fragment
+                android:layout_below="@+id/v_tag_belowroutehaults"
                 android:id="@+id/map"
                 android:layout_marginTop="8dp"
-                android:name="com.google.android.gms.maps.MapFragment"
+                class="com.google.android.gms.maps.MapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_height="300dp"
+                android:layout_weight="1"/>
+
 
 
 <RelativeLayout
+    android:layout_below="@+id/map"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/rl_pitstop"
     >
     <TextView
         android:id="@+id/tvEatables"
@@ -260,20 +300,24 @@
         android:padding="16dp"
         android:text="12" />
 </RelativeLayout>
+                <TextView
+                    android:layout_below="@+id/rl_pitstop"
+                    android:id="@+id/tvNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@color/light_brown"
+                    android:padding="12dp"
+                    android:gravity="center"
+                    android:text="NEXT"
+                    android:textColor="@android:color/white" />
+           </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tvNext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/light_brown"
-                android:padding="12dp"
-                android:gravity="center"
-                android:text="NEXT"
-                android:textColor="@android:color/white" />
+            </ScrollView>
+
 
 
         </LinearLayout>

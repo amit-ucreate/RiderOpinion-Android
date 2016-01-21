@@ -8,8 +8,8 @@
         android:id="@+id/lltop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp">
 
         <TextView
             android:id="@+id/tvTagRiders"
@@ -17,23 +17,23 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/logo_small"
             android:text="Riders"
-            android:textSize="@dimen/register_rider_text_size"
-            android:textColor="@color/dark_brown" />
+            android:textColor="@color/dark_brown"
+            android:textSize="@dimen/register_rider_text_size" />
 
         <TextView
             android:id="@+id/tvTagOpinion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="opinion"
-            android:textSize="@dimen/register_rider_text_size"
-            android:textColor="@color/light_brown" />
+            android:textColor="@color/light_brown"
+            android:textSize="@dimen/register_rider_text_size" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llcreatelayout"
-        android:layout_below="@+id/lltop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/lltop"
         android:layout_marginTop="40dp"
         android:orientation="vertical">
 
@@ -42,9 +42,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Create your account"
-            android:textStyle="bold"
+            android:textColor="@color/dark_brown"
             android:textSize="@dimen/title_text_size"
-            android:textColor="@color/dark_brown" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edPhoneNo"
@@ -59,6 +59,7 @@
             android:padding="8dp"
             android:textColorHint="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
+
         <AutoCompleteTextView
             android:id="@+id/autoCompleteTextView"
             android:layout_width="match_parent"
@@ -71,11 +72,10 @@
             android:hint="LOCATION"
             android:padding="8dp"
             android:textColorHint="@color/pink_color_edit_text_hint"
-            android:textSize="16sp"
-            >
+            android:textSize="16sp">
+
             <requestFocus />
         </AutoCompleteTextView>
-
 
 
         <EditText
@@ -86,8 +86,9 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
-            android:padding="8dp"
             android:hint="PASSWORD"
+            android:padding="8dp"
+            android:password="true"
             android:textColorHint="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
 
@@ -96,75 +97,96 @@
             android:id="@+id/tvExplore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="12dp"
-            android:background="@color/light_brown"
-            android:paddingBottom="8dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/light_brown"
+            android:gravity="center"
+            android:paddingBottom="8dp"
             android:paddingTop="8dp"
             android:text="Explore"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 
     </LinearLayout>
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_below="@+id/llcreatelayout"
-    android:id="@+id/tvOR"
-    android:text="or"
-    android:textSize="18sp"
-    android:layout_centerHorizontal="true"
-    android:layout_marginTop="5dp"
-    android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/tvOR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/llcreatelayout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="or"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+
+    <!-- LOGIN WITH FACEBOOK -->
     <FrameLayout
         android:id="@+id/flFacebook"
         android:layout_width="match_parent"
-        android:layout_marginTop="5dp"
         android:layout_height="45dp"
         android:layout_below="@+id/tvOR"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_fb_button_bg"
-        >
-<ImageView
-    android:layout_width="30dp"
-    android:layout_height="30dp"
-    android:background="@drawable/ic_facebook_icon"
-    android:layout_gravity="left|center_vertical"
-    android:layout_marginLeft="35dp"/>
-        <TextView
-            android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ic_fb_button_bg">
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btldFacebook"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
             android:text="Login with Facebook"
-            android:layout_gravity="center"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:id="@+id/fmFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="35dp"
+                android:background="@drawable/ic_facebook_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Login with Facebook"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+        </FrameLayout>
+
     </FrameLayout>
+
     <FrameLayout
         android:id="@+id/flTwitter"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_marginTop="8dp"
         android:layout_below="@+id/flFacebook"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:background="@drawable/ic_twitter_button_bg"
-        >
+        android:layout_marginTop="8dp"
+        android:background="@drawable/ic_twitter_button_bg">
+
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/ic_twitter_icon"
             android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="35dp"/>
+            android:layout_marginLeft="35dp"
+            android:background="@drawable/ic_twitter_icon" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login with Twitter"
             android:layout_gravity="center"
-            android:textSize="16sp"
-            android:textColor="@android:color/white"/>
+            android:text="Login with Twitter"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
 
     </FrameLayout>
 

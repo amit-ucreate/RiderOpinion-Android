@@ -2,13 +2,21 @@ package com.nutsuser.ridersdomain.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.nutsuser.ridersdomain.R;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,6 +59,29 @@ public class MainScreenActivity extends BaseActivity {
         String text_ = "<font color=#D1622A>United</font> <font color=#000000>By Throttles</font>";
         tv_TagRiders.setText(Html.fromHtml(text));
         tv_TagOpinion.setText(Html.fromHtml(text_));
+        printHashKey();
+    }
+
+    /**
+     * Generate Hash key pragmatically.
+     */
+    public void printHashKey() {
+        // Add code to print out the key hash
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(
+                    getPackageName(),
+                    PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+
+        } catch (NoSuchAlgorithmException e) {
+
+        }
     }
 
     @OnClick({R.id.ivRidingDestination, R.id.ivPlanRide, R.id.ivRidingEvents, R.id.ivModifyBike, R.id.ivHealthyRides, R.id.ivSettings,R.id.ivGetDirections})

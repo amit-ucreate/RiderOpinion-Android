@@ -22,6 +22,20 @@ public class ApplicationGlobal {
     public static String baseurl_sigup="riders/signup?";
     public static String ROOT = "http://ridersopininon.herokuapp.com/index.php/";
 
+    public static String TAG_LOGIN_FACEBOOK="facebook";// facebook
+    public static String TAG_LOGIN_TWITTER="twitter";// twitter
+    public static String TAG_LOGIN_DEFAULT="default";// default
+
+    public static final String TAG_GRAPH_OBJECT = "graphObject";
+    public static final String TAG_ACCOUNT_ID = "id";
+    public static final String TAG_FIRST_NAME = "first_name";
+    public static final String TAG_LAST_NAME = "last_name";
+    public static final String TAG_USER_NAME = "name";
+    public static final String TAG_EMAIL = "email";
+    public static final String TAG_CITY = "locale";
+    public static final String TAG_CONTACT = "contact";
+
+
     public static boolean taskscreen=false;
     public static boolean notificationscreen=false;
     public static boolean documenttask=false;

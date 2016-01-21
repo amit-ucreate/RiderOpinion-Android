@@ -68,6 +68,7 @@
                     android:layout_marginTop="5dp"
                     >
                     <Button
+                        android:id="@+id/btMap"
                         android:layout_width="45dp"
                         android:layout_height="45dp"
                         android:background="@drawable/ic_get_direction_btn"
@@ -80,8 +81,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_get_direction" />
-
-                    <TextView
+                    <AutoCompleteTextView
                         android:id="@+id/tvPlace3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -91,7 +91,11 @@
                         android:layout_toRightOf="@id/ivMap2"
                         android:drawableRight="@drawable/get_direction_marker"
                         android:hint="Starting point"
-                        android:textColorHint="#D9D5D6"/>
+                        android:textColorHint="#D9D5D6"
+                        >
+                        <requestFocus />
+                    </AutoCompleteTextView>
+
 
                     <View
                         android:id="@+id/viewLine2"
@@ -102,8 +106,7 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="54dp"
                         android:layout_toRightOf="@id/ivMap2" />
-
-                    <TextView
+                    <AutoCompleteTextView
                         android:layout_marginTop="8dp"
                         android:id="@+id/tvPlace4"
                         android:layout_width="match_parent"
@@ -115,7 +118,12 @@
                         android:layout_toRightOf="@id/ivMap2"
                         android:drawableRight="@drawable/get_direction_marker"
                         android:hint="Destination"
-                        android:textColorHint="#D9D5D6"/>
+                        android:textColorHint="#D9D5D6"
+                        >
+                        <requestFocus />
+                    </AutoCompleteTextView>
+
+
 
                     <View
                         android:id="@+id/view_Line2"

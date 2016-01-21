@@ -78,6 +78,7 @@
         android:layout_height="wrap_content" />
 
     <ImageView
+        android:id="@+id/ivVideo"
         android:layout_toLeftOf="@id/ivMap"
         android:padding="12dp"
         android:src="@drawable/icon_video"
