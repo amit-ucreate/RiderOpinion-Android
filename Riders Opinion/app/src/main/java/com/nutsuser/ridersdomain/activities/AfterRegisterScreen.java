@@ -29,7 +29,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
 
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
 import com.nutsuser.ridersdomain.utils.CustomizeDialog;
+import com.nutsuser.ridersdomain.utils.PrefsManager;
 import com.nutsuser.ridersdomain.view.BetterPopupWindow;
 import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
 import com.nutsuser.ridersdomain.web.pojos.VehicleDetails;
@@ -69,10 +71,10 @@ public class AfterRegisterScreen extends BaseActivity {
     DemoPopupWindow dw;
     ModelPopupWindow mdw;
 String vehicleId=null;
-
-View view;
+    View view;
     CustomBaseAdapter adapter;
     ModelCustomBaseAdapter ModelCustomBaseAdapter;
+    PrefsManager prefsManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,7 +83,7 @@ View view;
         ButterKnife.bind(activity);
         setFontsToViews();
         view=new View(this);
-
+        prefsManager = new PrefsManager(this);
         btVehiclesOwned=(Button)findViewById(R.id.btVehiclesOwned);
         btModel=(Button)findViewById(R.id.btModel);
 
@@ -100,13 +102,11 @@ if(vehicleId!=null){
         btVehiclesOwned.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // hideKeyboard();
+                // hideKeyboard();
                 vechicleinfo();
 
             }
         });
-
-
 
 
     }
@@ -151,7 +151,16 @@ if(vehicleId!=null){
     void click(View view) {
         switch (view.getId()) {
             case R.id.tvSubmit:
-                finish();
+                if(vehicleId!=null){
+                   if(edTagPhoneNo.getText().toString().length()==0){
+
+                   }
+                    else{
+                       submitinfo(edTagPhoneNo.getText().toString(),prefsManager.getCaseId(),vehicleId,prefsManager.getToken());
+                   }
+
+                }
+
                 break;
             case R.id.tvSkip:
                 finish();
@@ -218,7 +227,7 @@ if(vehicleId!=null){
           //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
             RequestQueue requestQueue = Volley.newRequestQueue(AfterRegisterScreen.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    "http://ridersopininon.herokuapp.com/index.php/riders/vehicle", null,
+                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_vehicle, null,
                     volleyErrorListener(), volleySuccessListener()
             );
 
@@ -229,6 +238,62 @@ if(vehicleId!=null){
 
         }
     }
+
+//
+
+    /**
+     * Register info .
+     */
+    public void submitinfo(String id,String userid,String vehicle_id,String accesstoken) {
+        showProgressDialog();
+        Log.e("vechiclemodelinfo","vechiclemodelinfo");
+        try {
+
+            //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
+            RequestQueue requestQueue = Volley.newRequestQueue(AfterRegisterScreen.this);
+            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
+                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_updateUserInfo+"userId="+userid+vehicleId+"&utypeid="+id+"&vehicleTypeId="+vehicle_id+"&accessToken="+accesstoken, null,
+                    volleySubmitErrorListener(), volleSubmitSuccessListener()
+            );
+
+            requestQueue.add(loginTaskRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    /**
+     * Implement success listener on execute api url.
+     */
+    public Response.Listener<JSONObject> volleSubmitSuccessListener() {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                dismissProgressDialog();
+                Log.e("Model response:",""+response);
+                finish();
+
+            }
+        };
+    }
+
+    /**
+     * Implement Volley error listener here.
+     */
+    public Response.ErrorListener volleySubmitErrorListener() {
+        dismissProgressDialog();
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error: ", "" + error);
+            }
+        };
+    }
+
+
+    //
 
 
     //http://ridersopininon.herokuapp.com/index.php/riders/vehicle
@@ -242,7 +307,7 @@ if(vehicleId!=null){
             //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
             RequestQueue requestQueue = Volley.newRequestQueue(AfterRegisterScreen.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    "http://ridersopininon.herokuapp.com/index.php/riders/vehicleId?vehicleId="+vehicleId, null,
+                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_model+vehicleId, null,
                     volleyModelErrorListener(), volleyModelSuccessListener()
             );
 

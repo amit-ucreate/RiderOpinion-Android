@@ -45,8 +45,8 @@ public class CaptureSignature extends Activity {
     private Bitmap mBitmap;
     View mView;
     File mypath;
-
     private String uniqueId;
+    String url;
    // private EditText yourName;
 
     @Override
@@ -249,8 +249,8 @@ public class CaptureSignature extends Activity {
                 mBitmap.compress(Bitmap.CompressFormat.PNG, 90, mFileOutStream);
                 mFileOutStream.flush();
                 mFileOutStream.close();
-                String url = Images.Media.insertImage(getContentResolver(), mBitmap, "title", null);
-                Log.v("log_tag","url: " + url);
+                 url = Images.Media.insertImage(getContentResolver(), mBitmap, "title", null);
+                Log.e("log_tag","url: " + url);
                 //In case you want to delete the file
                 //boolean deleted = mypath.delete();
                 //Log.v("log_tag","deleted: " + mypath.toString() + deleted);

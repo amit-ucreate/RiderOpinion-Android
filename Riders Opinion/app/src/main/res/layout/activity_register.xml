@@ -162,32 +162,49 @@
         </FrameLayout>
 
     </FrameLayout>
-
     <FrameLayout
         android:id="@+id/flTwitter"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@+id/flFacebook"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/ic_twitter_button_bg">
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginLeft="35dp"
-            android:background="@drawable/ic_twitter_icon" />
-
-        <TextView
+        android:layout_below="@+id/flFacebook"
+        android:background="@drawable/ic_twitter_button_bg" >
+        <!-- LOGIN WITH TWITTER -->
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/loginTwitter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Login with Twitter"
-            android:textColor="@android:color/white"
-            android:textSize="16sp" />
+            android:gravity="center"
+            android:visibility="gone" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+           android:id="@+id/fmTwitter"
+
+           >
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="35dp"
+                android:background="@drawable/ic_twitter_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Login with Twitter"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+        </FrameLayout>
+
 
     </FrameLayout>
+
 
 </RelativeLayout>

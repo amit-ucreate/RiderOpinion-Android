@@ -106,7 +106,6 @@ public class GetDirections extends BaseActivity implements
     LatLng mString_end;
     LatLng mString_start;
     double start,end;
-
     @Bind(R.id.gridView1)
     GridView gridView1;
     private Activity activity;
@@ -586,7 +585,7 @@ public class GetDirections extends BaseActivity implements
 
     /**
      *
-     * @author VIJAYAKUMAR M
+     * @author Amit Agnihotri
      * This class Get Route on the map
      *
      */

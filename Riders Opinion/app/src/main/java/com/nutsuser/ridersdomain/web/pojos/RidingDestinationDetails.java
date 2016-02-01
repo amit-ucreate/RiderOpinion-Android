@@ -4,6 +4,15 @@ package com.nutsuser.ridersdomain.web.pojos;
  * Created by admin on 20-01-2016.
  */
 public class RidingDestinationDetails {
+String destId;
+
+    public String getDestId() {
+        return destId;
+    }
+
+    public void setDestId(String destId) {
+        this.destId = destId;
+    }
 
     String destName;
     String description;

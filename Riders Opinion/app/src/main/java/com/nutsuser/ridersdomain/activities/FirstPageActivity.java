@@ -18,6 +18,9 @@ import com.android.volley.toolbox.Volley;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import io.fabric.sdk.android.Fabric;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -31,6 +34,7 @@ import butterknife.OnClick;
  * Created by user on 8/27/2015.
  */
 public class FirstPageActivity extends BaseActivity {
+
 
     private Activity activity;
     @Bind(R.id.tvTagRiders)
@@ -48,6 +52,7 @@ public class FirstPageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_first_page);
         //getSupportActionBar().hide();
         activity = FirstPageActivity.this;

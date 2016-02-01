@@ -18,11 +18,18 @@ import java.io.IOException;
  * Created by user on 8/13/2015.
  */
 public class ApplicationGlobal {
-
+ //http://ridersopininon.herokuapp.com/index.php/riders/signup?utypeid=tw_8934lk349&latitude=192.343&longitude=192.343&password=&deviceToken=456jkll4k545&OS=iphone&loginType=facebook
+    public static String baseurl_favroite="ridingDestination/favroite?";
+    public static String baseurl_like="ridingDestination/likeDestination?";
     public static String baseurl_sigup="riders/signup?";
+    public static String baseurl_search="ridingDestination/search?";
+    //
+    public static String baseurl_updateUserInfo="riders/updateUserInfo?";
     public static String baseurl_ridingdestination="ridingDestination?";
+    public static String baseurl_ridingdetailDestination="ridingDestination/detailDestination?";
+    public static String baseurl_vehicle="riders/vehicle";
+    public static String baseurl_model="riders/vehicleId?vehicleId=";
     public static String ROOT = "http://ridersopininon.herokuapp.com/index.php/";
-
     public static String TAG_LOGIN_FACEBOOK="facebook";// facebook
     public static String TAG_LOGIN_TWITTER="twitter";// twitter
     public static String TAG_LOGIN_DEFAULT="default";// default
