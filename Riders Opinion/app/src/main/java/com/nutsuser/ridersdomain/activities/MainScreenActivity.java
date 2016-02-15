@@ -27,12 +27,12 @@ import butterknife.OnClick;
  */
 public class MainScreenActivity extends BaseActivity {
 
-    private Activity activity;
     @Bind(R.id.tv_TagRiders)
     TextView tv_TagRiders;
     @Bind(R.id.tv_TagOpinion)
     TextView tv_TagOpinion;
     String mStringOpenClosed;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +43,14 @@ public class MainScreenActivity extends BaseActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-               if (!prefsManager.isLoginDone()){
-                   Intent intent = getIntent();
-                   mStringOpenClosed= intent.getStringExtra("MainScreen");
-                   if(mStringOpenClosed.matches("CLOSED")){
-                       startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
-                   }
+                if (!prefsManager.isLoginDone()) {
+                    Intent intent = getIntent();
+                    mStringOpenClosed = intent.getStringExtra("MainScreen");
+                    if (mStringOpenClosed.matches("CLOSED")) {
+                        startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+                    }
 
-               }
+                }
 
 
             }
@@ -84,18 +84,18 @@ public class MainScreenActivity extends BaseActivity {
         }
     }
 
-    @OnClick({R.id.ivRidingDestination, R.id.ivPlanRide, R.id.ivRidingEvents, R.id.ivModifyBike, R.id.ivHealthyRides, R.id.ivSettings,R.id.ivGetDirections})
+    @OnClick({R.id.ivRidingDestination, R.id.ivPlanRide, R.id.ivRidingEvents, R.id.ivModifyBike, R.id.ivHealthyRides, R.id.ivSettings, R.id.ivGetDirections})
     void click(View view) {
         switch (view.getId()) {
             case R.id.ivRidingDestination:
                 //if (!prefsManager.isLoginDone())
-                  //  startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+                //  startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
                 startActivity(new Intent(MainScreenActivity.this, DestinationsListActivity.class));
                 break;
 
             case R.id.ivPlanRide:
                 //if (!prefsManager.isLoginDone())
-                 //   startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+                //   startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
                 startActivity(new Intent(MainScreenActivity.this, PlanRideActivity.class));
                 break;
             case R.id.ivGetDirections:
@@ -106,25 +106,25 @@ public class MainScreenActivity extends BaseActivity {
 
             case R.id.ivRidingEvents:
                 //if (!prefsManager.isLoginDone())
-                  //  startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+                //  startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
                 startActivity(new Intent(MainScreenActivity.this, EventsListActivity.class));
                 break;
 
             case R.id.ivModifyBike:
                 //if (!prefsManager.isLoginDone())
-                 //   startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+                //   startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
                 startActivity(new Intent(MainScreenActivity.this, ModifyBikeActivity.class));
                 break;
 
             case R.id.ivHealthyRides:
-               // if (!prefsManager.isLoginDone())
+                // if (!prefsManager.isLoginDone())
                 //    startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
                 startActivity(new Intent(MainScreenActivity.this, HealthyRidingActivity.class));
                 break;
 
             case R.id.ivSettings:
                 //if (!prefsManager.isLoginDone())
-                 //   startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
+                //   startActivityForResult(new Intent(activity, RegisterActivity.class), 1);
                 startActivity(new Intent(MainScreenActivity.this, SettingsActivity.class));
                 break;
         }

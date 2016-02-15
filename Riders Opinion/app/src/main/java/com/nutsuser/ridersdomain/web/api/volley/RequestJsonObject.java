@@ -26,12 +26,11 @@ public class RequestJsonObject extends Request<JSONObject> {
     private Map<String, String> params;
 
     public RequestJsonObject(int method, String url, Map<String, String> params,
-                             Response.ErrorListener errorListener,Response.Listener<JSONObject> reponseListener) {
+                             Response.ErrorListener errorListener, Response.Listener<JSONObject> reponseListener) {
         super(method, url, errorListener);
         this.jsonObjectListener = reponseListener;
         this.params = params;
     }
-
 
 
     protected Map<String, String> getParams()
@@ -54,6 +53,7 @@ public class RequestJsonObject extends Request<JSONObject> {
             return Response.error(new ParseError(je));
         }
     }
+
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         HashMap<String, String> headers = new HashMap<String, String>();

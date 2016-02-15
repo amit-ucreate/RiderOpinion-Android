@@ -19,13 +19,14 @@ public class RecentsFragment extends Fragment {
 
     View view;
     ListView list;
-    Button btrides,btmessage;
+    Button btrides, btmessage;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_recent, container, false);
-        btrides=(Button)view.findViewById(R.id.btrides);
-        btmessage=(Button)view.findViewById(R.id.btmessage);
-        list=(ListView)view.findViewById(R.id.list);
+        btrides = (Button) view.findViewById(R.id.btrides);
+        btmessage = (Button) view.findViewById(R.id.btmessage);
+        list = (ListView) view.findViewById(R.id.list);
         list.setAdapter(new RecentAdapter(getActivity()));
 
         btrides.setOnClickListener(new View.OnClickListener() {

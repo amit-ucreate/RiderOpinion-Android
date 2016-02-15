@@ -1,16 +1,10 @@
 package com.nutsuser.ridersdomain.activities;
 
-import android.Manifest;
-import android.annotation.SuppressLint;
-
-import org.w3c.dom.Document;
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -20,10 +14,8 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
-import android.text.GetChars;
 import android.text.Html;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -31,7 +23,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
@@ -39,8 +30,8 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.RelativeLayout.LayoutParams;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.appindexing.AppIndex;
@@ -57,8 +48,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-
-
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -76,6 +65,8 @@ import com.nutsuser.ridersdomain.adapter.EndPlaceArrayAdapter;
 import com.nutsuser.ridersdomain.adapter.PlaceArrayAdapter;
 import com.nutsuser.ridersdomain.route.GMapV2GetRouteDirection;
 
+import org.w3c.dom.Document;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 
@@ -88,27 +79,30 @@ import butterknife.OnClick;
  */
 public class GetDirections extends BaseActivity implements
         GoogleApiClient.OnConnectionFailedListener,
-        GoogleApiClient.ConnectionCallbacks{
-    // Google Map
-    private GoogleMap map;
-    GMapV2GetRouteDirection v2GetRouteDirection;
-    LocationManager locManager;
-    Drawable drawable;
-    Document document;
-    private AutoCompleteTextView tvPlace3, tvPlace4;
-    private GoogleApiClient mGoogleApiClient;
-    private PlaceArrayAdapter mPlaceArrayAdapter;
-    EndPlaceArrayAdapter _ArrayAdapter;
+        GoogleApiClient.ConnectionCallbacks {
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     private static final String LOG_TAG = "GetDirection";
     private static final int GOOGLE_API_CLIENT_ID = 0;
+    public static String[] prgmNameList = {"My Rides", "My Messages", "My Friends", "Chats", "Favourite Destination", "Notifications", "Settings", "    \n"};
+    public static int[] prgmImages = {R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_my_messages, R.drawable.ic_menu_my_friends, R.drawable.ic_menu_menu_chats, R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_menu_notifications, R.drawable.ic_menu_menu_settings, R.drawable.ic_menu_menu_blank_icon};
+    public static Class[] classList = {MyRidesRecyclerView.class, ChatListScreen.class, MyFriends.class, ChatListScreen.class, FavouriteDesination.class, Notification.class, SettingsActivity.class, SettingsActivity.class};
+    // public static String [] prgmNameList={"Riding Destinations","Meet 'N' Plan A Ride","Riding Events \n    ","Modifly Your Bikes","Healthy Riding","Get Directions","Notifications","Settings"};
+    // public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_get_direction,R.drawable.icon_menu_notification,R.drawable.icon_menu_settings};
+    // public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
+    private final LatLng HAMBURG = new LatLng(53.558, 9.927);
+    public ImageLoader imageLoader;
+    public DisplayImageOptions options;
+    GMapV2GetRouteDirection v2GetRouteDirection;
+    LocationManager locManager;
+    Drawable drawable;
+    Document document;
+    EndPlaceArrayAdapter _ArrayAdapter;
     LatLng mString_end;
     LatLng mString_start;
-    double start,end;
+    double start, end;
     @Bind(R.id.gridView1)
     GridView gridView1;
-    private Activity activity;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.tvTitleToolbar)
@@ -119,21 +113,130 @@ public class GetDirections extends BaseActivity implements
     LinearLayout lvSlidingMenu;
     @Bind(R.id.tvName)
     TextView tvName;
-    private Marker customMarker;
-    private LatLng markerLatLng;
-    // public static String [] prgmNameList={"Riding Destinations","Meet 'N' Plan A Ride","Riding Events \n    ","Modifly Your Bikes","Healthy Riding","Get Directions","Notifications","Settings"};
-    // public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_get_direction,R.drawable.icon_menu_notification,R.drawable.icon_menu_settings};
-    // public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
-    private final LatLng HAMBURG = new LatLng(53.558, 9.927);
-    private Marker marker;
-    private Hashtable<String, String> markers;
-    public ImageLoader imageLoader;
-    public DisplayImageOptions options;
-    public static String[] prgmNameList = {"My Rides", "My Messages", "My Friends", "Chats", "Favourite Destination", "Notifications", "Settings", "    \n"};
-    public static int[] prgmImages = {R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_my_messages, R.drawable.ic_menu_my_friends, R.drawable.ic_menu_menu_chats, R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_menu_notifications, R.drawable.ic_menu_menu_settings, R.drawable.ic_menu_menu_blank_icon};
-    public static Class[] classList = {MyRidesRecyclerView.class, ChatListScreen.class, MyFriends.class, ChatListScreen.class, FavouriteDesination.class, Notification.class, SettingsActivity.class, SettingsActivity.class};
     @Bind(R.id.btMap)
     Button btMap;
+    // Google Map
+    private GoogleMap map;
+    private AutoCompleteTextView tvPlace3, tvPlace4;
+    private GoogleApiClient mGoogleApiClient;
+    private PlaceArrayAdapter mPlaceArrayAdapter;
+    private Activity activity;
+    private Marker customMarker;
+    private LatLng markerLatLng;
+    private Marker marker;
+    private Hashtable<String, String> markers;
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_start;
+    private AdapterView.OnItemClickListener mAutocompleteClickListener_start
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_start);
+            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_end
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                Log.e(LOG_TAG, "Place query did not complete. Error: " +
+                        places.getStatus().toString());
+                return;
+            }
+            // Selecting the first object buffer.
+            final Place place = places.get(0);
+            CharSequence attributions = places.getAttributions();
+
+            // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
+            // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
+            //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
+            String s = "" + Html.fromHtml("" + place.getLatLng().latitude);
+            String s1 = "" + Html.fromHtml("" + place.getLatLng().longitude);
+            double start = Double.valueOf(s.trim()).doubleValue();
+            double end = Double.valueOf(s1.trim()).doubleValue();
+
+
+            mString_end = new LatLng(start, end);
+            hideKeyboard();
+            //mString_end =Html.fromHtml(place.getLatLng() + "");
+
+            Log.e("end:", "" + mString_end);
+            //mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
+            //mWebTextView.setText(place.getWebsiteUri() + "");
+            if (attributions != null) {
+                // mAttTextView.setText(Html.fromHtml(attributions.toString()));
+            }
+        }
+
+    };
+    private AdapterView.OnItemClickListener mAutocompleteClickListener_end
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final EndPlaceArrayAdapter.PlaceAutocomplete item = _ArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_end);
+            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+
+    {
+        mUpdatePlaceDetailsCallback_start = new ResultCallback<PlaceBuffer>() {
+            @Override
+            public void onResult(PlaceBuffer places) {
+                if (!places.getStatus().isSuccess()) {
+                    Log.e(LOG_TAG, "Place query did not complete. Error: " +
+                            places.getStatus().toString());
+                    return;
+                }
+                // Selecting the first object buffer.
+                final Place place = places.get(0);
+                CharSequence attributions = places.getAttributions();
+
+                // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
+                // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
+                //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
+                String s = "" + Html.fromHtml("" + place.getLatLng().latitude);
+                String s1 = "" + Html.fromHtml("" + place.getLatLng().longitude);
+                start = Double.valueOf(s.trim()).doubleValue();
+                end = Double.valueOf(s1.trim()).doubleValue();
+                mString_start = new LatLng(start, end);
+
+                Log.e("start:", "" + mString_start);
+
+                //  mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
+                //mWebTextView.setText(place.getWebsiteUri() + "");
+                if (attributions != null) {
+                    // mAttTextView.setText(Html.fromHtml(attributions.toString()));
+                }
+            }
+
+        };
+    }
+
+    // Convert a view to bitmap
+    public static Bitmap createDrawableFromView(Context context, View view) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        return bitmap;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,9 +270,9 @@ public class GetDirections extends BaseActivity implements
                 .showImageForEmptyUri(R.drawable.ic_launcher)    //	If Empty image found
                 .cacheInMemory()
                 .cacheOnDisc().bitmapConfig(Bitmap.Config.RGB_565).build();
-       // map.setMyLocationEnabled(true);
+        // map.setMyLocationEnabled(true);
 
-       // mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(2));
+        // mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(2));
         // initializeMap();
 
         // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
@@ -201,103 +304,6 @@ public class GetDirections extends BaseActivity implements
         }, 300);
 
     }
-    private AdapterView.OnItemClickListener mAutocompleteClickListener_start
-            = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
-            final String placeId = String.valueOf(item.placeId);
-            Log.i(LOG_TAG, "Selected: " + item.description);
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_start);
-            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
-        }
-    };
-    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_start;
-
-    {
-        mUpdatePlaceDetailsCallback_start = new ResultCallback<PlaceBuffer>() {
-            @Override
-            public void onResult(PlaceBuffer places) {
-                if (!places.getStatus().isSuccess()) {
-                    Log.e(LOG_TAG, "Place query did not complete. Error: " +
-                            places.getStatus().toString());
-                    return;
-                }
-                // Selecting the first object buffer.
-                final Place place = places.get(0);
-                CharSequence attributions = places.getAttributions();
-
-                // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
-                // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
-                //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
-                String s=""+ Html.fromHtml("" + place.getLatLng().latitude);
-                String s1=""+Html.fromHtml(""+place.getLatLng().longitude);
-                start = Double.valueOf(s.trim()).doubleValue();
-                end = Double.valueOf(s1.trim()).doubleValue();
-                mString_start = new LatLng(start,end);
-
-                Log.e("start:", "" + mString_start);
-
-                //  mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
-                //mWebTextView.setText(place.getWebsiteUri() + "");
-                if (attributions != null) {
-                    // mAttTextView.setText(Html.fromHtml(attributions.toString()));
-                }
-            }
-
-        };
-    }
-
-    private AdapterView.OnItemClickListener mAutocompleteClickListener_end
-            = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            final EndPlaceArrayAdapter.PlaceAutocomplete item = _ArrayAdapter.getItem(position);
-            final String placeId = String.valueOf(item.placeId);
-            Log.i(LOG_TAG, "Selected: " + item.description);
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_end);
-            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
-        }
-    };
-    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_end
-            = new ResultCallback<PlaceBuffer>() {
-        @Override
-        public void onResult(PlaceBuffer places) {
-            if (!places.getStatus().isSuccess()) {
-                Log.e(LOG_TAG, "Place query did not complete. Error: " +
-                        places.getStatus().toString());
-                return;
-            }
-            // Selecting the first object buffer.
-            final Place place = places.get(0);
-            CharSequence attributions = places.getAttributions();
-
-            // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
-            // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
-            //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
-            String s=""+Html.fromHtml(""+place.getLatLng().latitude);
-            String s1=""+Html.fromHtml(""+place.getLatLng().longitude);
-            double start = Double.valueOf(s.trim()).doubleValue();
-            double end = Double.valueOf(s1.trim()).doubleValue();
-
-
-            mString_end = new LatLng(start,end);
-            hideKeyboard();
-            //mString_end =Html.fromHtml(place.getLatLng() + "");
-
-            Log.e("end:", "" + mString_end);
-            //mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
-            //mWebTextView.setText(place.getWebsiteUri() + "");
-            if (attributions != null) {
-                // mAttTextView.setText(Html.fromHtml(attributions.toString()));
-            }
-        }
-
-    };
 
     @Override
     protected void onResume() {
@@ -323,7 +329,7 @@ public class GetDirections extends BaseActivity implements
                         .show();
             } else {
 
-               // map.setMyLocationEnabled(true);
+                // map.setMyLocationEnabled(true);
                 map.getUiSettings().setZoomControlsEnabled(true);
                 map.getUiSettings().setCompassEnabled(true);
                 map.getUiSettings().setMyLocationButtonEnabled(true);
@@ -334,12 +340,14 @@ public class GetDirections extends BaseActivity implements
 
         }
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -355,7 +363,8 @@ public class GetDirections extends BaseActivity implements
         }
         return super.onOptionsItemSelected(item);
     }
-    @OnClick({R.id.ivMenu, R.id.rlProfile,R.id.btMap})
+
+    @OnClick({R.id.ivMenu, R.id.rlProfile, R.id.btMap})
     void onclick(View view) {
         switch (view.getId()) {
 
@@ -392,7 +401,7 @@ public class GetDirections extends BaseActivity implements
                 this).threadPoolSize(5)
                 .threadPriority(Thread.NORM_PRIORITY - 2)
                 .memoryCacheSize(memoryCacheSize)
-                .memoryCache(new FIFOLimitedMemoryCache(memoryCacheSize-1000000))
+                .memoryCache(new FIFOLimitedMemoryCache(memoryCacheSize - 1000000))
                 .denyCacheImageMultipleSizesInMemory()
                 .discCacheFileNameGenerator(new Md5FileNameGenerator())
                 .tasksProcessingOrder(QueueProcessingType.LIFO).enableLogging()
@@ -400,25 +409,11 @@ public class GetDirections extends BaseActivity implements
 
         ImageLoader.getInstance().init(config);
     }
-    // Convert a view to bitmap
-    public static Bitmap createDrawableFromView(Context context, View view) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        ((Activity) context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        view.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
-        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
-        view.buildDrawingCache();
-        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
 
-        Canvas canvas = new Canvas(bitmap);
-        view.draw(canvas);
-
-        return bitmap;
-    }
     private void setUpMap() {
         map.setInfoWindowAdapter(new CustomInfoWindowAdapter());
         View marker = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
-      final Marker hamburg = map.addMarker(new MarkerOptions()
+        final Marker hamburg = map.addMarker(new MarkerOptions()
                 .position(HAMBURG)
                 .title("Hamburg")
                 .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker))));
@@ -429,14 +424,13 @@ public class GetDirections extends BaseActivity implements
         map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
 
 
-
         customMarker = map.addMarker(new MarkerOptions()
                 .position(markerLatLng)
                 .title("TEST")
                 .snippet("Description")
                 .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker))));
         markers.put(customMarker.getId(), "http://img.india-forums.com/images/100x100/37525-a-still-image-of-akshay-kumar.jpg");
-       // map.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
+        // map.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
         map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
 
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
@@ -491,6 +485,7 @@ public class GetDirections extends BaseActivity implements
         mGoogleApiClient.connect();
 
     }
+
     private void hideKeyboard() {
         // Check if no view has focus:
         View view = this.getCurrentFocus();
@@ -498,6 +493,13 @@ public class GetDirections extends BaseActivity implements
             InputMethodManager inputManager = (InputMethodManager) this.getSystemService(Context.INPUT_METHOD_SERVICE);
             inputManager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mGoogleApiClient.disconnect();
     }
 
     private class CustomInfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
@@ -521,7 +523,6 @@ public class GetDirections extends BaseActivity implements
         }
 
 
-
         @Override
         public View getInfoWindow(final Marker marker) {
             GetDirections.this.marker = marker;
@@ -529,9 +530,9 @@ public class GetDirections extends BaseActivity implements
 
             String url = null;
 
-            
+
             if (marker.getId() != null && markers != null && markers.size() > 0) {
-                if ( markers.get(marker.getId()) != null &&
+                if (markers.get(marker.getId()) != null &&
                         markers.get(marker.getId()) != null) {
                     url = markers.get(marker.getId());
                 }
@@ -575,7 +576,7 @@ public class GetDirections extends BaseActivity implements
                 @Override
                 public void onClick(View v) {
                     Log.e("", "CLICKED");
-                 //   startActivity(new Intent(activity, PublicProfileScreen.class));
+                    //   startActivity(new Intent(activity, PublicProfileScreen.class));
                 }
             });
 
@@ -584,15 +585,14 @@ public class GetDirections extends BaseActivity implements
     }
 
     /**
-     *
      * @author Amit Agnihotri
-     * This class Get Route on the map
-     *
+     *         This class Get Route on the map
      */
     private class GetRouteTask extends AsyncTask<String, Void, String> {
 
-        private ProgressDialog Dialog;
         String response = "";
+        private ProgressDialog Dialog;
+
         @Override
         protected void onPreExecute() {
             Dialog = new ProgressDialog(GetDirections.this);
@@ -612,7 +612,7 @@ public class GetDirections extends BaseActivity implements
         @Override
         protected void onPostExecute(String result) {
             map.clear();
-            if(response.equalsIgnoreCase("Success")){
+            if (response.equalsIgnoreCase("Success")) {
                 ArrayList<LatLng> directionPoint = v2GetRouteDirection.getDirection(document);
                 PolylineOptions rectLine = new PolylineOptions().width(10).color(
                         Color.parseColor("#D1622A"));
@@ -620,7 +620,7 @@ public class GetDirections extends BaseActivity implements
                 for (int i = 0; i < directionPoint.size(); i++) {
                     rectLine.add(directionPoint.get(i));
                 }
-                LatLng latLng = new LatLng(start,end);
+                LatLng latLng = new LatLng(start, end);
 
                 // Adding route on the map
                 map.addPolyline(rectLine);
@@ -636,12 +636,6 @@ public class GetDirections extends BaseActivity implements
 
             Dialog.dismiss();
         }
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        mGoogleApiClient.disconnect();
     }
 
 }

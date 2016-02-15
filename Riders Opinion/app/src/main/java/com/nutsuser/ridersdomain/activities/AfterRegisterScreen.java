@@ -1,9 +1,7 @@
 package com.nutsuser.ridersdomain.activities;
 
 import android.app.Activity;
-
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,13 +9,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-
 import android.widget.TextView;
 
 import com.android.volley.Request;
@@ -28,7 +24,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
-
 import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
 import com.nutsuser.ridersdomain.utils.CustomizeDialog;
 import com.nutsuser.ridersdomain.utils.PrefsManager;
@@ -54,10 +49,7 @@ import butterknife.OnClick;
  */
 public class AfterRegisterScreen extends BaseActivity {
 
-    private ArrayList<VehicleDetails> mVehicleDetailses = new ArrayList<VehicleDetails>();
-    private ArrayList<VehicleModelDetails> vehicleModelDetailses = new ArrayList<VehicleModelDetails>();
     CustomizeDialog mCustomizeDialog;
-    private Activity activity;
     @Bind(R.id.tvTagRiders)
     TextView tvTagRiders;
     @Bind(R.id.tvTagOpinion)
@@ -70,11 +62,15 @@ public class AfterRegisterScreen extends BaseActivity {
     Button btModel;
     DemoPopupWindow dw;
     ModelPopupWindow mdw;
-String vehicleId=null;
+    String vehicleId = null;
     View view;
     CustomBaseAdapter adapter;
     ModelCustomBaseAdapter ModelCustomBaseAdapter;
     PrefsManager prefsManager;
+    private ArrayList<VehicleDetails> mVehicleDetailses = new ArrayList<VehicleDetails>();
+    private ArrayList<VehicleModelDetails> vehicleModelDetailses = new ArrayList<VehicleModelDetails>();
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,20 +78,19 @@ String vehicleId=null;
         activity = AfterRegisterScreen.this;
         ButterKnife.bind(activity);
         setFontsToViews();
-        view=new View(this);
+        view = new View(this);
         prefsManager = new PrefsManager(this);
-        btVehiclesOwned=(Button)findViewById(R.id.btVehiclesOwned);
-        btModel=(Button)findViewById(R.id.btModel);
+        btVehiclesOwned = (Button) findViewById(R.id.btVehiclesOwned);
+        btModel = (Button) findViewById(R.id.btModel);
 
         btModel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-if(vehicleId!=null){
-    vechiclemodelinfo();
-}
-                else{
-    Log.e("","FALSE");
-}
+                if (vehicleId != null) {
+                    vechiclemodelinfo();
+                } else {
+                    Log.e("", "FALSE");
+                }
             }
         });
 
@@ -111,7 +106,7 @@ if(vehicleId!=null){
 
     }
 
-    public  void showProgressDialog() {
+    public void showProgressDialog() {
 
         mCustomizeDialog = new CustomizeDialog(AfterRegisterScreen.this);
         mCustomizeDialog.setCancelable(false);
@@ -119,7 +114,7 @@ if(vehicleId!=null){
         Log.e("HERE", "HERE");
     }
 
-    public  void dismissProgressDialog() {
+    public void dismissProgressDialog() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -147,18 +142,15 @@ if(vehicleId!=null){
         tvTagOpinion.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
     }
 
-    @OnClick({R.id.tvSubmit,R.id.tvSkip})
+    @OnClick({R.id.tvSubmit, R.id.tvSkip})
     void click(View view) {
         switch (view.getId()) {
             case R.id.tvSubmit:
-                if(vehicleId!=null){
-                   if(edTagPhoneNo.getText().toString().length()==0){
-
-                   }
-                    else{
-                       submitinfo(edTagPhoneNo.getText().toString(),prefsManager.getCaseId(),vehicleId,prefsManager.getToken());
-                   }
-
+                if (vehicleId != null) {
+                    if (edTagPhoneNo.getText().toString().length() == 0) {
+                    } else {
+                        submitinfo(edTagPhoneNo.getText().toString(), prefsManager.getCaseId(), vehicleId, prefsManager.getToken());
+                    }
                 }
 
                 break;
@@ -180,7 +172,7 @@ if(vehicleId!=null){
         return new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-               dismissProgressDialog();
+                dismissProgressDialog();
 
                 Type type = new TypeToken<VehicleName>() {
                 }.getType();
@@ -188,10 +180,9 @@ if(vehicleId!=null){
                 mVehicleDetailses.clear();
 
                 Log.e("response: ", "" + response);
-                if (mVehicleName.getSuccess().equals("1")){
+                if (mVehicleName.getSuccess().equals("1")) {
 
                     mVehicleDetailses.addAll(mVehicleName.getData());
-
 
 
                     dw = new DemoPopupWindow(view, AfterRegisterScreen.this);
@@ -208,7 +199,7 @@ if(vehicleId!=null){
      * Implement Volley error listener here.
      */
     public Response.ErrorListener volleyErrorListener() {
-       // dismissProgressDialog();
+        // dismissProgressDialog();
         return new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
@@ -217,17 +208,18 @@ if(vehicleId!=null){
         };
     }
     //http://ridersopininon.herokuapp.com/index.php/riders/vehicle
+
     /**
      * Register info .
      */
     public void vechicleinfo() {
         showProgressDialog();
-        Log.e("See","ENTER");
+        Log.e("See", "ENTER");
         try {
-          //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
+            //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
             RequestQueue requestQueue = Volley.newRequestQueue(AfterRegisterScreen.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_vehicle, null,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_vehicle, null,
                     volleyErrorListener(), volleySuccessListener()
             );
 
@@ -244,15 +236,15 @@ if(vehicleId!=null){
     /**
      * Register info .
      */
-    public void submitinfo(String id,String userid,String vehicle_id,String accesstoken) {
+    public void submitinfo(String id, String userid, String vehicle_id, String accesstoken) {
         showProgressDialog();
-        Log.e("vechiclemodelinfo","vechiclemodelinfo");
+        Log.e("vechiclemodelinfo", "vechiclemodelinfo");
         try {
 
-            //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_updateUserInfo + "userId=" + userid + vehicleId + "&utypeid=" + id + "&vehicleTypeId=" + vehicle_id + "&accessToken=" + accesstoken);
             RequestQueue requestQueue = Volley.newRequestQueue(AfterRegisterScreen.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_updateUserInfo+"userId="+userid+vehicleId+"&utypeid="+id+"&vehicleTypeId="+vehicle_id+"&accessToken="+accesstoken, null,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_updateUserInfo + "userId=" + userid + vehicleId + "&utypeid=" + id + "&vehicleTypeId=" + vehicle_id + "&accessToken=" + accesstoken, null,
                     volleySubmitErrorListener(), volleSubmitSuccessListener()
             );
 
@@ -272,7 +264,7 @@ if(vehicleId!=null){
             @Override
             public void onResponse(JSONObject response) {
                 dismissProgressDialog();
-                Log.e("Model response:",""+response);
+                Log.e("Model response:", "" + response);
                 finish();
 
             }
@@ -297,17 +289,18 @@ if(vehicleId!=null){
 
 
     //http://ridersopininon.herokuapp.com/index.php/riders/vehicle
+
     /**
      * Register info .
      */
     public void vechiclemodelinfo() {
         showProgressDialog();
-        Log.e("vechiclemodelinfo","vechiclemodelinfo");
+        Log.e("vechiclemodelinfo", "vechiclemodelinfo");
         try {
             //  Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_sigup+"utypeid="+utypeid+"&latitude="+latitude+"&longitude="+longitude+"&password="+password+"&deviceToken="+devicetoken+"&OS=Android");
             RequestQueue requestQueue = Volley.newRequestQueue(AfterRegisterScreen.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_model+vehicleId, null,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_model + vehicleId, null,
                     volleyModelErrorListener(), volleyModelSuccessListener()
             );
 
@@ -327,7 +320,7 @@ if(vehicleId!=null){
             @Override
             public void onResponse(JSONObject response) {
                 dismissProgressDialog();
-                Log.e("Model response:",""+response);
+                Log.e("Model response:", "" + response);
 
                 Type type = new TypeToken<VehicleModel>() {
                 }.getType();
@@ -336,7 +329,7 @@ if(vehicleId!=null){
                 vehicleModelDetailses.clear();
 
 
-                if (vehicleModel.getSuccess().equals("1")){
+                if (vehicleModel.getSuccess().equals("1")) {
                     vehicleModelDetailses.addAll(vehicleModel.getData());
                     Log.e("vehicleModelDetailses: ", "" + vehicleModelDetailses.size());
                     mdw = new ModelPopupWindow(view, AfterRegisterScreen.this);
@@ -361,6 +354,7 @@ if(vehicleId!=null){
         };
     }
     // ************** Class for pop-up window **********************
+
     /**
      * The Class DemoPopupWindow.
      */
@@ -369,10 +363,8 @@ if(vehicleId!=null){
         /**
          * Instantiates a new demo popup window.
          *
-         * @param anchor
-         *            the anchor
-         * @param cnt
-         *            the cnt
+         * @param anchor the anchor
+         * @param cnt    the cnt
          */
         public DemoPopupWindow(View anchor, Context cnt) {
             super(anchor);
@@ -392,8 +384,8 @@ if(vehicleId!=null){
             ViewGroup root = (ViewGroup) inflater.inflate(
                     R.layout.share_choose_popup, null);
 
-            ListView listview=(ListView)root.findViewById(R.id.listview);
-            adapter=new CustomBaseAdapter(AfterRegisterScreen.this,mVehicleDetailses);
+            ListView listview = (ListView) root.findViewById(R.id.listview);
+            adapter = new CustomBaseAdapter(AfterRegisterScreen.this, mVehicleDetailses);
             listview.setAdapter(adapter);
             Button mButton = (Button) root.findViewById(R.id.cancelBtn);
 
@@ -414,26 +406,21 @@ if(vehicleId!=null){
         }
 
     }
+
     public class CustomBaseAdapter extends BaseAdapter {
         Context context;
         private ArrayList<VehicleDetails> mVehicleDetailses;
-        public CustomBaseAdapter(Context context,ArrayList<VehicleDetails> mVehicleDetailses) {
+
+        public CustomBaseAdapter(Context context, ArrayList<VehicleDetails> mVehicleDetailses) {
             this.mVehicleDetailses = mVehicleDetailses;
             this.context = context;
-
-        }
-
-
-        private class ViewHolder {
-
-            TextView txtTitle;
 
         }
 
         public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
 
-            LayoutInflater mInflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.list_item, null);
                 holder = new ViewHolder();
@@ -441,46 +428,50 @@ if(vehicleId!=null){
                 holder.txtTitle = (TextView) convertView.findViewById(R.id.title);
 
                 convertView.setTag(holder);
-            }
-            else {
+            } else {
                 holder = (ViewHolder) convertView.getTag();
             }
 
 
-
-
             holder.txtTitle.setText(mVehicleDetailses.get(position).getVehicle_name());
 
-convertView.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        vehicleId=mVehicleDetailses.get(position).getVehicle_id();
-        btVehiclesOwned.setText(mVehicleDetailses.get(position).getVehicle_name());
-        dw.dismiss();
-    }
-});
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    vehicleId = mVehicleDetailses.get(position).getVehicle_id();
+                    btVehiclesOwned.setText(mVehicleDetailses.get(position).getVehicle_name());
+                    dw.dismiss();
+                }
+            });
             return convertView;
         }
+
         @Override
         public int getCount() {
             return mVehicleDetailses.size();
         }
+
         @Override
         public Object getItem(int position) {
             return position;
         }
+
         @Override
         public long getItemId(int position) {
             return position;
         }
+
+        private class ViewHolder {
+
+            TextView txtTitle;
+
+        }
     }
-
-
-
 
 
     //////
     // ************** Class for pop-up window **********************
+
     /**
      * The Class DemoPopupWindow.
      */
@@ -489,10 +480,8 @@ convertView.setOnClickListener(new View.OnClickListener() {
         /**
          * Instantiates a new demo popup window.
          *
-         * @param anchor
-         *            the anchor
-         * @param cnt
-         *            the cnt
+         * @param anchor the anchor
+         * @param cnt    the cnt
          */
         public ModelPopupWindow(View anchor, Context cnt) {
             super(anchor);
@@ -512,8 +501,8 @@ convertView.setOnClickListener(new View.OnClickListener() {
             ViewGroup root = (ViewGroup) inflater.inflate(
                     R.layout.share_choose_popup, null);
 
-            ListView listview=(ListView)root.findViewById(R.id.listview);
-            ModelCustomBaseAdapter=new ModelCustomBaseAdapter(AfterRegisterScreen.this,vehicleModelDetailses);
+            ListView listview = (ListView) root.findViewById(R.id.listview);
+            ModelCustomBaseAdapter = new ModelCustomBaseAdapter(AfterRegisterScreen.this, vehicleModelDetailses);
             listview.setAdapter(ModelCustomBaseAdapter);
             Button mButton = (Button) root.findViewById(R.id.cancelBtn);
 
@@ -534,26 +523,21 @@ convertView.setOnClickListener(new View.OnClickListener() {
         }
 
     }
+
     public class ModelCustomBaseAdapter extends BaseAdapter {
         Context context;
         private ArrayList<VehicleModelDetails> vehicleModelDetailses;
-        public ModelCustomBaseAdapter(Context context,ArrayList<VehicleModelDetails> vehicleModelDetailses) {
+
+        public ModelCustomBaseAdapter(Context context, ArrayList<VehicleModelDetails> vehicleModelDetailses) {
             this.vehicleModelDetailses = vehicleModelDetailses;
             this.context = context;
-
-        }
-
-
-        private class ViewHolder {
-
-            TextView txtTitle;
 
         }
 
         public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
 
-            LayoutInflater mInflater = (LayoutInflater)context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             if (convertView == null) {
                 convertView = mInflater.inflate(R.layout.list_item, null);
                 holder = new ViewHolder();
@@ -561,12 +545,9 @@ convertView.setOnClickListener(new View.OnClickListener() {
                 holder.txtTitle = (TextView) convertView.findViewById(R.id.title);
 
                 convertView.setTag(holder);
-            }
-            else {
+            } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-
-
 
 
             holder.txtTitle.setText(vehicleModelDetailses.get(position).getVehicleType());
@@ -574,24 +555,33 @@ convertView.setOnClickListener(new View.OnClickListener() {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                 //   vehicleId=mVehicleDetailses.get(position).getVehicle_id();
+                    //   vehicleId=mVehicleDetailses.get(position).getVehicle_id();
                     btModel.setText(vehicleModelDetailses.get(position).getVehicleType());
                     mdw.dismiss();
                 }
             });
             return convertView;
         }
+
         @Override
         public int getCount() {
             return vehicleModelDetailses.size();
         }
+
         @Override
         public Object getItem(int position) {
             return position;
         }
+
         @Override
         public long getItemId(int position) {
             return position;
+        }
+
+        private class ViewHolder {
+
+            TextView txtTitle;
+
         }
     }
 }

@@ -1,5 +1,4 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background">
@@ -8,8 +7,8 @@
         android:id="@+id/lltop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp">
 
         <TextView
             android:id="@+id/tvTagRiders"
@@ -17,23 +16,23 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/logo_small"
             android:text="Riders"
-            android:textSize="@dimen/register_rider_text_size"
-            android:textColor="@color/dark_brown" />
+            android:textColor="@color/dark_brown"
+            android:textSize="@dimen/register_rider_text_size" />
 
         <TextView
             android:id="@+id/tvTagOpinion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="opinion"
-            android:textSize="@dimen/register_rider_text_size"
-            android:textColor="@color/light_brown" />
+            android:textColor="@color/light_brown"
+            android:textSize="@dimen/register_rider_text_size" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llcreatelayout"
-        android:layout_below="@+id/lltop"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/lltop"
         android:layout_marginTop="40dp"
         android:orientation="vertical">
 
@@ -42,9 +41,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Welcome!"
-            android:textStyle="bold"
+            android:textColor="@color/dark_brown"
             android:textSize="@dimen/title_text_size"
-            android:textColor="@color/dark_brown" />
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/edPhoneNo"
@@ -69,66 +68,66 @@
             android:layout_marginRight="20dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
-            android:text="VEHICLE OWNED"
             android:editable="false"
-android:gravity="left|center_vertical"
+            android:gravity="left|center_vertical"
             android:padding="8dp"
+            android:text="VEHICLE OWNED"
             android:textColor="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
-
-
 
 
         <Button
             android:id="@+id/btModel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="left|center_vertical"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:layout_marginTop="12dp"
             android:background="@android:color/white"
+            android:gravity="left|center_vertical"
             android:padding="8dp"
             android:text="MODEL"
             android:textColor="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <TextView
-        android:id="@+id/tvSkip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:layout_marginTop="12dp"
-        android:background="@color/light_brown"
-        android:paddingBottom="8dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:paddingTop="8dp"
-        android:text="SKIP"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
-    <TextView
-        android:id="@+id/tvSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_weight="1"
-        android:layout_marginTop="12dp"
-        android:background="@color/light_brown"
-        android:paddingBottom="8dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:paddingTop="8dp"
-        android:text="SUBMIT"
-        android:textColor="@android:color/white"
-        android:textSize="16sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/tvSkip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_weight="1"
+                android:background="@color/light_brown"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="SKIP"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvSubmit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_weight="1"
+                android:background="@color/light_brown"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:paddingTop="8dp"
+                android:text="SUBMIT"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
 
     </LinearLayout>

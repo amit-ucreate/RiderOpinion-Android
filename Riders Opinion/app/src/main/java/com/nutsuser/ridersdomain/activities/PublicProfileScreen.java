@@ -13,9 +13,10 @@ import butterknife.ButterKnife;
  * Created by user on 1/5/2016.
  */
 public class PublicProfileScreen extends BaseActivity {
-    private Activity activity;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,7 @@ public class PublicProfileScreen extends BaseActivity {
         ButterKnife.bind(this);
         setupActionBar();
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

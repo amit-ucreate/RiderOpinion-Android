@@ -39,7 +39,7 @@ public class EndPlaceArrayAdapter extends ArrayAdapter<EndPlaceArrayAdapter.Plac
      * @param filter   Used to specify place types
      */
     public EndPlaceArrayAdapter(Context context, int resource, LatLngBounds bounds,
-                             AutocompleteFilter filter) {
+                                AutocompleteFilter filter) {
         super(context, resource);
         mBounds = bounds;
         mPlaceFilter = filter;

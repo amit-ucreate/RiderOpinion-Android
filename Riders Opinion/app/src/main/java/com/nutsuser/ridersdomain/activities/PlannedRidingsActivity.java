@@ -32,11 +32,16 @@ import butterknife.OnClick;
  */
 public class PlannedRidingsActivity extends BaseActivity {
 
+    //  public static String [] prgmNameList={"My Rides","My Messages","My Friends","Chats","Favourite Desination","Notifications","Settings","NEW"};
+    // public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_notification,R.drawable.icon_modifybike,R.drawable.icon_menu_destination};
+    // public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
+    public static String[] prgmNameList = {"My Rides", "My Messages", "My Friends", "Chats", "Favourite Destination", "Notifications", "Settings", "    \n"};
+    public static int[] prgmImages = {R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_my_messages, R.drawable.ic_menu_my_friends, R.drawable.ic_menu_menu_chats, R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_menu_notifications, R.drawable.ic_menu_menu_settings, R.drawable.ic_menu_menu_blank_icon};
+    public static Class[] classList = {MyRidesRecyclerView.class, ChatListScreen.class, MyFriends.class, ChatListScreen.class, FavouriteDesination.class, Notification.class, SettingsActivity.class, SettingsActivity.class};
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.rvRides)
     RecyclerView rvRides;
-    private AdapterRide adapterRide;
     @Bind(R.id.tvPlaces)
     TextView tvPlaces;
     @Bind(R.id.tvDateAndTime)
@@ -47,38 +52,32 @@ public class PlannedRidingsActivity extends BaseActivity {
     TextView tvSubmit;
     @Bind(R.id.tvName)
     TextView tvName;
- /*   @Bind(R.id.tvAddress)
-    TextView tvAddress;
-    @Bind(R.id.tvDestinations)
-    TextView tvDestinations;
-    @Bind(R.id.tvEvents)
-    TextView tvEvents;
-    @Bind(R.id.tvModifyBike)
-    TextView tvModifyBike;
-    @Bind(R.id.tvMeetAndPlanRide)
-    TextView tvMeetAndPlanRide;
-    @Bind(R.id.tvHealthyRiding)
-    TextView tvHealthyRiding;
-    @Bind(R.id.tvGetDirections)
-    TextView tvGetDirections;
-    @Bind(R.id.tvNotifications)
-    TextView tvNotifications;
-    @Bind(R.id.tvSettings)
-    TextView tvSettings;*/
+    /*   @Bind(R.id.tvAddress)
+       TextView tvAddress;
+       @Bind(R.id.tvDestinations)
+       TextView tvDestinations;
+       @Bind(R.id.tvEvents)
+       TextView tvEvents;
+       @Bind(R.id.tvModifyBike)
+       TextView tvModifyBike;
+       @Bind(R.id.tvMeetAndPlanRide)
+       TextView tvMeetAndPlanRide;
+       @Bind(R.id.tvHealthyRiding)
+       TextView tvHealthyRiding;
+       @Bind(R.id.tvGetDirections)
+       TextView tvGetDirections;
+       @Bind(R.id.tvNotifications)
+       TextView tvNotifications;
+       @Bind(R.id.tvSettings)
+       TextView tvSettings;*/
     @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    private Activity activity;
     @Bind(R.id.lvSlidingMenu)
     LinearLayout lvSlidingMenu;
-
     @Bind(R.id.gridView1)
     GridView gridView1;
-  //  public static String [] prgmNameList={"My Rides","My Messages","My Friends","Chats","Favourite Desination","Notifications","Settings","NEW"};
-   // public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_notification,R.drawable.icon_modifybike,R.drawable.icon_menu_destination};
-   // public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
-  public static String [] prgmNameList={"My Rides","My Messages","My Friends","Chats","Favourite Destination","Notifications","Settings","    \n"};
-    public static int [] prgmImages={R.drawable.ic_menu_fav_destinations,R.drawable.ic_menu_my_messages,R.drawable.ic_menu_my_friends,R.drawable.ic_menu_menu_chats,R.drawable.ic_menu_fav_destinations,R.drawable.ic_menu_menu_notifications,R.drawable.ic_menu_menu_settings,R.drawable.ic_menu_menu_blank_icon};
-    public static Class [] classList={MyRidesRecyclerView.class,ChatListScreen.class,MyFriends.class,ChatListScreen.class,FavouriteDesination.class,Notification.class,SettingsActivity.class,SettingsActivity.class};
+    private AdapterRide adapterRide;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,21 +103,22 @@ public class PlannedRidingsActivity extends BaseActivity {
         gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position==7){
+                if (position == 7) {
 
-                }
-                else{
+                } else {
                     Log.e("positiuon:", "" + classList[position]);
                     intentCalling(classList[position]);
                 }
             }
         });
     }
-    public void intentCalling(Class name){
-        Intent mIntent=new Intent(PlannedRidingsActivity.this,name);
+
+    public void intentCalling(Class name) {
+        Intent mIntent = new Intent(PlannedRidingsActivity.this, name);
         startActivity(mIntent);
 
     }
+
     private void setFonts() {
         Typeface typefaceNormal = Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF");
         tvPlaces.setTypeface(typefaceNormal);
@@ -127,15 +127,15 @@ public class PlannedRidingsActivity extends BaseActivity {
         tvRidesAlreadyPlanned.setTypeface(typefaceNormal);
         tvSubmit.setTypeface(typefaceNormal);
         tvName.setTypeface(typefaceNormal);
-      //  tvAddress.setTypeface(typefaceNormal);
+        //  tvAddress.setTypeface(typefaceNormal);
         //tvDestinations.setTypeface(typefaceNormal);
-       // tvEvents.setTypeface(typefaceNormal);
-       // tvModifyBike.setTypeface(typefaceNormal);
+        // tvEvents.setTypeface(typefaceNormal);
+        // tvModifyBike.setTypeface(typefaceNormal);
         ///tvMeetAndPlanRide.setTypeface(typefaceNormal);
         //tvHealthyRiding.setTypeface(typefaceNormal);
-       // tvGetDirections.setTypeface(typefaceNormal);
-       // tvNotifications.setTypeface(typefaceNormal);
-       // tvSettings.setTypeface(typefaceNormal);
+        // tvGetDirections.setTypeface(typefaceNormal);
+        // tvNotifications.setTypeface(typefaceNormal);
+        // tvSettings.setTypeface(typefaceNormal);
     }
 
     private void setupActionBar() {
@@ -160,7 +160,7 @@ public class PlannedRidingsActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.ivMenu, R.id.rlProfile,R.id.tvSubmit})
+    @OnClick({R.id.ivMenu, R.id.rlProfile, R.id.tvSubmit})
     void click(View view) {
         switch (view.getId()) {
 

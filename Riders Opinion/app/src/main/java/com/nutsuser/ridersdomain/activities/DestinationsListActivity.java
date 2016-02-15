@@ -25,11 +25,10 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.gson.Gson;
+
 import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.AdapterDestination;
@@ -39,11 +38,10 @@ import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
 import com.nutsuser.ridersdomain.utils.CustomizeDialog;
 import com.nutsuser.ridersdomain.utils.PrefsManager;
 import com.nutsuser.ridersdomain.utils.RecyclerItemClickListener;
+import com.nutsuser.ridersdomain.web.api.RestClient;
 import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
 import com.nutsuser.ridersdomain.web.pojos.RidingDestination;
 import com.nutsuser.ridersdomain.web.pojos.RidingDestinationDetails;
-import com.nutsuser.ridersdomain.web.pojos.VehicleModel;
-import com.nutsuser.ridersdomain.web.pojos.VehicleModelDetails;
 
 import org.json.JSONObject;
 
@@ -53,41 +51,44 @@ import java.util.ArrayList;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
 
 /**
  * Created by user on 8/28/2015.
  */
 public class DestinationsListActivity extends BaseActivity {
 
+    public static String[] prgmNameList = {"My Rides", "My Messages", "My Friends", "Chats", "Favourite Destination", "Notifications", "Settings", "    \n"};
+    public static int[] prgmImages = {R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_my_messages, R.drawable.ic_menu_my_friends, R.drawable.ic_menu_menu_chats, R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_menu_notifications, R.drawable.ic_menu_menu_settings, R.drawable.ic_menu_menu_blank_icon};
+    public static Class[] classList = {MyRidesRecyclerView.class, ChatListScreen.class, MyFriends.class, ChatListScreen.class, FavouriteDesination.class, Notification.class, SettingsActivity.class, SettingsActivity.class};
     PrefsManager prefsManager;
     CustomizeDialog mCustomizeDialog;
-    String AccessToken,UserId;
-    private ArrayList<RidingDestinationDetails> mRidingDestinationDetailses = new ArrayList<RidingDestinationDetails>();
+    String AccessToken, UserId;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    private Activity activity;
     @Bind(R.id.tvTitleToolbar)
     TextView tvTitleToolbar;
     @Bind(R.id.tvName)
     TextView tvName;
-   /* @Bind(R.id.tvAddress)
-    TextView tvAddress;
-    @Bind(R.id.tvDestinations)
-    TextView tvDestinations;
-    @Bind(R.id.tvEvents)
-    TextView tvEvents;
-    @Bind(R.id.tvModifyBike)
-    TextView tvModifyBike;
-    @Bind(R.id.tvMeetAndPlanRide)
-    TextView tvMeetAndPlanRide;
-    @Bind(R.id.tvHealthyRiding)
-    TextView tvHealthyRiding;
-    @Bind(R.id.tvGetDirections)
-    TextView tvGetDirections;
-    @Bind(R.id.tvNotifications)
-    TextView tvNotifications;
-    @Bind(R.id.tvSettings)
-    TextView tvSettings;*/
+    /* @Bind(R.id.tvAddress)
+     TextView tvAddress;
+     @Bind(R.id.tvDestinations)
+     TextView tvDestinations;
+     @Bind(R.id.tvEvents)
+     TextView tvEvents;
+     @Bind(R.id.tvModifyBike)
+     TextView tvModifyBike;
+     @Bind(R.id.tvMeetAndPlanRide)
+     TextView tvMeetAndPlanRide;
+     @Bind(R.id.tvHealthyRiding)
+     TextView tvHealthyRiding;
+     @Bind(R.id.tvGetDirections)
+     TextView tvGetDirections;
+     @Bind(R.id.tvNotifications)
+     TextView tvNotifications;
+     @Bind(R.id.tvSettings)
+     TextView tvSettings;*/
     @Bind(R.id.rvDestinations)
     RecyclerView rvDestinations;
     @Bind(R.id.drawer_layout)
@@ -101,11 +102,11 @@ public class DestinationsListActivity extends BaseActivity {
     //public static String [] prgmNameList={"Riding Destinations","Meet 'N' Plan A Ride","Riding Events \n    ","Modifly Your Bikes","Healthy Riding","Get Directions","Notifications","Settings"};
     //public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_get_direction,R.drawable.icon_menu_notification,R.drawable.icon_menu_settings};
     //public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
-double start1,end1;
-    public static String [] prgmNameList={"My Rides","My Messages","My Friends","Chats","Favourite Destination","Notifications","Settings","    \n"};
-    public static int [] prgmImages={R.drawable.ic_menu_fav_destinations,R.drawable.ic_menu_my_messages,R.drawable.ic_menu_my_friends,R.drawable.ic_menu_menu_chats,R.drawable.ic_menu_fav_destinations,R.drawable.ic_menu_menu_notifications,R.drawable.ic_menu_menu_settings,R.drawable.ic_menu_menu_blank_icon};
-    public static Class [] classList={MyRidesRecyclerView.class,ChatListScreen.class,MyFriends.class,ChatListScreen.class,FavouriteDesination.class,Notification.class,SettingsActivity.class,SettingsActivity.class};
-String star_lat,star_long;
+    double start1, end1;
+    String star_lat, star_long;
+    public static  ArrayList<RidingDestinationDetails> mRidingDestinationDetailses = new ArrayList<RidingDestinationDetails>();
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,9 +122,9 @@ String star_lat,star_long;
         rvDestinations.addOnItemTouchListener(new RecyclerItemClickListener(activity, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                String string=mRidingDestinationDetailses.get(position).getDestId();
-                Intent mIntent=new Intent(activity, DestinationsDetailActivity.class);
-                mIntent.putExtra("DestID",string);
+                String string = mRidingDestinationDetailses.get(position).getDestId();
+                Intent mIntent = new Intent(activity, DestinationsDetailActivity.class);
+                mIntent.putExtra("DestID", string);
                 startActivity(mIntent);
             }
         }));
@@ -131,10 +132,9 @@ String star_lat,star_long;
         gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(position==7){
+                if (position == 7) {
 
-                }
-                else{
+                } else {
                     Log.e("positiuon:", "" + classList[position]);
                     intentCalling(classList[position]);
                 }
@@ -183,8 +183,9 @@ String star_lat,star_long;
         });
 
     }
-    public void intentCalling(Class name){
-        Intent mIntent=new Intent(DestinationsListActivity.this,name);
+
+    public void intentCalling(Class name) {
+        Intent mIntent = new Intent(DestinationsListActivity.this, name);
         startActivity(mIntent);
 
     }
@@ -200,14 +201,14 @@ String star_lat,star_long;
     private void setFontsToTextViews() {
         tvTitleToolbar.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
         tvName.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
-       // tvAddress.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
-       // tvDestinations.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
-       // tvEvents.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
-       // tvModifyBike.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
-       // tvMeetAndPlanRide.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
-       // tvHealthyRiding.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
+        // tvAddress.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
+        // tvDestinations.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
+        // tvEvents.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
+        // tvModifyBike.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
+        // tvMeetAndPlanRide.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
+        // tvHealthyRiding.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
         //tvGetDirections.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
-       // tvNotifications.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
+        // tvNotifications.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
         //tvSettings.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
     }
 
@@ -250,23 +251,25 @@ String star_lat,star_long;
     }
 
 //http://ridersopininon.herokuapp.com/index.php/riders/vehicle
+
     /**
      * Register info .
      */
     public void RidingListmodelinfo() {
         showProgressDialog();
-        Log.e("riding destination","riding destination");
+        Log.e("riding destination", "riding destination");
         try {
-            prefsManager=new PrefsManager(DestinationsListActivity.this);
-            AccessToken=prefsManager.getToken();
-            UserId=prefsManager.getCaseId();
-            Log.e("AccessToken:",""+AccessToken+"----UserId----"+UserId);
+            prefsManager = new PrefsManager(DestinationsListActivity.this);
+            AccessToken = prefsManager.getToken();
+            UserId = prefsManager.getCaseId();
+
+
 
             //http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken=eddfbf2bf4046e90fc768d8e319a4355
-             Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_ridingdestination+"userId="+UserId+"&longitude="+star_long+"&latitude="+star_lat+"&radius=2000&accessToken="+AccessToken);
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingdestination + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat + "&radius=2000&accessToken=" + AccessToken);
             RequestQueue requestQueue = Volley.newRequestQueue(DestinationsListActivity.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_ridingdestination+"userId="+UserId+"&longitude="+star_long+"&latitude="+star_lat+"&radius=2000&accessToken="+AccessToken, null,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingdestination + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat + "&radius=2000&accessToken=" + AccessToken, null,
                     volleyModelErrorListener(), volleyModelSuccessListener()
             );
 
@@ -286,19 +289,19 @@ String star_lat,star_long;
 
         //http://ridersopininon.herokuapp.com/index.php/ridingDestination/search?search=shimla&userId=105&longitude=76.70740061&latitude=30.7104346&radius=2000&accessToken=764bb308d8e4967b8183969ca709a483
         showProgressDialog();
-        Log.e("riding destination","riding destination");
+        Log.e("riding destination", "riding destination");
         try {
-            prefsManager=new PrefsManager(DestinationsListActivity.this);
-            AccessToken=prefsManager.getToken();
-            UserId=prefsManager.getCaseId();
-            Log.e("AccessToken:",""+AccessToken+"----UserId----"+UserId);
+            prefsManager = new PrefsManager(DestinationsListActivity.this);
+            AccessToken = prefsManager.getToken();
+            UserId = prefsManager.getCaseId();
+            Log.e("AccessToken:", "" + AccessToken + "----UserId----" + UserId);
             edSearch.setText("");
 
             //http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken=eddfbf2bf4046e90fc768d8e319a4355
-            Log.e("URL: ",""+ ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_search+"search="+search+"userId="+UserId+"&longitude="+star_long+"&latitude="+star_lat+"&accessToken="+AccessToken);
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_search + "search=" + search + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat + "&accessToken=" + AccessToken);
             RequestQueue requestQueue = Volley.newRequestQueue(DestinationsListActivity.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT+ApplicationGlobal.baseurl_search+"search="+search+"&userId="+UserId+"&longitude="+star_long+"&latitude="+star_lat+"&accessToken="+AccessToken, null,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_search + "search=" + search + "&userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat + "&accessToken=" + AccessToken, null,
                     volleyModelErrorListener(), volleyModelSuccessListener()
             );
 
@@ -317,18 +320,18 @@ String star_lat,star_long;
         return new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.e("Model response:",""+response);
+                Log.e("Model response:", "" + response);
 
                 Type type = new TypeToken<RidingDestination>() {
                 }.getType();
-               RidingDestination mRidingDestination = new Gson().fromJson(response.toString(), type);
+                RidingDestination mRidingDestination = new Gson().fromJson(response.toString(), type);
 
                 mRidingDestinationDetailses.clear();
 
                 dismissProgressDialog();
-                if (mRidingDestination.getSuccess().equals("1")){
+                if (mRidingDestination.getSuccess().equals("1")) {
                     mRidingDestinationDetailses.addAll(mRidingDestination.getData());
-                    rvDestinations.setAdapter(new AdapterDestination(DestinationsListActivity.this,mRidingDestinationDetailses));
+                    rvDestinations.setAdapter(new AdapterDestination(DestinationsListActivity.this, mRidingDestinationDetailses));
                 }
 
             }
@@ -348,7 +351,7 @@ String star_lat,star_long;
         };
     }
 
-    public  void showProgressDialog() {
+    public void showProgressDialog() {
 
         mCustomizeDialog = new CustomizeDialog(DestinationsListActivity.this);
         mCustomizeDialog.setCancelable(false);
@@ -356,7 +359,7 @@ String star_lat,star_long;
         Log.e("HERE", "HERE");
     }
 
-    public  void dismissProgressDialog() {
+    public void dismissProgressDialog() {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -369,4 +372,13 @@ String star_lat,star_long;
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(FilterActivity.filter){
+            FilterActivity.filter=false;
+            rvDestinations.setAdapter(new AdapterDestination(DestinationsListActivity.this, mRidingDestinationDetailses));
+
+        }
+    }
 }

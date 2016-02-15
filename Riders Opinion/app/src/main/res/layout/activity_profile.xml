@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -48,86 +48,86 @@
                 android:id="@+id/sdvDisplayPicture"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
-                android:layout_marginTop="32dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="32dp"
                 app:placeholderImage="@color/twenty_of_black"
                 app:roundAsCircle="true" />
 
             <EditText
                 android:id="@+id/etName"
-                android:layout_marginTop="32dp"
-                android:hint="Enter Name"
-                android:text="XYZ ROCKSS"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp" />
+                android:layout_marginRight="32dp"
+                android:layout_marginTop="32dp"
+                android:hint="Enter Name"
+                android:padding="12dp"
+                android:text="XYZ ROCKSS" />
 
             <EditText
                 android:id="@+id/etAddress"
-                android:hint="Enter Address"
-                android:text="H.No.293, Sector 28, Chandigarh"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp" />
+                android:layout_marginRight="32dp"
+                android:hint="Enter Address"
+                android:padding="12dp"
+                android:text="H.No.293, Sector 28, Chandigarh" />
 
             <EditText
                 android:id="@+id/etPhone"
-                android:inputType="phone"
-                android:hint="Enter Phone No."
-                android:text="9813198131"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp" />
+                android:layout_marginRight="32dp"
+                android:hint="Enter Phone No."
+                android:inputType="phone"
+                android:padding="12dp"
+                android:text="9813198131" />
 
             <EditText
                 android:id="@+id/etEmail"
-                android:hint="Enter Email"
-                android:inputType="textEmailAddress"
-                android:text="x@x.com"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp" />
+                android:layout_marginRight="32dp"
+                android:hint="Enter Email"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                android:text="x@x.com" />
 
             <EditText
                 android:id="@+id/etBikeBrand"
-                android:hint="Enter Bike Brand Name"
-                android:text="ROYAL ENFIELD"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="12dp"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp" />
+                android:layout_marginRight="32dp"
+                android:hint="Enter Bike Brand Name"
+                android:padding="12dp"
+                android:text="ROYAL ENFIELD" />
 
             <EditText
                 android:id="@+id/etBikeModel"
-                android:hint="Enter Bike Model"
-                android:text="CLASSIC 350"
-                android:padding="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp" />
+                android:layout_marginRight="32dp"
+                android:hint="Enter Bike Model"
+                android:padding="12dp"
+                android:text="CLASSIC 350" />
 
             <TextView
                 android:id="@+id/tvUpdate"
-                android:text="UPDATE"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:background="@color/light_brown"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp" />
+                android:layout_marginRight="32dp"
+                android:background="@color/light_brown"
+                android:gravity="center"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:text="UPDATE"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

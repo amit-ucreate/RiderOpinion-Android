@@ -19,6 +19,9 @@ public class RidingDestinationDetailsClickInfo {
     String petrolpumps;
     String serviceStation;
     String hospitals;
+    String riders;
+    String offers;
+    String images;
 
     public String getStringdestId() {
         return stringdestId;
@@ -163,8 +166,4 @@ public class RidingDestinationDetailsClickInfo {
     public void setImages(String images) {
         this.images = images;
     }
-
-    String riders;
-    String offers;
-    String images;
 }

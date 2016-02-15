@@ -8,6 +8,7 @@ package com.nutsuser.ridersdomain.web.pojos;
 public class FavoriteDestination {
     String success;
     String fav;
+    String message;
 
     public String getFav() {
         return fav;
@@ -25,7 +26,6 @@ public class FavoriteDestination {
         this.success = success;
     }
 
-
     public String getMessage() {
         return message;
     }
@@ -33,6 +33,4 @@ public class FavoriteDestination {
     public void setMessage(String message) {
         this.message = message;
     }
-
-    String message;
 }

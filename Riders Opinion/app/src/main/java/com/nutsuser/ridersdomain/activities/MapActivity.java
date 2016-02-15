@@ -2,25 +2,21 @@ package com.nutsuser.ridersdomain.activities;
 
 import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
-import android.location.LocationManager;
-
 
 import com.google.android.gms.common.api.GoogleApiClient;
-
 import com.google.android.gms.location.LocationRequest;
-
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -33,9 +29,7 @@ import com.nutsuser.ridersdomain.services.GPSService;
 
 import org.w3c.dom.Document;
 
-
 import java.util.ArrayList;
-
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -162,8 +156,8 @@ public class MapActivity extends BaseActivity {
      */
     public class GetRouteTask extends AsyncTask<String, Void, String> {
 
-        private ProgressDialog Dialog = new ProgressDialog(MapActivity.this);
         String response = "";
+        private ProgressDialog Dialog = new ProgressDialog(MapActivity.this);
 
         @Override
         protected void onPreExecute() {

@@ -16,7 +16,6 @@ import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.activities.MapActivity;
 import com.nutsuser.ridersdomain.web.pojos.RidingDestinationDetails;
 
-import java.io.File;
 import java.util.ArrayList;
 
 import butterknife.Bind;
@@ -29,9 +28,10 @@ public class AdapterDestination extends RecyclerView.Adapter<AdapterDestination.
 
     private final Context mContext;
     private ArrayList<RidingDestinationDetails> mRidingDestinationDetailses;
-    public AdapterDestination(Context context,ArrayList<RidingDestinationDetails> mRidingDestinationDetailses) {
+
+    public AdapterDestination(Context context, ArrayList<RidingDestinationDetails> mRidingDestinationDetailses) {
         this.mContext = context;
-        this.mRidingDestinationDetailses=mRidingDestinationDetailses;
+        this.mRidingDestinationDetailses = mRidingDestinationDetailses;
     }
 
     @Override
@@ -57,17 +57,17 @@ public class AdapterDestination extends RecyclerView.Adapter<AdapterDestination.
         jsonInString = jsonInString.replace("\\\"", "\"");
         jsonInString = jsonInString.replace("\"{", "{");
         jsonInString = jsonInString.replace("}\"", "}");
-        Log.e("jsonInString: ", ""+jsonInString);
+        Log.e("jsonInString: ", "" + jsonInString);
         Uri imageUri = Uri.parse(jsonInString);
         holder.sdv.setImageURI(imageUri);
         holder.ivMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String lat=mRidingDestinationDetailses.get(position).getDestLatitude();
-                String lon=mRidingDestinationDetailses.get(position).getDestLatitude();
-                Intent mIntent=new Intent(mContext, MapActivity.class);
-                mIntent.putExtra("endLat",lat);
-                mIntent.putExtra("endLon",lon);
+                String lat = mRidingDestinationDetailses.get(position).getDestLatitude();
+                String lon = mRidingDestinationDetailses.get(position).getDestLatitude();
+                Intent mIntent = new Intent(mContext, MapActivity.class);
+                mIntent.putExtra("endLat", lat);
+                mIntent.putExtra("endLon", lon);
                 mContext.startActivity(mIntent);
             }
         });

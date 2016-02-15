@@ -10,6 +10,7 @@ public class VehicleModel {
 
     String success;
     String message;
+    private List<VehicleModelDetails> data = new ArrayList<VehicleModelDetails>();
 
     public String getSuccess() {
         return success;
@@ -34,6 +35,4 @@ public class VehicleModel {
     public void setData(List<VehicleModelDetails> data) {
         this.data = data;
     }
-
-    private List<VehicleModelDetails> data = new ArrayList<VehicleModelDetails>();
 }

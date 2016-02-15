@@ -19,8 +19,7 @@ import butterknife.ButterKnife;
 /**
  * Created by user on 1/6/2016.
  */
-public class PlanARidePostRide extends BaseActivity{
-    private Activity activity;
+public class PlanARidePostRide extends BaseActivity {
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.tvTitleToolbar)
@@ -28,9 +27,10 @@ public class PlanARidePostRide extends BaseActivity{
     @Bind(R.id.listView)
     ListView listView;
     ArrayList<Object> taskadapterlist = new ArrayList<>();
-    //ArrayList<PostRide> mTaskDocumentses=new ArrayList<>();
-
     PlanRidePostAdapter mTaskDetailsAdapter;
+    //ArrayList<PostRide> mTaskDocumentses=new ArrayList<>();
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,10 +39,10 @@ public class PlanARidePostRide extends BaseActivity{
         ButterKnife.bind(this);
         setupActionBar();
         setFonts();
-        taskadapterlist=new ArrayList<>();
-       // PostRide mPostRide = new PostRide("ASISTANCE REQUIRED", "", "");
+        taskadapterlist = new ArrayList<>();
+        // PostRide mPostRide = new PostRide("ASISTANCE REQUIRED", "", "");
         PostRide mPostRide1 = new PostRide("PLAN THIS RIDE", "", "");
-        PostRide mPostRide2= new PostRide("HOTEL/RESTAURANT BOOKING", "", "");
+        PostRide mPostRide2 = new PostRide("HOTEL/RESTAURANT BOOKING", "", "");
         //PostRide mPostRide3 = new PostRide("WHO CAN JOIN", "", "");
         PostRide mPostRide4 = new PostRide("ANY BIKER", "", "");
         PostRide mPostRide5 = new PostRide("HARLEY", "", "");
@@ -63,12 +63,14 @@ public class PlanARidePostRide extends BaseActivity{
 
 
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_back);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
     private void setFonts() {
         tvTitleToolbar.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));
         //tvName.setTypeface(Typeface.createFromAsset(getResources().getAssets(), "fonts/ITC AVANT GARDE GOTHIC LT CONDENSED BOOK.TTF"));

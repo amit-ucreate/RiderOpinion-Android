@@ -1,6 +1,5 @@
 package com.nutsuser.ridersdomain.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -40,6 +39,7 @@ public class SettingsActivity extends BaseActivity {
         rsbDistance.setSelectedMaxValue(400);
         llSeekBar.addView(rsbDistance);
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

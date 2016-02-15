@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,46 +16,46 @@
         android:textStyle="bold" />
 
     <RelativeLayout
-        android:layout_marginLeft="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp">
 
         <ImageView
             android:id="@+id/ivStar1"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:src="@drawable/icon_star_full_small" />
 
         <ImageView
             android:id="@+id/ivStar2"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/ivStar1"
             android:src="@drawable/icon_star_full_small" />
 
         <ImageView
             android:id="@+id/ivStar3"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/ivStar2"
             android:src="@drawable/icon_star_full_small" />
 
         <ImageView
             android:id="@+id/ivStar4"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/ivStar3"
             android:src="@drawable/icon_star_full_small" />
 
         <ImageView
             android:id="@+id/ivStar5"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:layout_toRightOf="@id/ivStar4"
             android:src="@drawable/icon_star_full_small" />
 
@@ -69,19 +70,19 @@
 
         <ImageView
             android:id="@+id/ivFavourite"
-            android:padding="12dp"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/icon_star_full"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="12dp"
+            android:src="@drawable/icon_star_full" />
 
         <ImageView
             android:id="@+id/ivVideo"
-            android:padding="12dp"
-            android:layout_toLeftOf="@id/ivFavourite"
-            android:src="@drawable/icon_video"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivFavourite"
+            android:padding="12dp"
+            android:src="@drawable/icon_video" />
 
     </RelativeLayout>
 

@@ -10,22 +10,19 @@ public class PostRide {
 
     private String Estimated;
 
-    public String getEstimated() {
-        return Estimated;
-    }
-
-
-
-    public PostRide(String Type,String DocumentId,String Estimated) {
+    public PostRide(String Type, String DocumentId, String Estimated) {
         this.Type = Type;
 
         this.DocumentId = DocumentId;
 
 
-
         this.Estimated = Estimated;
 
 
+    }
+
+    public String getEstimated() {
+        return Estimated;
     }
 
     public String getType() {

@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import com.daimajia.swipe.util.Attributes;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.FavouriteDestinationAdapter;
-import com.nutsuser.ridersdomain.adapter.FreindsCurrentSwipeAdapter;
-import com.nutsuser.ridersdomain.adapter.FreindsRequestSwipeAdapter;
 import com.nutsuser.ridersdomain.web.pojos.DividerItemDecoration;
 import com.nutsuser.ridersdomain.web.pojos.Student;
 
@@ -27,14 +25,14 @@ import butterknife.ButterKnife;
  * Created by user on 1/6/2016.
  */
 public class FavouriteDesination extends BaseActivity {
-    private Activity activity;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-     RecyclerView mRecyclerView;
+    RecyclerView mRecyclerView;
+    FavouriteDestinationAdapter mAdapter;
+    private Activity activity;
     // FreindsRequestSwipeAdapter mUpcomingSwipeViewAdapter;
     //FreindsRequestSwipeAdapter mAdapter;
     private ArrayList<Student> mDataSet;
-    FavouriteDestinationAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,12 +77,14 @@ public class FavouriteDesination extends BaseActivity {
             }
         });
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
     // load initial data
     public void loadData() {
 
@@ -92,6 +92,7 @@ public class FavouriteDesination extends BaseActivity {
             mDataSet.add(new Student("Student " + i, "androidstudent" + i + "@gmail.com"));
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -105,7 +106,7 @@ public class FavouriteDesination extends BaseActivity {
                 Intent intent = new Intent(FavouriteDesination.this, MainScreenActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("MainScreen","OPEN");
+                intent.putExtra("MainScreen", "OPEN");
                 startActivity(intent);
                 break;
         }

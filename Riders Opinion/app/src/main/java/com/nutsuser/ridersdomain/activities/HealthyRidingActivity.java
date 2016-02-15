@@ -40,6 +40,7 @@ public class HealthyRidingActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         wvHealthTips.loadUrl("https://in.yahoo.com/");
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

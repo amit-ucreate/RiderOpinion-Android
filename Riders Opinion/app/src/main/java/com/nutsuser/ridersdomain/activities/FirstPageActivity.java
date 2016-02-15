@@ -18,9 +18,6 @@ import com.android.volley.toolbox.Volley;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
 
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import io.fabric.sdk.android.Fabric;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -36,18 +33,16 @@ import butterknife.OnClick;
 public class FirstPageActivity extends BaseActivity {
 
 
-    private Activity activity;
     @Bind(R.id.tvTagRiders)
     TextView tvTagRiders;
     @Bind(R.id.tvTagOpinion)
     TextView tvTagOpinion;
-
     @Bind(R.id.tv_TagRiders)
     TextView tv_TagRiders;
     @Bind(R.id.tv_TagOpinion)
     TextView tv_TagOpinion;
     Map<String, String> params;
-
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +57,7 @@ public class FirstPageActivity extends BaseActivity {
         String text_ = "<font color=#D1622A>United</font> <font color=#000000>By Throttles</font>";
         tv_TagRiders.setText(Html.fromHtml(text));
         tv_TagOpinion.setText(Html.fromHtml(text_));
-       // callApplyCompetitionService();
+        // callApplyCompetitionService();
 
     }
 
@@ -76,7 +71,7 @@ public class FirstPageActivity extends BaseActivity {
     void click(View view) {
         switch (view.getId()) {
             case R.id.ivStart:
-                Intent intent=new Intent(activity,MainScreenActivity.class);
+                Intent intent = new Intent(activity, MainScreenActivity.class);
                 intent.putExtra("MainScreen", "CLOSED");
                 startActivity(intent);
 
@@ -110,7 +105,6 @@ public class FirstPageActivity extends BaseActivity {
             );
 
 
-
             requestQueue.add(loginTaskRequest);
 
         } catch (Exception e) {
@@ -135,8 +129,6 @@ public class FirstPageActivity extends BaseActivity {
 
 
                     //If any Volley error occurs, then hide progress.
-
-
 
 
                     Log.e("ERROR LISTENER", "createErrorListener: " + volleyError);

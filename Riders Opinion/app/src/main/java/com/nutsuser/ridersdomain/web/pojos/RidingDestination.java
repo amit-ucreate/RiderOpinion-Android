@@ -9,6 +9,7 @@ import java.util.List;
 public class RidingDestination {
     String success;
     String message;
+    private List<RidingDestinationDetails> data = new ArrayList<RidingDestinationDetails>();
 
     public String getSuccess() {
         return success;
@@ -33,6 +34,4 @@ public class RidingDestination {
     public void setData(List<RidingDestinationDetails> data) {
         this.data = data;
     }
-
-    private List<RidingDestinationDetails> data = new ArrayList<RidingDestinationDetails>();
 }

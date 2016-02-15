@@ -27,9 +27,17 @@ import butterknife.OnClick;
 public class NotificationScreen extends BaseActivity {
 
 
+    //public static String [] prgmNameList={"Riding Destinations","Meet 'N' Plan A Ride","Riding Events \n    ","Modifly Your Bikes","Healthy Riding","Get Directions","Notifications","Settings"};
+    //public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_get_direction,R.drawable.icon_menu_notification,R.drawable.icon_menu_settings};
+    // public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
+    public static String[] prgmNameList = {"My Rides", "My Messages", "My Friends", "Chats", "Favourite Desination", "Notifications", "Settings", "    \n"};
+    public static int[] prgmImages = {R.drawable.icon_menu_destination, R.drawable.icon_menu_meetplan, R.drawable.icon_menu_events, R.drawable.icon_modifybike, R.drawable.icon_menu_healthy_riding, R.drawable.icon_menu_notification, R.drawable.icon_modifybike, R.drawable.icon_menu_destination};
+    public static Class[] classList = {DestinationsListActivity.class, PlanRideActivity.class, EventsListActivity.class, ModifyBikeActivity.class, HealthyRidingActivity.class, GetDirections.class, NotificationScreen.class, SettingsActivity.class};
+    public static String[] prgm_Name = {"Chat", "Riders Alert"};
+    public static int[] prgm_Images = {R.drawable.icon_menu_destination, R.drawable.icon_menu_meetplan};
+    public static Class[] class_List = {ChatListScreen.class, ChatListScreen.class};
     @Bind(R.id.toolbar)
     Toolbar toolbar;
-    private Activity activity;
     @Bind(R.id.tvTitleToolbar)
     TextView tvTitleToolbar;
     @Bind(R.id.drawer_layout)
@@ -40,18 +48,7 @@ public class NotificationScreen extends BaseActivity {
     GridView gridView1;
     @Bind(R.id.grid_View)
     GridView grid_View;
-
-    //public static String [] prgmNameList={"Riding Destinations","Meet 'N' Plan A Ride","Riding Events \n    ","Modifly Your Bikes","Healthy Riding","Get Directions","Notifications","Settings"};
-    //public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_get_direction,R.drawable.icon_menu_notification,R.drawable.icon_menu_settings};
-   // public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
-    public static String [] prgmNameList={"My Rides","My Messages","My Friends","Chats","Favourite Desination","Notifications","Settings","    \n"};
-    public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_notification,R.drawable.icon_modifybike,R.drawable.icon_menu_destination};
-    public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
-
-
-    public static String [] prgm_Name={"Chat","Riders Alert"};
-    public static int [] prgm_Images={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan};
-    public static Class [] class_List={ChatListScreen.class,ChatListScreen.class};
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +62,8 @@ public class NotificationScreen extends BaseActivity {
         gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-               // Log.e("positiuon:", "" + classList[position]);
-               // intentCalling(classList[position]);
+                // Log.e("positiuon:", "" + classList[position]);
+                // intentCalling(classList[position]);
             }
         });
 
@@ -79,17 +76,20 @@ public class NotificationScreen extends BaseActivity {
             }
         });
     }
-    public void intentCalling(Class name){
-        Intent mIntent=new Intent(NotificationScreen.this,name);
+
+    public void intentCalling(Class name) {
+        Intent mIntent = new Intent(NotificationScreen.this, name);
         startActivity(mIntent);
 
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -104,6 +104,7 @@ public class NotificationScreen extends BaseActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     @OnClick({R.id.ivFilter, R.id.ivMenu, R.id.rlProfile})
     void onclick(View view) {
         switch (view.getId()) {

@@ -37,12 +37,14 @@ public class RequestJsonArray extends Request<JSONArray> {
             throws com.android.volley.AuthFailureError {
         return params;
     }
+
     @Override
     public Map<String, String> getHeaders() throws AuthFailureError {
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.put("Content-Type", "application/json; charset=utf-8");
         return headers;
     }
+
     @Override
     protected Response<JSONArray> parseNetworkResponse(NetworkResponse response) {
         try {

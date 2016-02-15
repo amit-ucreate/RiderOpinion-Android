@@ -15,17 +15,19 @@ import com.nutsuser.ridersdomain.R;
  * Created by user on 12/9/2015.
  */
 public class RecentAdapter extends BaseAdapter {
-    private static LayoutInflater inflater=null;
+    private static LayoutInflater inflater = null;
     Context context;
+
     public RecentAdapter(Activity mainActivity) {
         // TODO Auto-generated constructor stub
 
-        context=mainActivity;
+        context = mainActivity;
 
-        inflater = ( LayoutInflater )context.
+        inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
+
     @Override
     public int getCount() {
         return 10;
@@ -43,17 +45,16 @@ public class RecentAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Holder holder=new Holder();
+        Holder holder = new Holder();
         View rowView;
 
         rowView = inflater.inflate(R.layout.item_recent_adapter, null);
 
 
-
         return rowView;
     }
-    public class Holder
-    {
+
+    public class Holder {
         TextView tv;
         ImageView img;
     }

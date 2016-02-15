@@ -1,112 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:layout_marginTop="8dp"
     android:background="@android:color/white"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:padding="8dp">
 
     <TextView
         android:id="@+id/tvTitle"
-        android:text="Kasauli"
-        android:layout_marginBottom="4dp"
-        android:textSize="@dimen/title_text_size"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Kasauli"
+        android:textSize="@dimen/title_text_size" />
 
     <ImageView
         android:id="@+id/ivStar1"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="4dp"
-        android:layout_alignBottom="@id/tvTitle"
-        android:src="@drawable/icon_star_full_small"
-        android:layout_toRightOf="@id/tvTitle"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tvTitle"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="12dp"
+        android:layout_toRightOf="@id/tvTitle"
+        android:src="@drawable/icon_star_full_small" />
 
     <ImageView
         android:id="@+id/ivStar2"
-        android:layout_marginBottom="4dp"
-        android:layout_alignBottom="@id/tvTitle"
-        android:src="@drawable/icon_star_full_small"
-        android:layout_toRightOf="@id/ivStar1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tvTitle"
+        android:layout_marginBottom="4dp"
+        android:layout_toRightOf="@id/ivStar1"
+        android:src="@drawable/icon_star_full_small" />
 
     <ImageView
         android:id="@+id/ivStar3"
-        android:layout_marginBottom="4dp"
-        android:layout_alignBottom="@id/tvTitle"
-        android:src="@drawable/icon_star_full_small"
-        android:layout_toRightOf="@id/ivStar2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tvTitle"
+        android:layout_marginBottom="4dp"
+        android:layout_toRightOf="@id/ivStar2"
+        android:src="@drawable/icon_star_full_small" />
 
     <ImageView
         android:id="@+id/ivStar4"
-        android:layout_marginBottom="4dp"
-        android:layout_alignBottom="@id/tvTitle"
-        android:src="@drawable/icon_star_half_small"
-        android:layout_toRightOf="@id/ivStar3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tvTitle"
+        android:layout_marginBottom="4dp"
+        android:layout_toRightOf="@id/ivStar3"
+        android:src="@drawable/icon_star_half_small" />
 
     <ImageView
         android:id="@+id/ivStar5"
-        android:layout_marginBottom="4dp"
-        android:layout_alignBottom="@id/tvTitle"
-        android:src="@drawable/icon_star_empty_small"
-        android:layout_toRightOf="@id/ivStar4"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tvTitle"
+        android:layout_marginBottom="4dp"
+        android:layout_toRightOf="@id/ivStar4"
+        android:src="@drawable/icon_star_empty_small" />
 
     <ImageView
         android:id="@+id/ivFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:padding="12dp"
-        android:src="@drawable/icon_add_favorites"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:src="@drawable/icon_add_favorites" />
 
     <ImageView
         android:id="@+id/ivMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/ivFavorites"
         android:padding="12dp"
-        android:src="@drawable/icon_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:src="@drawable/icon_map" />
 
     <ImageView
         android:id="@+id/ivVideo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/ivMap"
         android:padding="12dp"
-        android:src="@drawable/icon_video"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:src="@drawable/icon_video" />
 
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/sdv"
 
-        android:layout_below="@id/ivFavorites"
-        app:placeholderImage="@color/fourty_of_black"
         android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_below="@id/ivFavorites"
         android:layout_marginRight="4dp"
-        />
-
+        app:placeholderImage="@color/fourty_of_black" />
 
 
     <TextView
         android:id="@+id/tvDesc"
-        android:layout_alignTop="@id/sdv"
-        android:maxLines="3"
-        android:layout_marginLeft="4dp"
-        android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout."
-        android:layout_below="@id/ivFavorites"
-        android:layout_toRightOf="@id/sdv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/sdv"
+        android:layout_below="@id/ivFavorites"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@id/sdv"
+        android:maxLines="3"
+        android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout." />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,74 +112,74 @@
 
     <TextView
         android:id="@+id/tvEatables"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvDesc"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/sdv"
         android:drawableLeft="@drawable/icon_eating_joints"
-        android:layout_marginLeft="16dp"
         android:drawablePadding="8dp"
-        android:text="20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="20" />
 
     <TextView
         android:id="@+id/tvPetrolPump"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvDesc"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/tvEatables"
         android:drawableLeft="@drawable/icon_petrol_pump"
-        android:layout_marginLeft="16dp"
         android:drawablePadding="8dp"
-        android:text="15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="15" />
 
     <TextView
         android:id="@+id/tvServiceCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvEatables"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/sdv"
         android:drawableLeft="@drawable/icon_mechanic"
-        android:layout_marginLeft="16dp"
         android:drawablePadding="8dp"
-        android:text="20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="20" />
 
     <TextView
         android:id="@+id/tvFirstAid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvPetrolPump"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/tvEatables"
         android:drawableLeft="@drawable/icon_firstaid"
-        android:layout_marginLeft="16dp"
         android:drawablePadding="8dp"
-        android:text="15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="15" />
 
     <TextView
         android:id="@+id/tvBikes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvServiceCenter"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/sdv"
         android:drawableLeft="@drawable/icon_rides"
-        android:layout_marginLeft="16dp"
         android:drawablePadding="8dp"
-        android:text="20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="20" />
 
     <TextView
         android:id="@+id/tvOffers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvFirstAid"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
         android:layout_toRightOf="@id/tvEatables"
         android:drawableLeft="@drawable/icon_offers"
-        android:layout_marginLeft="16dp"
         android:drawablePadding="8dp"
-        android:text="15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:text="15" />
 
 </RelativeLayout>

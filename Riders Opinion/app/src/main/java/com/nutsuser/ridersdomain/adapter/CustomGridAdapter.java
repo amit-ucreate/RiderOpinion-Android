@@ -16,16 +16,17 @@ import com.nutsuser.ridersdomain.R;
  */
 public class CustomGridAdapter extends BaseAdapter {
 
-    String [] result;
+    private static LayoutInflater inflater = null;
+    String[] result;
     Context context;
-    int [] imageId;
-    private static LayoutInflater inflater=null;
+    int[] imageId;
+
     public CustomGridAdapter(Activity mainActivity, String[] prgmNameList, int[] prgmImages) {
         // TODO Auto-generated constructor stub
-        result=prgmNameList;
-        context=mainActivity;
-        imageId=prgmImages;
-        inflater = ( LayoutInflater )context.
+        result = prgmNameList;
+        context = mainActivity;
+        imageId = prgmImages;
+        inflater = (LayoutInflater) context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
     }
@@ -48,23 +49,18 @@ public class CustomGridAdapter extends BaseAdapter {
         return position;
     }
 
-    public class Holder
-    {
-        TextView tv;
-        ImageView img;
-    }
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
-        Holder holder=new Holder();
+        Holder holder = new Holder();
         View rowView;
 
         rowView = inflater.inflate(R.layout.gridview_list, null);
-        holder.tv=(TextView) rowView.findViewById(R.id.textView1);
-        holder.img=(ImageView) rowView.findViewById(R.id.imageView1);
-    holder.tv.setText(result[position]);
+        holder.tv = (TextView) rowView.findViewById(R.id.textView1);
+        holder.img = (ImageView) rowView.findViewById(R.id.imageView1);
+        holder.tv.setText(result[position]);
 
-    holder.img.setImageResource(imageId[position]);
+        holder.img.setImageResource(imageId[position]);
 
 
 
@@ -78,6 +74,11 @@ public class CustomGridAdapter extends BaseAdapter {
         });*/
 
         return rowView;
+    }
+
+    public class Holder {
+        TextView tv;
+        ImageView img;
     }
 
 }

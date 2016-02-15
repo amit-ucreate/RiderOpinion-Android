@@ -185,7 +185,7 @@ public class FreindsCurrentSwipeAdapter extends RecyclerSwipeAdapter<FreindsCurr
             tvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
             tvShare = (TextView) itemView.findViewById(R.id.tvShare);
             btnLocation = (ImageButton) itemView.findViewById(R.id.btnLocation);
-            ivimage=(ImageView) itemView.findViewById(R.id.ivimage);
+            ivimage = (ImageView) itemView.findViewById(R.id.ivimage);
 
 
         }

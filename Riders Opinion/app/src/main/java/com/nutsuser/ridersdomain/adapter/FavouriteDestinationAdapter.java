@@ -171,7 +171,7 @@ public class FavouriteDestinationAdapter extends RecyclerSwipeAdapter<FavouriteD
         //  TextView tvName;
         // TextView tvEmailId;
         // TextView tvDelete;
-      //  TextView tvEdit;
+        //  TextView tvEdit;
         TextView tvShare;
         ImageButton btnLocation;
         ImageView ivimage;
@@ -182,10 +182,10 @@ public class FavouriteDestinationAdapter extends RecyclerSwipeAdapter<FavouriteD
             //tvName = (TextView) itemView.findViewById(R.id.tvName);
             // tvEmailId = (TextView) itemView.findViewById(R.id.tvEmailId);
             //  tvDelete = (TextView) itemView.findViewById(R.id.tvDelete);
-           // tvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
+            // tvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
             tvShare = (TextView) itemView.findViewById(R.id.tvShare);
             btnLocation = (ImageButton) itemView.findViewById(R.id.btnLocation);
-            ivimage=(ImageView) itemView.findViewById(R.id.ivimage);
+            ivimage = (ImageView) itemView.findViewById(R.id.ivimage);
 
 
         }

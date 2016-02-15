@@ -20,7 +20,7 @@ import java.util.ArrayList;
 /**
  * Created by user on 1/8/2016.
  */
-public class FreindsRequestSwipeAdapter  extends RecyclerSwipeAdapter<FreindsRequestSwipeAdapter.SimpleViewHolder> {
+public class FreindsRequestSwipeAdapter extends RecyclerSwipeAdapter<FreindsRequestSwipeAdapter.SimpleViewHolder> {
 
 
     private Context mContext;
@@ -185,7 +185,7 @@ public class FreindsRequestSwipeAdapter  extends RecyclerSwipeAdapter<FreindsReq
             tvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
             tvShare = (TextView) itemView.findViewById(R.id.tvShare);
             btnLocation = (ImageButton) itemView.findViewById(R.id.btnLocation);
-            ivimage=(ImageView) itemView.findViewById(R.id.ivimage);
+            ivimage = (ImageView) itemView.findViewById(R.id.ivimage);
 
 
         }

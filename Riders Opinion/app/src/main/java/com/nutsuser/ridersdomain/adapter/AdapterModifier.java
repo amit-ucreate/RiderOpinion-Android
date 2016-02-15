@@ -43,10 +43,6 @@ public class AdapterModifier extends BaseAdapter {
         return position;
     }
 
-    static class ViewHolder {
-    }
-
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
@@ -63,6 +59,9 @@ public class AdapterModifier extends BaseAdapter {
         holder = (ViewHolder) rowView.getTag();
 
         return rowView;
+    }
+
+    static class ViewHolder {
     }
 
 

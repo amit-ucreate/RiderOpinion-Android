@@ -15,25 +15,10 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Created by user on 8/13/2015.
+ * Created by Amit Agnihotri on 8/13/2015.
  */
 public class ApplicationGlobal {
- //http://ridersopininon.herokuapp.com/index.php/riders/signup?utypeid=tw_8934lk349&latitude=192.343&longitude=192.343&password=&deviceToken=456jkll4k545&OS=iphone&loginType=facebook
-    public static String baseurl_favroite="ridingDestination/favroite?";
-    public static String baseurl_like="ridingDestination/likeDestination?";
-    public static String baseurl_sigup="riders/signup?";
-    public static String baseurl_search="ridingDestination/search?";
-    //
-    public static String baseurl_updateUserInfo="riders/updateUserInfo?";
-    public static String baseurl_ridingdestination="ridingDestination?";
-    public static String baseurl_ridingdetailDestination="ridingDestination/detailDestination?";
-    public static String baseurl_vehicle="riders/vehicle";
-    public static String baseurl_model="riders/vehicleId?vehicleId=";
-    public static String ROOT = "http://ridersopininon.herokuapp.com/index.php/";
-    public static String TAG_LOGIN_FACEBOOK="facebook";// facebook
-    public static String TAG_LOGIN_TWITTER="twitter";// twitter
-    public static String TAG_LOGIN_DEFAULT="default";// default
-
+    public static final String YOUTUBE_API_KEY = "AIzaSyDpKUbvuTh7erR-0GRxPvQ5mwGQ2E9XkDQ";
     public static final String TAG_GRAPH_OBJECT = "graphObject";
     public static final String TAG_ACCOUNT_ID = "id";
     public static final String TAG_FIRST_NAME = "first_name";
@@ -42,20 +27,35 @@ public class ApplicationGlobal {
     public static final String TAG_EMAIL = "email";
     public static final String TAG_CITY = "locale";
     public static final String TAG_CONTACT = "contact";
-
-
-    public static boolean taskscreen=false;
-    public static boolean notificationscreen=false;
-    public static boolean documenttask=false;
-    public static boolean contactscreen=false;
-    //camera params
-    public static Bitmap bMapRotate;
     public static final int RESULT_LOAD_IMAGE = 1;
     public static final int CAMERA_REQUEST = 2;
     public static final String JPEG_FILE_PREFIX = "IMG_";
     public static final String JPEG_FILE_SUFFIX = ".jpg";
     public static final String LOCAL_STORAGE_BASE_PATH_FOR_POSTED_PHOTOS = Environment.getExternalStorageDirectory().toString()
             + File.separator + "WYM";
+    public static String baseurl_favroite = "ridingDestination/favroite?";
+    public static String baseurl_like = "ridingDestination/likeDestination?";
+    public static String baseurl_sigup = "riders/signup?";
+    public static String baseurl_search = "ridingDestination/search?";
+    public static String baseurl_updateUserInfo = "riders/updateUserInfo?";
+    public static String baseurl_ridingdestination = "ridingDestination?";
+    public static String baseurl_ridingdetailDestination = "ridingDestination/detailDestination?";
+    public static String baseurl_ridingFilter = "ridingDestination?";
+
+    //
+    public static String baseurl_ridingSubcribedetails = "ridingDestination/ridingDestinationAfterSubscribe?";
+    public static String baseurl_vehicle = "riders/vehicle";
+    public static String baseurl_model = "riders/vehicleId?vehicleId=";
+    public static String ROOT = "http://ridersopininon.herokuapp.com/index.php/";
+    public static String TAG_LOGIN_FACEBOOK = "facebook";// facebook
+    public static String TAG_LOGIN_TWITTER = "twitter";// twitter
+    public static String TAG_LOGIN_DEFAULT = "default";// default
+    public static boolean taskscreen = false;
+    public static boolean notificationscreen = false;
+    public static boolean documenttask = false;
+    public static boolean contactscreen = false;
+    //camera params
+    public static Bitmap bMapRotate;
     public static boolean menuhandle = true;
     public static String sToken = "";
     public static int sClientId;

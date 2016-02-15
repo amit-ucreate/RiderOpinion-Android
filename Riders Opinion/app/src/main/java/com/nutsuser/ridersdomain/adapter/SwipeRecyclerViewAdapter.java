@@ -39,16 +39,16 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
         final Student item = studentList.get(position);
 
         //viewHolder.tvName.setText((item.getName()) + "  -  Row Position " + position);
-       // viewHolder.tvEmailId.setText(item.getEmailId());
+        // viewHolder.tvEmailId.setText(item.getEmailId());
 
 
         viewHolder.swipeLayout.setShowMode(SwipeLayout.ShowMode.PullOut);
 
         // Drag From Left
-      //  viewHolder.swipeLayout.addDrag(SwipeLayout.DragEdge.Left, viewHolder.swipeLayout.findViewById(R.id.bottom_wrapper1));
+        //  viewHolder.swipeLayout.addDrag(SwipeLayout.DragEdge.Left, viewHolder.swipeLayout.findViewById(R.id.bottom_wrapper1));
 
         // Drag From Right
-       viewHolder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, viewHolder.swipeLayout.findViewById(R.id.bottom_wrapper));
+        viewHolder.swipeLayout.addDrag(SwipeLayout.DragEdge.Right, viewHolder.swipeLayout.findViewById(R.id.bottom_wrapper));
 
 
         // Handling different events when swiping
@@ -110,7 +110,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             @Override
             public void onClick(View v) {
 
-               // Toast.makeText(v.getContext(), "Clicked on Map " + viewHolder.tvName.getText().toString(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(v.getContext(), "Clicked on Map " + viewHolder.tvName.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -119,7 +119,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             @Override
             public void onClick(View view) {
 
-               // Toast.makeText(view.getContext(), "Clicked on Share " + viewHolder.tvName.getText().toString(), Toast.LENGTH_SHORT).show();
+                // Toast.makeText(view.getContext(), "Clicked on Share " + viewHolder.tvName.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -127,7 +127,7 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             @Override
             public void onClick(View view) {
 
-              //  Toast.makeText(view.getContext(), "Clicked on Edit  " + viewHolder.tvName.getText().toString(), Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(view.getContext(), "Clicked on Edit  " + viewHolder.tvName.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -165,9 +165,9 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
 
     public static class SimpleViewHolder extends RecyclerView.ViewHolder {
         SwipeLayout swipeLayout;
-      //  TextView tvName;
-       // TextView tvEmailId;
-       // TextView tvDelete;
+        //  TextView tvName;
+        // TextView tvEmailId;
+        // TextView tvDelete;
         TextView tvEdit;
         TextView tvShare;
         ImageButton btnLocation;
@@ -177,12 +177,12 @@ public class SwipeRecyclerViewAdapter extends RecyclerSwipeAdapter<SwipeRecycler
             super(itemView);
             swipeLayout = (SwipeLayout) itemView.findViewById(R.id.swipe);
             //tvName = (TextView) itemView.findViewById(R.id.tvName);
-           // tvEmailId = (TextView) itemView.findViewById(R.id.tvEmailId);
-          //  tvDelete = (TextView) itemView.findViewById(R.id.tvDelete);
+            // tvEmailId = (TextView) itemView.findViewById(R.id.tvEmailId);
+            //  tvDelete = (TextView) itemView.findViewById(R.id.tvDelete);
             tvEdit = (TextView) itemView.findViewById(R.id.tvEdit);
             tvShare = (TextView) itemView.findViewById(R.id.tvShare);
             btnLocation = (ImageButton) itemView.findViewById(R.id.btnLocation);
-            ivimage=(ImageView) itemView.findViewById(R.id.ivimage);
+            ivimage = (ImageView) itemView.findViewById(R.id.ivimage);
 
 
         }

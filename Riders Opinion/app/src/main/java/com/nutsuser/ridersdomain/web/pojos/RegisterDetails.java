@@ -6,6 +6,7 @@ package com.nutsuser.ridersdomain.web.pojos;
 public class RegisterDetails {
 
     String userId;
+    String accessToken;
 
     public String getUserId() {
         return userId;
@@ -22,7 +23,5 @@ public class RegisterDetails {
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;
     }
-
-    String accessToken;
 
 }

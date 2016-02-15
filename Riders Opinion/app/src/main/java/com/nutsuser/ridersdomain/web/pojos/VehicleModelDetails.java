@@ -6,6 +6,7 @@ package com.nutsuser.ridersdomain.web.pojos;
 public class VehicleModelDetails {
 
     String vehicleTypeId;
+    String vehicleType;
 
     public String getVehicleTypeId() {
         return vehicleTypeId;
@@ -22,6 +23,4 @@ public class VehicleModelDetails {
     public void setVehicleType(String vehicleType) {
         this.vehicleType = vehicleType;
     }
-
-    String vehicleType;
 }

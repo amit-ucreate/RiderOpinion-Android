@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content" android:layout_height="wrap_content">
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tvDate"
-        android:textSize="@dimen/date_text_size"
-        android:padding="2dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textSize="@dimen/date_text_size" />
 
 
     <ImageView
-        android:padding="2dp"
-        android:layout_marginLeft="4dp"
-        android:src="@drawable/icon_star_full_small"
-        android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="4dp"
+        android:padding="2dp"
+        android:src="@drawable/icon_star_full_small" />
 
     <TextView
         android:id="@+id/tvEvents"
-        android:textColor="@android:color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvDate"
         android:padding="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="@android:color/black" />
 
 </RelativeLayout>

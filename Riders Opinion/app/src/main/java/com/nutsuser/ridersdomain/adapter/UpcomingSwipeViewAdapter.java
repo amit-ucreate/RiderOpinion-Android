@@ -88,7 +88,6 @@ public class UpcomingSwipeViewAdapter extends RecyclerSwipeAdapter<UpcomingSwipe
         });
 
 
-
         viewHolder.swipeLayout.getSurfaceView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,8 +103,6 @@ public class UpcomingSwipeViewAdapter extends RecyclerSwipeAdapter<UpcomingSwipe
                 // Toast.makeText(v.getContext(), "Clicked on Map " + viewHolder.tvName.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
-
 
 
         viewHolder.tvRemove.setOnClickListener(new View.OnClickListener() {
@@ -165,7 +162,7 @@ public class UpcomingSwipeViewAdapter extends RecyclerSwipeAdapter<UpcomingSwipe
             tvRemove = (TextView) itemView.findViewById(R.id.tvRemove);
 
             btnLocation = (ImageButton) itemView.findViewById(R.id.btnLocation);
-            ivimage=(ImageView) itemView.findViewById(R.id.ivimage);
+            ivimage = (ImageView) itemView.findViewById(R.id.ivimage);
 
 
         }

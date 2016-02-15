@@ -9,6 +9,8 @@ import java.util.List;
 public class VehicleName {
 
     String success;
+    String message;
+    private List<VehicleDetails> data = new ArrayList<VehicleDetails>();
 
     public String getSuccess() {
         return success;
@@ -26,22 +28,15 @@ public class VehicleName {
         this.message = message;
     }
 
-    String message;
-    private List<VehicleDetails> data = new ArrayList<VehicleDetails>();
-
     /**
-     *
-     * @return
-     * The data
+     * @return The data
      */
     public List<VehicleDetails> getData() {
         return data;
     }
 
     /**
-     *
-     * @param data
-     * The data
+     * @param data The data
      */
     public void setData(List<VehicleDetails> data) {
         this.data = data;

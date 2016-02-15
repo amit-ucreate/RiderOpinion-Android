@@ -12,21 +12,21 @@
     <LinearLayout
         android:id="@+id/bottom_wrapper"
         android:layout_width="90dp"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
             android:background="@color/light_brown">
+
             <ImageView
                 android:id="@+id/ivimage"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginBottom="10dp"
                 android:layout_gravity="center|center_horizontal"
-                android:src="@drawable/ic_swipe_icon_delete"/>
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_swipe_icon_delete" />
 
             <TextView
                 android:id="@+id/tvRemove"
@@ -34,19 +34,16 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
 
+                android:layout_marginBottom="10dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:gravity="center"
-                android:layout_marginBottom="10dp"
-                android:textStyle="bold"
-                android:textSize="15sp"
                 android:text="REMOVE"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
         </FrameLayout>
-
-
-
 
 
     </LinearLayout>
@@ -74,9 +71,9 @@
 
     <RelativeLayout
 
-        android:layout_marginBottom="4dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="4dp">
 
 
         <!-- <ImageView
@@ -89,31 +86,31 @@
 
         <ImageView
             android:id="@+id/ivMap"
-            android:src="@drawable/icon_map"
-            android:padding="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_toLeftOf="@id/ivStar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:padding="12dp"
+            android:src="@drawable/icon_map" />
 
         <TextView
-            android:layout_marginTop="12dp"
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
-            android:id="@+id/tvTitle"
-            android:text="3-Day Ride from Chandigarh To New Delhi(Stopover at Karnal)"
-            android:maxLines="2"
-            android:textColor="@color/dark_brown"
-            android:ellipsize="end"
+            android:layout_marginTop="12dp"
             android:layout_toLeftOf="@id/ivMap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="3-Day Ride from Chandigarh To New Delhi(Stopover at Karnal)"
+            android:textColor="@color/dark_brown" />
 
         <LinearLayout
-            android:layout_below="@id/ivMap"
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="70dp">
+            android:layout_height="70dp"
+            android:layout_below="@id/ivMap"
+            android:orientation="vertical">
 
             <!-- <com.facebook.drawee.view.SimpleDraweeView
                  android:id="@+id/sdvPostImage"
@@ -127,43 +124,48 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
-                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/icon_calendar"
                     android:drawablePadding="8dp"
-                    android:layout_marginTop="8dp"
-                    android:text="15 september 2015"
-                    android:textStyle="bold"
-                    android:textColor="@color/dark_brown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-                <TextView
-                    android:layout_marginTop="8dp"
-                    android:layout_marginLeft="10dp"
                     android:gravity="center"
+                    android:text="15 september 2015"
+                    android:textColor="@color/dark_brown"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/icon_time"
                     android:drawablePadding="8dp"
+                    android:gravity="center"
                     android:text="05:00 PM"
-                    android:textStyle="bold"
                     android:textColor="@color/dark_brown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textStyle="bold" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:gravity="center"
                     android:drawableLeft="@drawable/icon_get_direction"
                     android:drawablePadding="8dp"
+                    android:gravity="center"
                     android:text="New Delhi"
-                    android:textStyle="bold"
                     android:textColor="@color/dark_brown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:textStyle="bold" />
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -181,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/ivPeopleIcon"
                         android:text="125 Riders"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvLabelHaveJoined"
@@ -190,18 +192,14 @@
                         android:layout_below="@id/tvNumberOfRiders"
                         android:layout_toRightOf="@id/ivPeopleIcon"
                         android:text="have Joined"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
             </LinearLayout>
 
 
-
-
         </LinearLayout>
-
-
 
 
     </RelativeLayout>

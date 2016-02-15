@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,7 +30,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -68,36 +66,10 @@ public class PlanRideActivity extends BaseActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
 
-    GoogleMap mGoogleMap;
-    GMapV2GetRouteDirection v2GetRouteDirection;
-    LocationManager locManager;
-    Drawable drawable;
-    Document document;
-
-    @Bind(R.id.ivMap)
-    ImageView ivMap;
-    @Bind(R.id.gridView1)
-    GridView gridView1;
-    private Activity activity;
-    @Bind(R.id.toolbar)
-    Toolbar toolbar;
-    @Bind(R.id.tvTitleToolbar)
-    TextView tvTitleToolbar;
-    @Bind(R.id.drawer_layout)
-    DrawerLayout mDrawerLayout;
-    @Bind(R.id.lvSlidingMenu)
-    LinearLayout lvSlidingMenu;
-    @Bind(R.id.tvName)
-    TextView tvName;
-    private AutoCompleteTextView tvPlace1, tvPlace2;
-    private GoogleApiClient mGoogleApiClient;
-    private PlaceArrayAdapter mPlaceArrayAdapter;
-    EndPlaceArrayAdapter _ArrayAdapter;
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     private static final String LOG_TAG = "PlanRideActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
-
     // @Bind(R.id.tvAddress)
     //TextView tvAddress;
    /* @Bind(R.id.tvDestinations)
@@ -122,9 +94,129 @@ public class PlanRideActivity extends BaseActivity implements
     public static String[] prgmNameList = {"My Rides", "My Messages", "My Friends", "Chats", "Favourite Destination", "Notifications", "Settings", "    \n"};
     public static int[] prgmImages = {R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_my_messages, R.drawable.ic_menu_my_friends, R.drawable.ic_menu_menu_chats, R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_menu_notifications, R.drawable.ic_menu_menu_settings, R.drawable.ic_menu_menu_blank_icon};
     public static Class[] classList = {MyRidesRecyclerView.class, ChatListScreen.class, MyFriends.class, ChatListScreen.class, FavouriteDesination.class, Notification.class, SettingsActivity.class, SettingsActivity.class};
+    GoogleMap mGoogleMap;
+    GMapV2GetRouteDirection v2GetRouteDirection;
+    LocationManager locManager;
+    Drawable drawable;
+    Document document;
+    @Bind(R.id.ivMap)
+    ImageView ivMap;
+    @Bind(R.id.gridView1)
+    GridView gridView1;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.tvTitleToolbar)
+    TextView tvTitleToolbar;
+    @Bind(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
+    @Bind(R.id.lvSlidingMenu)
+    LinearLayout lvSlidingMenu;
+    @Bind(R.id.tvName)
+    TextView tvName;
+    EndPlaceArrayAdapter _ArrayAdapter;
     LatLng mString_end;
     LatLng mString_start;
-    double start,end;
+    double start, end;
+    private Activity activity;
+    private AutoCompleteTextView tvPlace1, tvPlace2;
+    private GoogleApiClient mGoogleApiClient;
+    private PlaceArrayAdapter mPlaceArrayAdapter;
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_start;
+    private AdapterView.OnItemClickListener mAutocompleteClickListener_start
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_start);
+            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_end
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                Log.e(LOG_TAG, "Place query did not complete. Error: " +
+                        places.getStatus().toString());
+                return;
+            }
+            // Selecting the first object buffer.
+            final Place place = places.get(0);
+            CharSequence attributions = places.getAttributions();
+
+            // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
+            // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
+            //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
+            String s = "" + Html.fromHtml("" + place.getLatLng().latitude);
+            String s1 = "" + Html.fromHtml("" + place.getLatLng().longitude);
+            double start = Double.valueOf(s.trim()).doubleValue();
+            double end = Double.valueOf(s1.trim()).doubleValue();
+
+
+            mString_end = new LatLng(start, end);
+            hideKeyboard();
+            //mString_end =Html.fromHtml(place.getLatLng() + "");
+
+            Log.e("end:", "" + mString_end);
+            //mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
+            //mWebTextView.setText(place.getWebsiteUri() + "");
+            if (attributions != null) {
+                // mAttTextView.setText(Html.fromHtml(attributions.toString()));
+            }
+        }
+
+    };
+    private AdapterView.OnItemClickListener mAutocompleteClickListener_end
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final EndPlaceArrayAdapter.PlaceAutocomplete item = _ArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_end);
+            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+
+    {
+        mUpdatePlaceDetailsCallback_start = new ResultCallback<PlaceBuffer>() {
+            @Override
+            public void onResult(PlaceBuffer places) {
+                if (!places.getStatus().isSuccess()) {
+                    Log.e(LOG_TAG, "Place query did not complete. Error: " +
+                            places.getStatus().toString());
+                    return;
+                }
+                // Selecting the first object buffer.
+                final Place place = places.get(0);
+                CharSequence attributions = places.getAttributions();
+
+                // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
+                // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
+                //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
+                String s = "" + Html.fromHtml("" + place.getLatLng().latitude);
+                String s1 = "" + Html.fromHtml("" + place.getLatLng().longitude);
+                start = Double.valueOf(s.trim()).doubleValue();
+                end = Double.valueOf(s1.trim()).doubleValue();
+                mString_start = new LatLng(start, end);
+
+                Log.e("start:", "" + mString_start);
+
+                //  mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
+                //mWebTextView.setText(place.getWebsiteUri() + "");
+                if (attributions != null) {
+                    // mAttTextView.setText(Html.fromHtml(attributions.toString()));
+                }
+            }
+
+        };
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -200,108 +292,12 @@ public class PlanRideActivity extends BaseActivity implements
 
     }
 
-    private AdapterView.OnItemClickListener mAutocompleteClickListener_start
-            = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
-            final String placeId = String.valueOf(item.placeId);
-            Log.i(LOG_TAG, "Selected: " + item.description);
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_start);
-            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
-        }
-    };
-    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_start;
+    public void intentCalling(Class name) {
+        Intent mIntent = new Intent(PlanRideActivity.this, name);
+        startActivity(mIntent);
 
-    {
-        mUpdatePlaceDetailsCallback_start = new ResultCallback<PlaceBuffer>() {
-            @Override
-            public void onResult(PlaceBuffer places) {
-                if (!places.getStatus().isSuccess()) {
-                    Log.e(LOG_TAG, "Place query did not complete. Error: " +
-                            places.getStatus().toString());
-                    return;
-                }
-                // Selecting the first object buffer.
-                final Place place = places.get(0);
-                CharSequence attributions = places.getAttributions();
-
-                // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
-                // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
-                //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
-                String s=""+Html.fromHtml(""+place.getLatLng().latitude);
-                String s1=""+Html.fromHtml(""+place.getLatLng().longitude);
-                 start = Double.valueOf(s.trim()).doubleValue();
-                 end = Double.valueOf(s1.trim()).doubleValue();
-                mString_start = new LatLng(start,end);
-
-                Log.e("start:", "" + mString_start);
-
-                //  mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
-                //mWebTextView.setText(place.getWebsiteUri() + "");
-                if (attributions != null) {
-                    // mAttTextView.setText(Html.fromHtml(attributions.toString()));
-                }
-            }
-
-        };
     }
 
-    private AdapterView.OnItemClickListener mAutocompleteClickListener_end
-            = new AdapterView.OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            final EndPlaceArrayAdapter.PlaceAutocomplete item = _ArrayAdapter.getItem(position);
-            final String placeId = String.valueOf(item.placeId);
-            Log.i(LOG_TAG, "Selected: " + item.description);
-            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
-                    .getPlaceById(mGoogleApiClient, placeId);
-            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_end);
-            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
-        }
-    };
-    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_end
-            = new ResultCallback<PlaceBuffer>() {
-        @Override
-        public void onResult(PlaceBuffer places) {
-            if (!places.getStatus().isSuccess()) {
-                Log.e(LOG_TAG, "Place query did not complete. Error: " +
-                        places.getStatus().toString());
-                return;
-            }
-            // Selecting the first object buffer.
-            final Place place = places.get(0);
-            CharSequence attributions = places.getAttributions();
-
-            // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
-            // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
-            //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
-            String s=""+Html.fromHtml(""+place.getLatLng().latitude);
-            String s1=""+Html.fromHtml(""+place.getLatLng().longitude);
-            double start = Double.valueOf(s.trim()).doubleValue();
-            double end = Double.valueOf(s1.trim()).doubleValue();
-
-
-            mString_end = new LatLng(start,end);
-            hideKeyboard();
-            //mString_end =Html.fromHtml(place.getLatLng() + "");
-
-            Log.e("end:", "" + mString_end);
-              //mPhoneTextView.setText(Html.fromHtml("Lat:" + place.getLatLng().latitude + "--long:" + latlong));
-            //mWebTextView.setText(place.getWebsiteUri() + "");
-            if (attributions != null) {
-                // mAttTextView.setText(Html.fromHtml(attributions.toString()));
-            }
-        }
-
-    };
-public void intentCalling(Class name){
-    Intent mIntent=new Intent(PlanRideActivity.this,name);
-    startActivity(mIntent);
-
-}
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -331,7 +327,7 @@ public void intentCalling(Class name){
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.tvNext, R.id.ivMenu, R.id.rlProfile,R.id.ivMap})
+    @OnClick({R.id.tvNext, R.id.ivMenu, R.id.rlProfile, R.id.ivMap})
     void onclick(View view) {
         switch (view.getId()) {
             case R.id.tvNext:
@@ -350,7 +346,6 @@ public void intentCalling(Class name){
                 GetRouteTask getRoute = new GetRouteTask();
                 getRoute.execute();
                 break;
-
 
 
         }
@@ -388,6 +383,7 @@ public void intentCalling(Class name){
         mGoogleApiClient.connect();
 
     }
+
     private void hideKeyboard() {
         // Check if no view has focus:
         View view = this.getCurrentFocus();
@@ -397,16 +393,22 @@ public void intentCalling(Class name){
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        mGoogleApiClient.disconnect();
+    }
+
     /**
-     *
      * @author VIJAYAKUMAR M
-     * This class Get Route on the map
-     *
+     *         This class Get Route on the map
      */
     private class GetRouteTask extends AsyncTask<String, Void, String> {
 
-        private ProgressDialog Dialog;
         String response = "";
+        private ProgressDialog Dialog;
+
         @Override
         protected void onPreExecute() {
             Dialog = new ProgressDialog(PlanRideActivity.this);
@@ -426,7 +428,7 @@ public void intentCalling(Class name){
         @Override
         protected void onPostExecute(String result) {
             mGoogleMap.clear();
-            if(response.equalsIgnoreCase("Success")){
+            if (response.equalsIgnoreCase("Success")) {
                 ArrayList<LatLng> directionPoint = v2GetRouteDirection.getDirection(document);
                 PolylineOptions rectLine = new PolylineOptions().width(10).color(
                         Color.parseColor("#D1622A"));
@@ -434,27 +436,21 @@ public void intentCalling(Class name){
                 for (int i = 0; i < directionPoint.size(); i++) {
                     rectLine.add(directionPoint.get(i));
                 }
-                LatLng latLng = new LatLng(start,end);
+                LatLng latLng = new LatLng(start, end);
 
                 // Adding route on the map
                 mGoogleMap.addPolyline(rectLine);
                 CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 9);
                 mGoogleMap.animateCamera(cameraUpdate);
-              //  mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
+                //  mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(12));
                 //mGoogleMap.animateCamera(CameraUpdateFactory.zoomTo(6),1000, null);
-               // markerOptions.position(toPosition);
-               // markerOptions.draggable(true);
-               // mGoogleMap.addMarker(markerOptions);
+                // markerOptions.position(toPosition);
+                // markerOptions.draggable(true);
+                // mGoogleMap.addMarker(markerOptions);
 
             }
 
             Dialog.dismiss();
         }
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-        mGoogleApiClient.disconnect();
     }
 }

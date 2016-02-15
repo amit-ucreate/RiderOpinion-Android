@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.AdapterNotification;
-import com.nutsuser.ridersdomain.adapter.PlanRidePostAdapter;
 import com.nutsuser.ridersdomain.web.pojos.PostRide;
 
 import java.util.ArrayList;
@@ -23,13 +22,14 @@ import butterknife.ButterKnife;
  */
 public class Notification extends BaseActivity {
 
-    private Activity activity;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.listView)
     ListView listView;
     ArrayList<Object> taskadapterlist = new ArrayList<>();
     AdapterNotification mTaskDetailsAdapter;
+    private Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +38,10 @@ public class Notification extends BaseActivity {
         ButterKnife.bind(this);
         setupActionBar();
 
-        taskadapterlist=new ArrayList<>();
+        taskadapterlist = new ArrayList<>();
         // PostRide mPostRide = new PostRide("ASISTANCE REQUIRED", "", "");
         PostRide mPostRide1 = new PostRide("Riding Destination", "", "");
-        PostRide mPostRide2= new PostRide("Riding Events", "", "");
+        PostRide mPostRide2 = new PostRide("Riding Events", "", "");
 
         PostRide mPostRide4 = new PostRide("Message", "", "");
         PostRide mPostRide5 = new PostRide("Chat", "", "");
@@ -65,12 +65,14 @@ public class Notification extends BaseActivity {
         mTaskDetailsAdapter = new AdapterNotification(Notification.this, taskadapterlist);
         listView.setAdapter(mTaskDetailsAdapter);
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -84,7 +86,7 @@ public class Notification extends BaseActivity {
                 Intent intent = new Intent(Notification.this, MainScreenActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("MainScreen","OPEN");
+                intent.putExtra("MainScreen", "OPEN");
                 startActivity(intent);
                 break;
         }

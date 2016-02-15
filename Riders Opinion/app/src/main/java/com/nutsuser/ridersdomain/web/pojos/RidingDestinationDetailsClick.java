@@ -6,6 +6,8 @@ package com.nutsuser.ridersdomain.web.pojos;
 public class RidingDestinationDetailsClick {
 
     String success;
+    String message;
+    RidingDestinationDetailsClickInfo data;
 
     public String getSuccess() {
         return success;
@@ -22,11 +24,6 @@ public class RidingDestinationDetailsClick {
     public void setMessage(String message) {
         this.message = message;
     }
-
-
-
-    String message;
-    RidingDestinationDetailsClickInfo data;
 
     public RidingDestinationDetailsClickInfo getData() {
         return data;

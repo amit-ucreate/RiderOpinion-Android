@@ -155,6 +155,7 @@
     <orderEntry type="library" exported="" name="play-services-ads-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-appinvite-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="library-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="YouTubeAndroidPlayerApi" level="project" />
     <orderEntry type="library" exported="" name="cardview-v7-23.0.0" level="project" />
     <orderEntry type="library" exported="" name="materialish-progress-1.5" level="project" />
     <orderEntry type="library" exported="" name="play-services-gcm-8.4.0" level="project" />
@@ -165,6 +166,7 @@
     <orderEntry type="library" exported="" name="play-services-panorama-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="okhttp-urlconnection-2.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-appindexing-8.4.0" level="project" />
+    <orderEntry type="library" exported="" name="rollbar-android-0.1.2-dev" level="project" />
     <orderEntry type="library" exported="" name="play-services-plus-8.4.0" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />
     <orderEntry type="library" exported="" name="play-services-identity-8.4.0" level="project" />

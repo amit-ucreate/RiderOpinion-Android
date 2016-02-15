@@ -43,15 +43,11 @@ public class AdapterModify extends BaseAdapter {
         return position;
     }
 
-    static class ViewHolder {
-    }
-
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
         if (rowView == null) {
-            LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             rowView = inflater.inflate(R.layout.item_modify, null);
             ViewHolder viewHolder = new ViewHolder();
 
@@ -63,6 +59,9 @@ public class AdapterModify extends BaseAdapter {
         holder = (ViewHolder) rowView.getTag();
 
         return rowView;
+    }
+
+    static class ViewHolder {
     }
 
 

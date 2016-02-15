@@ -26,38 +26,35 @@ public class PrefsManager {
 
     public PrefsManager(Context context) {
 
-            this.mContext = context;
-            mSharedPreferences = context.getSharedPreferences(mPrefsName, context.MODE_PRIVATE);
-            mEditor = mSharedPreferences.edit();
+        this.mContext = context;
+        mSharedPreferences = context.getSharedPreferences(mPrefsName, context.MODE_PRIVATE);
+        mEditor = mSharedPreferences.edit();
 
     }
 
 
-
     public boolean isLoginDone() {
-            return mSharedPreferences.getBoolean("loginDone", false);
+        return mSharedPreferences.getBoolean("loginDone", false);
 
     }
 
 
     public void setLoginDone(boolean loginDone) {
 
-            mEditor.putBoolean("loginDone", loginDone);
-            mEditor.apply();
+        mEditor.putBoolean("loginDone", loginDone);
+        mEditor.apply();
 
     }
 
 
-
-
     public String getMyId() {
-            return mSharedPreferences.getString(mKeyUserId, "");
+        return mSharedPreferences.getString(mKeyUserId, "");
 
     }
 
     public void setMyId(String id) {
-            mEditor.putString(mKeyUserId, id);
-            mEditor.apply();
+        mEditor.putString(mKeyUserId, id);
+        mEditor.apply();
 
     }
 
@@ -73,13 +70,13 @@ public class PrefsManager {
     }
 
     public String getToken() {
-            return mSharedPreferences.getString(mKeyToken, "");
+        return mSharedPreferences.getString(mKeyToken, "");
 
     }
 
     public void setToken(String token) {
-            mEditor.putString(mKeyToken, token);
-            mEditor.apply();
+        mEditor.putString(mKeyToken, token);
+        mEditor.apply();
 
     }
 

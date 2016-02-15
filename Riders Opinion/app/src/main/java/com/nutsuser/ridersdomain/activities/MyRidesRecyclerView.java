@@ -3,7 +3,6 @@ package com.nutsuser.ridersdomain.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -32,6 +31,14 @@ import butterknife.OnClick;
 
 public class MyRidesRecyclerView extends AppCompatActivity {
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+    @Bind(R.id.bt_upcoming)
+    Button bt_upcoming;
+    @Bind(R.id.bt_past)
+    Button bt_past;
+    UpcomingSwipeViewAdapter mUpcomingSwipeViewAdapter;
+    SwipeRecyclerViewAdapter mAdapter;
     /**
      * RecyclerView: The new recycler view replaces the list view. Its more modular and therefore we
      * must implement some of the functionality ourselves and attach it to our recyclerview.
@@ -42,17 +49,8 @@ public class MyRidesRecyclerView extends AppCompatActivity {
      */
 
     private ArrayList<Student> mDataSet;
-     @Bind(R.id.toolbar)
-     Toolbar toolbar;
-    @Bind(R.id.bt_upcoming)
-    Button bt_upcoming;
-    @Bind(R.id.bt_past)
-    Button bt_past;
-
     private TextView tvEmptyView;
     private RecyclerView mRecyclerView;
-    UpcomingSwipeViewAdapter mUpcomingSwipeViewAdapter;
-    SwipeRecyclerViewAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +62,8 @@ public class MyRidesRecyclerView extends AppCompatActivity {
         tvEmptyView = (TextView) findViewById(R.id.empty_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        bt_upcoming=(Button)findViewById(R.id.bt_upcoming);
-        bt_past=(Button)findViewById(R.id.bt_past);
+        bt_upcoming = (Button) findViewById(R.id.bt_upcoming);
+        bt_past = (Button) findViewById(R.id.bt_past);
 
         // Layout Managers:
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -97,7 +95,7 @@ public class MyRidesRecyclerView extends AppCompatActivity {
 
 
         // Creating Adapter object
-         mAdapter = new SwipeRecyclerViewAdapter(this, mDataSet);
+        mAdapter = new SwipeRecyclerViewAdapter(this, mDataSet);
 
 
         // Setting Mode to Single to reveal bottom View for one item in List
@@ -130,6 +128,7 @@ public class MyRidesRecyclerView extends AppCompatActivity {
 
         }
     }
+
     @OnClick({R.id.bt_past, R.id.bt_upcoming})
     void click(View view) {
         switch (view.getId()) {
@@ -166,6 +165,7 @@ public class MyRidesRecyclerView extends AppCompatActivity {
 
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -175,11 +175,11 @@ public class MyRidesRecyclerView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-               // finish();
+                // finish();
                 Intent intent = new Intent(MyRidesRecyclerView.this, MainScreenActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("MainScreen","OPEN");
+                intent.putExtra("MainScreen", "OPEN");
                 startActivity(intent);
                 break;
         }

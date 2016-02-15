@@ -18,8 +18,6 @@ import com.daimajia.swipe.util.Attributes;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.FreindsCurrentSwipeAdapter;
 import com.nutsuser.ridersdomain.adapter.FreindsRequestSwipeAdapter;
-import com.nutsuser.ridersdomain.adapter.SwipeRecyclerViewAdapter;
-import com.nutsuser.ridersdomain.adapter.UpcomingSwipeViewAdapter;
 import com.nutsuser.ridersdomain.web.pojos.DividerItemDecoration;
 import com.nutsuser.ridersdomain.web.pojos.Student;
 
@@ -33,19 +31,20 @@ import butterknife.OnClick;
  * Created by user on 1/6/2016.
  */
 public class MyFriends extends BaseActivity {
-    private Activity activity;
     @Bind(R.id.toolbar)
     Toolbar toolbar;
     @Bind(R.id.bt_upcoming)
     Button bt_upcoming;
     @Bind(R.id.bt_past)
     Button bt_past;
+    // FreindsRequestSwipeAdapter mUpcomingSwipeViewAdapter;
+    FreindsRequestSwipeAdapter mAdapter;
+    FreindsCurrentSwipeAdapter mUpcomingSwipeViewAdapter;
+    private Activity activity;
     private TextView tvEmptyView;
     private RecyclerView mRecyclerView;
-   // FreindsRequestSwipeAdapter mUpcomingSwipeViewAdapter;
-    FreindsRequestSwipeAdapter mAdapter;
     private ArrayList<Student> mDataSet;
-    FreindsCurrentSwipeAdapter mUpcomingSwipeViewAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +55,8 @@ public class MyFriends extends BaseActivity {
         tvEmptyView = (TextView) findViewById(R.id.empty_view);
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-        bt_upcoming=(Button)findViewById(R.id.bt_upcoming);
-        bt_past=(Button)findViewById(R.id.bt_past);
+        bt_upcoming = (Button) findViewById(R.id.bt_upcoming);
+        bt_past = (Button) findViewById(R.id.bt_past);
 
         // Layout Managers:
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -104,12 +103,14 @@ public class MyFriends extends BaseActivity {
             }
         });
     }
+
     private void setupActionBar() {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.icon_home);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
+
     // load initial data
     public void loadData() {
 
@@ -154,6 +155,7 @@ public class MyFriends extends BaseActivity {
 
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
@@ -167,7 +169,7 @@ public class MyFriends extends BaseActivity {
                 Intent intent = new Intent(MyFriends.this, MainScreenActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("MainScreen","OPEN");
+                intent.putExtra("MainScreen", "OPEN");
                 startActivity(intent);
                 break;
         }

@@ -29,7 +29,6 @@ public class ProfileActivity extends BaseActivity {
     DrawerLayout mDrawerLayout;
     @Bind(R.id.lvSlidingMenu)
     LinearLayout lvSlidingMenu;
-    private Activity activity;
     @Bind(R.id.tvName)
     TextView tvName;
     @Bind(R.id.tvAddress)
@@ -50,6 +49,7 @@ public class ProfileActivity extends BaseActivity {
     TextView tvNotifications;
     @Bind(R.id.tvSettings)
     TextView tvSettings;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

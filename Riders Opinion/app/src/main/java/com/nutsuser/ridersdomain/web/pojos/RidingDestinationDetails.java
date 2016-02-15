@@ -4,16 +4,7 @@ package com.nutsuser.ridersdomain.web.pojos;
  * Created by admin on 20-01-2016.
  */
 public class RidingDestinationDetails {
-String destId;
-
-    public String getDestId() {
-        return destId;
-    }
-
-    public void setDestId(String destId) {
-        this.destId = destId;
-    }
-
+    String destId;
     String destName;
     String description;
     String address;
@@ -26,6 +17,17 @@ String destId;
     String hospitals;
     String riders;
     String offers;
+    String destLongitude;
+    String destLatitude;
+    String images;
+
+    public String getDestId() {
+        return destId;
+    }
+
+    public void setDestId(String destId) {
+        this.destId = destId;
+    }
 
     public String getRestaurant() {
         return restaurant;
@@ -146,8 +148,4 @@ String destId;
     public void setImages(String images) {
         this.images = images;
     }
-
-    String destLongitude;
-    String destLatitude;
-    String images;
 }

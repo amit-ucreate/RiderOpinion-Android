@@ -11,444 +11,446 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_brown">
-
-
-        <TextView
-            android:id="@+id/tvTitleToolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="PLAN A RIDE"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/title_text_size"
-            android:textStyle="bold" />
-
-        <ImageView
-            android:id="@+id/ivMenu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:padding="16dp"
-            android:src="@drawable/menu_icon" />
-
-
-    </android.support.v7.widget.Toolbar>
-
-    <android.support.v4.widget.DrawerLayout
-        android:id="@+id/drawer_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
-        android:layout_weight="1">
-
-        <!--<ScrollView
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/light_brown">
 
-        </ScrollView>-->
+
+            <TextView
+                android:id="@+id/tvTitleToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="PLAN A RIDE"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:padding="16dp"
+                android:src="@drawable/menu_icon" />
 
 
-        <LinearLayout
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <ScrollView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-            <RelativeLayout
+            android:layout_below="@id/toolbar"
+            android:layout_weight="1">
+
+            <!--<ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tv_rideTag"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableRight="@drawable/icon_down_arrow"
-                android:padding="12dp"
-                android:text="RIDE TYPE" />
-
-            <View
-                android:id="@+id/v_TagStart"
-                android:layout_below="@+id/tv_rideTag"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:background="@color/light_brown" />
-
-            <TextView
-                android:id="@+id/tv_TagDate"
-                android:layout_below="@+id/v_TagStart"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="11 Oct 2015/ 5:30-16:30" />
-
-            <View
-                android:layout_below="@+id/tv_TagDate"
-                android:id="@+id/v_TagView"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:background="@color/light_brown" />
-
-            <RelativeLayout
-                android:id="@+id/rl_add"
-                android:layout_below="@+id/v_TagView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
-                android:layout_marginLeft="12dp">
-
-                <ImageView
-                    android:id="@+id/ivMap"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/icon_map_big" />
-                <AutoCompleteTextView
-                    android:id="@+id/tvPlace1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_toRightOf="@id/ivMap"
-                    android:hint="start"
-                    android:drawableRight="@drawable/icon_get_direction"
-                    >
-                    <requestFocus />
-                </AutoCompleteTextView>
+            </ScrollView>-->
 
 
-                <View
-                    android:id="@+id/viewLine"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_brown"
-                    android:layout_below="@id/tvPlace1"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_toRightOf="@id/ivMap" />
-
-                <AutoCompleteTextView
-                    android:id="@+id/tvPlace2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/viewLine"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_toRightOf="@id/ivMap"
-                    android:drawableRight="@drawable/icon_get_direction"
-                    android:hint="SHIMLA"
-                    >
-                    <requestFocus />
-                </AutoCompleteTextView>
-
-
-
-
-            </RelativeLayout>
-
-            <View
-                android:id="@+id/v_afteradddress"
-                android:layout_below="@+id/rl_add"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:background="@color/light_brown" />
-
-            <TextView
-                android:layout_below="@+id/v_afteradddress"
-                android:id="@+id/tv_route_haults"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:text="ROUTE HAULTS"
-                android:textColor="@color/light_brown" />
-
-            <RelativeLayout
-                android:id="@+id/rl_routehaults"
-                android:layout_below="@+id/tv_route_haults"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp">
-
-                <ImageView
-                    android:id="@+id/ivMap2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:src="@drawable/icon_map_big" />
-
-                <TextView
-                    android:id="@+id/tvPlace3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_toRightOf="@id/ivMap2"
-                    android:drawableRight="@drawable/icon_get_direction"
-                    android:text="CHANDIGARH" />
-
-                <View
-                    android:id="@+id/viewLine2"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_brown"
-                    android:layout_below="@id/tvPlace3"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_toRightOf="@id/ivMap2" />
-
-                <TextView
-                    android:layout_marginTop="8dp"
-                    android:id="@+id/tvPlace4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/viewLine2"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginBottom="8dp"
-                    android:layout_toRightOf="@id/ivMap2"
-                    android:drawableRight="@drawable/icon_get_direction"
-                    android:text="SHIMLA" />
-
-
-            </RelativeLayout>
-
-            <View
-                android:id="@+id/v_tag_belowroutehaults"
-                android:layout_below="@+id/rl_routehaults"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:background="@color/light_brown" />
-
-            <fragment
-                android:layout_below="@+id/v_tag_belowroutehaults"
-                android:id="@+id/map"
-                android:layout_marginTop="8dp"
-                class="com.google.android.gms.maps.MapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_weight="1"/>
-
-
-
-<RelativeLayout
-    android:layout_below="@+id/map"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/rl_pitstop"
-    >
-    <TextView
-        android:id="@+id/tvEatables"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-
-       android:layout_marginLeft="70dp"
-        android:drawablePadding="8dp"
-        android:drawableTop="@drawable/icon_eating_joints"
-        android:padding="16dp"
-        android:text="12" />
-
-    <TextView
-        android:id="@+id/tvPetrolPump"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/tvEatables"
-        android:layout_toRightOf="@id/tvEatables"
-        android:drawablePadding="8dp"
-        android:drawableTop="@drawable/icon_petrol_pump"
-        android:padding="16dp"
-        android:text="18" />
-
-
-    <TextView
-        android:id="@+id/tvServiceCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/tvEatables"
-        android:layout_toRightOf="@id/tvPetrolPump"
-        android:drawablePadding="8dp"
-        android:drawableTop="@drawable/icon_mechanic"
-        android:padding="16dp"
-        android:text="8" />
-
-    <TextView
-        android:id="@+id/tvFirstAid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/tvEatables"
-        android:layout_toRightOf="@id/tvServiceCenter"
-        android:drawablePadding="8dp"
-        android:drawableTop="@drawable/icon_firstaid"
-        android:padding="16dp"
-        android:text="12" />
-</RelativeLayout>
-                <TextView
-                    android:layout_below="@+id/rl_pitstop"
-                    android:id="@+id/tvNext"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:layout_marginLeft="32dp"
-                    android:layout_marginRight="32dp"
-                    android:layout_marginTop="4dp"
-                    android:background="@color/light_brown"
-                    android:padding="12dp"
-                    android:gravity="center"
-                    android:text="NEXT"
-                    android:textColor="@android:color/white" />
-           </RelativeLayout>
-
-            </ScrollView>
-
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/lvSlidingMenu"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="end"
-            android:background="#8A3C16"
-            android:clickable="true"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/rlProfile"
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:background="@color/dark_brown"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp">
-                <Button
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="9dp"
-                    android:background="@drawable/icon_menu_edit"
-                    android:layout_centerInParent="true"
-
-                    android:layout_alignParentLeft="true"
-                   android:layout_marginLeft="10dp"
-                    />
-                <Button
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="9dp"
-                    android:background="@drawable/icon_menu_logout"
-                    android:layout_centerInParent="true"
-
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"
-                    />
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    android:singleLine="true"
-                    android:gravity="top|center"
-
-                    android:layout_alignParentTop="true"
-                    android:text="VISHAL SHAHI"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/title_text_size" />
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/sdvDp"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="7dp"
-                    android:layout_below="@+id/tvName"
-                   android:layout_centerInParent="true"
-                    app:placeholderImage="@color/white"
-                    app:roundAsCircle="true" />
-
-
-
-              <!--  <TextView
-                    android:id="@+id/tvAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tvName"
-                    android:layout_below="@id/tvName"
-                    android:layout_toLeftOf="@id/sdvDp"
-                    android:text="H.No.293, Sector 28, Chandigarh"
-                    android:textColor="@android:color/white" />-->
-
-
-            </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@android:color/white">
+                android:orientation="vertical">
 
-
-
-            <GridView
-                android:id="@+id/gridView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@+id/rlProfile"
-                android:numColumns="2"
-                android:horizontalSpacing="1dp"
-                android:stretchMode="columnWidth"
-                android:verticalSpacing="1dp">
-
-            </GridView>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@android:color/white"
-                    ></View>
-                <FrameLayout
+                <ScrollView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#8A3C16">
+                    android:layout_weight="1">
 
-                </FrameLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tv_rideTag"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/icon_down_arrow"
+                            android:padding="12dp"
+                            android:text="RIDE TYPE" />
+
+                        <View
+                            android:id="@+id/v_TagStart"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@+id/tv_rideTag"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@color/light_brown" />
+
+                        <TextView
+                            android:id="@+id/tv_TagDate"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/v_TagStart"
+                            android:padding="12dp"
+                            android:text="11 Oct 2015/ 5:30-16:30" />
+
+                        <View
+                            android:id="@+id/v_TagView"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@+id/tv_TagDate"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@color/light_brown" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_add"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/v_TagView"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginTop="2dp">
+
+                            <ImageView
+                                android:id="@+id/ivMap"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/icon_map_big" />
+
+                            <AutoCompleteTextView
+                                android:id="@+id/tvPlace1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="12dp"
+                                android:layout_toRightOf="@id/ivMap"
+                                android:drawableRight="@drawable/icon_get_direction"
+                                android:hint="start">
+
+                                <requestFocus />
+                            </AutoCompleteTextView>
+
+
+                            <View
+                                android:id="@+id/viewLine"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@id/tvPlace1"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="12dp"
+                                android:layout_toRightOf="@id/ivMap"
+                                android:background="@color/light_brown" />
+
+                            <AutoCompleteTextView
+                                android:id="@+id/tvPlace2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/viewLine"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="12dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_toRightOf="@id/ivMap"
+                                android:drawableRight="@drawable/icon_get_direction"
+                                android:hint="SHIMLA">
+
+                                <requestFocus />
+                            </AutoCompleteTextView>
+
+
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@+id/v_afteradddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@+id/rl_add"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@color/light_brown" />
+
+                        <TextView
+                            android:id="@+id/tv_route_haults"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/v_afteradddress"
+                            android:padding="12dp"
+                            android:text="ROUTE HAULTS"
+                            android:textColor="@color/light_brown" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_routehaults"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_route_haults"
+                            android:layout_marginLeft="12dp">
+
+                            <ImageView
+                                android:id="@+id/ivMap2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:src="@drawable/icon_map_big" />
+
+                            <TextView
+                                android:id="@+id/tvPlace3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="12dp"
+                                android:layout_toRightOf="@id/ivMap2"
+                                android:drawableRight="@drawable/icon_get_direction"
+                                android:text="CHANDIGARH" />
+
+                            <View
+                                android:id="@+id/viewLine2"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@id/tvPlace3"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="12dp"
+                                android:layout_toRightOf="@id/ivMap2"
+                                android:background="@color/light_brown" />
+
+                            <TextView
+                                android:id="@+id/tvPlace4"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/viewLine2"
+                                android:layout_marginBottom="8dp"
+                                android:layout_marginLeft="8dp"
+                                android:layout_marginRight="12dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_toRightOf="@id/ivMap2"
+                                android:drawableRight="@drawable/icon_get_direction"
+                                android:text="SHIMLA" />
+
+
+                        </RelativeLayout>
+
+                        <View
+                            android:id="@+id/v_tag_belowroutehaults"
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_below="@+id/rl_routehaults"
+                            android:layout_marginLeft="12dp"
+                            android:layout_marginRight="12dp"
+                            android:background="@color/light_brown" />
+
+                        <fragment
+                            android:id="@+id/map"
+                            class="com.google.android.gms.maps.MapFragment"
+                            android:layout_width="match_parent"
+                            android:layout_height="300dp"
+                            android:layout_below="@+id/v_tag_belowroutehaults"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1" />
+
+
+                        <RelativeLayout
+                            android:id="@+id/rl_pitstop"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/map">
+
+                            <TextView
+                                android:id="@+id/tvEatables"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="70dp"
+
+                                android:drawablePadding="8dp"
+                                android:drawableTop="@drawable/icon_eating_joints"
+                                android:gravity="center"
+                                android:padding="16dp"
+                                android:text="12" />
+
+                            <TextView
+                                android:id="@+id/tvPetrolPump"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@id/tvEatables"
+                                android:layout_toRightOf="@id/tvEatables"
+                                android:drawablePadding="8dp"
+                                android:drawableTop="@drawable/icon_petrol_pump"
+                                android:padding="16dp"
+                                android:text="18" />
+
+
+                            <TextView
+                                android:id="@+id/tvServiceCenter"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@id/tvEatables"
+                                android:layout_toRightOf="@id/tvPetrolPump"
+                                android:drawablePadding="8dp"
+                                android:drawableTop="@drawable/icon_mechanic"
+                                android:padding="16dp"
+                                android:text="8" />
+
+                            <TextView
+                                android:id="@+id/tvFirstAid"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@id/tvEatables"
+                                android:layout_toRightOf="@id/tvServiceCenter"
+                                android:drawablePadding="8dp"
+                                android:drawableTop="@drawable/icon_firstaid"
+                                android:padding="16dp"
+                                android:text="12" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/tvNext"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/rl_pitstop"
+                            android:layout_marginBottom="5dp"
+                            android:layout_marginLeft="32dp"
+                            android:layout_marginRight="32dp"
+                            android:layout_marginTop="4dp"
+                            android:background="@color/light_brown"
+                            android:gravity="center"
+                            android:padding="12dp"
+                            android:text="NEXT"
+                            android:textColor="@android:color/white" />
+                    </RelativeLayout>
+
+                </ScrollView>
+
+
             </LinearLayout>
-        </LinearLayout>
 
-    </android.support.v4.widget.DrawerLayout>
-</LinearLayout>
-   <!-- <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#8555"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
 
-        android:id="@+id/mainbanner">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BANNER 50 PX HEIGHT"
-            android:gravity="center"
-            android:textSize="22sp"
-            android:layout_gravity="center_vertical|center"
-            android:textColor="@android:color/white"/>
-    </FrameLayout>-->
+            <LinearLayout
+                android:id="@+id/lvSlidingMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="#8A3C16"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rlProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:background="@color/dark_brown"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp">
+
+                    <Button
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+
+                        android:layout_marginTop="9dp"
+                        android:background="@drawable/icon_menu_edit" />
+
+                    <Button
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="10dp"
+
+                        android:layout_marginTop="9dp"
+                        android:background="@drawable/icon_menu_logout" />
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignParentTop="true"
+                        android:gravity="top|center"
+
+                        android:singleLine="true"
+                        android:text="VISHAL SHAHI"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/title_text_size" />
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sdvDp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_below="@+id/tvName"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="7dp"
+                        app:placeholderImage="@color/white"
+                        app:roundAsCircle="true" />
+
+
+                    <!--  <TextView
+                          android:id="@+id/tvAddress"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_alignLeft="@id/tvName"
+                          android:layout_below="@id/tvName"
+                          android:layout_toLeftOf="@id/sdvDp"
+                          android:text="H.No.293, Sector 28, Chandigarh"
+                          android:textColor="@android:color/white" />-->
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:orientation="vertical">
+
+
+                    <GridView
+                        android:id="@+id/gridView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/rlProfile"
+                        android:horizontalSpacing="1dp"
+                        android:numColumns="2"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="1dp">
+
+                    </GridView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/white"></View>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#8A3C16">
+
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v4.widget.DrawerLayout>
+    </LinearLayout>
+    <!-- <FrameLayout
+         android:layout_width="match_parent"
+         android:layout_height="55dp"
+         android:background="#8555"
+         android:layout_gravity="bottom"
+         android:layout_alignParentBottom="true"
+
+         android:id="@+id/mainbanner">
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="BANNER 50 PX HEIGHT"
+             android:gravity="center"
+             android:textSize="22sp"
+             android:layout_gravity="center_vertical|center"
+             android:textColor="@android:color/white"/>
+     </FrameLayout>-->
 
 </RelativeLayout>

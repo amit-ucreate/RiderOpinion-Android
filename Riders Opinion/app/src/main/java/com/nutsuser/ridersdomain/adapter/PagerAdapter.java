@@ -3,6 +3,7 @@ package com.nutsuser.ridersdomain.adapter;
 /**
  * Created by user on 11/10/2015.
  */
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;

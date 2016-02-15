@@ -5,6 +5,8 @@ package com.nutsuser.ridersdomain.web.pojos;
  */
 public class Like {
     String success;
+    String message;
+    LikeDetails data;
 
     public String getSuccess() {
         return success;
@@ -29,7 +31,4 @@ public class Like {
     public void setData(LikeDetails data) {
         this.data = data;
     }
-
-    String message;
-    LikeDetails data;
 }

@@ -10,9 +10,10 @@ public class Student implements Serializable {
 
     private String emailId;
 
-	public Student() {
+    public Student() {
 
     }
+
     public Student(String name, String emailId) {
         this.name = name;
         this.emailId = emailId;

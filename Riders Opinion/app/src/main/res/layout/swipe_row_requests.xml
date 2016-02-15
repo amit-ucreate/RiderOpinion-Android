@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:swipe="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/tools"
+    xmlns:swipe="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,65 +21,66 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#BA4C11">
+
             <ImageView
                 android:id="@+id/ivimage"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:layout_marginBottom="10dp"
                 android:layout_gravity="center|center_horizontal"
-                android:src="@drawable/ic_swipe_message"/>
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_swipe_message" />
 
             <TextView
                 android:id="@+id/tvEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
-                  android:textSize="13sp"
+                android:layout_marginBottom="12dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:gravity="center"
-                android:layout_marginBottom="12dp"
-                android:textStyle="bold"
                 android:text="MESSAGE"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
         </FrameLayout>
+
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:background="@color/white"
-            ></View>
+            android:background="@color/white"></View>
 
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="#D1622A">
+
             <ImageView
                 android:id="@+id/ivroutereview"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="center|center_horizontal"
                 android:layout_marginBottom="10dp"
-                android:src="@drawable/ic_swipe_unfriend"/>
+                android:src="@drawable/ic_swipe_unfriend" />
+
             <TextView
                 android:id="@+id/tvShare"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="12dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:gravity="center"
-                android:textSize="13sp"
-                android:layout_gravity="bottom|center_horizontal"
-                android:layout_marginBottom="12dp"
-                android:textStyle="bold"
                 android:text="UNFRIEND"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold" />
 
 
         </FrameLayout>
-
-
 
 
     </LinearLayout>
@@ -106,55 +107,59 @@
     <!-- Top View,  Row itemView of RecyclerView -->
 
     <RelativeLayout
-        android:layout_marginBottom="12dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="12dp">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="80dp">
+
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/sdvPostImage"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_centerInParent="true"
                 android:layout_gravity="left|center_vertical"
                 android:layout_marginLeft="10dp"
                 android:background="@drawable/ic_dummy_publicprofile"
-                android:layout_centerInParent="true"
-                app:roundAsCircle="true"  />
+                app:roundAsCircle="true" />
+
             <LinearLayout
                 android:layout_width="match_parent"
-                android:orientation="vertical"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp">
+                android:layout_marginLeft="90dp"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
                     android:text="VISHAL SHAHI"
+                    android:textColor="#CD411E"
                     android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#CD411E"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"/>
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="4dp"
                     android:text="Smart Boy"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
                     android:textColor="#CD411E"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"/>
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="STREET 750"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:textColor="#CD411E"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginTop="4dp"
+                    android:text="STREET 750"
+                    android:textColor="#CD411E"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
