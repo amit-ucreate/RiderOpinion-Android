@@ -337,6 +337,8 @@ public class FilterActivity extends BaseActivity {
                 dismissProgressDialog();
                 if (mRidingDestination.getSuccess().equals("1")) {
                     filter=true;
+                    prefsManager=new PrefsManager(FilterActivity.this);
+                    prefsManager.setRadius(tvDistance.getText().toString().trim());
                     DestinationsListActivity.mRidingDestinationDetailses.addAll(mRidingDestination.getData());
                     finish();
                     //rvDestinations.setAdapter(new AdapterDestination(DestinationsListActivity.this, mRidingDestinationDetailses));

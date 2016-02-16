@@ -79,6 +79,9 @@ public class PlannedRidingsActivity extends BaseActivity {
     private AdapterRide adapterRide;
     private Activity activity;
 
+    String ridetype,startdate,enddate,starttime,fromlatitude,fromlongitude,fromlocation,tolatitude,tolongitude,tolocation,hlatitude,hlongitude,htype,hlocation,hlatitude1,hlongitude1,htype1,hlocation1;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +90,43 @@ public class PlannedRidingsActivity extends BaseActivity {
         ButterKnife.bind(this);
         setupActionBar();
         setFonts();
+        ridetype=getIntent().getStringExtra("rideType");
+        if(ridetype.matches("Breakfast Ride")){
+            startdate=getIntent().getStringExtra("startdate");
+            starttime=getIntent().getStringExtra("starttime");
+            fromlatitude=getIntent().getStringExtra("fromlatitude");
+            fromlongitude=getIntent().getStringExtra("fromlatitude");
+            fromlocation=getIntent().getStringExtra("fromlocation");
+            tolatitude=getIntent().getStringExtra("tolatitude");
+            tolongitude=getIntent().getStringExtra("tolongitude");
+            tolocation=getIntent().getStringExtra("tolocation");
+            hlatitude=getIntent().getStringExtra("hlatitude");
+            hlongitude=getIntent().getStringExtra("hlongitude");
+            hlocation=getIntent().getStringExtra("hlocation");
+            htype=getIntent().getStringExtra("breakfast");
+        }
+        else{
+            startdate=getIntent().getStringExtra("startdate");
+            starttime=getIntent().getStringExtra("starttime");
+            fromlatitude=getIntent().getStringExtra("fromlatitude");
+            fromlongitude=getIntent().getStringExtra("fromlatitude");
+            fromlocation=getIntent().getStringExtra("fromlocation");
+            enddate=getIntent().getStringExtra("enddate");
+            tolatitude=getIntent().getStringExtra("tolatitude");
+            tolongitude=getIntent().getStringExtra("tolongitude");
+            tolocation=getIntent().getStringExtra("tolocation");
+            hlatitude=getIntent().getStringExtra("hlatitude");
+            hlongitude=getIntent().getStringExtra("hlongitude");
+            hlocation=getIntent().getStringExtra("hlocation");
+            htype=getIntent().getStringExtra("htype");
+            hlatitude1=getIntent().getStringExtra("hlatitude1");
+            hlongitude1=getIntent().getStringExtra("hlongitude1");
+            hlocation1=getIntent().getStringExtra("hlocation1");
+            htype1=getIntent().getStringExtra("htype1");
+
+        }
+        tvPlaces.setText(fromlocation+"  -  "+tolocation);
+        tvDateAndTime.setText(startdate+"/"+starttime);
         rvRides.setLayoutManager(new LinearLayoutManager(this));
         adapterRide = new AdapterRide(this);
 

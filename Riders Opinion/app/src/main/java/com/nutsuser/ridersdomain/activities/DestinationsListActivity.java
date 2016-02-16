@@ -262,14 +262,15 @@ public class DestinationsListActivity extends BaseActivity {
             prefsManager = new PrefsManager(DestinationsListActivity.this);
             AccessToken = prefsManager.getToken();
             UserId = prefsManager.getCaseId();
+            String radius=prefsManager.getRadius();
 
 
 
             //http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken=eddfbf2bf4046e90fc768d8e319a4355
-            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingdestination + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat + "&radius=2000&accessToken=" + AccessToken);
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingdestination + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat + "&radius="+radius+"&accessToken=" + AccessToken);
             RequestQueue requestQueue = Volley.newRequestQueue(DestinationsListActivity.this);
             RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingdestination + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat + "&radius=2000&accessToken=" + AccessToken, null,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingdestination + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat + "&radius="+radius+"&accessToken=" + AccessToken, null,
                     volleyModelErrorListener(), volleyModelSuccessListener()
             );
 

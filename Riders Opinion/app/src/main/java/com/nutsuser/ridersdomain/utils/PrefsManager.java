@@ -69,6 +69,18 @@ public class PrefsManager {
 
     }
 
+
+    public String getRadius() {
+        return mSharedPreferences.getString("radius", "");
+
+    }
+
+    public void setRadius(String id) {
+        mEditor.putString("radius", id);
+        mEditor.apply();
+
+    }
+
     public String getToken() {
         return mSharedPreferences.getString(mKeyToken, "");
 
@@ -145,6 +157,7 @@ public class PrefsManager {
             setLoginDone(false);
             setToken("");
             setCaseId("");
+            setRadius("");
             setName("");
             setPassword("");
             setEmail("");

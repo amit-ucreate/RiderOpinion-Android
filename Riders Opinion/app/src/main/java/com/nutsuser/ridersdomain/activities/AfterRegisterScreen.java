@@ -155,6 +155,7 @@ public class AfterRegisterScreen extends BaseActivity {
 
                 break;
             case R.id.tvSkip:
+                prefsManager.setRadius("2000");
                 finish();
                 break;
         }
@@ -265,6 +266,7 @@ public class AfterRegisterScreen extends BaseActivity {
             public void onResponse(JSONObject response) {
                 dismissProgressDialog();
                 Log.e("Model response:", "" + response);
+                prefsManager.setRadius("2000");
                 finish();
 
             }

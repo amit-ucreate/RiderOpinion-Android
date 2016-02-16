@@ -2,6 +2,7 @@ package com.nutsuser.ridersdomain.activities;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,15 +19,25 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,11 +60,14 @@ import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.CustomGridAdapter;
 import com.nutsuser.ridersdomain.adapter.EndPlaceArrayAdapter;
 import com.nutsuser.ridersdomain.adapter.PlaceArrayAdapter;
+import com.nutsuser.ridersdomain.adapter.PlaceEndRouteHault;
+import com.nutsuser.ridersdomain.adapter.PlaceStartRouteHault;
 import com.nutsuser.ridersdomain.route.GMapV2GetRouteDirection;
-
+import com.nutsuser.ridersdomain.view.BetterPopupWindow;
 import org.w3c.dom.Document;
-
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.StringTokenizer;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -66,19 +80,35 @@ public class PlanRideActivity extends BaseActivity implements
         GoogleApiClient.OnConnectionFailedListener,
         GoogleApiClient.ConnectionCallbacks {
 
+    DemoPopupWindow dw;
+    private ArrayList<String> ridetype = new ArrayList<String>();
+    CustomBaseAdapter adapter;
+
+    boolean rideTypeChoose=false;
+
+    // Variable for storing current date and time
+    private int mYear, mMonth, mDay, mHour, mMinute,AMPM;
+
     private static final LatLngBounds BOUNDS_MOUNTAIN_VIEW = new LatLngBounds(
             new LatLng(37.398160, -122.180831), new LatLng(37.430610, -121.972090));
     private static final String LOG_TAG = "PlanRideActivity";
     private static final int GOOGLE_API_CLIENT_ID = 0;
-    // @Bind(R.id.tvAddress)
-    //TextView tvAddress;
-   /* @Bind(R.id.tvDestinations)
-    TextView tvDestinations;
-    @Bind(R.id.tvEvents)
-    TextView tvEvents;
-    @Bind(R.id.tvModifyBike)
-    TextView tvModifyBike;
-    @Bind(R.id.tvMeetAndPlanRide)
+     @Bind(R.id.tv_StartTagDate)
+    TextView tv_StartTagDate;
+    @Bind(R.id.tv_EndTagDate)
+    TextView tv_EndTagDate;
+    @Bind(R.id.fmStartDate)
+    FrameLayout fmStartDate;
+    @Bind(R.id.fmEndDate)
+    FrameLayout fmEndDate;
+    @Bind(R.id.edPlace4)
+    AutoCompleteTextView edPlace4;
+    @Bind(R.id.tv_rideTag)
+    TextView tv_rideTag;
+    @Bind(R.id.edPlace3)
+    AutoCompleteTextView edPlace3;
+    String amPM="";
+    /*@Bind(R.id.tvMeetAndPlanRide)
     TextView tvMeetAndPlanRide;
     @Bind(R.id.tvHealthyRiding)
     TextView tvHealthyRiding;
@@ -121,7 +151,118 @@ public class PlanRideActivity extends BaseActivity implements
     private AutoCompleteTextView tvPlace1, tvPlace2;
     private GoogleApiClient mGoogleApiClient;
     private PlaceArrayAdapter mPlaceArrayAdapter;
+    private PlaceStartRouteHault placeStartRouteHault;
+    private PlaceEndRouteHault placeEndRouteHault;
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_start;
+    LatLng mString_endroutehault;
+    LatLng mString_startroutehault;
+
+
+    String fromstartlat,fromendlong,fromloactionnanem,tostartlat,toendlong,tolocationnane,fromroutehaultlat,fromroutehaultlong,fromroutehaultlocation,toroutehaultlat,toroutehaultlong,toroutehaultlocationnanme;
+
+
+    private AdapterView.OnItemClickListener mAutocompleteClickListener_routehaultSTART
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_routehaultSTART);
+            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_routehaultSTART
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                Log.e(LOG_TAG, "Place query did not complete. Error: " +
+                        places.getStatus().toString());
+                return;
+            }
+            // Selecting the first object buffer.
+            final Place place = places.get(0);
+            CharSequence attributions = places.getAttributions();
+
+            // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
+            // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
+            //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
+            String s = "" + Html.fromHtml("" + place.getLatLng().latitude);
+            String s1 = "" + Html.fromHtml("" + place.getLatLng().longitude);
+            double start = Double.valueOf(s.trim()).doubleValue();
+            double end = Double.valueOf(s1.trim()).doubleValue();
+fromroutehaultlat=s;
+            fromroutehaultlong=s1;
+
+            mString_startroutehault = new LatLng(start, end);
+
+
+            Log.e("startroutehault:", "" + mString_startroutehault);
+
+            if (attributions != null) {
+                // mAttTextView.setText(Html.fromHtml(attributions.toString()));
+            }
+        }
+
+    };
+
+
+
+    private AdapterView.OnItemClickListener mAutocompleteClickListener_routehaultEND
+            = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            final PlaceArrayAdapter.PlaceAutocomplete item = mPlaceArrayAdapter.getItem(position);
+            final String placeId = String.valueOf(item.placeId);
+            Log.i(LOG_TAG, "Selected: " + item.description);
+            PendingResult<PlaceBuffer> placeResult = Places.GeoDataApi
+                    .getPlaceById(mGoogleApiClient, placeId);
+            placeResult.setResultCallback(mUpdatePlaceDetailsCallback_routehaultEND);
+            Log.i(LOG_TAG, "Fetching details for ID: " + item.placeId);
+        }
+    };
+    private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_routehaultEND
+            = new ResultCallback<PlaceBuffer>() {
+        @Override
+        public void onResult(PlaceBuffer places) {
+            if (!places.getStatus().isSuccess()) {
+                Log.e(LOG_TAG, "Place query did not complete. Error: " +
+                        places.getStatus().toString());
+                return;
+            }
+            // Selecting the first object buffer.
+            final Place place = places.get(0);
+            CharSequence attributions = places.getAttributions();
+
+            // mNameTextView.setText("NAME:"+ Html.fromHtml(place.getName() + ""));
+            // mAddressTextView.setText("ADDRESS: "+Html.fromHtml(place.getAddress() + ""));
+            //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
+            String s = "" + Html.fromHtml("" + place.getLatLng().latitude);
+            String s1 = "" + Html.fromHtml("" + place.getLatLng().longitude);
+            double start = Double.valueOf(s.trim()).doubleValue();
+            double end = Double.valueOf(s1.trim()).doubleValue();
+
+toroutehaultlat=s;
+            toroutehaultlong=s1;
+            mString_endroutehault = new LatLng(start, end);
+
+
+            Log.e("endroutehault:", "" + mString_endroutehault);
+
+            if (attributions != null) {
+                // mAttTextView.setText(Html.fromHtml(attributions.toString()));
+            }
+        }
+
+    };
+
+
+
+
+
     private AdapterView.OnItemClickListener mAutocompleteClickListener_start
             = new AdapterView.OnItemClickListener() {
         @Override
@@ -153,12 +294,14 @@ public class PlanRideActivity extends BaseActivity implements
             //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
             String s = "" + Html.fromHtml("" + place.getLatLng().latitude);
             String s1 = "" + Html.fromHtml("" + place.getLatLng().longitude);
+            tostartlat=s;
+            toendlong=s1;
             double start = Double.valueOf(s.trim()).doubleValue();
             double end = Double.valueOf(s1.trim()).doubleValue();
 
 
             mString_end = new LatLng(start, end);
-            hideKeyboard();
+            //hideKeyboard();
             //mString_end =Html.fromHtml(place.getLatLng() + "");
 
             Log.e("end:", "" + mString_end);
@@ -202,6 +345,8 @@ public class PlanRideActivity extends BaseActivity implements
                 //  mIdTextView.setText(Html.fromHtml("PLACEID:" + place.getId() + ""));
                 String s = "" + Html.fromHtml("" + place.getLatLng().latitude);
                 String s1 = "" + Html.fromHtml("" + place.getLatLng().longitude);
+                fromstartlat=s;
+                fromendlong=s1;
                 start = Double.valueOf(s.trim()).doubleValue();
                 end = Double.valueOf(s1.trim()).doubleValue();
                 mString_start = new LatLng(start, end);
@@ -259,8 +404,8 @@ public class PlanRideActivity extends BaseActivity implements
                 .tvPlace1);
         tvPlace2 = (AutoCompleteTextView) findViewById(R.id
                 .tvPlace2);
-        tvPlace2.setThreshold(3);
-        tvPlace1.setThreshold(3);
+        tvPlace2.setThreshold(1);
+        tvPlace1.setThreshold(1);
         tvTitleToolbar.setText("MEET & PLAN A RIDE");
         gridView1.setAdapter(new CustomGridAdapter(this, prgmNameList, prgmImages));
         gridView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -283,12 +428,55 @@ public class PlanRideActivity extends BaseActivity implements
         _ArrayAdapter = new EndPlaceArrayAdapter(this, android.R.layout.simple_list_item_1,
                 BOUNDS_MOUNTAIN_VIEW, null);
         tvPlace2.setAdapter(_ArrayAdapter);
+        edPlace3.setThreshold(1);
+        edPlace3.setOnItemClickListener(mAutocompleteClickListener_routehaultSTART);
+        placeStartRouteHault = new PlaceStartRouteHault(this, android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        edPlace3.setAdapter(placeStartRouteHault);
+        edPlace4.setThreshold(1);
+        edPlace4.setOnItemClickListener(mAutocompleteClickListener_routehaultEND);
+        placeEndRouteHault=new PlaceEndRouteHault(this, android.R.layout.simple_list_item_1,
+                BOUNDS_MOUNTAIN_VIEW, null);
+        edPlace4.setAdapter(placeEndRouteHault);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 hideKeyboard();
             }
         }, 300);
+        ridetype.clear();
+        ridetype.add("Breakfast Ride");
+        ridetype.add("Overnight Ride");
+        tvPlace2.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT) {
+                    //do something
+                    tvPlace2.clearFocus();
+                    hideKeyboard();
+                    if (tvPlace2.getText().toString().trim().equals(""))
+
+                        showToast("Please enter end destination");
+                    else if (tvPlace1.getText().toString().trim().equals(""))
+
+                        showToast("Please enter start destination");
+                    else {
+                        if (isNetworkConnected()) {
+                            try {
+                                GetRouteTask getRoute = new GetRouteTask();
+                                getRoute.execute();
+                            } catch (Exception e) {
+
+                            }
+                        } else {
+                            showToast("Internet Not Connected");
+                        }
+                    }
+                }
+
+                return false;
+            }
+        });
 
     }
 
@@ -327,11 +515,77 @@ public class PlanRideActivity extends BaseActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    @OnClick({R.id.tvNext, R.id.ivMenu, R.id.rlProfile, R.id.ivMap})
+    @OnClick({R.id.tvNext, R.id.ivMenu, R.id.rlProfile, R.id.ivMap,R.id.tv_rideTag,R.id.fmStartDate,R.id.fmEndDate})
     void onclick(View view) {
         switch (view.getId()) {
             case R.id.tvNext:
-                startActivity(new Intent(PlanRideActivity.this, PlannedRidingsActivity.class));
+                if (isNetworkConnected()) {
+                    try {
+                      if(rideTypeChoose){
+                          boolean approved=Next(tv_rideTag.getText().toString(),tv_StartTagDate.getText().toString(),"",tvPlace1.getText().toString(),tvPlace2.getText().toString(),edPlace3.getText().toString(),"");
+                                  if(approved){
+                                      StringTokenizer tokens = new StringTokenizer(tv_StartTagDate.getText().toString(), "/");
+                                      String first = tokens.nextToken();// this will contain "Fruit"
+                                      String second = tokens.nextToken();// this will contain " they taste good"
+                                      Intent mIntent=new Intent(PlanRideActivity.this, PlannedRidingsActivity.class);
+                                          mIntent.putExtra("rideType",tv_rideTag.getText().toString());
+                                          mIntent.putExtra("startdate",first);
+                                          mIntent.putExtra("starttime",second);
+                                          mIntent.putExtra("fromlatitude",fromstartlat);
+                                          mIntent.putExtra("fromlongitude",fromendlong);
+                                          mIntent.putExtra("fromlocation",tvPlace1.getText().toString());
+                                          mIntent.putExtra("tolatitude",tostartlat);
+                                          mIntent.putExtra("tolongitude",toendlong);
+                                          mIntent.putExtra("tolocation",tvPlace2.getText().toString());
+                                          mIntent.putExtra("hlatitude",fromroutehaultlat);
+                                          mIntent.putExtra("hlongitude",fromroutehaultlong);
+                                          mIntent.putExtra("hlocation",edPlace3.getText().toString());
+                                          mIntent.putExtra("htype","breakfast");
+                                          startActivity(mIntent);
+                                  }
+                          else{
+                                      showToast("Please fill all Value");
+                                  }
+                      }
+                        else{
+                          boolean approved=Next(tv_rideTag.getText().toString(),tv_StartTagDate.getText().toString(),tv_EndTagDate.getText().toString(),tvPlace1.getText().toString(),tvPlace2.getText().toString(),edPlace3.getText().toString(),edPlace4.getText().toString());
+                          if(approved){
+                              StringTokenizer tokens = new StringTokenizer(tv_StartTagDate.getText().toString(), "/");
+                              String first = tokens.nextToken();// this will contain "Fruit"
+                              String second = tokens.nextToken();// this will contain " they taste good"
+                              Intent mIntent=new Intent(PlanRideActivity.this, PlannedRidingsActivity.class);
+                              mIntent.putExtra("rideType",tv_rideTag.getText().toString());
+                              mIntent.putExtra("startdate",first);
+                              mIntent.putExtra("starttime",second);
+                              mIntent.putExtra("enddate",tv_EndTagDate.getText().toString());
+                              mIntent.putExtra("fromlatitude",fromstartlat);
+                              mIntent.putExtra("fromlongitude",fromendlong);
+                              mIntent.putExtra("fromlocation",tvPlace1.getText().toString());
+                              mIntent.putExtra("tolatitude",tostartlat);
+                              mIntent.putExtra("tolongitude",toendlong);
+                              mIntent.putExtra("tolocation",tvPlace2.getText().toString());
+                              mIntent.putExtra("hlatitude",fromroutehaultlat);
+                              mIntent.putExtra("hlongitude",fromroutehaultlong);
+                              mIntent.putExtra("hlocation",edPlace3.getText().toString());
+                              mIntent.putExtra("htype","breakfast");
+                              mIntent.putExtra("hlatitude1",toroutehaultlat);
+                              mIntent.putExtra("hlongitude1",toroutehaultlong);
+                              mIntent.putExtra("hlocation1",edPlace4.getText().toString());
+                              mIntent.putExtra("htype1","Overnight Ride");
+                                  startActivity(mIntent);
+                          }
+                          else{
+                              showToast("Please fill all Value");
+                          }
+                      }
+                    } catch (Exception e) {
+
+                    }
+                } else {
+                    showToast("Internet Not Connected");
+                }
+
+
                 break;
             case R.id.ivMenu:
                 if (mDrawerLayout.isDrawerOpen(lvSlidingMenu))
@@ -342,19 +596,102 @@ public class PlanRideActivity extends BaseActivity implements
             case R.id.rlProfile:
                 startActivity(new Intent(activity, ProfileActivity.class));
                 break;
-            case R.id.ivMap:
-                GetRouteTask getRoute = new GetRouteTask();
-                getRoute.execute();
+            case R.id.fmStartDate:
+
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+                mMinute=c.get(Calendar.MINUTE);
+                mHour=c.get(Calendar.HOUR);
+                AMPM=c.get(Calendar.AM_PM);
+                if(AMPM==0){
+                    amPM="AM";
+                }
+                else{
+                    amPM="PM";
+                }
+
+                // Launch Date Picker Dialog
+                DatePickerDialog dpd = new DatePickerDialog(this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // Display Selected date in textbox
+                                tv_StartTagDate.setText(" "+dayOfMonth + "-"
+                                        + (monthOfYear + 1) + "-" + year+"/"+mHour+":"+mMinute+" "+amPM);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                dpd.show();
+                break;
+            case R.id.tv_rideTag:
+                dw = new DemoPopupWindow(view, PlanRideActivity.this);
+                dw.showLikeQuickAction(0, 0);
+                break;
+            case R.id.fmEndDate:
+                final Calendar c1 = Calendar.getInstance();
+                mYear = c1.get(Calendar.YEAR);
+                mMonth = c1.get(Calendar.MONTH);
+                mDay = c1.get(Calendar.DAY_OF_MONTH);
+
+                // Launch Date Picker Dialog
+                DatePickerDialog dpd1 = new DatePickerDialog(this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+                                // Display Selected date in textbox
+                                tv_EndTagDate.setText(" "+dayOfMonth + "-"
+                                        + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                dpd1.show();
                 break;
 
 
         }
     }
+public boolean Next(String RideType,String startDate,String endDate,String startLocation,String endLocation,String breakfast,String tea){
+    if(RideType.matches("")){
+        return false;
+    }
+    else if(RideType.matches("Overnight Ride")){
+        if(endDate.matches("")){
+            return false;
+        }
+        else if(startDate.matches("")){
+            return false;
+        }
+        else if(tea.matches("")){
+            return false;
+        }
 
+    }
+    else if(startDate.matches("")){
+        return false;
+    }
+    else if(startLocation.matches("")){
+        return false;
+    }
+    else if(endLocation.matches("")){
+        return false;
+    }
+    else if(breakfast.matches("")){
+        return false;
+    }
+    return true;
+}
     @Override
     public void onConnected(Bundle bundle) {
         _ArrayAdapter.setGoogleApiClient(mGoogleApiClient);
         mPlaceArrayAdapter.setGoogleApiClient(mGoogleApiClient);
+        placeStartRouteHault.setGoogleApiClient(mGoogleApiClient);
+        placeEndRouteHault.setGoogleApiClient(mGoogleApiClient);
         Log.i(LOG_TAG, "Google Places API connected.");
     }
 
@@ -453,4 +790,134 @@ public class PlanRideActivity extends BaseActivity implements
             Dialog.dismiss();
         }
     }
+
+
+    // ************** Class for pop-up window **********************
+
+    /**
+     * The Class DemoPopupWindow.
+     */
+    private class DemoPopupWindow extends BetterPopupWindow {
+
+        /**
+         * Instantiates a new demo popup window.
+         *
+         * @param anchor the anchor
+         * @param cnt    the cnt
+         */
+        public DemoPopupWindow(View anchor, Context cnt) {
+            super(anchor);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @see com.cellalert24.Views.BetterPopupWindow#onCreate()
+         */
+        @Override
+        protected void onCreate() {
+            // inflate layout
+            LayoutInflater inflater = (LayoutInflater) this.anchor.getContext()
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+            ViewGroup root = (ViewGroup) inflater.inflate(
+                    R.layout.share_choose_popup, null);
+
+            ListView listview = (ListView) root.findViewById(R.id.listview);
+            adapter = new CustomBaseAdapter(PlanRideActivity.this, ridetype);
+            listview.setAdapter(adapter);
+            Button mButton = (Button) root.findViewById(R.id.cancelBtn);
+
+
+            mButton.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    // TODO Auto-generated method stub
+
+                    dismiss();
+
+                }
+            });
+
+            this.setContentView(root);
+        }
+
+    }
+
+    public class CustomBaseAdapter extends BaseAdapter {
+        Context context;
+        private ArrayList<String> ridetype;
+
+        public CustomBaseAdapter(Context context, ArrayList<String> ridetype) {
+            this.ridetype = ridetype;
+            this.context = context;
+
+        }
+
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            ViewHolder holder = null;
+
+            LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+            if (convertView == null) {
+                convertView = mInflater.inflate(R.layout.list_item, null);
+                holder = new ViewHolder();
+
+                holder.txtTitle = (TextView) convertView.findViewById(R.id.title);
+
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
+
+            holder.txtTitle.setText(ridetype.get(position));
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(ridetype.get(position).matches("Breakfast Ride")){
+                        tv_rideTag.setText(ridetype.get(position));
+                        fmEndDate.setVisibility(View.GONE);
+                        edPlace4.setVisibility(View.GONE);
+                        rideTypeChoose=true;
+                        dw.dismiss();
+                    }
+                    else if(ridetype.get(position).matches("Overnight Ride")){
+                        tv_rideTag.setText(ridetype.get(position));
+                        fmEndDate.setVisibility(View.VISIBLE);
+                        fmStartDate.setVisibility(View.VISIBLE);
+                        edPlace4.setVisibility(View.VISIBLE);
+                        rideTypeChoose=false;
+                        dw.dismiss();
+                    }
+
+                }});
+            return convertView;
+        }
+
+        @Override
+        public int getCount() {
+            return ridetype.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return position;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        private class ViewHolder {
+
+            TextView txtTitle;
+
+        }
+    }
+
+
+
 }

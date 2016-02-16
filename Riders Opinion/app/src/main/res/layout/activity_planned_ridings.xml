@@ -49,7 +49,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="65dp"
                 android:background="@color/light_yellow">
 
                 <TextView
@@ -58,7 +58,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center_horizontal"
                     android:layout_marginTop="15dp"
-                    android:text="CHANDIGARH-SHIMLA"
+                    android:text=""
+                    android:singleLine="true"
                     android:textColor="@color/light_brown" />
 
                 <TextView
@@ -67,7 +68,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center|center_vertical"
                     android:layout_marginTop="12dp"
-                    android:text="11 Oct 2015/ 5:30-16:30" />
+                    android:text="" />
 
             </FrameLayout>
 
