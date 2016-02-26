@@ -3,18 +3,39 @@ package com.nutsuser.ridersdomain.activities;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.CustomGridAdapter;
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
+import com.nutsuser.ridersdomain.utils.CustomizeDialog;
+import com.nutsuser.ridersdomain.utils.PrefsManager;
+import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
+import com.nutsuser.ridersdomain.web.pojos.PlanRideDetails;
+import com.nutsuser.ridersdomain.web.pojos.PlanRideDetailsData;
+
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -24,6 +45,9 @@ import butterknife.OnClick;
  * Created by user on 9/25/2015.
  */
 public class EventDetailActivity extends BaseActivity {
+    PlanRideDetailsData planRideDetailsData;
+    String AccessToken, UserId, eventId, LOCATION;
+    CustomizeDialog mCustomizeDialog;
     public static String[] prgmNameList = {"My Rides", "My Messages", "My Friends", "Chats", "Favourite Destination", "Notifications", "Settings", "    \n"};
     public static int[] prgmImages = {R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_my_messages, R.drawable.ic_menu_my_friends, R.drawable.ic_menu_menu_chats, R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_menu_notifications, R.drawable.ic_menu_menu_settings, R.drawable.ic_menu_menu_blank_icon};
     public static Class[] classList = {MyRidesRecyclerView.class, ChatListScreen.class, MyFriends.class, ChatListScreen.class, FavouriteDesination.class, Notification.class, SettingsActivity.class, SettingsActivity.class};
@@ -33,24 +57,26 @@ public class EventDetailActivity extends BaseActivity {
     TextView tvTitleToolbar;
     @Bind(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    /*   @Bind(R.id.tvAddress)
-       TextView tvAddress;
-       @Bind(R.id.tvDestinations)
-       TextView tvDestinations;
-       @Bind(R.id.tvEvents)
-       TextView tvEvents;
-       @Bind(R.id.tvModifyBike)
-       TextView tvModifyBike;
-       @Bind(R.id.tvMeetAndPlanRide)
-       TextView tvMeetAndPlanRide;
-       @Bind(R.id.tvHealthyRiding)
-       TextView tvHealthyRiding;
-       @Bind(R.id.tvGetDirections)
-       TextView tvGetDirections;
-       @Bind(R.id.tvNotifications)
-       TextView tvNotifications;
-       @Bind(R.id.tvSettings)
-       TextView tvSettings;*/
+    @Bind(R.id.tvEventName)
+    TextView tvEventName;
+    @Bind(R.id.tvDate)
+    TextView tvDate;
+    @Bind(R.id.tvTime)
+    TextView tvTime;
+    @Bind(R.id.tvLabelHaveJoined)
+    TextView tvLabelHaveJoined;
+    @Bind(R.id.tvNumberOfRiders)
+    TextView tvNumberOfRiders;
+    @Bind(R.id.sdvEventImage)
+    SimpleDraweeView sdvEventImage;
+    @Bind(R.id.tvEatables)
+    TextView tvEatables;
+    @Bind(R.id.tvPetrolPump)
+    TextView tvPetrolPump;
+    @Bind(R.id.tvFirstAid)
+    TextView tvFirstAid;
+    @Bind(R.id.tvServiceCenter)
+    TextView tvServiceCenter;
     @Bind(R.id.lvSlidingMenu)
     LinearLayout lvSlidingMenu;
     // public static String [] prgmNameList={"Riding Destinations","Meet 'N' Plan A Ride","Riding Events \n    ","Modifly Your Bikes","Healthy Riding","Get Directions","Notifications","Settings"};
@@ -61,6 +87,10 @@ public class EventDetailActivity extends BaseActivity {
     @Bind(R.id.gridView1)
     GridView gridView1;
     private Activity activity;
+    @Bind(R.id.fmtrackrider)
+    FrameLayout fmtrackrider;
+    @Bind(R.id.tvJoin)
+    TextView tvJoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +113,14 @@ public class EventDetailActivity extends BaseActivity {
                 }
             }
         });
+        eventId = getIntent().getStringExtra("eventId");
+        if(isNetworkConnected()){
+            RidingDetails();
+        }
+        else{
+            showToast("Internet Not Connected");
+        }
+
     }
 
     public void intentCalling(Class name) {
@@ -111,7 +149,7 @@ public class EventDetailActivity extends BaseActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
-    @OnClick({R.id.ivBack, R.id.ivFilter, R.id.ivMenu, R.id.rlProfile})
+    @OnClick({R.id.ivBack, R.id.ivFilter, R.id.ivMenu, R.id.rlProfile, R.id.fmtrackrider,R.id.tvJoin})
     void click(View v) {
         switch (v.getId()) {
             case R.id.ivBack:
@@ -130,13 +168,26 @@ public class EventDetailActivity extends BaseActivity {
             case R.id.rlProfile:
                 startActivity(new Intent(activity, ProfileActivity.class));
                 break;
-           /* case R.id.tvNotifications:
-                startActivity(new Intent(activity, ChatListScreen.class));
+            case R.id.fmtrackrider:
+
+                Intent intent = new Intent(activity, TrackingScreen.class);
+                intent.putExtra("eventId", eventId);
+                startActivity(intent);
                 break;
-            case R.id.tvDestinations:
-                startActivity(new Intent(activity, DestinationsListActivity.class));
+             case R.id.tvJoin:
+                 if(planRideDetailsData.getIsVehId()==1){
+                     if(isNetworkConnected()){
+                         JOINEVENT();
+                     }
+                     else{
+                         showToast("Internet Not Connected");
+                     }
+                 }
+                 else{
+                     startActivity(new Intent(EventDetailActivity.this, AfterRegisterScreen.class));
+                 }
                 break;
-            case R.id.tvEvents:
+            /*case R.id.tvEvents:
                 startActivity(new Intent(activity, EventsListActivity.class));
                 break;
             case R.id.tvModifyBike:
@@ -153,6 +204,173 @@ public class EventDetailActivity extends BaseActivity {
                 startActivity(new Intent(activity, SettingsActivity.class));
                 break;*/
         }
+    }
+
+    /**
+     * Match Event Details info .
+     */
+    public void RidingDetails() {
+        showProgressDialog();
+        Log.e("riding destination", "riding destination");
+        try {
+            prefsManager = new PrefsManager(EventDetailActivity.this);
+            AccessToken = prefsManager.getToken();
+            UserId = prefsManager.getCaseId();
+            String radius = prefsManager.getRadius();
+
+
+            //http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken=eddfbf2bf4046e90fc768d8e319a4355
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_eventdetails + "userId=" + UserId + "&accessToken=" + AccessToken + "&eventId=" + eventId);
+            RequestQueue requestQueue = Volley.newRequestQueue(EventDetailActivity.this);
+            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.GET,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_eventdetails + "userId=" + UserId + "&accessToken=" + AccessToken + "&eventId=" + eventId, null,
+                    volleyModelErrorListener(), volleyModelSuccessListener()
+            );
+
+            requestQueue.add(loginTaskRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    /**
+     * Implement success listener on execute api url.
+     */
+    public Response.Listener<JSONObject> volleyModelSuccessListener() {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Model response:", "" + response);
+
+                Type type = new TypeToken<PlanRideDetails>() {
+                }.getType();
+                PlanRideDetails planARide = new Gson().fromJson(response.toString(), type);
+
+
+                if (planARide.getSuccess().equals("1")) {
+                    dismissProgressDialog();
+                    planRideDetailsData = planARide.getData();
+                    if(planRideDetailsData.getIsJoin()==1){
+                        tvJoin.setText("JOINED");
+                    }
+                    else{
+                        tvJoin.setText("JOIN");
+                    }
+                    tvEventName.setText(planRideDetailsData.getBaseLocation() + " to " + planRideDetailsData.getDestLocation());
+                    tvTime.setText(planRideDetailsData.getStartTime());
+
+                    tvDate.setText(planRideDetailsData.getStartDate());
+                    tvNumberOfRiders.setText(planRideDetailsData.getRiders());
+                    tvLabelHaveJoined.setText(planRideDetailsData.getMutual());
+                    tvServiceCenter.setText(planRideDetailsData.getServiceStation());
+                    tvFirstAid.setText(planRideDetailsData.getHospitals());
+                    tvPetrolPump.setText(planRideDetailsData.getPetrolpumps());
+                    tvEatables.setText(planRideDetailsData.getRestaurant());
+                    if (planRideDetailsData.getImage() != null) {
+                        String milestonesJsonInString = planRideDetailsData.getImage().toString();
+                        milestonesJsonInString = milestonesJsonInString.replace("\\\"", "\"");
+                        milestonesJsonInString = milestonesJsonInString.replace("\"{", "{");
+                        milestonesJsonInString = milestonesJsonInString.replace("}\"", "}");
+                        sdvEventImage.setImageURI(Uri.parse(milestonesJsonInString));
+                    }
+                } else if (planARide.getMessage().equals("Data Not Found.")) {
+                    dismissProgressDialog();
+                    showToast("Data Not Found.");
+                }
+
+            }
+        };
+    }
+
+    /**
+     * Implement Volley error listener here.
+     */
+    public Response.ErrorListener volleyModelErrorListener() {
+        dismissProgressDialog();
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error: ", "" + error);
+            }
+        };
+    }
+
+    public void showProgressDialog() {
+
+        mCustomizeDialog = new CustomizeDialog(EventDetailActivity.this);
+        mCustomizeDialog.setCancelable(false);
+        mCustomizeDialog.show();
+        Log.e("HERE", "HERE");
+    }
+
+    public void dismissProgressDialog() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mCustomizeDialog != null && mCustomizeDialog.isShowing()) {
+                    mCustomizeDialog.dismiss();
+                    mCustomizeDialog = null;
+                }
+            }
+        }, 1000);
+
+    }
+
+    /**
+     * Match Event Details info .
+     */
+    public void JOINEVENT() {
+        showProgressDialog();
+        Log.e("JOIN EVENT", "JOIN EVENT");
+        try {
+            prefsManager = new PrefsManager(EventDetailActivity.this);
+            AccessToken = prefsManager.getToken();
+            UserId = prefsManager.getCaseId();
+            String radius = prefsManager.getRadius();
+            //http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken=eddfbf2bf4046e90fc768d8e319a4355
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_joinEvent + "userId=" + UserId + "&accessToken=" + AccessToken + "&eventId=" + eventId);
+            RequestQueue requestQueue = Volley.newRequestQueue(EventDetailActivity.this);
+            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.GET,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_joinEvent + "userId=" + UserId + "&accessToken=" + AccessToken + "&eventId=" + eventId, null,
+                    volleyJoinErrorListener(), volleyJoinSuccessListener()
+            );
+
+            requestQueue.add(loginTaskRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    /**
+     * Implement success listener on execute api url.
+     */
+    public Response.Listener<JSONObject> volleyJoinSuccessListener() {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Model response:", "" + response);
+
+
+
+            }
+        };
+    }
+
+    /**
+     * Implement Volley error listener here.
+     */
+    public Response.ErrorListener volleyJoinErrorListener() {
+        dismissProgressDialog();
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error: ", "" + error);
+            }
+        };
     }
 
 }

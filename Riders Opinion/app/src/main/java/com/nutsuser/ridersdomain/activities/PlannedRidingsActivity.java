@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,11 +18,31 @@ import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
+import com.nutsuser.ridersdomain.adapter.AdapterDestination;
 import com.nutsuser.ridersdomain.adapter.AdapterRide;
 import com.nutsuser.ridersdomain.adapter.CustomGridAdapter;
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
+import com.nutsuser.ridersdomain.utils.CustomizeDialog;
 import com.nutsuser.ridersdomain.utils.DividerItemDecoration;
+import com.nutsuser.ridersdomain.utils.PrefsManager;
 import com.nutsuser.ridersdomain.utils.RecyclerItemClickListener;
+import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
+import com.nutsuser.ridersdomain.web.pojos.PlanARide;
+import com.nutsuser.ridersdomain.web.pojos.PlanARideData;
+import com.nutsuser.ridersdomain.web.pojos.RidingDestination;
+
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,6 +52,11 @@ import butterknife.OnClick;
  * Created by user on 10/1/2015.
  */
 public class PlannedRidingsActivity extends BaseActivity {
+
+    PrefsManager prefsManager;
+    CustomizeDialog mCustomizeDialog;
+    String AccessToken, UserId;
+    ArrayList<PlanARideData> planARideDatas=new ArrayList<>();
 
     //  public static String [] prgmNameList={"My Rides","My Messages","My Friends","Chats","Favourite Desination","Notifications","Settings","NEW"};
     // public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_notification,R.drawable.icon_modifybike,R.drawable.icon_menu_destination};
@@ -92,10 +118,11 @@ public class PlannedRidingsActivity extends BaseActivity {
         setFonts();
         ridetype=getIntent().getStringExtra("rideType");
         if(ridetype.matches("Breakfast Ride")){
+            ridetype="breakfast";
             startdate=getIntent().getStringExtra("startdate");
             starttime=getIntent().getStringExtra("starttime");
             fromlatitude=getIntent().getStringExtra("fromlatitude");
-            fromlongitude=getIntent().getStringExtra("fromlatitude");
+            fromlongitude=getIntent().getStringExtra("fromlongitude");
             fromlocation=getIntent().getStringExtra("fromlocation");
             tolatitude=getIntent().getStringExtra("tolatitude");
             tolongitude=getIntent().getStringExtra("tolongitude");
@@ -106,10 +133,11 @@ public class PlannedRidingsActivity extends BaseActivity {
             htype=getIntent().getStringExtra("breakfast");
         }
         else{
+            ridetype="overnight";
             startdate=getIntent().getStringExtra("startdate");
             starttime=getIntent().getStringExtra("starttime");
             fromlatitude=getIntent().getStringExtra("fromlatitude");
-            fromlongitude=getIntent().getStringExtra("fromlatitude");
+            fromlongitude=getIntent().getStringExtra("fromlongitude");
             fromlocation=getIntent().getStringExtra("fromlocation");
             enddate=getIntent().getStringExtra("enddate");
             tolatitude=getIntent().getStringExtra("tolatitude");
@@ -125,17 +153,25 @@ public class PlannedRidingsActivity extends BaseActivity {
             htype1=getIntent().getStringExtra("htype1");
 
         }
-        tvPlaces.setText(fromlocation+"  -  "+tolocation);
-        tvDateAndTime.setText(startdate+"/"+starttime);
-        rvRides.setLayoutManager(new LinearLayoutManager(this));
-        adapterRide = new AdapterRide(this);
+        tvPlaces.setText(fromlocation + "  -  " + tolocation);
+        tvDateAndTime.setText(startdate + "/" + starttime);
+        Log.e("fromlatitude:", "" + fromlatitude);
+        Log.e("fromlongitude:", "" + fromlongitude);
+        Log.e("tolatitude:", "" + tolatitude);
+        Log.e("tolongitude:", "" + tolongitude);
 
+
+        rvRides.setLayoutManager(new LinearLayoutManager(this));
         rvRides.addItemDecoration(new DividerItemDecoration(this, R.drawable.divider));
-        rvRides.setAdapter(adapterRide);
+
         rvRides.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(PlannedRidingsActivity.this, PlanRideDetailActivity.class));
+                Intent mIntent=new Intent(PlannedRidingsActivity.this,PlanRideDetailActivity.class);
+                mIntent.putExtra("LOCATION","details");
+                mIntent.putExtra("eventId",planARideDatas.get(position).getEventId());
+                startActivity(mIntent);
+                //startActivity(new Intent(PlannedRidingsActivity.this, PlanRideDetailActivity.class));
             }
         }));
 
@@ -151,6 +187,7 @@ public class PlannedRidingsActivity extends BaseActivity {
                 }
             }
         });
+        MatchRidinginfo();
     }
 
     public void intentCalling(Class name) {
@@ -214,7 +251,47 @@ public class PlannedRidingsActivity extends BaseActivity {
                 startActivity(new Intent(activity, ProfileActivity.class));
                 break;
             case R.id.tvSubmit:
-                startActivity(new Intent(activity, PlanARidePostRide.class));
+                if(ridetype.matches("breakfast")){
+                    Intent mIntent=new Intent(PlannedRidingsActivity.this, PlanARidePostRide.class);
+                    mIntent.putExtra("rideType",ridetype);
+                    mIntent.putExtra("startdate",startdate);
+                    mIntent.putExtra("starttime",starttime);
+                    mIntent.putExtra("fromlatitude",fromlatitude);
+                    mIntent.putExtra("fromlongitude",fromlongitude);
+                    mIntent.putExtra("fromlocation",fromlocation);
+                    mIntent.putExtra("tolatitude",tolatitude);
+                    mIntent.putExtra("tolongitude",tolongitude);
+                    mIntent.putExtra("tolocation",tolocation);
+                    mIntent.putExtra("hlatitude",hlatitude);
+                    mIntent.putExtra("hlongitude",hlongitude);
+                    mIntent.putExtra("hlocation",hlocation);
+                    mIntent.putExtra("htype","breakfast");
+                    startActivity(mIntent);
+                }
+                else{
+                    Intent mIntent=new Intent(PlannedRidingsActivity.this, PlanARidePostRide.class);
+                    mIntent.putExtra("rideType",ridetype);
+                    mIntent.putExtra("startdate",startdate);
+                    mIntent.putExtra("starttime",starttime);
+                    mIntent.putExtra("enddate",enddate);
+                    mIntent.putExtra("fromlatitude",fromlatitude);
+                    mIntent.putExtra("fromlongitude",fromlongitude);
+                    mIntent.putExtra("fromlocation",fromlocation);
+                    mIntent.putExtra("tolatitude",tolatitude);
+                    mIntent.putExtra("tolongitude",tolongitude);
+                    mIntent.putExtra("tolocation",tolocation);
+                    mIntent.putExtra("hlatitude",hlatitude);
+                    mIntent.putExtra("hlongitude",hlongitude);
+                    mIntent.putExtra("hlocation",hlocation);
+                    mIntent.putExtra("htype","breakfast");
+                    mIntent.putExtra("hlatitude1",hlatitude1);
+                    mIntent.putExtra("hlongitude1",hlongitude1);
+                    mIntent.putExtra("hlocation1",hlocation1);
+                    mIntent.putExtra("htype1","Overnight");
+                    startActivity(mIntent);
+                }
+
+               // startActivity(new Intent(activity, PlanARidePostRide.class));
                 break;
             /*case R.id.tvNotifications:
                 startActivity(new Intent(activity, ChatListScreen.class));
@@ -239,6 +316,97 @@ public class PlannedRidingsActivity extends BaseActivity {
                 startActivity(new Intent(activity, SettingsActivity.class));
                 break;*/
         }
+    }
+    /**
+     * Match Riding List info .
+     */
+    public void MatchRidinginfo() {
+        showProgressDialog();
+        Log.e("riding destination", "riding destination");
+        try {
+            prefsManager = new PrefsManager(PlannedRidingsActivity.this);
+            AccessToken = prefsManager.getToken();
+            UserId = prefsManager.getCaseId();
+            String radius=prefsManager.getRadius();
+
+
+
+            //http://ridersopininon.herokuapp.com/index.php/ridingDestination?userId=75&longitude=0.000000&latitude=0.000000&accessToken=eddfbf2bf4046e90fc768d8e319a4355
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_matchevent + "userId=" + UserId + "&baseLat=" + fromlatitude + "&baseLon=" + fromlongitude + "&destLat="+tolatitude+"&destLon=" + tolongitude+"&accessToken="+AccessToken+"&eventType="+ridetype);
+            RequestQueue requestQueue = Volley.newRequestQueue(PlannedRidingsActivity.this);
+            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.GET,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_matchevent + "userId=" + UserId + "&baseLat=" + fromlatitude + "&baseLon=" + fromlongitude + "&destLat="+tolatitude+"&destLon=" + tolongitude+"&accessToken="+AccessToken+"&eventType="+ridetype, null,
+                    volleyModelErrorListener(), volleyModelSuccessListener()
+            );
+
+            requestQueue.add(loginTaskRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+    /**
+     * Implement success listener on execute api url.
+     */
+    public Response.Listener<JSONObject> volleyModelSuccessListener() {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Model response:", "" + response);
+
+               Type type = new TypeToken<PlanARide>() {
+                }.getType();
+                PlanARide planARide = new Gson().fromJson(response.toString(), type);
+
+                planARideDatas.clear();
+                if (planARide.getSuccess().equals("1")) {
+                    dismissProgressDialog();
+                    planARideDatas.addAll(planARide.getData());
+                    adapterRide = new AdapterRide(activity,planARideDatas);
+                    rvRides.setAdapter(adapterRide);
+                }
+                else if(planARide.getMessage().equals("Data Not Found.")){
+                    dismissProgressDialog();
+                    showToast("Data Not Found.");
+                }
+
+            }
+        };
+    }
+
+    /**
+     * Implement Volley error listener here.
+     */
+    public Response.ErrorListener volleyModelErrorListener() {
+        dismissProgressDialog();
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error: ", "" + error);
+            }
+        };
+    }
+
+    public void showProgressDialog() {
+
+        mCustomizeDialog = new CustomizeDialog(PlannedRidingsActivity.this);
+        mCustomizeDialog.setCancelable(false);
+        mCustomizeDialog.show();
+        Log.e("HERE", "HERE");
+    }
+
+    public void dismissProgressDialog() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mCustomizeDialog != null && mCustomizeDialog.isShowing()) {
+                    mCustomizeDialog.dismiss();
+                    mCustomizeDialog = null;
+                }
+            }
+        }, 1000);
+
     }
 
 }

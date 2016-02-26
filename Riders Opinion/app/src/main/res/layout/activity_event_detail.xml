@@ -137,33 +137,27 @@
                                     android:layout_height="wrap_content"
                                     android:text="Harley Group"
                                     android:textColor="@color/dark_brown" />
-
-                                <RelativeLayout
+                                <FrameLayout
+                                    android:id="@+id/fmtrackrider"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="3dp">
+                                    
                                     <ImageView
-                                        android:id="@+id/ivPeopleIcon"
-                                        android:layout_width="28dp"
-                                        android:layout_height="28dp"
-                                        android:src="@drawable/icon_profile_group" />
-
+                                        android:layout_width="30dp"
+                                        android:layout_height="30dp"
+                                        android:src="@drawable/ic_trackrider"/>
                                     <TextView
-                                        android:id="@+id/tvNumberOfRiders"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_toRightOf="@id/ivPeopleIcon"
-                                        android:text="125 Riders" />
+                                        android:text="Track Rider"
+                                        android:gravity="center"
+                                        android:layout_gravity="left|center_vertical"
+                                        android:layout_marginLeft="35dp"
+                                        android:textColor="#C15413"/>
+                                </FrameLayout>
 
-                                    <TextView
-                                        android:id="@+id/tvLabelHaveJoined"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_below="@id/tvNumberOfRiders"
-                                        android:layout_toRightOf="@id/ivPeopleIcon"
-                                        android:text="have Joined" />
 
-                                </RelativeLayout>
                             </LinearLayout>
 
                             <LinearLayout
@@ -181,7 +175,7 @@
                                     android:text="15 September 2015"
                                     android:textColor="@color/dark_brown" />
 
-                                <TextView
+                                <!--<TextView
                                     android:id="@+id/tvCity"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -189,7 +183,7 @@
                                     android:drawableLeft="@drawable/icon_get_direction"
                                     android:drawablePadding="8dp"
                                     android:text="New Delhi"
-                                    android:textColor="@color/dark_brown" />
+                                    android:textColor="@color/dark_brown" />-->
 
                                 <TextView
                                     android:id="@+id/tvTime"
@@ -200,6 +194,33 @@
                                     android:drawablePadding="8dp"
                                     android:text="5:30 PM"
                                     android:textColor="@color/dark_brown" />
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:id="@+id/ivPeopleIcon"
+                                        android:layout_width="28dp"
+                                        android:layout_height="28dp"
+                                        android:src="@drawable/icon_profile_group" />
+
+                                    <TextView
+                                        android:id="@+id/tvNumberOfRiders"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_toRightOf="@id/ivPeopleIcon"
+                                        android:textColor="#C15413"
+                                        android:text="125 Riders" />
+
+                                    <TextView
+                                        android:id="@+id/tvLabelHaveJoined"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/tvNumberOfRiders"
+                                        android:layout_toRightOf="@id/ivPeopleIcon"
+                                        android:text="have Joined" />
+
+                                </RelativeLayout>
 
                             </LinearLayout>
 
@@ -261,7 +282,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@id/tvEatables"
-                            android:layout_marginLeft="16dp"
+                            android:layout_marginLeft="30dp"
                             android:layout_marginTop="16dp"
                             android:layout_toRightOf="@id/tvFirstAid"
                             android:background="@color/light_brown"

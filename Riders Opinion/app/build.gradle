@@ -55,11 +55,12 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.8.+'
     compile 'com.pnikosis:materialish-progress:1.5'
     compile 'com.google.android.gms:play-services-maps:8.4.0'
+
     compile 'com.google.android.gms:play-services:8.4.0'
     compile 'com.roomorama:caldroid:2.2.0'
     compile 'com.yahoo.mobile.client.android.util.rangeseekbar:rangeseekbar-library:0.1.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0'
-    compile 'com.squareup.okhttp:okhttp:2.3.0'
+    compile 'com.squareup.okhttp:okhttp:2.7.2'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.daimajia.swipelayout:library:1.2.0@aar'
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
@@ -70,4 +71,7 @@ dependencies {
         transitive = true;
     }
     compile files('libs/YouTubeAndroidPlayerApi.jar')
+
+
+
 }

@@ -1,17 +1,20 @@
 package com.nutsuser.ridersdomain.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.web.pojos.ProductMultipleSelect;
+import com.nutsuser.ridersdomain.web.pojos.ProductMultipleSelectAssistance;
 import com.nutsuser.ridersdomain.web.pojos.VehicleDetails;
 
 import java.util.ArrayList;
@@ -19,15 +22,15 @@ import java.util.ArrayList;
 /**
  * Created by user on 1/7/2016.
  */
-public class PlanRidePostAdapter extends BaseAdapter {
-    private ArrayList<VehicleDetails> mVehicleDetailses;
+public class PlanRidePostAdapterAssistance extends BaseAdapter {
+
     Context mContext;
     ViewHolder holder;
     private LayoutInflater inflater;
-    ArrayList<ProductMultipleSelect> objects;
+    ArrayList<ProductMultipleSelectAssistance> objects;
 
-    public PlanRidePostAdapter(Context context, ArrayList<VehicleDetails> mVehicleDetailses, ArrayList<ProductMultipleSelect> objects) {
-        this.mVehicleDetailses = mVehicleDetailses;
+    public PlanRidePostAdapterAssistance(Context context, ArrayList<ProductMultipleSelectAssistance> objects) {
+
         mContext = context;
         this.objects=objects;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -47,13 +50,13 @@ public class PlanRidePostAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return objects.get(position);
     }
-    public ProductMultipleSelect getProduct(int position) {
-        return ((ProductMultipleSelect) getItem(position));
+    public ProductMultipleSelectAssistance getProduct(int position) {
+        return ((ProductMultipleSelectAssistance) getItem(position));
     }
 
-    public ArrayList<ProductMultipleSelect> getBox() {
-        ArrayList<ProductMultipleSelect> box = new ArrayList<>();
-        for (ProductMultipleSelect p : objects) {
+    public ArrayList<ProductMultipleSelectAssistance> getBox() {
+        ArrayList<ProductMultipleSelectAssistance> box = new ArrayList<>();
+        for (ProductMultipleSelectAssistance p : objects) {
             if (p.box)
                 box.add(p);
         }
@@ -73,10 +76,12 @@ public class PlanRidePostAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) rowView.getTag();
         }
-        holder.name.setText(mVehicleDetailses.get(position).getVehicle_name());
+        ProductMultipleSelectAssistance p = getProduct(position);
+        holder.name.setText(p._name);
         holder.cbBox.setOnCheckedChangeListener(myCheckChangList);
         holder.cbBox.setTag(position);
-
+        Log.e("NMAE:", "" + p._name);
+        Log.e("String:",""+p.toString());
 
         return rowView;
     }

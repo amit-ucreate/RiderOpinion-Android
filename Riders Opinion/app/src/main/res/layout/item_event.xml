@@ -51,54 +51,64 @@
              android:padding="8dp"
              android:layout_height="match_parent" />-->
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:orientation="horizontal">
+            android:layout_marginLeft="12dp"
+            >
 
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/tvdate"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:drawableLeft="@drawable/icon_calendar"
                 android:drawablePadding="8dp"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="15 september 2015"
                 android:textColor="@color/dark_brown" />
 
             <TextView
+                android:id="@+id/tvtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="180dp"
                 android:layout_marginTop="8dp"
                 android:drawableLeft="@drawable/icon_time"
                 android:drawablePadding="8dp"
                 android:gravity="center"
+                android:singleLine="true"
                 android:text="05:00 PM"
                 android:textColor="@color/dark_brown" />
 
-        </LinearLayout>
+        </FrameLayout>
 
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginLeft="12dp"
+           >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:id="@+id/tvdesloc"
+                android:layout_width="170dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
                 android:drawableLeft="@drawable/icon_get_direction"
-                android:drawablePadding="8dp"
+
                 android:gravity="center"
                 android:text="New Delhi"
+                android:singleLine="true"
+
                 android:textColor="@color/dark_brown" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="9dp"
+                android:layout_marginLeft="180dp"
+
                 android:gravity="center">
 
                 <ImageView
@@ -115,7 +125,8 @@
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/ivPeopleIcon"
                     android:gravity="center"
-                    android:text="125 Riders" />
+                    android:textColor="#C15413"
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/tvLabelHaveJoined"
@@ -124,11 +135,13 @@
                     android:layout_marginTop="7dp"
                     android:layout_toRightOf="@id/tvNumberOfRiders"
                     android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
                     android:text="have Joined" />
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </FrameLayout>
 
 
     </LinearLayout>

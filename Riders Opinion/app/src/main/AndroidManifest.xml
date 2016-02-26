@@ -10,6 +10,9 @@
     <uses-permission android:name="com.nutsuser.ridersdomain.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -60,6 +63,10 @@
         <activity
             android:name=".activities.GetDirections"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.TrackingScreen"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activities.PlanARidePostRide"
             android:screenOrientation="portrait" />
@@ -135,8 +142,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.ModifierAddressActivity"
-            android:screenOrientation="portrait"
-            />
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.Subcribe"
             android:screenOrientation="portrait">
@@ -172,6 +178,10 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="a3f204f98fa96f272713e7a8102f468da725e2e8" />
+
+        <service
+            android:name="com.nutsuser.ridersdomain.services.LocationService"
+            android:enabled="true" />
 
     </application>
 

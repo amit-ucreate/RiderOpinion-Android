@@ -1,31 +1,42 @@
 package com.nutsuser.ridersdomain.services;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+
+import com.nutsuser.ridersdomain.utils.NetworkUtil;
+import com.nutsuser.ridersdomain.utils.PrefsManager;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-public class GPSService extends Service implements LocationListener {
-
+public class LocationService extends Service implements LocationListener {
+    private final Handler handler = new Handler();
+    int connectionStatus;
+    boolean isRunning;
+    PrefsManager prefsManager;
     // Minimum time fluctuation for next update (in milliseconds)
     private static final long TIME = 30000;
     // Minimum distance fluctuation for next update (in meters)
-    private static final long DISTANCE = 10;
+    private static final long DISTANCE = 20;
     // saving the context for later use
-    private final Context mContext;
+
     // if Location co-ordinates are available using GPS or Network
     public boolean isLocationAvailable = false;
     // Declaring a Location Manager
@@ -39,11 +50,13 @@ public class GPSService extends Service implements LocationListener {
     double mLatitude;
     double mLongitude;
 
-    public GPSService(Context context) {
-        this.mContext = context;
-        mLocationManager = (LocationManager) mContext
-                .getSystemService(LOCATION_SERVICE);
-
+    private Runnable sendUpdatesToUI = new Runnable() {
+        public void run() {
+            Log.e("sendUpdatesToUI","RUNNING");
+            handler.postDelayed(this, 5000); // 5 seconds
+        }
+    };
+    public LocationService() {
     }
 
     /**
@@ -53,7 +66,8 @@ public class GPSService extends Service implements LocationListener {
      */
     public Location getLocation() {
         try {
-
+            mLocationManager = (LocationManager) this
+                    .getSystemService(LOCATION_SERVICE);
             // Getting GPS status
             isGPSEnabled = mLocationManager
                     .isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -121,7 +135,7 @@ public class GPSService extends Service implements LocationListener {
 
         if (isLocationAvailable) {
 
-            Geocoder geocoder = new Geocoder(mContext, Locale.getDefault());
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
             // Get the current location from the input parameter list
             // Create a list to contain the result address
             List<Address> addresses = null;
@@ -146,7 +160,7 @@ public class GPSService extends Service implements LocationListener {
             if (addresses != null && addresses.size() > 0) {
                 // Get the first address
                 Address address = addresses.get(0);
-				/*
+                /*
 				 * Format the first line of address (if available), city, and
 				 * country name.
 				 */
@@ -200,7 +214,17 @@ public class GPSService extends Service implements LocationListener {
      */
     public void closeGPS() {
         if (mLocationManager != null) {
-            mLocationManager.removeUpdates(GPSService.this);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            mLocationManager.removeUpdates(LocationService.this);
         }
     }
 
@@ -208,7 +232,7 @@ public class GPSService extends Service implements LocationListener {
      * show settings to open GPS
      */
     public void askUserToOpenGPS() {
-        AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
+        AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(this);
 
         // Setting Dialog Title
         mAlertDialog.setTitle("Location not available, Open GPS?")
@@ -216,7 +240,7 @@ public class GPSService extends Service implements LocationListener {
                 .setPositiveButton("Open Settings", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        mContext.startActivity(intent);
+                        startActivity(intent);
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -260,5 +284,22 @@ public class GPSService extends Service implements LocationListener {
     @Override
     public void onCreate() {
         super.onCreate();
+        connectionStatus = NetworkUtil.getConnectionStatus(this);
+        prefsManager=new PrefsManager(this);
+
     }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        isRunning=prefsManager.isServicesRunning();
+        // If we have network connection
+        if (isRunning && (connectionStatus == NetworkUtil.TYPE_MOBILE ||
+                connectionStatus == NetworkUtil.TYPE_WIFI)) {
+            Log.e("onStartCommand","RUNNING");
+            handler.postDelayed(sendUpdatesToUI, 1000); // 1 second
+        }
+        return START_NOT_STICKY;
+    }
+
 }

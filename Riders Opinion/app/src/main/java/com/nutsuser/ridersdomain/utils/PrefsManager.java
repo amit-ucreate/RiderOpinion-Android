@@ -14,7 +14,7 @@ public class PrefsManager {
     private Context mContext;
     private String mPrefsName = "riders_opinion_prefs";
     private String mKeyToken = "token";
-
+    public static final String SERVICE_RUNNING = "service_running";
 
     private String mKeyName = "myName";
     private String mKeyPassword = "password";
@@ -42,6 +42,20 @@ public class PrefsManager {
     public void setLoginDone(boolean loginDone) {
 
         mEditor.putBoolean("loginDone", loginDone);
+        mEditor.apply();
+
+    }
+
+
+    // services
+    public boolean isServicesRunning() {
+        return mSharedPreferences.getBoolean(SERVICE_RUNNING, false);
+
+    }
+
+
+    public void setServicesRunning(boolean ServicesRunning) {
+        mEditor.putBoolean(SERVICE_RUNNING, ServicesRunning);
         mEditor.apply();
 
     }

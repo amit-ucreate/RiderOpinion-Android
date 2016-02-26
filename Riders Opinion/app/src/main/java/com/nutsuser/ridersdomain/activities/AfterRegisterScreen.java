@@ -242,10 +242,10 @@ public class AfterRegisterScreen extends BaseActivity {
         Log.e("vechiclemodelinfo", "vechiclemodelinfo");
         try {
 
-            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_updateUserInfo + "userId=" + userid + vehicleId + "&utypeid=" + id + "&vehicleTypeId=" + vehicle_id + "&accessToken=" + accesstoken);
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_updateUserInfo + "userId=" + userid + "&utypeid=" + id + "&vehicleTypeId=" + vehicle_id + "&accessToken=" + accesstoken);
             RequestQueue requestQueue = Volley.newRequestQueue(AfterRegisterScreen.this);
-            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_updateUserInfo + "userId=" + userid + vehicleId + "&utypeid=" + id + "&vehicleTypeId=" + vehicle_id + "&accessToken=" + accesstoken, null,
+            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.GET,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_updateUserInfo + "userId=" + userid  + "&utypeid=" + id + "&vehicleTypeId=" + vehicle_id + "&accessToken=" + accesstoken, null,
                     volleySubmitErrorListener(), volleSubmitSuccessListener()
             );
 

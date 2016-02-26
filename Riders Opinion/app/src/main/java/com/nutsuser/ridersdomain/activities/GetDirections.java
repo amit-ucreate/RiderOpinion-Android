@@ -91,6 +91,8 @@ public class GetDirections extends BaseActivity implements
     // public static int [] prgmImages={R.drawable.icon_menu_destination,R.drawable.icon_menu_meetplan,R.drawable.icon_menu_events,R.drawable.icon_modifybike,R.drawable.icon_menu_healthy_riding,R.drawable.icon_menu_get_direction,R.drawable.icon_menu_notification,R.drawable.icon_menu_settings};
     // public static Class [] classList={DestinationsListActivity.class,PlanRideActivity.class,EventsListActivity.class,ModifyBikeActivity.class,HealthyRidingActivity.class,GetDirections.class,NotificationScreen.class,SettingsActivity.class};
     private final LatLng HAMBURG = new LatLng(53.558, 9.927);
+
+    private final LatLng HAMBURG_ = new LatLng(53.500, 9.900);
     public ImageLoader imageLoader;
     public DisplayImageOptions options;
     GMapV2GetRouteDirection v2GetRouteDirection;
@@ -431,6 +433,16 @@ public class GetDirections extends BaseActivity implements
                 .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker))));
         markers.put(customMarker.getId(), "http://img.india-forums.com/images/100x100/37525-a-still-image-of-akshay-kumar.jpg");
         // map.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
+
+        final Marker custom_Marker = map.addMarker(new MarkerOptions()
+                .position(HAMBURG_)
+                .title("AMIT")
+                .snippet("Description")
+                .icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, marker))));
+        markers.put(custom_Marker.getId(), "http://img.india-forums.com/images/100x100/37525-a-still-image-of-akshay-kumar.jpg");
+
+
+
         map.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null);
 
         map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {

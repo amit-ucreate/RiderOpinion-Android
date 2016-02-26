@@ -68,8 +68,8 @@
 
     <TextView
         android:id="@+id/tvDistance"
-        android:layout_width="match_parent"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
         android:layout_gravity="right"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
@@ -77,7 +77,20 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:textColor="@android:color/black"
-        android:textSize="@dimen/date_text_size" />
+        android:textSize="8dp" />
+    <TextView
+        android:id="@+id/tv_Distance"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="left"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:gravity="left"
+        android:text="0"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@android:color/black"
+        android:textSize="8dp" />
 
 
     <TextView

@@ -11,6 +11,7 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +42,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -56,6 +62,8 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.adapter.CustomGridAdapter;
 import com.nutsuser.ridersdomain.adapter.EndPlaceArrayAdapter;
@@ -63,10 +71,22 @@ import com.nutsuser.ridersdomain.adapter.PlaceArrayAdapter;
 import com.nutsuser.ridersdomain.adapter.PlaceEndRouteHault;
 import com.nutsuser.ridersdomain.adapter.PlaceStartRouteHault;
 import com.nutsuser.ridersdomain.route.GMapV2GetRouteDirection;
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
+import com.nutsuser.ridersdomain.utils.CustomizeDialog;
+import com.nutsuser.ridersdomain.utils.PrefsManager;
 import com.nutsuser.ridersdomain.view.BetterPopupWindow;
+import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
+import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObjectClient;
+import com.nutsuser.ridersdomain.web.pojos.PlanRideDetails;
+
+import org.json.JSONObject;
 import org.w3c.dom.Document;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import butterknife.Bind;
@@ -83,9 +103,9 @@ public class PlanRideActivity extends BaseActivity implements
     DemoPopupWindow dw;
     private ArrayList<String> ridetype = new ArrayList<String>();
     CustomBaseAdapter adapter;
-
+    String AccessToken, UserId;
     boolean rideTypeChoose=false;
-
+    Map<String, String> params;
     // Variable for storing current date and time
     private int mYear, mMonth, mDay, mHour, mMinute,AMPM;
 
@@ -156,7 +176,7 @@ public class PlanRideActivity extends BaseActivity implements
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback_start;
     LatLng mString_endroutehault;
     LatLng mString_startroutehault;
-
+    CustomizeDialog mCustomizeDialog;
 
     String fromstartlat,fromendlong,fromloactionnanem,tostartlat,toendlong,tolocationnane,fromroutehaultlat,fromroutehaultlong,fromroutehaultlocation,toroutehaultlat,toroutehaultlong,toroutehaultlocationnanme;
 
@@ -463,6 +483,7 @@ toroutehaultlat=s;
                     else {
                         if (isNetworkConnected()) {
                             try {
+                                fewdetailssendbackend();
                                 GetRouteTask getRoute = new GetRouteTask();
                                 getRoute.execute();
                             } catch (Exception e) {
@@ -571,7 +592,7 @@ toroutehaultlat=s;
                               mIntent.putExtra("hlatitude1",toroutehaultlat);
                               mIntent.putExtra("hlongitude1",toroutehaultlong);
                               mIntent.putExtra("hlocation1",edPlace4.getText().toString());
-                              mIntent.putExtra("htype1","Overnight Ride");
+                              mIntent.putExtra("htype1","Overnight");
                                   startActivity(mIntent);
                           }
                           else{
@@ -918,6 +939,78 @@ public boolean Next(String RideType,String startDate,String endDate,String start
         }
     }
 
+// send data from backend
 
+    /**
+     * Match Riding List info .
+     */
+    public void fewdetailssendbackend() {
+
+        Log.e("riding destination", "riding destination");
+        try {
+            params = new HashMap<String, String>();
+            prefsManager = new PrefsManager(PlanRideActivity.this);
+            AccessToken = prefsManager.getToken();
+            UserId = prefsManager.getCaseId();
+            params.put("baseLocation",tvPlace1.getText().toString());
+            params.put("destLocation",tvPlace2.getText().toString());
+            params.put("accessToken",AccessToken);
+            RequestQueue requestQueue = Volley.newRequestQueue(PlanRideActivity.this);
+            RequestJsonObjectClient loginTaskRequest = new RequestJsonObjectClient(Request.Method.POST,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_mapinfo, params,
+                    volleyModelErrorListener(), volleyModelSuccessListener()
+            );
+            requestQueue.add(loginTaskRequest);
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+    }
+    /**
+     * Implement success listener on execute api url.
+     */
+    public Response.Listener<JSONObject> volleyModelSuccessListener() {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Model response:", "" + response);
+
+
+            }
+        };
+    }
+
+    /**
+     * Implement Volley error listener here.
+     */
+    public Response.ErrorListener volleyModelErrorListener() {
+        dismissProgressDialog();
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error: ", "" + error);
+            }
+        };
+    }
+
+    public void showProgressDialog() {
+        mCustomizeDialog = new CustomizeDialog(PlanRideActivity.this);
+        mCustomizeDialog.setCancelable(false);
+        mCustomizeDialog.show();
+        Log.e("HERE", "HERE");
+    }
+
+    public void dismissProgressDialog() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mCustomizeDialog != null && mCustomizeDialog.isShowing()) {
+                    mCustomizeDialog.dismiss();
+                    mCustomizeDialog = null;
+                }
+            }
+        }, 1000);
+
+    }
 
 }

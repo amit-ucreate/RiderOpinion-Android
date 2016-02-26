@@ -39,6 +39,16 @@ public class ApplicationGlobal {
     public static String baseurl_search = "ridingDestination/search?";
     public static String baseurl_updateUserInfo = "riders/updateUserInfo?";
     public static String baseurl_ridingdestination = "ridingDestination?";
+    public static String baseurl_ridingevent = "rideEvent?";
+    public static String baseurl_trackuserlist = "track/trackUser?";
+
+    public static String baseurl_matchevent = "rideEvent/matchEvent?";
+    public static String baseurl_eventdetails = "rideEvent/eventDetail?";
+    public static String baseurl_joinEvent = "rideEvent/joinEvent?";
+
+    public static String baseurl_postride = "rideEvent/postRide";
+
+    public static String baseurl_mapinfo = "map/saveCounter";
     public static String baseurl_ridingdetailDestination = "ridingDestination/detailDestination?";
     public static String baseurl_ridingFilter = "ridingDestination?";
 

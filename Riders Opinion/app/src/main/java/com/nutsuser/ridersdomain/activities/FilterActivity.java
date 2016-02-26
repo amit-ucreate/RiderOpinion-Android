@@ -113,7 +113,7 @@ public class FilterActivity extends BaseActivity {
             public void onProgressChanged(SeekBar seekBar, int progresValue, boolean fromUser) {
 
                 progress = progresValue;
-                tvDistance.setText("Please Wait..");
+               // tvDistance.setText("Please Wait..");
                 //Toast.makeText(getApplicationContext(), "Changing seekbar's progress: "+progress, Toast.LENGTH_SHORT).show();
 
             }

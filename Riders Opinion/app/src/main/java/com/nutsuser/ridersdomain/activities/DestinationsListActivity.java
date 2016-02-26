@@ -162,7 +162,13 @@ public class DestinationsListActivity extends BaseActivity {
             end1 = mGPSService.getLongitude();
             star_lat = String.valueOf(start1);
             star_long = String.valueOf(end1);
-            RidingListmodelinfo();
+            if(isNetworkConnected()){
+                RidingListmodelinfo();
+            }
+            else{
+                showToast("Internet Not Connected");
+            }
+
         }
 
 

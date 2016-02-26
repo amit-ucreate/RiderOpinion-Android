@@ -2,7 +2,6 @@ package com.nutsuser.ridersdomain.web.api.volley;
 
 import android.util.Log;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -13,24 +12,40 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by karan@ucreate.co.in on 11/26/2015
- * to POST user information on server.
+ * Created by admin on 19-02-2016.
  */
-public class RequestJsonObject extends Request<JSONObject> {
+public class RequestJsonObjectClient extends Request<JSONObject> {
 
     private Response.Listener<JSONObject> jsonObjectListener;
     private Map<String, String> params;
+    JSONObject jsonparams;
+    String mString;
 
-    public RequestJsonObject(int method, String url, Map<String, String> params,
-                             Response.ErrorListener errorListener, Response.Listener<JSONObject> reponseListener) {
+
+    public RequestJsonObjectClient(int method, String url, Map<String, String> params,
+                             Response.ErrorListener errorListener,Response.Listener<JSONObject> reponseListener) {
         super(method, url, errorListener);
         this.jsonObjectListener = reponseListener;
         this.params = params;
     }
+
+    public RequestJsonObjectClient(String url,JSONObject params,int method,
+                             Response.ErrorListener errorListener,Response.Listener<JSONObject> reponseListener) {
+        super(method, url, errorListener);
+        this.jsonObjectListener = reponseListener;
+        this.jsonparams = params;
+    }
+
+    public RequestJsonObjectClient(String url,String params,
+                             Response.ErrorListener errorListener,Response.Listener<JSONObject> reponseListener,int method) {
+        super(method, url, errorListener);
+        this.jsonObjectListener = reponseListener;
+        this.mString = params;
+    }
+
 
 
     protected Map<String, String> getParams()
@@ -55,14 +70,8 @@ public class RequestJsonObject extends Request<JSONObject> {
     }
 
     @Override
-    public Map<String, String> getHeaders() throws AuthFailureError {
-        HashMap<String, String> headers = new HashMap<String, String>();
-        headers.put("Content-Type", "application/json; charset=utf-8");
-        return headers;
-    }
-
-    @Override
     protected void deliverResponse(JSONObject response) {
         jsonObjectListener.onResponse(response);
     }
 }
+

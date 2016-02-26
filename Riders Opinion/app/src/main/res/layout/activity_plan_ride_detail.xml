@@ -146,32 +146,7 @@
                                 android:text="Harley Group"
                                 android:textColor="@color/dark_brown" />
 
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
 
-                                <ImageView
-                                    android:id="@+id/ivPeopleIcon"
-                                    android:layout_width="28dp"
-                                    android:layout_height="28dp"
-                                    android:src="@drawable/icon_profile_group" />
-
-                                <TextView
-                                    android:id="@+id/tvNumberOfRiders"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_toRightOf="@id/ivPeopleIcon"
-                                    android:text="125 Riders" />
-
-                                <TextView
-                                    android:id="@+id/tvLabelHaveJoined"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_below="@id/tvNumberOfRiders"
-                                    android:layout_toRightOf="@id/ivPeopleIcon"
-                                    android:text="have Joined" />
-
-                            </RelativeLayout>
                         </LinearLayout>
 
                         <LinearLayout
@@ -189,15 +164,7 @@
                                 android:text="15 September 2015"
                                 android:textColor="@color/dark_brown" />
 
-                            <TextView
-                                android:id="@+id/tvCity"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:drawableLeft="@drawable/icon_get_direction"
-                                android:drawablePadding="8dp"
-                                android:text="New Delhi"
-                                android:textColor="@color/dark_brown" />
+
 
                             <TextView
                                 android:id="@+id/tvTime"
@@ -208,23 +175,61 @@
                                 android:drawablePadding="8dp"
                                 android:text="5:30 PM"
                                 android:textColor="@color/dark_brown" />
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:id="@+id/ivPeopleIcon"
+                                    android:layout_width="28dp"
+                                    android:layout_height="28dp"
+                                    android:src="@drawable/icon_profile_group" />
+
+                                <TextView
+                                    android:id="@+id/tvNumberOfRiders"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_toRightOf="@id/ivPeopleIcon"
+                                    android:textColor="#C15413"
+                                    android:text="125 Riders" />
+
+                                <TextView
+                                    android:id="@+id/tvLabelHaveJoined"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/tvNumberOfRiders"
+                                    android:layout_toRightOf="@id/ivPeopleIcon"
+                                    android:text="have Joined" />
+
+                            </RelativeLayout>
 
                         </LinearLayout>
 
                     </LinearLayout>
-
-                    <com.facebook.drawee.view.SimpleDraweeView
-                        android:id="@+id/sdvEventImage"
+                    <FrameLayout
+                        android:id="@+id/fmUploadImage"
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
                         android:layout_below="@id/llHostedBy"
-                        app:placeholderImage="@color/twenty_of_black" />
+                        android:layout_height="200dp">
+                        <Button
+                            android:id="@+id/btEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Edit"
+                            android:textColor="@android:color/holo_blue_dark"
+                            android:background="@android:color/transparent"/>
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:id="@+id/sdvEventImage"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:placeholderImage="@color/twenty_of_black" />
 
+                    </FrameLayout>
                     <TextView
                         android:id="@+id/tvEatables"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/sdvEventImage"
+                        android:layout_below="@id/fmUploadImage"
                         android:drawablePadding="8dp"
                         android:drawableTop="@drawable/icon_eating_joints"
                         android:padding="16dp"

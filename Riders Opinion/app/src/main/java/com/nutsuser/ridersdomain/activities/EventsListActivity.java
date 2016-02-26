@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -18,15 +19,36 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.Volley;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.nutsuser.ridersdomain.R;
+import com.nutsuser.ridersdomain.adapter.AdapterDestination;
 import com.nutsuser.ridersdomain.adapter.AdapterEvent;
 import com.nutsuser.ridersdomain.adapter.CustomGridAdapter;
 import com.nutsuser.ridersdomain.fragments.CaldroidCustomFragment;
+import com.nutsuser.ridersdomain.services.GPSService;
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
+import com.nutsuser.ridersdomain.utils.CustomizeDialog;
+import com.nutsuser.ridersdomain.utils.PrefsManager;
 import com.nutsuser.ridersdomain.utils.RecyclerItemClickListener;
+import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
+import com.nutsuser.ridersdomain.web.pojos.RidingDestination;
+import com.nutsuser.ridersdomain.web.pojos.RidingEvent;
+import com.nutsuser.ridersdomain.web.pojos.RidingEventData;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -38,7 +60,12 @@ import butterknife.OnClick;
  * Created by user on 9/2/2015.
  */
 public class EventsListActivity extends BaseActivity {
-
+    double start1, end1;
+    String star_lat, star_long;
+    PrefsManager prefsManager;
+    CustomizeDialog mCustomizeDialog;
+    String AccessToken, UserId;
+    ArrayList<RidingEventData> data=new ArrayList<>();
     public static String[] prgmNameList = {"My Rides", "My Messages", "My Friends", "Chats", "Favourite Destination", "Notifications", "Settings", "    \n"};
     public static int[] prgmImages = {R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_my_messages, R.drawable.ic_menu_my_friends, R.drawable.ic_menu_menu_chats, R.drawable.ic_menu_fav_destinations, R.drawable.ic_menu_menu_notifications, R.drawable.ic_menu_menu_settings, R.drawable.ic_menu_menu_blank_icon};
     public static Class[] classList = {MyRidesRecyclerView.class, ChatListScreen.class, MyFriends.class, ChatListScreen.class, FavouriteDesination.class, Notification.class, SettingsActivity.class, SettingsActivity.class};
@@ -97,12 +124,14 @@ public class EventsListActivity extends BaseActivity {
         mDrawerLayout.closeDrawer(lvSlidingMenu);
         rvEvents.setLayoutManager(new LinearLayoutManager(activity));
         setFonts();
-        adapterEvent = new AdapterEvent(activity);
-        rvEvents.setAdapter(adapterEvent);
+
         rvEvents.addOnItemTouchListener(new RecyclerItemClickListener(activity, new RecyclerItemClickListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                startActivity(new Intent(activity, EventDetailActivity.class));
+
+                Intent mIntent=new Intent(activity, EventDetailActivity.class);
+                mIntent.putExtra("eventId",data.get(position).getEventId());
+                startActivity(mIntent);
             }
         }));
         tvTitleToolbar.setText("RIDING EVENTS");
@@ -119,6 +148,41 @@ public class EventsListActivity extends BaseActivity {
                 }
             }
         });
+
+        GPSService mGPSService = new GPSService(this);
+        mGPSService.getLocation();
+
+        if (mGPSService.isLocationAvailable == false) {
+
+            // Here you can ask the user to try again, using return; for that
+            Toast.makeText(getApplicationContext(), "Your location is not available, please try again.", Toast.LENGTH_SHORT).show();
+            return;
+
+            // Or you can continue without getting the location, remove the return; above and uncomment the line given below
+            // address = "Location not available";
+        } else {
+
+            // Getting location co-ordinates
+            double latitude = mGPSService.getLatitude();
+            double longitude = mGPSService.getLongitude();
+            Toast.makeText(getApplicationContext(), "Latitude:" + latitude + " | Longitude: " + longitude, Toast.LENGTH_LONG).show();
+
+            start1 = mGPSService.getLatitude();
+            end1 = mGPSService.getLongitude();
+            star_lat = String.valueOf(start1);
+            star_long = String.valueOf(end1);
+            if(isNetworkConnected()){
+                RidingEventinfo();
+            }
+            else{
+                showToast("Internet Not Connected");
+            }
+
+        }
+
+
+        // make sure you close the gps after using it. Save user's battery power
+        mGPSService.closeGPS();
     }
 
     public void intentCalling(Class name) {
@@ -239,6 +303,98 @@ public class EventsListActivity extends BaseActivity {
             case R.id.tvSettings:
                 startActivity(new Intent(activity, SettingsActivity.class));
                 break;*/
+        }
+    }
+
+    public void showProgressDialog() {
+        mCustomizeDialog = new CustomizeDialog(EventsListActivity.this);
+        mCustomizeDialog.setCancelable(false);
+        mCustomizeDialog.show();
+        Log.e("HERE", "HERE");
+    }
+
+    public void dismissProgressDialog() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mCustomizeDialog != null && mCustomizeDialog.isShowing()) {
+                    mCustomizeDialog.dismiss();
+                    mCustomizeDialog = null;
+                }
+            }
+        }, 1000);
+
+    }
+    /**
+     * Implement success listener on execute api url.
+     */
+    public Response.Listener<JSONObject> volleyModelSuccessListener() {
+        return new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.e("Model response:", "" + response);
+
+                Type type = new TypeToken<RidingEvent>() {
+                }.getType();
+                RidingEvent ridingEvent = new Gson().fromJson(response.toString(), type);
+                data.clear();
+
+                if (ridingEvent.getSuccess().equals("1")) {
+                    dismissProgressDialog();
+                    data=ridingEvent.getData();
+                    adapterEvent = new AdapterEvent(activity,data);
+                    rvEvents.setAdapter(adapterEvent);
+                }
+                else{
+                    dismissProgressDialog();
+                }
+
+            }
+        };
+    }
+
+    /**
+     * Implement Volley error listener here.
+     */
+    public Response.ErrorListener volleyModelErrorListener() {
+        dismissProgressDialog();
+        return new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("error: ", "" + error);
+            }
+        };
+    }
+
+    /**
+     * Riding Event info .
+     */
+    public void RidingEventinfo() {
+        showProgressDialog();
+        try {
+            prefsManager = new PrefsManager(EventsListActivity.this);
+            AccessToken = prefsManager.getToken();
+            UserId = prefsManager.getCaseId();
+            String radius=prefsManager.getRadius();
+            if(star_long==null){
+                star_long=null;
+            }
+            if(star_lat==null){
+                star_lat=null;
+            }
+
+            Log.e("URL: ", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingdestination + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat +"&accessToken=" + AccessToken);
+            RequestQueue requestQueue = Volley.newRequestQueue(EventsListActivity.this);
+            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingevent + "userId=" + UserId + "&longitude=" + star_long + "&latitude=" + star_lat +"&accessToken=" + AccessToken, null,
+                    volleyModelErrorListener(), volleyModelSuccessListener()
+            );
+
+            requestQueue.add(loginTaskRequest);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
         }
     }
 
