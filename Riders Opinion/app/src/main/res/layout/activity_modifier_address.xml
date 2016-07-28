@@ -4,25 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <!--<android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/light_brown">
-
-
-        <TextView
-            android:id="@+id/tvTitleToolbar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="RIDING GEARS"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/title_text_size"
-            android:textStyle="bold" />
-
-    </android.support.v7.widget.Toolbar>-->
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,12 +12,6 @@
         android:layout_marginRight="10dp"
         android:layout_marginTop="35dp"
         android:background="@color/white">
-        <!--<ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right|center_horizontal"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/ic_popup_close"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,7 +30,7 @@
                     android:layout_marginTop="12dp"
                     android:drawableRight="@drawable/icon_batch"
                     android:gravity="center"
-                    android:text="EMPIRE AUTO SALES"
+                    android:text=""
                     android:textSize="@dimen/title_text_size" />
 
                 <ImageView
@@ -79,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:padding="12dp"
-                    android:src="@drawable/icon_star_full" />
+                    android:src="@drawable/icon_star_empty" />
 
                 <ImageView
                     android:id="@+id/ivVideo"
@@ -95,6 +70,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="12dp"
+                    android:visibility="gone"
                     android:src="@drawable/icon_star_full_small" />
 
                 <ImageView
@@ -102,6 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/ivStar1"
+                    android:visibility="gone"
                     android:layout_toRightOf="@id/ivStar1"
                     android:src="@drawable/icon_star_full_small" />
 
@@ -110,6 +87,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/ivStar1"
+                    android:visibility="gone"
                     android:layout_toRightOf="@id/ivStar2"
                     android:src="@drawable/icon_star_full_small" />
 
@@ -118,6 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/ivStar1"
+                    android:visibility="gone"
                     android:layout_toRightOf="@id/ivStar3"
                     android:src="@drawable/icon_star_full_small" />
 
@@ -127,6 +106,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignTop="@id/ivStar1"
                     android:layout_toRightOf="@id/ivStar4"
+                    android:visibility="gone"
                     android:src="@drawable/icon_star_full_small" />
 
                 <TextView
@@ -135,6 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignLeft="@id/ivStar1"
                     android:layout_below="@id/ivStar1"
+                    android:visibility="gone"
                     android:layout_toLeftOf="@id/ivVideo"
                     android:textSize="@dimen/date_text_size" />
 
@@ -155,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:text="E91, Phase 8, Mohali, Punjab, India" />
+                android:text="" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -179,7 +160,7 @@
                         android:id="@+id/tvPhone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="9814123456 \n0172-2456654" />
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -200,7 +181,7 @@
                         android:id="@+id/tvTiming"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="10:00am-08:00pm" />
+                        android:text="" />
 
                 </LinearLayout>
 
@@ -211,12 +192,12 @@
                 android:id="@+id/map"
                 android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="300dp"
                 android:layout_marginTop="10dp" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="0dp"
                 android:background="@android:color/white"></View>
 
         </LinearLayout>

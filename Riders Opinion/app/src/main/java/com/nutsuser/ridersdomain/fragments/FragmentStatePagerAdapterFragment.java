@@ -1,6 +1,5 @@
 package com.nutsuser.ridersdomain.fragments;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -10,7 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,7 +26,6 @@ import com.nutsuser.ridersdomain.utils.CustomizeDialog;
 import com.nutsuser.ridersdomain.utils.PrefsManager;
 import com.nutsuser.ridersdomain.utils.UtilsSubcribe;
 import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
-import com.nutsuser.ridersdomain.web.pojos.RidingDestinationDetailsClick;
 import com.nutsuser.ridersdomain.web.pojos.SubcribeData;
 import com.nutsuser.ridersdomain.web.pojos.SubcribesImages;
 import com.nutsuser.ridersdomain.web.pojos.SucribeOjectdata;
@@ -38,21 +36,22 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
-
 /**
  * Created by noor on 10/04/15.
  */
 public class FragmentStatePagerAdapterFragment extends Fragment {
     private static final String TAG = "FragmentStatPgrAdapFrag";
+    public PrefsManager prefsManager;
+    CustomizeDialog mCustomizeDialog;
+    String AccessToken, UserId;
+    SucribeOjectdata data;
+    ArrayList<SubcribesImages> subcribesImages = new ArrayList<>();
+    ArrayList<UtilsSubcribe.DummyItem> fullImageList = new ArrayList<>();
     private MyFragmentStatePagerAdapter mPagerAdapter;
     private ArrayList<UtilsSubcribe.DummyItem> mImageItemList;
     private ViewPager mViewPager;
-    CustomizeDialog mCustomizeDialog;
-    public PrefsManager prefsManager;
-    String AccessToken, UserId;
-    SucribeOjectdata data;
-    ArrayList<SubcribesImages>subcribesImages=new ArrayList<>();
-    ArrayList<UtilsSubcribe.DummyItem> fullImageList = new ArrayList<>();
+    LinearLayout lllinear;
+
     /* Avoid non-default constructors in fragments: use a default constructor plus Fragment.setArguments(Bundle) instead and use Type value = getArguments().getType("key") to retrieve back the values in the bundle in onCreateView()*/
     public FragmentStatePagerAdapterFragment() {
     }
@@ -64,10 +63,12 @@ public class FragmentStatePagerAdapterFragment extends Fragment {
         rootView.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
 
         mViewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
+        lllinear=(LinearLayout)rootView.findViewById(R.id.lllinear);
         SubcribeImagemodelinfo();
         return rootView;
 
     }
+
     /**
      * Destination Details info .
      */
@@ -79,10 +80,11 @@ public class FragmentStatePagerAdapterFragment extends Fragment {
             AccessToken = prefsManager.getToken();
             UserId = prefsManager.getCaseId();
             Log.e("AccessToken:", "" + AccessToken + "----UserId----" + UserId);
+            Log.e("URl:", "" + ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingSubcribedetails + "userId=" + UserId + "&destId=" + ApplicationGlobal.DestID + "&&accessToken=" + AccessToken);
 
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
-            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingSubcribedetails + "userId=" + UserId + "&destId=" + DestinationsDetailActivity.DestID + "&&accessToken=" + AccessToken, null,
+            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.GET,
+                    ApplicationGlobal.ROOT + ApplicationGlobal.baseurl_ridingSubcribedetails + "userId=" + UserId + "&destId=" + ApplicationGlobal.DestID + "&&accessToken=" + AccessToken, null,
                     volleyModelErrorListener(), volleyModelSuccessListener()
             );
 
@@ -106,17 +108,23 @@ public class FragmentStatePagerAdapterFragment extends Fragment {
                 Type type = new TypeToken<SubcribeData>() {
                 }.getType();
                 SubcribeData subcribeData = new Gson().fromJson(response.toString(), type);
-                 fullImageList.clear();
+                fullImageList.clear();
                 subcribesImages.clear();
                 if (subcribeData.getSuccess().equals("1")) {
-                    data=subcribeData.getData();
+                    data = subcribeData.getData();
                     subcribesImages.addAll(data.getImages());
-                    for (int i = 0; i < subcribesImages.size(); i++) {
-                        fullImageList.add(new UtilsSubcribe.DummyItem(subcribesImages.get(i).getDestImage(), "Full Image:"+subcribesImages.get(i).getDestImageId()));
+                    if(subcribesImages.size()==0){
+                        lllinear.setBackgroundResource(R.drawable.ic_no_image_routereview);
                     }
-                    dismissProgressDialog();
-                    mPagerAdapter = new MyFragmentStatePagerAdapter(getChildFragmentManager(), fullImageList);
-                    mViewPager.setAdapter(mPagerAdapter);
+                    else{
+                        for (int i = 0; i < subcribesImages.size(); i++) {
+                            fullImageList.add(new UtilsSubcribe.DummyItem(subcribesImages.get(i).getDestImage(), "Full Image:" + subcribesImages.get(i).getDestImageId()));
+                        }
+                        dismissProgressDialog();
+                        mPagerAdapter = new MyFragmentStatePagerAdapter(getChildFragmentManager(), fullImageList);
+                        mViewPager.setAdapter(mPagerAdapter);
+                    }
+
                 }
 
             }

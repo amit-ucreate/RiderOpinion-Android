@@ -51,6 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="-12dp"
             android:text="Divided By Boundaries"
+            android:layout_marginRight="30dp"
             android:textColor="@color/dark_brown"
             android:textSize="@dimen/date_text_size" />
 
@@ -71,6 +72,14 @@
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/logo_margin_right"
         android:src="@drawable/logo" />
+    <!--<ImageView
+        android:id="@+id/ivTakeaTour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_live_drem_menu"
+        android:layout_alignBottom="@+id/ivStart"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />-->
 
     <ImageView
         android:id="@+id/ivStart"

@@ -6,6 +6,8 @@ package com.nutsuser.ridersdomain.web.pojos;
 public class SubcribeData {
 
     String success;
+    String message;
+    SucribeOjectdata data;
 
     public SucribeOjectdata getData() {
         return data;
@@ -14,9 +16,6 @@ public class SubcribeData {
     public void setData(SucribeOjectdata data) {
         this.data = data;
     }
-
-    String message;
-    SucribeOjectdata data;
 
     public String getSuccess() {
         return success;

@@ -2,15 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:id="@+id/rllayout">
+    <ImageView
+        android:id="@+id/ivstart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/ic_divider"/>
     <ImageView
         android:id="@+id/ivStar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:padding="8dp"
-        android:src="@drawable/icon_star_empty" />
+        android:visibility="gone"
+        android:src="@drawable/icon_star_empty"
+        android:layout_above="@+id/llPostImage"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:id="@+id/ivVideo"
@@ -18,6 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@id/ivStar"
         android:padding="8dp"
+        android:layout_alignParentRight="true"
         android:src="@drawable/icon_video" />
 
     <TextView
@@ -27,7 +37,7 @@
         android:layout_toLeftOf="@id/ivVideo"
         android:padding="8dp"
         android:singleLine="true"
-        android:text="Empire Auto Sales" />
+        android:text="" />
 
 
     <LinearLayout
@@ -42,6 +52,7 @@
             android:layout_height="120dp"
             android:layout_weight="1"
             android:padding="8dp"
+            android:id="@+id/sdv"
             app:placeholderImage="@color/twenty_of_black" />
 
         <RelativeLayout
@@ -58,14 +69,16 @@
                 android:drawableLeft="@drawable/icon_get_direction"
                 android:drawablePadding="8dp"
                 android:ellipsize="end"
+                android:visibility="visible"
                 android:gravity="center_vertical"
                 android:singleLine="true"
-                android:text="New Delhi" />
+                android:text="" />
 
             <LinearLayout
                 android:id="@+id/llOffers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
                 android:layout_below="@id/tvLocation">
 
                 <TextView
@@ -74,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/icon_offers_2"
                     android:gravity="center"
-                    android:text="4"
+                    android:text="0"
                     android:textColor="@android:color/white" />
 
                 <TextView
@@ -93,7 +106,8 @@
                 android:layout_below="@id/llOffers"
                 android:layout_marginTop="8dp"
                 android:paddingTop="2dp"
-                android:src="@drawable/icon_star_full_small" />
+                android:visibility="gone"
+                android:src="@drawable/icon_star_empty_small" />
 
             <ImageView
                 android:id="@+id/ivStar2"
@@ -102,7 +116,8 @@
                 android:layout_alignTop="@id/ivStar1"
                 android:layout_toRightOf="@id/ivStar1"
                 android:paddingTop="2dp"
-                android:src="@drawable/icon_star_full_small" />
+                android:visibility="gone"
+                android:src="@drawable/icon_star_empty_small" />
 
             <ImageView
                 android:id="@+id/ivStar3"
@@ -111,7 +126,8 @@
                 android:layout_alignTop="@id/ivStar1"
                 android:layout_toRightOf="@id/ivStar2"
                 android:paddingTop="2dp"
-                android:src="@drawable/icon_star_full_small" />
+                android:visibility="gone"
+                android:src="@drawable/icon_star_empty_small" />
 
             <ImageView
                 android:id="@+id/ivStar4"
@@ -120,7 +136,8 @@
                 android:layout_alignTop="@id/ivStar1"
                 android:layout_toRightOf="@id/ivStar3"
                 android:paddingTop="2dp"
-                android:src="@drawable/icon_star_half_small" />
+                android:visibility="gone"
+                android:src="@drawable/icon_star_empty_small" />
 
             <ImageView
                 android:id="@+id/ivStar5"
@@ -130,6 +147,7 @@
                 android:layout_alignTop="@id/ivStar1"
                 android:layout_toRightOf="@id/ivStar4"
                 android:paddingTop="2dp"
+                android:visibility="gone"
                 android:src="@drawable/icon_star_empty_small" />
 
 
@@ -139,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@id/ivStar1"
                 android:layout_toRightOf="@id/ivStar5"
-                android:text="23 Reviews"
+                android:text=""
                 android:textSize="@dimen/date_text_size" />
 
 
@@ -149,12 +167,13 @@
 
 
     <TextView
+        android:id="@+id/tvdes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/llPostImage"
         android:layout_margin="8dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="Our speciality is arm sleeves. Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
+        android:text="" />
 
 </RelativeLayout>

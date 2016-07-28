@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -21,69 +22,337 @@
             android:textSize="@dimen/title_text_size"
             android:textStyle="bold" />
 
-
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="16dp"
+            android:src="@drawable/menu_icon" />
     </android.support.v7.widget.Toolbar>
-
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_weight="1">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <FrameLayout
+            android:id="@+id/fmMain"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/dark_brown"
+           >
     <TextView
         android:id="@+id/tvLabelNotifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:background="@color/dark_brown"
         android:paddingBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="8dp"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
         android:text="Notifications"
         android:textColor="@android:color/white"
         android:textSize="@dimen/title_text_size" />
+        <ToggleButton
+            android:id="@+id/toggleMain"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvLabelNotifications"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btntoggle_selector"
+            android:gravity="right"
+            android:checked="true"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@android:color/white"
+            android:textOff=""
+            android:textOn="" />
+</FrameLayout>
+    <FrameLayout
+        android:id="@+id/fmDestinations"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/tvLabelNotifications">
 
-    <TextView
-        android:id="@+id/tvLabelDestinations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvLabelNotifications"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:text="Riding Destinations" />
+        <TextView
+            android:id="@+id/tvLabelDestinations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvLabelNotifications"
+            android:layout_gravity="left|center_vertical"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:text="Riding Destinations"
+            android:textColor="@color/light_brown"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/tvLabelEvents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvLabelDestinations"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:text="Riding Events" />
+        <ToggleButton
+            android:id="@+id/toggleFBAutoShare"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvLabelNotifications"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btntoggle_selector"
+            android:gravity="right"
+            android:checked="true"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@android:color/white"
+            android:textOff=""
+            android:textOn="" />
 
+    </FrameLayout>
 
-    <TextView
-        android:id="@+id/tvLabelCustomisations"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvLabelEvents"
-        android:paddingBottom="8dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="8dp"
-        android:text="Bike Customizations" />
+    <View
+        android:id="@+id/viewdestination"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@id/fmDestinations"
+        android:background="@drawable/ic_dottedline">
 
+    </View>
 
+    <FrameLayout
+        android:id="@+id/fmEvents"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/viewdestination">
+
+        <TextView
+            android:id="@+id/tvLabelEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/fmDestinations"
+            android:layout_gravity="left|center_vertical"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:text="Riding Events"
+            android:textColor="@color/light_brown"
+            android:textSize="18sp" />
+
+        <ToggleButton
+            android:id="@+id/toggleLabelEvents"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/fmDestinations"
+            android:layout_gravity="right|center_vertical"
+            android:checked="true"
+            android:background="@drawable/btntoggle_selector"
+            android:gravity="right"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:layout_marginRight="10dp"
+            android:paddingTop="10dp"
+            android:textColor="@android:color/white"
+            android:textOff=""
+            android:textOn="" />
+    </FrameLayout>
+    <View
+        android:id="@+id/viewEvents"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@id/fmEvents"
+        android:background="@drawable/ic_dottedline">
+
+    </View>
+    <FrameLayout
+        android:id="@+id/fmbike"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/viewEvents">
+
+        <TextView
+            android:id="@+id/tvLabelCustomisations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp"
+            android:text="Bike Customizations"
+            android:textColor="@color/light_brown"
+            android:textSize="18sp" />
+
+        <ToggleButton
+            android:id="@+id/toggleCustomisations"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btntoggle_selector"
+            android:gravity="right"
+            android:checked="true"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@android:color/white"
+            android:textOff=""
+            android:textOn="" />
+
+    </FrameLayout>
+    <View
+        android:id="@+id/viewbike"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_below="@id/fmbike"
+        android:background="@drawable/ic_dottedline">
+
+    </View>
+
+        <FrameLayout
+            android:id="@+id/fmfriends"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/viewEvents">
+
+            <TextView
+                android:id="@+id/tvLabelFriends"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:text="Friends Alert"
+                android:textColor="@color/light_brown"
+                android:textSize="18sp" />
+
+            <ToggleButton
+                android:id="@+id/toggleFriends"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/btntoggle_selector"
+                android:gravity="right"
+                android:checked="true"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@android:color/white"
+                android:textOff=""
+                android:textOn="" />
+
+        </FrameLayout>
+        <View
+            android:id="@+id/viewFriends"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_below="@id/fmbike"
+            android:background="@drawable/ic_dottedline">
+
+        </View>
+        <FrameLayout
+            android:id="@+id/fmChat"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/viewEvents">
+
+            <TextView
+                android:id="@+id/tvLabelChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:text="Chat / Messages"
+                android:textColor="@color/light_brown"
+                android:textSize="18sp" />
+
+            <ToggleButton
+                android:id="@+id/toggleChat"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_alignParentRight="true"
+                android:layout_gravity="right|center_vertical"
+                android:background="@drawable/btntoggle_selector"
+                android:gravity="right"
+                android:checked="true"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="@android:color/white"
+                android:textOff=""
+                android:textOn="" />
+
+        </FrameLayout>
+        <View
+            android:id="@+id/viewChat"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:layout_below="@id/fmbike"
+            android:background="@drawable/ic_dottedline">
+
+        </View>
+
+        <FrameLayout
+            android:id="@+id/fmDistnace"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/viewbike">
     <TextView
         android:id="@+id/tvLabelDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tvLabelCustomisations"
         android:paddingBottom="8dp"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="8dp"
-        android:text="Distance" />
-
+        android:text="Distance"
+        android:textColor="@color/light_brown"
+        android:textSize="18sp" />
+        <ToggleButton
+            android:id="@+id/toggleDistance"
+            android:layout_width="50dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/btntoggle_selector_distance"
+            android:gravity="right"
+            android:checked="true"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="10dp"
+            android:layout_marginRight="10dp"
+            android:textColor="@android:color/white"
+            android:textOff=""
+            android:textOn="" />
+</FrameLayout>
     <TextView
         android:id="@+id/tvLabelSelectDistance"
         android:layout_width="match_parent"
@@ -91,41 +360,80 @@
         android:layout_below="@id/tvLabelDistance"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
-        android:text="Select the distance between which you want to get notified about an event(M-Meter,KM-Kilometer)" />
+        android:text="Select the distance between which you want to get notified about an event(M-Miles,KM-Kilometer)" />
 
 
-    <LinearLayout
-        android:id="@+id/llSeekBar"
+    <SeekBar
+
+        android:id="@+id/seekBar1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:layout_below="@id/tvLabelSelectDistance"
-        android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal" />
+        android:layout_marginTop="5dp"
+        android:max="5000" />
 
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_below="@+id/seekBar1"
+            android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_Distance"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="16dp"
+        android:gravity="left"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_weight="1"
+        android:text="0 M"
+        android:textColor="#333333"
+        android:textSize="12dp" />
+    <TextView
+        android:id="@+id/tv_Distance_final"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_gravity="right"
+        android:gravity="right"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginRight="16dp"
+        android:text="5000 M"
+        android:layout_weight="1"
+        android:textColor="#333333"
+        android:textSize="12dp"
+      />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tvDeleteOldNotification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/llSeekBar"
+        android:layout_below="@id/tv_Distance"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
+        android:textSize="18sp"
         android:text="Delete Old Notifications after"
         android:textColor="@color/light_brown" />
+            <TextView
+                android:id="@+id/tvdays"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="8dp"
+                android:text="5 Days"
+                android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/llSeekBar"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="8dp"
-        android:text="5 Days" />
-
+        </LinearLayout>
     <TextView
         android:id="@+id/tvLabelOptions"
         android:layout_width="match_parent"
@@ -137,6 +445,7 @@
         android:paddingRight="16dp"
         android:paddingTop="8dp"
         android:text="Other Options"
+        android:visibility="gone"
         android:textColor="@android:color/white"
         android:textSize="@dimen/title_text_size" />
 
@@ -149,7 +458,113 @@
         android:padding="12dp"
         android:text="UPDATE"
         android:textColor="@color/white"
+        android:background="@color/light_brown"
         android:textSize="@dimen/title_text_size" />
 
+    </LinearLayout>
+        </ScrollView>
+        <LinearLayout
+            android:id="@+id/lvSlidingMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="#8A3C16"
+            android:clickable="true"
+            android:orientation="vertical">
 
+            <RelativeLayout
+                android:id="@+id/rlProfile"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@color/dark_brown"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
+
+                <Button
+                    android:id="@+id/btUpdateProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/icon_menu_edit" />
+
+                <Button
+                    android:id="@+id/btFullProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/icon_menu_logout" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:gravity="top|center"
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/title_text_size" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvDp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_below="@+id/tvName"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="7dp"
+                    app:placeholderImage="@color/white"
+                    app:roundAsCircle="true" />
+
+                <!--  <TextView
+                      android:id="@+id/tvAddress"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_alignLeft="@id/tvName"
+                      android:layout_below="@id/tvName"
+                      android:layout_toLeftOf="@id/sdvDp"
+                      android:text="H.No.293, Sector 28, Chandigarh"
+                      android:textColor="@android:color/white" />-->
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <GridView
+                    android:id="@+id/gridView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/rlProfile"
+                    android:horizontalSpacing="1dp"
+                    android:numColumns="2"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="1dp">
+                </GridView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"></View>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#8A3C16">
+
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
 </RelativeLayout>

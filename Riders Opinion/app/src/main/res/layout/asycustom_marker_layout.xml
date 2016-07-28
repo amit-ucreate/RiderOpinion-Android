@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <FrameLayout
+        android:id="@+id/fmlayout"
+        android:layout_width="48dp"
+        android:layout_height="78dp"
+        android:background="@drawable/ic_other_location_tip">
+
+
+
+            <com.nutsuser.ridersdomain.async.AsyncImageView
+                android:id="@+id/ivMapImage"
+                android:layout_width="41dp"
+                android:layout_height="38dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="14dp"
+
+               />
+        <FrameLayout
+            android:layout_width="43dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/imageview_background_border"/>
+
+    </FrameLayout>
+
+
+</RelativeLayout>

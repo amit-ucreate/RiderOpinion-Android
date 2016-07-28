@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -44,6 +43,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/toolbar"
+            android:layout_marginTop="1dp"
             android:layout_weight="1">
 
 
@@ -52,13 +52,13 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <View
+                <!--<View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="12dp"
                     android:background="@color/light_brown" />
-
+-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -88,9 +88,11 @@
                         android:layout_marginBottom="8dp"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="54dp"
+                        android:singleLine="true"
                         android:layout_toRightOf="@id/ivMap2"
                         android:drawableRight="@drawable/get_direction_marker"
                         android:hint="Starting point"
+                        android:background="@android:color/transparent"
                         android:textColorHint="#D9D5D6">
 
                         <requestFocus />
@@ -116,6 +118,8 @@
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="54dp"
                         android:layout_marginTop="8dp"
+                        android:singleLine="true"
+                        android:background="@android:color/transparent"
                         android:layout_toRightOf="@id/ivMap2"
                         android:drawableRight="@drawable/get_direction_marker"
                         android:hint="Destination"
@@ -143,6 +147,9 @@
                       android:layout_marginRight="12dp"
                       android:background="@drawable/ic_getdirection_profile_border" />-->
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <fragment
                     android:id="@+id/map"
                     android:name="com.google.android.gms.maps.MapFragment"
@@ -150,6 +157,14 @@
                     android:layout_height="match_parent"
                     android:layout_marginTop="12dp"
                     android:layout_weight="1" />
+                <Button
+                    android:id="@+id/btMapNAv"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="bottom|right"
+                    android:layout_margin="10dp"
+                    android:visibility="gone"
+                    android:background="@drawable/ic_get_direction_btn" />
 
                 <!--<fragment
                     android:id="@+id/map"
@@ -158,7 +173,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent" />-->
 
-
+                </FrameLayout>
             </LinearLayout>
 
 
@@ -182,6 +197,7 @@
                     android:paddingTop="8dp">
 
                     <Button
+                        android:id="@+id/btUpdateProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentLeft="true"
@@ -192,6 +208,7 @@
                         android:background="@drawable/icon_menu_edit" />
 
                     <Button
+                        android:id="@+id/btFullProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"
@@ -200,6 +217,7 @@
 
                         android:layout_marginTop="9dp"
                         android:background="@drawable/icon_menu_logout" />
+
 
                     <TextView
                         android:id="@+id/tvName"

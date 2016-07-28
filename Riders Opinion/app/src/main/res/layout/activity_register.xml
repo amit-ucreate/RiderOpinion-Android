@@ -8,9 +8,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="4dp">
+        android:layout_marginTop="10dp">
 
-        <TextView
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_riderlogo" />
+        <!--<TextView
             android:id="@+id/tvTagRiders"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -25,22 +29,54 @@
             android:layout_height="wrap_content"
             android:text="opinion"
             android:textColor="@color/light_brown"
-            android:textSize="@dimen/register_rider_text_size" />
+            android:textSize="@dimen/register_rider_text_size" />-->
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/lltextlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lltop"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="1dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_TagRiders"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-12dp"
+            android:layout_marginRight="30dp"
+            android:text="Divided By Boundaries"
+            android:textColor="@color/dark_brown"
+            android:textSize="@dimen/date_text_size" />
+
+        <TextView
+            android:id="@+id/tv_TagOpinion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="47dp"
+            android:layout_marginTop="8dp"
+            android:text="United By Throttles"
+            android:textColor="@color/light_brown"
+            android:textSize="@dimen/date_text_size" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/llcreatelayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/lltop"
+        android:layout_below="@+id/lltextlayout"
         android:layout_marginTop="40dp"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/tvcreateaccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Create your account"
+            android:text="EXPLORE"
             android:textColor="@color/dark_brown"
             android:textSize="@dimen/title_text_size"
             android:textStyle="bold" />
@@ -55,7 +91,29 @@
             android:background="@android:color/white"
             android:hint="EMAIL ADDRESS OR PHONE NO"
             android:inputType="textEmailAddress"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
             android:padding="8dp"
+            android:focusable="true"
+            android:cursorVisible="true"
+            android:textColorHint="@color/pink_color_edit_text_hint"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/white"
+            android:hint="USER NAME"
+            android:inputType="textEmailAddress"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:padding="8dp"
+            android:focusable="true"
+            android:cursorVisible="true"
             android:textColorHint="@color/pink_color_edit_text_hint"
             android:textSize="16sp" />
 
@@ -69,15 +127,16 @@
             android:background="@android:color/white"
             android:ems="10"
             android:hint="LOCATION"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
             android:padding="8dp"
             android:textColorHint="@color/pink_color_edit_text_hint"
             android:textSize="16sp">
 
-            <requestFocus />
         </AutoCompleteTextView>
 
 
-        <EditText
+       <!-- <EditText
             android:id="@+id/edPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,8 +147,10 @@
             android:hint="PASSWORD"
             android:padding="8dp"
             android:password="true"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
             android:textColorHint="@color/pink_color_edit_text_hint"
-            android:textSize="16sp" />
+            android:textSize="16sp" />-->
 
 
         <TextView
@@ -103,7 +164,7 @@
             android:gravity="center"
             android:paddingBottom="8dp"
             android:paddingTop="8dp"
-            android:text="Explore"
+            android:text="PROCEED"
             android:textColor="@android:color/white"
             android:textSize="16sp" />
 
@@ -167,42 +228,37 @@
         android:id="@+id/flTwitter"
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:layout_below="@+id/flFacebook"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
+        android:layout_below="@+id/flFacebook"
         android:layout_marginTop="8dp"
         android:background="@drawable/ic_twitter_button_bg">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="35dp"
+            android:background="@drawable/twitter" />
         <!-- LOGIN WITH TWITTER -->
         <com.twitter.sdk.android.core.identity.TwitterLoginButton
-            android:id="@+id/loginTwitter"
+            android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:gravity="center"
             android:visibility="gone" />
-
-        <FrameLayout
-            android:id="@+id/fmTwitter"
+        <!-- LOGIN WITH TWITTER -->
+        <Button
+            android:id="@+id/btlTwitter"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            >
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="35dp"
-                android:background="@drawable/ic_twitter_icon" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Login with Twitter"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-        </FrameLayout>
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:paddingLeft="10dp"
+            android:text="Login with Twitter"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white" />
 
 
     </FrameLayout>

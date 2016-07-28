@@ -6,30 +6,49 @@
         android:name="com.nutsuser.ridersdomain.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
 
-
-    <uses-permission android:name="com.nutsuser.ridersdomain.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <!--
+ The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but are recommended.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- [START gcm_permission] -->
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- [END gcm_permission] -->
 
     <uses-feature
         android:glEsVersion="0x00020000"
         android:required="true" />
     <!-- Required to show current location -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:largeHeap="true"
+        android:name=".activities.MyChatApplication">
         <activity
-            android:name=".activities.FirstPageActivity"
+            android:name=".activities.SplashActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -39,13 +58,16 @@
             </intent-filter>
         </activity>
         <!-- FACEBOOK LOGIN ACTIVITY DECLARATION -->
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:label="@string/app_name" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
+        <activity
+            android:name=".activities.FirstPageActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".activities.MyRidesRecyclerView"
@@ -60,18 +82,38 @@
         <activity
             android:name=".activities.MainScreenActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.LiveforDream"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.HomeScreenTakeATour"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.TakeATour"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".activities.GetDirections"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activities.TrackingScreen"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.ComingSoon"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".activities.PlanARidePostRide"
             android:screenOrientation="portrait" />
 
-
+        <activity
+            android:name=".activities.GroupChatListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chat.ChatroomChatActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activities.PublicProfileScreen"
             android:screenOrientation="portrait" />
@@ -79,10 +121,7 @@
             android:name=".activities.FavouriteDesination"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activities.MyFriends"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activities.Notification"
+            android:name=".activities.MyFriendsActivity"
             android:screenOrientation="portrait" />
 
 
@@ -97,7 +136,8 @@
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
             android:name=".activities.PlanRideActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.EventsListActivity"
             android:screenOrientation="portrait"
@@ -105,7 +145,7 @@
         <activity
             android:name=".activities.ProfileActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateAlwaysHidden" />
+            android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name=".activities.ModifyBikeActivity"
@@ -121,6 +161,11 @@
         <activity
             android:name=".activities.MapActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.StatusRiderOnMapActivity"
+            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".activities.EventDetailActivity"
             android:screenOrientation="portrait" />
@@ -144,6 +189,10 @@
             android:name=".activities.ModifierAddressActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".activities.DestinationReviewsActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".activities.Subcribe"
             android:screenOrientation="portrait">
 
@@ -151,27 +200,57 @@
 
         <activity
             android:name=".activities.ChatListScreen"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeChat">
 
         </activity>
         <activity
             android:name=".activities.YouTubeVideoPlay"
             android:screenOrientation="portrait"></activity>
         <activity
-            android:name=".activities.NotificationScreen"
-            android:screenOrientation="portrait">
-
-        </activity>
-        <activity
             android:name=".activities.ChatScreen"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.NearByFriendsAcitivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.NotificationListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".chat.SampleCometChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chat.SampleSingleChatActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".chat.UsersListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".chat.ChatroomChatActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".chat.ChatroomListActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".activities.CalendarEventListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activities.RecentChatListActivity"
+            android:screenOrientation="portrait" />
+
+
         <!-- Goolge Maps API Key -->
-        <!-- <meta-data
-             android:name="com.google.android.maps.v2.API_KEY"
-             android:value="@string/google_maps_key" />-->
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
+
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -182,7 +261,42 @@
         <service
             android:name="com.nutsuser.ridersdomain.services.LocationService"
             android:enabled="true" />
+        <service android:name="com.nutsuser.ridersdomain.services.BroadcastService" />
 
+
+        <!-- [START gcm_receiver] -->
+        <receiver
+            android:name="com.google.android.gms.gcm.GcmReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <category android:name="gcm.play.android.samples.com.gcmquickstart" />
+            </intent-filter>
+        </receiver>
+        <!-- [END gcm_receiver] -->
+
+        <!-- [START gcm_listener] -->
+        <service
+            android:name=".activities.MyGcmListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </service>
+        <!-- [END gcm_listener] -->
+        <!-- [START instanceId_listener] -->
+        <service
+            android:name=".activities.MyInstanceIDListenerService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.android.gms.iid.InstanceID" />
+            </intent-filter>
+        </service>
+        <!-- [END instanceId_listener] -->
+        <service
+            android:name=".activities.RegistrationIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

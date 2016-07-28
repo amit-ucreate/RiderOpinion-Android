@@ -1,37 +1,46 @@
 package com.nutsuser.ridersdomain.activities;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Html;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
+import com.newrelic.agent.android.NewRelic;
 import com.nutsuser.ridersdomain.R;
-import com.nutsuser.ridersdomain.web.api.volley.RequestJsonObject;
+import com.rollbar.android.Rollbar;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
 
-import org.json.JSONObject;
-
-import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.fabric.sdk.android.Fabric;
 
 /**
- * Created by user on 8/27/2015.
+ * Created by Amit Agnihotri on 8/27/2015.
  */
 public class FirstPageActivity extends BaseActivity {
 
+    // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
+    private static final String TWITTER_KEY = "nQ3iUHEZ8Mh4syPepbJsFkmrr";
+    private static final String TWITTER_SECRET = "D2j3TPEjVnXBvyOnGjoK21wbv4He79Nx0O0ye5SQb2fPnssXKE";
+
+    private static final int READ_CONTACTS_PERMISSIONS_REQUEST = 1;
+    String[] permissions = new String[]{
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION};
 
     @Bind(R.id.tvTagRiders)
     TextView tvTagRiders;
@@ -47,18 +56,35 @@ public class FirstPageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        if(prefsManager.isLoginDone()){
+//            Intent intent = new Intent(FirstPageActivity.this, MainScreenActivity.class);
+//            intent.putExtra("MainScreenResponse", "CLOSED");
+//            startActivity(intent);
+//            finish();
+//        }
 
-        setContentView(R.layout.activity_first_page);
-        //getSupportActionBar().hide();
-        activity = FirstPageActivity.this;
-        ButterKnife.bind(activity);
-        setFontsToViews();
-        String text = "<font color=#D1622A>Divided</font> <font color=#000000>By Boundaries</font>";
-        String text_ = "<font color=#D1622A>United</font> <font color=#000000>By Throttles</font>";
-        tv_TagRiders.setText(Html.fromHtml(text));
-        tv_TagOpinion.setText(Html.fromHtml(text_));
-        // callApplyCompetitionService();
 
+        try {
+            TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+            Fabric.with(this, new Twitter(authConfig));
+            NewRelic.withApplicationToken(
+                    "AA8eb7c97891052af5975c5066a8433edad995e960"
+            ).start(this.getApplication());
+
+            setContentView(R.layout.activity_first_page);
+            //getSupportActionBar().hide();
+            activity = FirstPageActivity.this;
+            ButterKnife.bind(activity);
+            setFontsToViews();
+            String text = "<font color=#D1622A>Divided</font> <font color=#000000>By Boundaries</font>";
+            String text_ = "<font color=#D1622A>United</font> <font color=#000000>By Throttles</font>";
+            tv_TagRiders.setText(Html.fromHtml(text));
+            tv_TagOpinion.setText(Html.fromHtml(text_));
+            // callApplyCompetitionService();
+            getPermissionToCamera();
+        } catch (Exception e) {
+            Rollbar.reportException(e, "minor", "First Page activity Activity on create");
+        }
     }
 
     private void setFontsToViews() {
@@ -67,90 +93,81 @@ public class FirstPageActivity extends BaseActivity {
     }
 
 
+    // Called when the user is performing an action which requires the app to read the
+    // user's Camera
+    @TargetApi(Build.VERSION_CODES.M)
+    public void getPermissionToCamera() {
+        // 1) Use the support library version ContextCompat.checkSelfPermission(...) to avoid
+        // checking the build version since Context.checkSelfPermission(...) is only available
+        // in Marshmallow
+        // 2) Always check for permission (even if permission has already been granted)
+        // since the user can revoke permissions at any time through Settings
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // The permission is NOT already granted.
+            // Check if the user has been asked about this permission already and denied
+            // it. If so, we want to give more explanation about why the permission is needed.
+            if (shouldShowRequestPermissionRationale(
+                    Manifest.permission.CAMERA)) {
+                // Show our own UI to explain to the user why we need to read the contacts
+                // before actually requesting the permission and showing the default UI
+
+            }
+
+            // Fire off an async request to actually get the permission
+            // This will show the standard permission request dialog UI
+
+            String[] permissions = new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION};
+            requestPermissions(permissions,
+                    READ_CONTACTS_PERMISSIONS_REQUEST);
+        } else {
+            //openCamera();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case READ_CONTACTS_PERMISSIONS_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+
+                } else {
+                    finish();
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+
+            // other 'case' lines to check for other
+            // permissions this app might request
+        }
+    }
+
+
     @OnClick(R.id.ivStart)
     void click(View view) {
         switch (view.getId()) {
             case R.id.ivStart:
                 Intent intent = new Intent(activity, MainScreenActivity.class);
-                intent.putExtra("MainScreen", "CLOSED");
+                intent.putExtra("MainScreenResponse", "CLOSED");
                 startActivity(intent);
-
+                finish();
                 break;
         }
     }
 
 
-    private void callApplyCompetitionService() {
-
-
-        // showPleaseWait("Sending...");
-        params = new HashMap<String, String>();
-
-        params.put("User_Id", "214");
-        params.put("CompetitionId", "164");
-        params.put("FirstName", "Karan");
-        params.put("LastName", "NASSA");
-        params.put("AppName", getResources().getString(R.string.app_name));
-        params.put("ContactNumber", "23457376");
-        params.put("EmailAddress", "aa@gmail.com");
-
-        Log.e("TAG_COMPETITIONS", "APPLY COMPETITIONS CALL");
-
-        Log.e("params:", "" + params);
-        try {
-            RequestQueue requestQueue = Volley.newRequestQueue(FirstPageActivity.this);
-            RequestJsonObject loginTaskRequest = new RequestJsonObject(Request.Method.POST,
-                    "http://www.heeroservice.ucreate.co.in/api/applycompetition", params,
-                    createErrorListener(), createSuccessListener()
-            );
-
-
-            requestQueue.add(loginTaskRequest);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-    }
-
-    public Response.ErrorListener createErrorListener() {
-        return new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError volleyError) {
-
-                Log.e("ERROR LISTENER", "STArt: " + volleyError);
-                if (volleyError.networkResponse == null) {
-                    if (volleyError.getClass().equals(TimeoutError.class)) {
-                        // Show timeout error message
-                        //hideProgress();
-
-                    }
-                } else {
-
-
-                    //If any Volley error occurs, then hide progress.
-
-
-                    Log.e("ERROR LISTENER", "createErrorListener: " + volleyError);
-
-                }
-            }
-        };
-    }
-
-    /**
-     * Implement success listener on execute api url.
-     */
-    public Response.Listener<JSONObject> createSuccessListener() {
-        return new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-
-                // hideProgress();
-
-                Log.e("Response:", response.toString());
-
-            }
-        };
-    }
 }

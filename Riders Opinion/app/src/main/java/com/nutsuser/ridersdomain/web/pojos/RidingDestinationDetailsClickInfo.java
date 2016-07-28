@@ -19,6 +19,7 @@ public class RidingDestinationDetailsClickInfo {
     String petrolpumps;
     String serviceStation;
     String hospitals;
+    String blogLink;
     String riders;
     String offers;
     String images;
@@ -142,6 +143,15 @@ public class RidingDestinationDetailsClickInfo {
     public void setHospitals(String hospitals) {
         this.hospitals = hospitals;
     }
+
+    public String getBlogLinks() {
+        return blogLink;
+    }
+
+    public void setBlogLinks(String blogLink) {
+        this.blogLink = blogLink;
+    }
+
 
     public String getRiders() {
         return riders;

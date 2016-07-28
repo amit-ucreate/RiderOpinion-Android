@@ -63,12 +63,12 @@
                         android:background="@color/light_yellow">
 
                         <TextView
-                            android:id="@+id/tvPlaces"
+                            android:id="@+id/tvPlace"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="top|center_horizontal"
                             android:layout_marginTop="15dp"
-                            android:text="CHANDIGARH-SHIMLA"
+                            android:text=""
                             android:textColor="@color/light_brown" />
 
                         <TextView
@@ -90,21 +90,21 @@
                         android:background="@color/twenty_of_black" />
 
 
-                    <ImageView
+                    <!--<ImageView
                         android:id="@+id/ivFavourite"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_below="@id/viewLine"
                         android:padding="12dp"
-                        android:src="@drawable/icon_star_full" />
+                        android:src="@drawable/icon_star_full" />-->
 
                     <ImageView
                         android:id="@+id/ivMap"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@id/ivFavourite"
-                        android:layout_toLeftOf="@id/ivFavourite"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@id/viewLine"
                         android:padding="12dp"
                         android:src="@drawable/icon_map" />
 
@@ -112,7 +112,7 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignTop="@id/ivFavourite"
+                        android:layout_alignTop="@id/ivMap"
                         android:layout_marginLeft="8dp"
                         android:layout_toLeftOf="@id/ivMap"
                         android:text="3-Day Ride from Chandigarh To New Delhi(Stopover at Karnal)"
@@ -160,10 +160,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:drawableLeft="@drawable/icon_calendar"
-                                android:drawablePadding="8dp"
+                                android:drawablePadding="6dp"
                                 android:text="15 September 2015"
                                 android:textColor="@color/dark_brown" />
-
 
 
                             <TextView
@@ -172,9 +171,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
                                 android:drawableLeft="@drawable/icon_time"
-                                android:drawablePadding="8dp"
+                                android:drawablePadding="6dp"
                                 android:text="5:30 PM"
                                 android:textColor="@color/dark_brown" />
+
                             <RelativeLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content">
@@ -183,15 +183,16 @@
                                     android:id="@+id/ivPeopleIcon"
                                     android:layout_width="28dp"
                                     android:layout_height="28dp"
-                                    android:src="@drawable/icon_profile_group" />
+                                    android:padding="1dp"
+                                    android:src="@drawable/riding_event_group_brown" />
 
                                 <TextView
                                     android:id="@+id/tvNumberOfRiders"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_toRightOf="@id/ivPeopleIcon"
-                                    android:textColor="#C15413"
-                                    android:text="125 Riders" />
+                                    android:text=""
+                                    android:textColor="#C15413" />
 
                                 <TextView
                                     android:id="@+id/tvLabelHaveJoined"
@@ -206,18 +207,21 @@
                         </LinearLayout>
 
                     </LinearLayout>
+
                     <FrameLayout
                         android:id="@+id/fmUploadImage"
                         android:layout_width="match_parent"
-                        android:layout_below="@id/llHostedBy"
-                        android:layout_height="200dp">
+                        android:layout_height="200dp"
+                        android:layout_below="@id/llHostedBy">
+
                         <Button
                             android:id="@+id/btEdit"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
                             android:text="Edit"
-                            android:textColor="@android:color/holo_blue_dark"
-                            android:background="@android:color/transparent"/>
+                            android:textColor="@android:color/holo_blue_dark" />
+
                         <com.facebook.drawee.view.SimpleDraweeView
                             android:id="@+id/sdvEventImage"
                             android:layout_width="match_parent"
@@ -225,6 +229,7 @@
                             app:placeholderImage="@color/twenty_of_black" />
 
                     </FrameLayout>
+
                     <TextView
                         android:id="@+id/tvEatables"
                         android:layout_width="wrap_content"
@@ -291,6 +296,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/tvJoin"
+                        android:visibility="gone"
                         android:layout_margin="8dp">
 
                         <RelativeLayout
@@ -482,7 +488,7 @@
                         android:paddingLeft="12dp"
                         android:paddingRight="12dp"
                         android:paddingTop="8dp"
-                        android:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book" />
+                        android:text="" />
 
 
                 </RelativeLayout>
@@ -522,6 +528,8 @@
                 android:paddingTop="8dp">
 
                 <Button
+
+                    android:id="@+id/btUpdateProfile"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentLeft="true"
@@ -532,6 +540,7 @@
                     android:background="@drawable/icon_menu_edit" />
 
                 <Button
+                    android:id="@+id/btFullProfile"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"

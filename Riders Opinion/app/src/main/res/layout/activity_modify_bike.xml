@@ -35,13 +35,13 @@
                 android:padding="16dp"
                 android:src="@drawable/menu_icon" />
 
-            <ImageView
-                android:id="@+id/ivFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:padding="16dp"
-                android:src="@drawable/icon_filter" />
+            <!--<ImageView-->
+            <!--android:id="@+id/ivFilter"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:padding="16dp"-->
+            <!--android:src="@drawable/icon_filter" />-->
 
         </android.support.v7.widget.Toolbar>
 
@@ -56,19 +56,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
+                <FrameLayout
+                    android:id="@+id/frameLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/searchView"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="7dp">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
+                    android:id="@+id/EtServiceCenter"
+                    android:imeOptions="actionDone"
                     android:background="@drawable/search_edit_text"
-                    android:drawableRight="@drawable/icon_search"
                     android:hint="Enter Service Center Name"
+                    android:singleLine="true"
                     android:padding="8dp" />
+                <ImageView
+                    android:id="@+id/ivSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginBottom="4dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/icon_search" />
+                </FrameLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_margin="8dp">
 
                     <RelativeLayout
@@ -251,21 +272,81 @@
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvBikeName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawableLeft="@drawable/icon_rides"
-                    android:drawablePadding="8dp"
-                    android:drawableRight="@drawable/icon_profile_down_arrow"
-                    android:text="HARLEY DAVIDSON-STREET 750"
-                    android:textColor="@color/light_brown" />
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="#F9EEE8">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:background="@drawable/icon_rides" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginRight="50dp"
+                        android:gravity="center"
+                        android:layout_gravity="center_vertical">
+
+                        <TextView
+                            android:id="@+id/tvBikeYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:text=""
+                            android:visibility="gone"
+                            android:singleLine="true"
+                            android:textColor="@color/light_brown"
+                            android:textSize="14sp" />
+
+
+                        <TextView
+                            android:id="@+id/tvBikeName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:text=""
+                            android:textColor="@color/light_brown"
+                            android:textSize="14sp" />
+
+                        <TextView
+                            android:id="@+id/tvBikeModel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="5dp"
+                            android:singleLine="true"
+                            android:text=""
+                            android:visibility="gone"
+                            android:textColor="@color/light_brown"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/ivEdit"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:layout_marginRight="0dp"
+                        android:src="@drawable/ic_edit"
+                        android:padding="15dp" />
+                </FrameLayout>
 
                 <GridView
                     android:id="@+id/gvModifiers"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="4dp"
                     android:layout_weight="1"
                     android:horizontalSpacing="0dp"
                     android:numColumns="2"
@@ -278,6 +359,7 @@
                     android:background="#8555"
                     android:gravity="center"
                     android:padding="12dp"
+                    android:visibility="gone"
                     android:text="BANNER 50 PX HEIGHT"
                     android:textColor="@android:color/white"
                     android:textSize="22sp" />
@@ -303,6 +385,7 @@
                     android:paddingTop="8dp">
 
                     <Button
+                        android:id="@+id/btUpdateProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentLeft="true"
@@ -313,6 +396,7 @@
                         android:background="@drawable/icon_menu_edit" />
 
                     <Button
+                        android:id="@+id/btFullProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"

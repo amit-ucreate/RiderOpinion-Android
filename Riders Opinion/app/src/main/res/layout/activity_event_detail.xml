@@ -23,11 +23,11 @@
                 android:padding="8dp"
                 android:src="@drawable/icon_back" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:src="@drawable/icon_search_white" />
+            <!-- <ImageView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:padding="8dp"
+                 android:src="@drawable/icon_search_white" />-->
 
 
             <TextView
@@ -48,14 +48,6 @@
                 android:layout_gravity="right"
                 android:padding="8dp"
                 android:src="@drawable/menu_icon" />
-
-            <ImageView
-                android:id="@+id/ivFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:padding="8dp"
-                android:src="@drawable/icon_filter" />
 
 
         </android.support.v7.widget.Toolbar>
@@ -84,19 +76,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
 
-                        <ImageView
-                            android:id="@+id/ivFavorite"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:padding="12dp"
-                            android:src="@drawable/icon_add_favorites" />
 
                         <ImageView
                             android:id="@+id/ivMap"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toLeftOf="@id/ivFavorite"
+                            android:layout_alignParentRight="true"
                             android:padding="12dp"
                             android:src="@drawable/icon_map" />
 
@@ -107,8 +92,8 @@
                             android:layout_toLeftOf="@id/ivMap"
                             android:layout_weight="1"
                             android:padding="8dp"
-                            android:text="3 Day Ride from Chandigarh to New Delhi(Stopover at Karnal)"
-                            android:textColor="@color/dark_brown"
+                            android:text=""
+                            android:textColor="#431603"
                             android:textSize="@dimen/title_text_size" />
 
                         <LinearLayout
@@ -135,26 +120,29 @@
                                     android:id="@+id/tvHostedBy"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Harley Group"
+                                    android:text=""
                                     android:textColor="@color/dark_brown" />
+
                                 <FrameLayout
                                     android:id="@+id/fmtrackrider"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="3dp">
-                                    
+
                                     <ImageView
+                                        android:id="@+id/ivImage"
                                         android:layout_width="30dp"
                                         android:layout_height="30dp"
-                                        android:src="@drawable/ic_trackrider"/>
+                                        android:src="@drawable/ic_trackrider_light" />
+
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Track Rider"
-                                        android:gravity="center"
                                         android:layout_gravity="left|center_vertical"
                                         android:layout_marginLeft="35dp"
-                                        android:textColor="#C15413"/>
+                                        android:gravity="center"
+                                        android:text="Track Rider"
+                                        android:textColor="#C15413" />
                                 </FrameLayout>
 
 
@@ -172,7 +160,8 @@
                                     android:layout_height="wrap_content"
                                     android:drawableLeft="@drawable/icon_calendar"
                                     android:drawablePadding="8dp"
-                                    android:text="15 September 2015"
+                                    android:text=""
+                                    android:layout_marginLeft="5dp"
                                     android:textColor="@color/dark_brown" />
 
                                 <!--<TextView
@@ -192,25 +181,29 @@
                                     android:layout_marginTop="8dp"
                                     android:drawableLeft="@drawable/icon_time"
                                     android:drawablePadding="8dp"
-                                    android:text="5:30 PM"
+                                    android:text=""
+                                    android:layout_marginLeft="5dp"
                                     android:textColor="@color/dark_brown" />
+
                                 <RelativeLayout
                                     android:layout_width="wrap_content"
+                                    android:id="@+id/rvRiders"
                                     android:layout_height="wrap_content">
 
                                     <ImageView
                                         android:id="@+id/ivPeopleIcon"
                                         android:layout_width="28dp"
                                         android:layout_height="28dp"
-                                        android:src="@drawable/icon_profile_group" />
+                                        android:padding="2dp"
+                                        android:src="@drawable/riding_event_group_brown" />
 
                                     <TextView
                                         android:id="@+id/tvNumberOfRiders"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_toRightOf="@id/ivPeopleIcon"
-                                        android:textColor="#C15413"
-                                        android:text="125 Riders" />
+                                        android:text=""
+                                        android:textColor="#C15413" />
 
                                     <TextView
                                         android:id="@+id/tvLabelHaveJoined"
@@ -218,7 +211,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_below="@id/tvNumberOfRiders"
                                         android:layout_toRightOf="@id/ivPeopleIcon"
-                                        android:text="have Joined" />
+                                        android:text="" />
 
                                 </RelativeLayout>
 
@@ -240,8 +233,8 @@
                             android:layout_below="@id/sdvEventImage"
                             android:drawablePadding="8dp"
                             android:drawableTop="@drawable/icon_eating_joints"
-                            android:padding="16dp"
-                            android:text="12" />
+                            android:padding="14dp"
+                            android:text="0" />
 
                         <TextView
                             android:id="@+id/tvPetrolPump"
@@ -251,8 +244,8 @@
                             android:layout_toRightOf="@id/tvEatables"
                             android:drawablePadding="8dp"
                             android:drawableTop="@drawable/icon_petrol_pump"
-                            android:padding="16dp"
-                            android:text="18" />
+                            android:padding="14dp"
+                            android:text="0" />
 
 
                         <TextView
@@ -263,8 +256,8 @@
                             android:layout_toRightOf="@id/tvPetrolPump"
                             android:drawablePadding="8dp"
                             android:drawableTop="@drawable/icon_mechanic"
-                            android:padding="16dp"
-                            android:text="8" />
+                            android:padding="14dp"
+                            android:text="0" />
 
                         <TextView
                             android:id="@+id/tvFirstAid"
@@ -274,34 +267,55 @@
                             android:layout_toRightOf="@id/tvServiceCenter"
                             android:drawablePadding="8dp"
                             android:drawableTop="@drawable/icon_firstaid"
-                            android:padding="16dp"
-                            android:text="12" />
+                            android:padding="14dp"
+                            android:text="0" />
 
-                        <TextView
-                            android:id="@+id/tvJoin"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignTop="@id/tvEatables"
-                            android:layout_marginLeft="30dp"
+                            android:orientation="horizontal"
                             android:layout_marginTop="16dp"
-                            android:layout_toRightOf="@id/tvFirstAid"
+                            android:id="@+id/layoutJoin"
+                            android:layout_toRightOf="@id/tvFirstAid">
+
+                        <TextView
+                            android:id="@+id/tvShare"
+                            android:layout_width="70dp"
+                            android:layout_height="40dp"
+                            android:layout_alignTop="@id/tvEatables"
+                            android:layout_marginLeft="2dp"
                             android:background="@color/light_brown"
-                            android:drawableLeft="@drawable/icon_like_white"
-                            android:drawablePadding="8dp"
+                            android:layout_marginRight="5dp"
                             android:gravity="center"
-                            android:padding="8dp"
-                            android:text="JOIN"
+                            android:padding="0dp"
+                            android:text="SHARE"
                             android:textColor="@android:color/white" />
-
-
+                            <TextView
+                                android:id="@+id/tvJoin"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@color/light_brown"
+                                android:drawableLeft="@drawable/icon_like_white"
+                                android:drawablePadding="8dp"
+                                android:gravity="center"
+                                android:layout_marginRight="2dp"
+                                android:padding="8dp"
+                                android:text="JOIN" android:layout_weight="1"
+                                android:textColor="@android:color/white" />
+                        </LinearLayout>
                         <LinearLayout
                             android:id="@+id/llAd"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/tvJoin"
-                            android:layout_margin="8dp">
+                            android:layout_height="40dp"
+                            android:layout_below="@+id/layoutJoin"
+                            android:background="#E1B5A5"
+                            android:orientation="vertical"
+                            android:visibility="gone"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp">
 
-                            <RelativeLayout
+                         <!--   <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1">
@@ -477,7 +491,7 @@
                                     android:textSize="11sp" />
 
                             </RelativeLayout>
-
+-->
 
                         </LinearLayout>
 
@@ -489,8 +503,8 @@
                             android:paddingBottom="8dp"
                             android:paddingLeft="12dp"
                             android:paddingRight="12dp"
-                            android:paddingTop="8dp"
-                            android:text="Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book" />
+                            android:paddingTop="10dp"
+                            android:text="" />
 
 
                     </RelativeLayout>
@@ -498,16 +512,16 @@
 
                 </ScrollView>
 
-                <TextView
+                <!--<TextView
                     android:id="@+id/tvSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#8555"
                     android:gravity="center"
                     android:padding="12dp"
-                    android:text="BANNER 50 PX HEIGHT"
+                    android:text=""
                     android:textColor="@android:color/white"
-                    android:textSize="22sp" />
+                    android:textSize="22sp" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -530,6 +544,7 @@
                     android:paddingTop="8dp">
 
                     <Button
+                        android:id="@+id/btUpdateProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentLeft="true"
@@ -540,6 +555,7 @@
                         android:background="@drawable/icon_menu_edit" />
 
                     <Button
+                        android:id="@+id/btFullProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"

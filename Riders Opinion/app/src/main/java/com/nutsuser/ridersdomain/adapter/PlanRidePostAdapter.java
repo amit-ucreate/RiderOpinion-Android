@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.FrameLayout;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.web.pojos.ProductMultipleSelect;
 import com.nutsuser.ridersdomain.web.pojos.VehicleDetails;
@@ -20,16 +21,22 @@ import java.util.ArrayList;
  * Created by user on 1/7/2016.
  */
 public class PlanRidePostAdapter extends BaseAdapter {
-    private ArrayList<VehicleDetails> mVehicleDetailses;
     Context mContext;
     ViewHolder holder;
-    private LayoutInflater inflater;
     ArrayList<ProductMultipleSelect> objects;
+    OnCheckedChangeListener myCheckChangList = new OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView,
+                                     boolean isChecked) {
+            getProduct((Integer) buttonView.getTag()).box = isChecked;
+        }
+    };
+    private ArrayList<VehicleDetails> mVehicleDetailses;
+    private LayoutInflater inflater;
 
     public PlanRidePostAdapter(Context context, ArrayList<VehicleDetails> mVehicleDetailses, ArrayList<ProductMultipleSelect> objects) {
         this.mVehicleDetailses = mVehicleDetailses;
         mContext = context;
-        this.objects=objects;
+        this.objects = objects;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -47,6 +54,7 @@ public class PlanRidePostAdapter extends BaseAdapter {
     public Object getItem(int position) {
         return objects.get(position);
     }
+
     public ProductMultipleSelect getProduct(int position) {
         return ((ProductMultipleSelect) getItem(position));
     }
@@ -59,6 +67,7 @@ public class PlanRidePostAdapter extends BaseAdapter {
         }
         return box;
     }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
@@ -76,16 +85,14 @@ public class PlanRidePostAdapter extends BaseAdapter {
         holder.name.setText(mVehicleDetailses.get(position).getVehicle_name());
         holder.cbBox.setOnCheckedChangeListener(myCheckChangList);
         holder.cbBox.setTag(position);
+        if(objects.get(position).box){
+            holder.cbBox.setChecked(true);
+        }
 
 
         return rowView;
     }
-    OnCheckedChangeListener myCheckChangList = new OnCheckedChangeListener() {
-         public void onCheckedChanged(CompoundButton buttonView,
-                                 boolean isChecked) {
-        getProduct((Integer) buttonView.getTag()).box = isChecked;
-    }
-};
+
     static class ViewHolder {
         TextView name, address, title;
         FrameLayout frame;

@@ -1,47 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="160dp">
+    android:layout_height="161dp">
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdvPostImage"
-        android:layout_width="match_parent"
-        android:layout_height="160dp" />
-
-    <View
+        android:id="@+id/ivgrid"
         android:layout_width="match_parent"
         android:layout_height="160dp"
-        android:background="@drawable/item_gradient_bg" />
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="10dp"
+        app:placeholderImage="@color/fourty_of_black" />
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/fmClick"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:gravity="top"
-        android:padding="8dp">
+        android:alpha="1"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:background="#80000000">
 
-        <TextView
-            android:id="@+id/tvTitle"
+        <LinearLayout
+            android:id="@+id/lllayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TYRES"
-            android:textColor="@color/white" />
+            android:layout_marginBottom="2dp"
+            android:layout_marginRight="5dp"
+            android:gravity="top"
+            android:padding="8dp">
 
-        <TextView
-            android:id="@+id/tvPrice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/price_oval_shape"
-            android:paddingBottom="1dp"
-            android:paddingLeft="2dp"
-            android:paddingRight="1dp"
-            android:paddingTop="1dp"
-            android:text="999"
-            android:textColor="@color/white"
-            android:textSize="@dimen/date_text_size" />
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="TYRES"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/price_oval_shape"
+                android:paddingBottom="1dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="1dp"
+                android:paddingTop="1dp"
+                android:text="999"
+                android:textColor="@color/white"
+                android:textSize="@dimen/date_text_size" />
 
+        </LinearLayout>
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginRight="7dp"
+        android:layout_marginLeft="7dp"
+        android:layout_below="@+id/ivgrid"
+        android:background="@color/light_brown"></View>
 
 </RelativeLayout>

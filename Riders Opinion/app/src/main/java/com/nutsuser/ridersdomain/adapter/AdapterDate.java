@@ -3,15 +3,18 @@ package com.nutsuser.ridersdomain.adapter;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nutsuser.ridersdomain.R;
+import com.nutsuser.ridersdomain.web.pojos.CalendarEventData;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import hirondelle.date4j.DateTime;
@@ -21,8 +24,10 @@ import hirondelle.date4j.DateTime;
  */
 public class AdapterDate extends CaldroidGridAdapter {
 
+
     public AdapterDate(Context context, int month, int year, HashMap<String, Object> caldroidData, HashMap<String, Object> extraData) {
         super(context, month, year, caldroidData, extraData);
+
     }
 
     @Override
@@ -71,6 +76,8 @@ public class AdapterDate extends CaldroidGridAdapter {
                 cellView.setBackgroundResource(CaldroidFragment.disabledBackgroundDrawable);
             }
 
+
+
             if (dateTime.equals(getToday())) {
                 cellView.setBackgroundResource(com.caldroid.R.drawable.red_border_gray_bg);
             }
@@ -81,10 +88,17 @@ public class AdapterDate extends CaldroidGridAdapter {
 
         // Customize for selected dates
         if (selectedDates != null && selectedDates.indexOf(dateTime) != -1) {
-            cellView.setBackgroundColor(resources
-                    .getColor(com.caldroid.R.color.caldroid_sky_blue));
-
-            tvDate.setTextColor(Color.BLACK);
+            if (dateTime.getMonth() != month) {
+                cellView.setBackgroundColor(resources
+                        .getColor(R.color.white));
+                tvDate.setTextColor(resources
+                        .getColor(com.caldroid.R.color.caldroid_darker_gray));
+            }
+            else{
+                cellView.setBackgroundColor(resources
+                        .getColor(R.color.dark_brown));
+                tvDate.setTextColor(Color.WHITE);
+            }
 
         } else {
             shouldResetSelectedView = true;
@@ -100,7 +114,7 @@ public class AdapterDate extends CaldroidGridAdapter {
         }
 
         tvDate.setText("" + dateTime.getDay());
-        tvEvents.setText("12");
+        tvEvents.setText("");
 
         // Somehow after setBackgroundResource, the padding collapse.
         // This is to recover the padding

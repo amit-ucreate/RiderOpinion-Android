@@ -6,9 +6,9 @@ import java.util.ArrayList;
  * Created by admin on 17-02-2016.
  */
 public class PlanARide {
-    String success;
+    int success;
     String message;
-ArrayList<PlanARideData> data=new ArrayList<>();
+    ArrayList<PlanARideData> data = new ArrayList<>();
 
     public ArrayList<PlanARideData> getData() {
         return data;
@@ -18,11 +18,11 @@ ArrayList<PlanARideData> data=new ArrayList<>();
         this.data = data;
     }
 
-    public String getSuccess() {
+    public int getSuccess() {
         return success;
     }
 
-    public void setSuccess(String success) {
+    public void setSuccess(int success) {
         this.success = success;
     }
 

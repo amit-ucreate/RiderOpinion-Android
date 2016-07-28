@@ -35,9 +35,9 @@ public class MyFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
 
         //We are doing this only for checking the total number of fragments in the fragment manager.
-        List<Fragment> fragmentsList= mFragmentManager.getFragments();
+        List<Fragment> fragmentsList = mFragmentManager.getFragments();
         int size = 0;
-        if(fragmentsList != null){
+        if (fragmentsList != null) {
             size = fragmentsList.size();
         }
         UtilsSubcribe.DummyItem dummyItem = mImageItemList.get(position);
@@ -66,8 +66,8 @@ public class MyFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
      */
     @Override
     public int getItemPosition(Object object) {
-        List<Fragment> fragmentsList= mFragmentManager.getFragments();
-        SubcribeFragment fragment = (SubcribeFragment)object;
+        List<Fragment> fragmentsList = mFragmentManager.getFragments();
+        SubcribeFragment fragment = (SubcribeFragment) object;
         UtilsSubcribe.DummyItem dummyItem = fragment.getDummyItem();
         int position = mImageItemList.indexOf(dummyItem);
 
@@ -75,11 +75,11 @@ public class MyFragmentStatePagerAdapter extends FragmentStatePagerAdapter {
         /*Only for logging purpose*/
         int size = fragmentsList.size();
         UtilsSubcribe.DummyItem dummyItemNew = null;
-        if(position>=0){
+        if (position >= 0) {
             dummyItemNew = mImageItemList.get(position);
         }
         Log.i(TAG, "************getItemPosition Old_Item: Position:" + position + " size:" + size + " title:" + dummyItem.getImageTitle() + " url:" + dummyItem.getImageUrl());
-        if(dummyItemNew !=null){
+        if (dummyItemNew != null) {
             Log.i(TAG, "************getItemPosition New_Item: Position:" + position + " title:" + dummyItemNew.getImageTitle() + " url:" + dummyItemNew.getImageUrl());
         }
         /*_____________________________________________*/

@@ -1,5 +1,12 @@
 package com.nutsuser.ridersdomain.web.pojos;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by admin on 17-02-2016.
  */
@@ -15,6 +22,26 @@ public class PlanARideData {
     String daysCount;
     String riders;
     String mutual;
+    @SerializedName("halts")
+    @Expose
+    private List<Halt> halts = new ArrayList<Halt>();
+    /**
+     *
+     * @return
+     *     The halts
+     */
+    public List<Halt> getHalts() {
+        return halts;
+    }
+
+    /**
+     *
+     * @param halts
+     *     The halts
+     */
+    public void setHalts(List<Halt> halts) {
+        this.halts = halts;
+    }
 
     public String getEventId() {
         return eventId;
@@ -87,7 +114,6 @@ public class PlanARideData {
     public void setDaysCount(String daysCount) {
         this.daysCount = daysCount;
     }
-
 
 
     public String getRiders() {

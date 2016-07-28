@@ -8,20 +8,91 @@
     swipe:rightEdgeSwipeOffset="0dp">
 
     <!--Bottom View For Right to Left-->
-
     <LinearLayout
         android:id="@+id/bottom_wrapper"
-        android:layout_width="90dp"
-        android:layout_height="match_parent">
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:weightSum="2">
 
-        <FrameLayout
-            android:layout_width="match_parent"
+     <!--   <FrameLayout
+            android:id="@+id/fmRoutereview"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-
+            android:layout_weight="1"
             android:background="@color/light_brown">
 
             <ImageView
                 android:id="@+id/ivimage"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/ic_swipe_route_review" />
+
+            <TextView
+                android:id="@+id/tvEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="ROUTE REVIEW"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"></View>
+-->
+        <FrameLayout
+            android:id="@+id/fmchat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/light_brown">
+
+            <ImageView
+                android:id="@+id/ivroutereview"
+                android:layout_width="400dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center|center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/ic_swipe_chats" />
+
+            <TextView
+                android:id="@+id/tvShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="CHATS"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </FrameLayout>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"></View>
+        <FrameLayout
+            android:id="@+id/frameremove"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/light_brown">
+
+            <ImageView
+                android:id="@+id/iv_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center|center_horizontal"
@@ -33,10 +104,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
-
                 android:layout_marginBottom="10dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
                 android:gravity="center"
                 android:text="REMOVE"
                 android:textColor="@color/white"
@@ -44,9 +114,11 @@
                 android:textStyle="bold" />
 
         </FrameLayout>
-
-
     </LinearLayout>
+
+
+
+
 
 
     <!-- Another Bottom View For Left to Right -->
@@ -70,19 +142,18 @@
     <!-- Top View,  Row itemView of RecyclerView -->
 
     <RelativeLayout
-
+        android:id="@+id/rllayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="4dp">
 
 
-        <!-- <ImageView
-             android:id="@+id/ivStar"
-             android:src="@drawable/icon_add_favorites"
-             android:padding="12dp"
-             android:layout_alignParentRight="true"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content" />-->
+        <ImageView
+            android:id="@+id/ivstart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/ic_divider"/>
 
         <ImageView
             android:id="@+id/ivMap"
@@ -103,10 +174,11 @@
             android:layout_toLeftOf="@id/ivMap"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="3-Day Ride from Chandigarh To New Delhi(Stopover at Karnal)"
+            android:text=""
             android:textColor="@color/dark_brown" />
 
         <LinearLayout
+            android:id="@+id/lllinear"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_below="@id/ivMap"
@@ -121,22 +193,26 @@
                  android:layout_height="match_parent" />-->
 
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvdate"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/icon_calendar"
                     android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:text="15 september 2015"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text=""
                     android:textColor="@color/dark_brown"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvtime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -144,7 +220,7 @@
                     android:drawableLeft="@drawable/icon_time"
                     android:drawablePadding="8dp"
                     android:gravity="center"
-                    android:text="05:00 PM"
+                    android:text=""
                     android:textColor="@color/dark_brown"
                     android:textStyle="bold" />
 
@@ -156,20 +232,22 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvDesplace"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:drawableLeft="@drawable/icon_get_direction"
                     android:drawablePadding="8dp"
-                    android:gravity="center"
-                    android:text="New Delhi"
+                    android:gravity="left"
+                    android:singleLine="true"
+                    android:text=""
                     android:textColor="@color/dark_brown"
                     android:textStyle="bold" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp">
+                    android:layout_marginLeft="5dp">
 
                     <ImageView
                         android:id="@+id/ivPeopleIcon"
@@ -182,7 +260,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/ivPeopleIcon"
-                        android:text="125 Riders"
+                        android:text=""
+                        android:layout_marginTop="3dp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -192,6 +271,7 @@
                         android:layout_below="@id/tvNumberOfRiders"
                         android:layout_toRightOf="@id/ivPeopleIcon"
                         android:text="have Joined"
+                        android:visibility="gone"
                         android:textStyle="bold" />
 
                 </RelativeLayout>

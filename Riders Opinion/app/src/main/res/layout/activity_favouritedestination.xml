@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
@@ -7,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -22,11 +22,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Favourite Destination"
+                android:text="FAVORITES"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/title_text_size"
                 android:textStyle="bold" />
-
             <ImageView
                 android:id="@+id/ivMenu"
                 android:layout_width="wrap_content"
@@ -37,17 +36,240 @@
 
 
         </android.support.v7.widget.Toolbar>
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:layout_weight="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/LvDestination"
+                    android:visibility="visible"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    >
+
+
+                    <FrameLayout
+                        android:id="@+id/fmDestination"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:clickable="false"
+                        android:background="@color/white">
+                        <TextView
+                            android:id="@+id/bt_fav_destination"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginRight="40dp"
+                            android:background="@android:color/transparent"
+                            android:layout_marginLeft="20dp"
+                            android:gravity="center"
+                            android:clickable="false"
+                            android:layout_gravity="center_vertical|left"
+                            android:text="FAVORITE DESTINATION"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/light_brown" />
+                        <com.nutsuser.ridersdomain.view.CircleButtonText
+                            android:id="@+id/tvFavCount"
+                            android:layout_width="20dip"
+                            android:layout_height="20dip"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_marginRight="130dp"
+                            android:gravity="center"
+                            android:text="0"
+                            android:visibility="visible"
+                            android:background="@drawable/circularshapebutton"
+                            android:textColor="#DC602C"
+                            android:textSize="14dp"
+                            app:cb_color="#ffffff"
+                            app:cb_pressedRingWidth="8dip" />
+                    </FrameLayout>
+                </LinearLayout>
+            <android.support.v7.widget.RecyclerView
             android:id="@+id/my_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
-
             android:layout_weight="1"
-            android:scrollbars="vertical" />
+           />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="0dp"
+                    android:id="@+id/LvVendor"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@color/white"
+                    android:orientation="horizontal"
+                    >
+                    <FrameLayout
+                        android:id="@+id/fmVendor"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:clickable="false"
+                        android:background="@color/white">
+                        <TextView
+                            android:id="@+id/bt_vendor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_marginRight="40dp"
+                            android:background="@android:color/transparent"
+                            android:layout_marginLeft="20dp"
+                            android:gravity="center"
+                            android:clickable="false"
+                            android:layout_gravity="center_vertical|left"
+                            android:text="FAVORITE VENDOR"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/light_brown" />
+                        <com.nutsuser.ridersdomain.view.CircleButtonText
+                            android:id="@+id/tvVendorCount"
+                            android:layout_width="20dip"
+                            android:layout_height="20dip"
+                            android:layout_gravity="center_vertical|right"
+                            android:layout_marginRight="120dp"
+                            android:gravity="center"
+                            android:text="0"
+                            android:visibility="visible"
+                            android:background="@drawable/circularshapebutton"
+                            android:textColor="#DC602C"
+                            android:textSize="14dp"
+                            app:cb_color="#ffffff"
+                            app:cb_pressedRingWidth="8dip" />
+                    </FrameLayout>
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/my_recycler_view_vendor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    />
+                <TextView
+                    android:id="@+id/empty_view_fav"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="No Records Found"
+                    android:visibility="gone" />
+            </LinearLayout>
+    <LinearLayout
+        android:id="@+id/lvSlidingMenu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#8A3C16"
+        android:clickable="true"
+        android:orientation="vertical">
 
+        <RelativeLayout
+            android:id="@+id/rlProfile"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:background="@color/dark_brown"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="8dp">
+
+            <Button
+                android:id="@+id/btUpdateProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/icon_menu_edit" />
+
+            <Button
+                android:id="@+id/btFullProfile"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/icon_menu_logout" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:gravity="top|center"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size" />
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/sdvDp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_below="@+id/tvName"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="7dp"
+                app:placeholderImage="@color/white"
+                app:roundAsCircle="true" />
+
+            <!--  <TextView
+                  android:id="@+id/tvAddress"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:layout_alignLeft="@id/tvName"
+                  android:layout_below="@id/tvName"
+                  android:layout_toLeftOf="@id/sdvDp"
+                  android:text="H.No.293, Sector 28, Chandigarh"
+                  android:textColor="@android:color/white" />-->
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+
+            <GridView
+                android:id="@+id/gridView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/rlProfile"
+                android:horizontalSpacing="1dp"
+                android:numColumns="2"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="1dp">
+            </GridView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/white"></View>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#8A3C16">
+
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+        </android.support.v4.widget.DrawerLayout>
     </LinearLayout>
 
 

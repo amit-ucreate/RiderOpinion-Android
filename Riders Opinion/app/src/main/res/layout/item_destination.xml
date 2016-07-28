@@ -1,185 +1,348 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rllayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="8dp"
-    android:background="@android:color/white"
-    android:padding="8dp">
+    android:layout_marginTop="0dp"
+    android:background="@android:color/white">
+
+    <ImageView
+        android:id="@+id/ivstart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:background="@drawable/ic_divider" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ivstart"
+        android:paddingLeft="8dp"
+        android:paddingRight="4dp"
+        android:paddingTop="0dp">
+<LinearLayout
+    android:id="@+id/lltitile"
+    android:layout_width="240dp"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutDestName"
+        android:orientation="vertical">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
-        android:text="Kasauli"
-        android:textSize="@dimen/title_text_size" />
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:gravity="left|top"
+        android:text="City"
+        android:textColor="#451308"
+        android:textSize="14sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="State"
+            android:textColor="#451308"
+            android:textSize="14sp"
+            android:ellipsize="end"
+            android:id="@+id/txtStateName"
+            android:singleLine="true"
+            android:gravity="left|center_vertical"
+            />
+    </LinearLayout>
 
+    <!--
     <ImageView
         android:id="@+id/ivStar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tvTitle"
-        android:layout_marginBottom="4dp"
-        android:layout_marginLeft="12dp"
-        android:layout_toRightOf="@id/tvTitle"
-        android:src="@drawable/icon_star_full_small" />
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:gravity="left|center_vertical"
+        android:layout_gravity="left|top"
+        android:src="@drawable/ic_rating_orange" />
 
     <ImageView
         android:id="@+id/ivStar2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tvTitle"
-        android:layout_marginBottom="4dp"
-        android:layout_toRightOf="@id/ivStar1"
-        android:src="@drawable/icon_star_full_small" />
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_gravity="left|top"
+        android:src="@drawable/ic_rating_orange" />
 
     <ImageView
         android:id="@+id/ivStar3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tvTitle"
-        android:layout_marginBottom="4dp"
-        android:layout_toRightOf="@id/ivStar2"
-        android:src="@drawable/icon_star_full_small" />
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_gravity="left|top"
+        android:src="@drawable/ic_rating_orange" />
 
     <ImageView
         android:id="@+id/ivStar4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tvTitle"
-        android:layout_marginBottom="4dp"
-        android:layout_toRightOf="@id/ivStar3"
-        android:src="@drawable/icon_star_half_small" />
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_gravity="left|top"
+        android:src="@drawable/ic_rating_orange" />
 
     <ImageView
         android:id="@+id/ivStar5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tvTitle"
-        android:layout_marginBottom="4dp"
-        android:layout_toRightOf="@id/ivStar4"
-        android:src="@drawable/icon_star_empty_small" />
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="3dp"
+        android:layout_gravity="left|top"
+        android:src="@drawable/ic_rating_orange" />
 
-    <ImageView
-        android:id="@+id/ivFavorites"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:padding="12dp"
-        android:src="@drawable/icon_add_favorites" />
-
-    <ImageView
-        android:id="@+id/ivMap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/ivFavorites"
-        android:padding="12dp"
-        android:src="@drawable/icon_map" />
-
-    <ImageView
-        android:id="@+id/ivVideo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/ivMap"
-        android:padding="12dp"
-        android:src="@drawable/icon_video" />
-
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/sdv"
-
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_below="@id/ivFavorites"
-        android:layout_marginRight="4dp"
-        app:placeholderImage="@color/fourty_of_black" />
+-->
+</LinearLayout>
 
 
-    <TextView
-        android:id="@+id/tvDesc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/sdv"
-        android:layout_below="@id/ivFavorites"
-        android:layout_marginLeft="4dp"
-        android:layout_toRightOf="@id/sdv"
-        android:maxLines="3"
-        android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout." />
+        <ImageView
+            android:id="@+id/ivFavorites"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:paddingBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="1dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/icon_add_favorites" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></LinearLayout>
+        <ImageView
+            android:id="@+id/ivMap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivFavorites"
+            android:paddingBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="1dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/icon_map" />
 
-    <TextView
-        android:id="@+id/tvEatables"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvDesc"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/sdv"
-        android:drawableLeft="@drawable/icon_eating_joints"
-        android:drawablePadding="8dp"
-        android:text="20" />
+        <ImageView
+            android:id="@+id/ivVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/ivMap"
+            android:paddingBottom="5dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="1dp"
+            android:paddingRight="5dp"
+            android:src="@drawable/icon_video" />
 
-    <TextView
-        android:id="@+id/tvPetrolPump"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvDesc"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/tvEatables"
-        android:drawableLeft="@drawable/icon_petrol_pump"
-        android:drawablePadding="8dp"
-        android:text="15" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/ivVideo"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="35dp"
+            android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/ivStar1"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_toLeftOf="@+id/ivStar2"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_rating_orange" />
 
-    <TextView
-        android:id="@+id/tvServiceCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvEatables"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/sdv"
-        android:drawableLeft="@drawable/icon_mechanic"
-        android:drawablePadding="8dp"
-        android:text="20" />
+        <ImageView
+            android:id="@+id/ivStar2"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_toLeftOf="@+id/ivStar3"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_rating_orange" />
 
-    <TextView
-        android:id="@+id/tvFirstAid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvPetrolPump"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/tvEatables"
-        android:drawableLeft="@drawable/icon_firstaid"
-        android:drawablePadding="8dp"
-        android:text="15" />
+        <ImageView
+            android:id="@+id/ivStar3"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_toLeftOf="@+id/ivStar4"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_rating_orange" />
 
-    <TextView
-        android:id="@+id/tvBikes"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvServiceCenter"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/sdv"
-        android:drawableLeft="@drawable/icon_rides"
-        android:drawablePadding="8dp"
-        android:text="20" />
+        <ImageView
+            android:id="@+id/ivStar4"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_toLeftOf="@+id/ivStar5"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_rating_orange" />
 
-    <TextView
-        android:id="@+id/tvOffers"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvFirstAid"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_toRightOf="@id/tvEatables"
-        android:drawableLeft="@drawable/icon_offers"
-        android:drawablePadding="8dp"
-        android:text="15" />
+        <ImageView
+            android:id="@+id/ivStar5"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/ic_rating_orange" />
+        </LinearLayout>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/sdv"
+            android:layout_width="160dp"
+            android:layout_height="115dp"
+            app:placeholderImage="@color/fourty_of_black"
+            android:layout_below="@+id/lltitile"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
+        <RelativeLayout
+            android:id="@+id/rl_layout"
+            android:layout_width="match_parent"
+            android:layout_height="117dp"
+            android:layout_alignTop="@id/sdv"
+            android:layout_below="@id/ivFavorites"
+            android:layout_toRightOf="@id/sdv">
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="2dp"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:textSize="12sp"
+                android:text=""
+                android:textColor="#4c4b48" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDesc"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="0dp"
+                android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/llfirstlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/llsecondlastlayout"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvEatables"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvDesc"
+                    android:layout_marginLeft="12dp"
+                    android:drawableLeft="@drawable/icon_eating_joints"
+                    android:drawablePadding="6dp"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="#333231" />
+
+                <TextView
+                    android:id="@+id/tvPetrolPump"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tvEatables"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginStart="40dp"
+                    android:layout_toEndOf="@+id/tvEatables"
+                    android:layout_toRightOf="@+id/tvEatables"
+                    android:drawableLeft="@drawable/icon_petrol_pump"
+                    android:drawablePadding="6dp"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="#333231" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llsecondlastlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/lllastlayout"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvServiceCenter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvEatables"
+                    android:layout_marginLeft="12dp"
+                    android:layout_toLeftOf="@+id/tvPetrolPump"
+                    android:layout_toStartOf="@+id/tvPetrolPump"
+                    android:drawableLeft="@drawable/icon_mechanic"
+                    android:drawablePadding="6dp"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="#333231" />
+
+                <TextView
+                    android:id="@+id/tvFirstAid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/tvPetrolPump"
+                    android:layout_alignRight="@+id/tvPetrolPump"
+                    android:layout_below="@+id/tvServiceCenter"
+                    android:layout_marginLeft="22dp"
+                    android:drawableLeft="@drawable/icon_firstaid"
+                    android:drawablePadding="6dp"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="#333231" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lllastlayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="1dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvBikes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/tvServiceCenter"
+                    android:layout_alignStart="@+id/tvServiceCenter"
+                    android:layout_below="@+id/tvFirstAid"
+                    android:layout_marginLeft="12dp"
+                    android:drawableLeft="@drawable/icon_rides"
+                    android:drawablePadding="6dp"
+                    android:text="0"
+                    android:singleLine="true"
+                    android:textColor="#333231" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <!--  <TextView
+              android:id="@+id/tvOffers"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_below="@id/tvFirstAid"
+              android:layout_marginLeft="16dp"
+              android:layout_marginTop="8dp"
+              android:textColor="#333231"
+              android:layout_toRightOf="@id/tvEatables"
+              android:drawableLeft="@drawable/icon_offers"
+              android:drawablePadding="8dp"
+              android:text="15" />-->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_below="@+id/sdv"></View>
+    </RelativeLayout>
 </RelativeLayout>

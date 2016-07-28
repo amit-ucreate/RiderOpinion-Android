@@ -11,13 +11,13 @@
         android:textSize="@dimen/date_text_size" />
 
 
-    <ImageView
+  <!--  <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="4dp"
         android:padding="2dp"
-        android:src="@drawable/icon_star_full_small" />
+        android:src="@drawable/icon_star_full_small" />-->
 
     <TextView
         android:id="@+id/tvEvents"

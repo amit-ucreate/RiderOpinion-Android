@@ -70,20 +70,6 @@ public class ImageLoaderUtil {
         }
     }
 
-    static class DownloadedDrawable extends ColorDrawable {
-        private final WeakReference<BitmapDownloaderTask> bitmapDownloaderTaskReference;
-
-        public DownloadedDrawable(BitmapDownloaderTask bitmapDownloaderTask) {
-            super(Color.BLACK);
-            bitmapDownloaderTaskReference =
-                    new WeakReference<BitmapDownloaderTask>(bitmapDownloaderTask);
-        }
-
-        public BitmapDownloaderTask getBitmapDownloaderTask() {
-            return bitmapDownloaderTaskReference.get();
-        }
-    }
-
     private static boolean cancelPotentialDownload(String url, ImageView imageView) {
         BitmapDownloaderTask bitmapDownloaderTask = getBitmapDownloaderTask(imageView);
 
@@ -108,6 +94,20 @@ public class ImageLoaderUtil {
             }
         }
         return null;
+    }
+
+    static class DownloadedDrawable extends ColorDrawable {
+        private final WeakReference<BitmapDownloaderTask> bitmapDownloaderTaskReference;
+
+        public DownloadedDrawable(BitmapDownloaderTask bitmapDownloaderTask) {
+            super(Color.BLACK);
+            bitmapDownloaderTaskReference =
+                    new WeakReference<BitmapDownloaderTask>(bitmapDownloaderTask);
+        }
+
+        public BitmapDownloaderTask getBitmapDownloaderTask() {
+            return bitmapDownloaderTaskReference.get();
+        }
     }
 }
 

@@ -13,6 +13,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.Locale;
 public class GPSService extends Service implements LocationListener {
 
     // Minimum time fluctuation for next update (in milliseconds)
-    private static final long TIME = 30000;
+    private static final long TIME = 1000;
     // Minimum distance fluctuation for next update (in meters)
     private static final long DISTANCE = 10;
     // saving the context for later use
@@ -46,6 +47,8 @@ public class GPSService extends Service implements LocationListener {
 
     }
 
+
+
     /**
      * Returs the Location
      *
@@ -68,6 +71,8 @@ public class GPSService extends Service implements LocationListener {
                     if (mLocation != null) {
                         mLatitude = mLocation.getLatitude();
                         mLongitude = mLocation.getLongitude();
+
+                        Log.e("location", "yes");
                         isLocationAvailable = true; // setting a flag that
                         // location is available
                         return mLocation;
@@ -91,6 +96,7 @@ public class GPSService extends Service implements LocationListener {
                         mLatitude = mLocation.getLatitude();
                         mLongitude = mLocation.getLongitude();
                         isLocationAvailable = true; // setting a flag that
+                        Log.e("location", "gps not fetch location");
                         // location is available
                         return mLocation;
                     }
@@ -101,6 +107,21 @@ public class GPSService extends Service implements LocationListener {
             if (!isGPSEnabled) {
                 // so asking user to open GPS
                 askUserToOpenGPS();
+            }else{
+                mLocationManager.requestLocationUpdates(
+                        LocationManager.GPS_PROVIDER, TIME, DISTANCE, this);
+                if (mLocationManager != null) {
+                    mLocation = mLocationManager
+                            .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                    if (mLocation != null) {
+                        mLatitude = mLocation.getLatitude();
+                        mLongitude = mLocation.getLongitude();
+                        isLocationAvailable = true; // setting a flag that
+                        Log.e("location", "no gps , no loc");
+                        // location is available
+                        return mLocation;
+                    }
+                }
             }
 
         } catch (Exception e) {
@@ -108,6 +129,7 @@ public class GPSService extends Service implements LocationListener {
         }
         // if reaching here means, location was not available, so setting the
         // flag as false
+        Log.e("location", "false");
         isLocationAvailable = false;
         return null;
     }
@@ -132,7 +154,7 @@ public class GPSService extends Service implements LocationListener {
                 addresses = geocoder.getFromLocation(mLatitude, mLongitude, 1);
             } catch (IOException e1) {
                 e1.printStackTrace();
-                return ("IO Exception trying to get address:" + e1);
+                return ("No address");
             } catch (IllegalArgumentException e2) {
                 // Error message to post in the log
                 String errorString = "Illegal arguments "
@@ -146,23 +168,23 @@ public class GPSService extends Service implements LocationListener {
             if (addresses != null && addresses.size() > 0) {
                 // Get the first address
                 Address address = addresses.get(0);
-				/*
+                /*
 				 * Format the first line of address (if available), city, and
 				 * country name.
 				 */
                 String addressText = String.format(
-                        "%s, %s, %s",
-                        // If there's a street address, add it
-                        address.getMaxAddressLineIndex() > 0 ? address
-                                .getAddressLine(0) : "",
-                        // Locality is usually a city
-                        address.getLocality(),
-                        // The country of the address
-                        address.getCountryName());
+                        "%s", address.getLocality());
+
+
+// address.getCountryName()
+                //// If there's a street address, add it
+               // address.getMaxAddressLineIndex() > 0 ? address
+                //        .getAddressLine(0) : "",
+                // Locality is usually a city
                 // Return the text
                 return addressText;
             } else {
-                return "No address found by the service: Note to the developers, If no address is found by google itself, there is nothing you can do about it.";
+                return "No address";
             }
         } else {
             return "Location Not available";
@@ -209,7 +231,7 @@ public class GPSService extends Service implements LocationListener {
      */
     public void askUserToOpenGPS() {
         AlertDialog.Builder mAlertDialog = new AlertDialog.Builder(mContext);
-
+        mAlertDialog.setCancelable(false);
         // Setting Dialog Title
         mAlertDialog.setTitle("Location not available, Open GPS?")
                 .setMessage("Activate GPS to use use location services?")
@@ -222,6 +244,7 @@ public class GPSService extends Service implements LocationListener {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
+                        askUserToOpenGPS();
                     }
                 }).show();
     }

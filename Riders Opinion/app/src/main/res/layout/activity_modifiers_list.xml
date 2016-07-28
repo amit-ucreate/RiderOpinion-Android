@@ -36,13 +36,13 @@
                 android:padding="16dp"
                 android:src="@drawable/menu_icon" />
 
-            <ImageView
+           <!-- <ImageView
                 android:id="@+id/ivFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:padding="16dp"
-                android:src="@drawable/icon_filter" />
+                android:src="@drawable/icon_filter" />-->
 
 
         </android.support.v7.widget.Toolbar>
@@ -70,9 +70,11 @@
                     android:text="HARLEY DAVIDSON-STREET 750"
                     android:textColor="@color/light_brown" />
 
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_margin="8dp">
 
                     <RelativeLayout
@@ -260,6 +262,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:layout_marginTop="5dp"
                     android:divider="@color/ten_of_black"
                     android:dividerHeight="2dp" />
 
@@ -270,6 +273,7 @@
                     android:background="#8555"
                     android:gravity="center"
                     android:padding="12dp"
+                    android:visibility="gone"
                     android:text="BANNER 50 PX HEIGHT"
                     android:textColor="@android:color/white"
                     android:textSize="22sp" />
@@ -297,6 +301,7 @@
                     android:paddingTop="8dp">
 
                     <Button
+                        android:id="@+id/btUpdateProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentLeft="true"
@@ -307,6 +312,7 @@
                         android:background="@drawable/icon_menu_edit" />
 
                     <Button
+                        android:id="@+id/btFullProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"

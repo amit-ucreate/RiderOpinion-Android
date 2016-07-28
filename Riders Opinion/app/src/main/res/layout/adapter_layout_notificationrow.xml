@@ -20,7 +20,6 @@
         android:layout_marginLeft="60dp"
         android:layout_marginRight="48dp"
         android:ellipsize="end"
-
         android:singleLine="true"
         android:text=""
         android:textColor="@android:color/black"

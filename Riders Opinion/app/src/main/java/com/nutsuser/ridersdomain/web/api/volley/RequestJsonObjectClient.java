@@ -19,33 +19,32 @@ import java.util.Map;
  */
 public class RequestJsonObjectClient extends Request<JSONObject> {
 
-    private Response.Listener<JSONObject> jsonObjectListener;
-    private Map<String, String> params;
     JSONObject jsonparams;
     String mString;
+    private Response.Listener<JSONObject> jsonObjectListener;
+    private Map<String, String> params;
 
 
     public RequestJsonObjectClient(int method, String url, Map<String, String> params,
-                             Response.ErrorListener errorListener,Response.Listener<JSONObject> reponseListener) {
+                                   Response.ErrorListener errorListener, Response.Listener<JSONObject> reponseListener) {
         super(method, url, errorListener);
         this.jsonObjectListener = reponseListener;
         this.params = params;
     }
 
-    public RequestJsonObjectClient(String url,JSONObject params,int method,
-                             Response.ErrorListener errorListener,Response.Listener<JSONObject> reponseListener) {
+    public RequestJsonObjectClient(String url, JSONObject params, int method,
+                                   Response.ErrorListener errorListener, Response.Listener<JSONObject> reponseListener) {
         super(method, url, errorListener);
         this.jsonObjectListener = reponseListener;
         this.jsonparams = params;
     }
 
-    public RequestJsonObjectClient(String url,String params,
-                             Response.ErrorListener errorListener,Response.Listener<JSONObject> reponseListener,int method) {
+    public RequestJsonObjectClient(String url, String params,
+                                   Response.ErrorListener errorListener, Response.Listener<JSONObject> reponseListener, int method) {
         super(method, url, errorListener);
         this.jsonObjectListener = reponseListener;
         this.mString = params;
     }
-
 
 
     protected Map<String, String> getParams()

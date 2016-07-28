@@ -13,9 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.nutsuser.ridersdomain.R;
-import com.nutsuser.ridersdomain.web.pojos.ProductMultipleSelect;
 import com.nutsuser.ridersdomain.web.pojos.ProductMultipleSelectAssistance;
-import com.nutsuser.ridersdomain.web.pojos.VehicleDetails;
 
 import java.util.ArrayList;
 
@@ -26,13 +24,19 @@ public class PlanRidePostAdapterAssistance extends BaseAdapter {
 
     Context mContext;
     ViewHolder holder;
-    private LayoutInflater inflater;
     ArrayList<ProductMultipleSelectAssistance> objects;
+    OnCheckedChangeListener myCheckChangList = new OnCheckedChangeListener() {
+        public void onCheckedChanged(CompoundButton buttonView,
+                                     boolean isChecked) {
+            getProduct((Integer) buttonView.getTag()).box = isChecked;
+        }
+    };
+    private LayoutInflater inflater;
 
     public PlanRidePostAdapterAssistance(Context context, ArrayList<ProductMultipleSelectAssistance> objects) {
 
         mContext = context;
-        this.objects=objects;
+        this.objects = objects;
         this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -50,6 +54,7 @@ public class PlanRidePostAdapterAssistance extends BaseAdapter {
     public Object getItem(int position) {
         return objects.get(position);
     }
+
     public ProductMultipleSelectAssistance getProduct(int position) {
         return ((ProductMultipleSelectAssistance) getItem(position));
     }
@@ -62,6 +67,7 @@ public class PlanRidePostAdapterAssistance extends BaseAdapter {
         }
         return box;
     }
+
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View rowView = convertView;
@@ -81,16 +87,11 @@ public class PlanRidePostAdapterAssistance extends BaseAdapter {
         holder.cbBox.setOnCheckedChangeListener(myCheckChangList);
         holder.cbBox.setTag(position);
         Log.e("NMAE:", "" + p._name);
-        Log.e("String:",""+p.toString());
+        Log.e("String:", "" + p.toString());
 
         return rowView;
     }
-    OnCheckedChangeListener myCheckChangList = new OnCheckedChangeListener() {
-         public void onCheckedChanged(CompoundButton buttonView,
-                                 boolean isChecked) {
-        getProduct((Integer) buttonView.getTag()).box = isChecked;
-    }
-};
+
     static class ViewHolder {
         TextView name, address, title;
         FrameLayout frame;

@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_brown">
+
+
+        <TextView
+            android:id="@+id/tvTitleToolbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="My Friends"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/title_text_size"
+            android:textStyle="bold" />
+
+
+        <ImageView
+            android:id="@+id/ivMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="16dp"
+            android:src="@drawable/menu_icon" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:id="@+id/LvRequest"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:id="@+id/fmRequest"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:background="@color/white"
+                        android:clickable="false">
+
+                        <TextView
+                            android:id="@+id/bt_request"
+                            android:layout_width="wrap_content"
+                            android:layout_height="25dp"
+                            android:layout_gravity="center_vertical|left"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="40dp"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:text="REQUEST"
+                            android:textColor="@color/light_brown"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <com.nutsuser.ridersdomain.view.CircleButtonText
+                            android:id="@+id/tvPastCount"
+                            android:layout_width="20dip"
+                            android:layout_height="20dip"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="1dp"
+                            android:background="@drawable/circularshapebutton"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="#DC602C"
+                            android:textSize="14dp"
+                            app:cb_color="#ffffff"
+                            app:cb_pressedRingWidth="8dip" />
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/my_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:scrollbars="vertical" />
+
+                    <!--
+
+                <TextView
+                    android:id="@+id/empty_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="No Records"
+                    android:visibility="gone" />
+                    -->
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LvFriends"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+
+                    <LinearLayout
+                        android:id="@+id/fmCurrent"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_weight="1"
+                        android:background="@color/white"
+                        android:clickable="false">
+
+                        <TextView
+                            android:id="@+id/bt_current"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginRight="40dp"
+                            android:background="@android:color/transparent"
+                            android:clickable="false"
+                            android:gravity="center"
+                            android:text="FRIENDS"
+                            android:textColor="@color/light_brown"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <com.nutsuser.ridersdomain.view.CircleButtonText
+                            android:id="@+id/tvUpcomingCount"
+                            android:layout_width="20dip"
+                            android:layout_height="20dip"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="1dp"
+                            android:background="@drawable/circularshapebutton"
+                            android:gravity="center"
+                            android:text="0"
+                            android:textColor="#DC602C"
+                            android:textSize="14dp"
+                            app:cb_color="#ffffff"
+                            app:cb_pressedRingWidth="8dip" />
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/my_recycler_view_friends"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:scrollbars="vertical" />
+
+
+                    <TextView
+                        android:id="@+id/empty_view_friends"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="No Records"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="bottom"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tvSubmit"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#8555"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="BANNER 50 PX HEIGHT"
+                        android:textColor="@android:color/white"
+                        android:textSize="22sp" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/empty_friends"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="No Records Found"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/lvSlidingMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="#8A3C16"
+            android:clickable="true"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rlProfile"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:background="@color/dark_brown"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp">
+
+                <Button
+                    android:id="@+id/btUpdateProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/icon_menu_edit" />
+
+                <Button
+                    android:id="@+id/btFullProfile"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/icon_menu_logout" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_alignParentTop="true"
+                    android:gravity="top|center"
+
+                    android:singleLine="true"
+                    android:text=""
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/title_text_size" />
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvDp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_below="@+id/tvName"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="7dp"
+                    app:placeholderImage="@color/white"
+                    app:roundAsCircle="true" />
+
+
+                <!--  <TextView
+                      android:id="@+id/tvAddress"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_alignLeft="@id/tvName"
+                      android:layout_below="@id/tvName"
+                      android:layout_toLeftOf="@id/sdvDp"
+                      android:text="H.No.293, Sector 28, Chandigarh"
+                      android:textColor="@android:color/white" />-->
+
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+
+                <GridView
+                    android:id="@+id/gridView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/rlProfile"
+                    android:horizontalSpacing="1dp"
+                    android:numColumns="2"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="1dp">
+
+                </GridView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"></View>
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#8A3C16">
+
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v4.widget.DrawerLayout>
+    </LinearLayout>
+</RelativeLayout>

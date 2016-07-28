@@ -2,7 +2,23 @@
     <string name="app_name">Riders Opinion</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
-    <string name="facebook_app_id">200205186997069</string>
+    <string name="action_settings">Settings</string>    <!--
+    <string name="facebook_app_id">200205186997069</string> -->
+    <string name="facebook_app_id">1264742963538161</string>
     <string name="player_error">Error initializing YouTube player</string>
+    <string name="rider_livedream">Don\'t have a Superbike? No Problem</string>
+    <string name="rider_live_dream">RidersOpinion will let you live your dream and be \n the part of memories</string>
+
+<!--============= navigation items List======== -->
+    <string name="my_rides">My Rides</string>
+    <string name="my_messages">My Messages</string>
+    <string name="my_friends">My Friends</string>
+    <string name="my_chats">Chats</string>
+    <string name="fav_destinations">Favourite Destinations</string>
+    <string name="notifications">Notifications</string>
+    <string name="settings">Settings</string>
+    <string name="near_by_friends">Near By Friends</string>
+
+    <string name="riders_alert">Riders Alert</string>
+
 </resources>

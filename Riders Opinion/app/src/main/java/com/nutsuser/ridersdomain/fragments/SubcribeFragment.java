@@ -2,6 +2,7 @@ package com.nutsuser.ridersdomain.fragments;
 
 
 import android.app.Activity;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.utils.ImageLoaderUtil;
 import com.nutsuser.ridersdomain.utils.UtilsSubcribe;
@@ -55,16 +56,23 @@ public class SubcribeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.photo_layout, container, false);
-       // TextView titleTextView = (TextView) view.findViewById(R.id.title);
+        // TextView titleTextView = (TextView) view.findViewById(R.id.title);
         //If we have the requirement of adding, removing or changing the fragment data once it has been instantiated, We will set the data explicitly in the fragment through a getter and setter.
         //Bundle bundle = getArguments();
         //title = bundle.getString(Utils.EXTRA_TITLE);
         //titleTextView.setText(bundle.getString(Utils.EXTRA_TITLE));
-       // title = dummyItem.getImageTitle();
-       // titleTextView.setText(title);
-        ImageView imageView = (ImageView) view.findViewById(R.id.image);
+        // title = dummyItem.getImageTitle();
+        // titleTextView.setText(title);
+        SimpleDraweeView imageView = (SimpleDraweeView) view.findViewById(R.id.image);
         //ImageLoaderUtil.downloadImage(bundle.getString(Utils.EXTRA_IMAGE_URL), imageView);
         ImageLoaderUtil.downloadImage(dummyItem.getImageUrl(), imageView);
+        if (dummyItem.getImageUrl() != null) {
+            String milestonesJsonInString = dummyItem.getImageUrl().toString();
+            milestonesJsonInString = milestonesJsonInString.replace("\\\"", "\"");
+            milestonesJsonInString = milestonesJsonInString.replace("\"{", "{");
+            milestonesJsonInString = milestonesJsonInString.replace("}\"", "}");
+            imageView.setImageURI(Uri.parse(milestonesJsonInString));
+        }
         Log.i(TAG, "****PagerFragment onCreateView()#" + title);
         return view;
     }
@@ -133,7 +141,6 @@ public class SubcribeFragment extends Fragment {
 
         return dummyItem;
     }
-
 
 
     public void setDummyItem(UtilsSubcribe.DummyItem dummyItem) {

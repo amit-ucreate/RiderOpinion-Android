@@ -3,7 +3,6 @@ package com.nutsuser.ridersdomain.services;
 import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Service;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -19,28 +18,37 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
+import com.google.gson.JsonObject;
+import com.nutsuser.ridersdomain.activities.TrackingScreen;
+import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
 import com.nutsuser.ridersdomain.utils.NetworkUtil;
 import com.nutsuser.ridersdomain.utils.PrefsManager;
+import com.nutsuser.ridersdomain.web.api.FileUploadService;
+import com.nutsuser.ridersdomain.web.api.ServiceGenerator;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+import retrofit.Callback;
+import retrofit.RetrofitError;
+
 public class LocationService extends Service implements LocationListener {
-    private final Handler handler = new Handler();
-    int connectionStatus;
-    boolean isRunning;
-    PrefsManager prefsManager;
     // Minimum time fluctuation for next update (in milliseconds)
     private static final long TIME = 30000;
     // Minimum distance fluctuation for next update (in meters)
     private static final long DISTANCE = 20;
-    // saving the context for later use
-
+    private final Handler handler = new Handler();
     // if Location co-ordinates are available using GPS or Network
     public boolean isLocationAvailable = false;
     // Declaring a Location Manager
     protected LocationManager mLocationManager;
+    int connectionStatus;
+    boolean isRunning;
+    String latitudeLocation, longitudeLocation;
+    PrefsManager prefsManager;
+    // saving the context for later use
+    String AccessToken, UserId;
     // if GPS is enabled
     boolean isGPSEnabled = false;
     // if Network is enabled
@@ -52,10 +60,19 @@ public class LocationService extends Service implements LocationListener {
 
     private Runnable sendUpdatesToUI = new Runnable() {
         public void run() {
-            Log.e("sendUpdatesToUI","RUNNING");
-            handler.postDelayed(this, 5000); // 5 seconds
+            Log.e("sendUpdatesToUI", "RUNNING");
+
+            if (ApplicationGlobal.isNetworkConnected(LocationService.this)) {
+                TrackingDetailsUpdate();
+            } else {
+
+            }
+
+            handler.postDelayed(this, 60000); // 1 min
+
         }
     };
+
     public LocationService() {
     }
 
@@ -161,7 +178,7 @@ public class LocationService extends Service implements LocationListener {
                 // Get the first address
                 Address address = addresses.get(0);
                 /*
-				 * Format the first line of address (if available), city, and
+                 * Format the first line of address (if available), city, and
 				 * country name.
 				 */
                 String addressText = String.format(
@@ -257,6 +274,8 @@ public class LocationService extends Service implements LocationListener {
     public void onLocationChanged(Location location) {
         mLatitude = location.getLatitude();
         mLongitude = location.getLongitude();
+        latitudeLocation = Double.toString(mLatitude);
+        longitudeLocation = Double.toString(mLongitude);
     }
 
     @Override
@@ -285,21 +304,56 @@ public class LocationService extends Service implements LocationListener {
     public void onCreate() {
         super.onCreate();
         connectionStatus = NetworkUtil.getConnectionStatus(this);
-        prefsManager=new PrefsManager(this);
-
+        prefsManager = new PrefsManager(this);
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
 
-        isRunning=prefsManager.isServicesRunning();
+        isRunning = prefsManager.isServicesRunning();
         // If we have network connection
         if (isRunning && (connectionStatus == NetworkUtil.TYPE_MOBILE ||
                 connectionStatus == NetworkUtil.TYPE_WIFI)) {
-            Log.e("onStartCommand","RUNNING");
-            handler.postDelayed(sendUpdatesToUI, 1000); // 1 second
+            Log.e("onStartCommand", "RUNNING");
+            handler.postDelayed(sendUpdatesToUI, 10000); // 10 second
         }
         return START_NOT_STICKY;
+    }
+
+    /**
+     * Tracking Details info update .
+     */
+    public void TrackingDetailsUpdate() {
+
+        Log.d("TrackingDetailsUpdate", "TrackingDetailsUpdate");
+        try {
+            // prefsManager = new PrefsManager(LocationService.this);
+            AccessToken = prefsManager.getToken();
+            UserId = prefsManager.getCaseId();
+
+            FileUploadService service = ServiceGenerator.createService(FileUploadService.BASE_URL);
+            service.tracking_info(UserId, TrackingScreen.eventId, latitudeLocation, longitudeLocation, AccessToken, new Callback<JsonObject>() {
+                @Override
+                public void success(JsonObject jsonObject, retrofit.client.Response response) {
+                    Log.d("Upload", "success");
+                    Log.e("jsonObject:", "" + jsonObject.toString());
+                    Log.e("latitudeLocation:", "" + latitudeLocation);
+                    Log.e("longitudeLocation:", "" + longitudeLocation);
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+                    Log.e("error:", "" + error);
+                }
+            });
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
     }
 
 }

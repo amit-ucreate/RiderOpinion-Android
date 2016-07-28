@@ -22,7 +22,7 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/title_text_size"
             android:textStyle="bold" />
-
+<!--
         <ImageView
             android:id="@+id/ivMenu"
             android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
             android:layout_gravity="right"
             android:padding="16dp"
             android:src="@drawable/menu_icon" />
-
+-->
 
     </android.support.v7.widget.Toolbar>
 
@@ -58,8 +58,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center_horizontal"
                     android:layout_marginTop="15dp"
-                    android:text=""
                     android:singleLine="true"
+                    android:text=""
                     android:textColor="@color/light_brown" />
 
                 <TextView
@@ -83,7 +83,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <com.facebook.drawee.view.SimpleDraweeView
+                  <!--  <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/sdvSponsoredAdImage1"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -164,7 +164,7 @@
                         android:layout_below="@id/tvSponsoredAdReviews1"
                         android:layout_toRightOf="@id/sdvSponsoredAdImage1"
                         android:text="Kasauli, India"
-                        android:textSize="11sp" />
+                        android:textSize="11sp" />-->
 
                 </RelativeLayout>
 
@@ -173,7 +173,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                    <com.facebook.drawee.view.SimpleDraweeView
+                 <!--   <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/sdvSponsoredAdImage2"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -252,7 +252,7 @@
                         android:layout_toRightOf="@id/sdvSponsoredAdImage2"
                         android:text="Kasauli, India"
                         android:textSize="11sp" />
-
+-->
                 </RelativeLayout>
 
 
@@ -263,7 +263,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="5 OTHER RIDES ALSO PLANNED"
+                android:textStyle="bold"
+                android:text="0 OTHER RIDES ALSO PLANNED"
                 android:textColor="@color/light_brown" />
 
             <View

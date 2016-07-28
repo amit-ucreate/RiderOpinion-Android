@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class TrackUserList {
     String success;
     String message;
+    ArrayList<TrackUserListData> data = new ArrayList<>();
 
     public String getSuccess() {
         return success;
@@ -32,6 +33,4 @@ public class TrackUserList {
     public void setData(ArrayList<TrackUserListData> data) {
         this.data = data;
     }
-
-    ArrayList<TrackUserListData> data=new ArrayList<>();
 }

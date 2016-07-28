@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/light_brown">
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:visibility="gone"
+                android:src="@drawable/icon_back" />
+
+            <TextView
+                android:id="@+id/tvTitleToolbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="EVENT LIST"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/title_text_size"
+                android:textStyle="bold" />
+
+
+            <ImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:padding="16dp"
+                android:src="@drawable/menu_icon" />
+
+           <!-- <ImageView
+                android:id="@+id/ivFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:padding="16dp"
+                android:src="@drawable/icon_filter" />-->
+
+
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v4.widget.DrawerLayout
+            android:id="@+id/drawer_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:fadeScrollbars="true"
+                    android:scrollbars="vertical" />
+
+
+
+                <LinearLayout
+                    android:id="@+id/llCalender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/lvSlidingMenu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="#8A3C16"
+                android:clickable="true"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rlProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:background="@color/dark_brown"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp">
+
+                    <Button
+                        android:id="@+id/btUpdateProfile"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+
+                        android:layout_marginTop="9dp"
+                        android:background="@drawable/icon_menu_edit" />
+
+                    <Button
+                        android:id="@+id/btFullProfile"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="10dp"
+
+                        android:layout_marginTop="9dp"
+                        android:background="@drawable/icon_menu_logout" />
+
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:layout_alignParentTop="true"
+                        android:gravity="top|center"
+
+                        android:singleLine="true"
+                        android:text="VISHAL SHAHI"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/title_text_size" />
+
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/sdvDp"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_below="@+id/tvName"
+                        android:layout_centerInParent="true"
+                        android:layout_marginTop="7dp"
+                        app:placeholderImage="@color/white"
+                        app:roundAsCircle="true" />
+
+
+                    <!--  <TextView
+                          android:id="@+id/tvAddress"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_alignLeft="@id/tvName"
+                          android:layout_below="@id/tvName"
+                          android:layout_toLeftOf="@id/sdvDp"
+                          android:text="H.No.293, Sector 28, Chandigarh"
+                          android:textColor="@android:color/white" />-->
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+
+                    android:orientation="vertical">
+
+
+                    <GridView
+                        android:id="@+id/gridView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@+id/rlProfile"
+                        android:horizontalSpacing="1dp"
+
+                        android:numColumns="2"
+                        android:stretchMode="columnWidth"
+                        android:verticalSpacing="1dp">
+
+                    </GridView>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/white"></View>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#8A3C16"></FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v4.widget.DrawerLayout>
+
+    </LinearLayout>
+    <!-- <FrameLayout
+         android:layout_width="match_parent"
+         android:layout_height="55dp"
+         android:background="#8555"
+         android:layout_gravity="bottom"
+         android:layout_alignParentBottom="true"
+
+         android:id="@+id/mainbanner">
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:text="BANNER 50 PX HEIGHT"
+             android:gravity="center"
+             android:textSize="22sp"
+             android:layout_gravity="center_vertical|center"
+             android:textColor="@android:color/white"/>
+     </FrameLayout>-->
+</RelativeLayout>

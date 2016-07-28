@@ -10,14 +10,14 @@ import java.lang.ref.WeakReference;
  * Created by noor on 11/04/15.
  */
 class BitmapDownloaderTask extends AsyncTask<String, Void, Bitmap> {
-    private String url;
     private final WeakReference<ImageView> imageViewReference;
+    private String url;
 
     public BitmapDownloaderTask(ImageView imageView) {
         imageViewReference = new WeakReference<ImageView>(imageView);
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return url;
     }
 

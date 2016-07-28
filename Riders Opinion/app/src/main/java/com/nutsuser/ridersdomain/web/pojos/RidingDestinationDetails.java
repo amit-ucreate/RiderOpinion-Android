@@ -20,6 +20,7 @@ public class RidingDestinationDetails {
     String destLongitude;
     String destLatitude;
     String images;
+    String state;
 
     public String getDestId() {
         return destId;
@@ -65,6 +66,12 @@ public class RidingDestinationDetails {
         return riders;
     }
 
+    public String getState() {
+        return state;
+    }
+    public void setState(String state) {
+        this.state = state;
+    }
     public void setRiders(String riders) {
         this.riders = riders;
     }

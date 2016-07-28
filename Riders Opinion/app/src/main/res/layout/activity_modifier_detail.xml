@@ -36,14 +36,14 @@
                 android:padding="16dp"
                 android:src="@drawable/menu_icon" />
 
-            <ImageView
+           <!-- <ImageView
                 android:id="@+id/ivFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:padding="16dp"
                 android:src="@drawable/icon_filter" />
-
+-->
 
         </android.support.v7.widget.Toolbar>
 
@@ -69,14 +69,15 @@
                         android:layout_gravity="center"
                         android:drawableLeft="@drawable/icon_rides"
                         android:drawablePadding="8dp"
-                        android:drawableRight="@drawable/icon_profile_down_arrow"
                         android:padding="8dp"
+                        android:textSize="18sp"
                         android:text="HARLEY DAVIDSON-STREET 750"
                         android:textColor="@color/light_brown" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:visibility="gone"
                         android:layout_margin="8dp">
 
                         <RelativeLayout
@@ -262,6 +263,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
+                        android:layout_marginBottom="5dp"
                         android:background="@color/ten_of_black" />
 
                     <TextView
@@ -270,8 +272,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:drawablePadding="8dp"
+                        android:layout_marginTop="10dp"
                         android:drawableRight="@drawable/icon_batch"
-                        android:text="EMPIRE AUTO SALES"
+                        android:text=""
                         android:textColor="@android:color/black"
                         android:textSize="@dimen/title_text_size"
                         android:textStyle="bold" />
@@ -283,6 +286,7 @@
                         android:padding="8dp">
 
                         <com.facebook.drawee.view.SimpleDraweeView
+                            android:id="@+id/sdv"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
                             android:layout_weight="1.2"
@@ -298,46 +302,52 @@
                                 android:id="@+id/ivStar1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:src="@drawable/icon_star_full_small" />
+                                android:visibility="gone"
+                                android:src="@drawable/icon_star_empty" />
 
                             <ImageView
                                 android:id="@+id/ivStar2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toRightOf="@id/ivStar1"
-                                android:src="@drawable/icon_star_full_small" />
+                                android:visibility="gone"
+                                android:src="@drawable/icon_star_empty" />
 
                             <ImageView
                                 android:id="@+id/ivStar3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:visibility="gone"
                                 android:layout_toRightOf="@id/ivStar2"
-                                android:src="@drawable/icon_star_full_small" />
+                                android:src="@drawable/icon_star_empty" />
 
                             <ImageView
                                 android:id="@+id/ivStar4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toRightOf="@id/ivStar3"
-                                android:src="@drawable/icon_star_full_small" />
+                                android:visibility="gone"
+                                android:src="@drawable/icon_star_empty" />
 
                             <ImageView
                                 android:id="@+id/ivStar5"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_toRightOf="@id/ivStar4"
-                                android:src="@drawable/icon_star_full_small" />
+                                android:visibility="gone"
+                                android:src="@drawable/icon_star_empty" />
 
                             <TextView
-                                android:id="@+id/tvReviews"
+                                android:id="@+id/tvAddress"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@id/ivStar1"
                                 android:layout_marginLeft="16dp"
-                                android:text="102 reviews and opinions"
+                                android:maxLines="4"
+                                android:lines="4"
+                                android:text=""
                                 android:textSize="@dimen/date_text_size" />
-
-                            <ImageView
+                               <ImageView
                                 android:id="@+id/ivGetLocation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -346,6 +356,7 @@
                                 android:src="@drawable/icon_get_direction" />
 
                             <ImageView
+                                android:id="@+id/ivVideo"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
@@ -354,12 +365,13 @@
                                 android:src="@drawable/icon_video" />
 
                             <ImageView
+                                android:id="@+id/ivFav"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentBottom="true"
                                 android:layout_alignParentRight="true"
                                 android:padding="16dp"
-                                android:src="@drawable/icon_star_full" />
+                                android:src="@drawable/icon_add_favorites" />
 
                         </RelativeLayout>
 
@@ -367,16 +379,17 @@
 
                     <TextView
                         android:id="@+id/tvSpeciality"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawableLeft="@drawable/icon_notify"
                         android:drawablePadding="8dp"
                         android:padding="8dp"
-                        android:text="Our speciality is arm sleeves. Lorem Ipsum is simply dummy text of the printing and typesetting industry" />
+                        android:text="" />
 
                     <LinearLayout
+                        android:id="@+id/llofferandProduct"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="30dp">
 
                         <TextView
                             android:id="@+id/tvOffers"
@@ -386,10 +399,11 @@
                             android:layout_weight="1"
                             android:background="@color/light_brown"
                             android:gravity="center"
-                            android:padding="8dp"
-                            android:text="OFFERS(99)"
+                            android:paddingTop="1dp"
+                            android:paddingBottom="2dp"
+                            android:text="OFFERS(0)"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/title_text_size" />
+                            android:textSize="@dimen/simple_title_text_size" />
 
                         <TextView
                             android:id="@+id/tvProducts"
@@ -397,12 +411,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="1dp"
                             android:layout_weight="1"
-                            android:background="@color/light_brown"
+                            android:background="#C6B9B3"
                             android:gravity="center"
-                            android:padding="8dp"
-                            android:text="PRODUCTS(99)"
+                            android:paddingTop="1dp"
+                            android:paddingBottom="2dp"
+                            android:text="PRODUCTS(0)"
                             android:textColor="@android:color/white"
-                            android:textSize="@dimen/title_text_size" />
+                            android:textSize="@dimen/simple_title_text_size" />
 
                     </LinearLayout>
 
@@ -414,18 +429,29 @@
                         android:drawableRight="@drawable/right_arrow_black"
                         android:gravity="center"
                         android:padding="12dp"
+                        android:visibility="gone"
                         android:text="VIEW ALL"
                         android:textColor="@android:color/black" />
 
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rvItems"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:layout_marginBottom="16dp"
-                        android:fadeScrollbars="true"
-                        android:scrollbars="horizontal" />
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
 
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rvItems"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="16dp"
+                            android:layout_gravity="start"
+
+                            android:fadeScrollbars="true"
+                            android:layout_marginLeft="1dp"
+                            android:scrollbars="horizontal" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -452,6 +478,7 @@
                     android:paddingTop="8dp">
 
                     <Button
+                        android:id="@+id/btUpdateProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentLeft="true"
@@ -462,6 +489,7 @@
                         android:background="@drawable/icon_menu_edit" />
 
                     <Button
+                        android:id="@+id/btFullProfile"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_alignParentRight="true"

@@ -2,7 +2,12 @@ package com.nutsuser.ridersdomain.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.youtube.player.YouTubeBaseActivity;
@@ -11,12 +16,15 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.nutsuser.ridersdomain.R;
 import com.nutsuser.ridersdomain.utils.ApplicationGlobal;
+import com.rollbar.android.Rollbar;
 
 /**
  * Created by Amit Agnihotri on 03-02-2016.
  */
 public class YouTubeVideoPlay extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
+    Toolbar toolbar;
+    ImageView ivBack;
     private static final int RECOVERY_REQUEST = 1;
     String mStringYoutube;
     private YouTubePlayerView youTubeView;
@@ -28,17 +36,31 @@ public class YouTubeVideoPlay extends YouTubeBaseActivity implements YouTubePlay
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_youtube);
+        try {
+            toolbar = (Toolbar) findViewById(R.id.toolbar);
+            ivBack = (ImageView) findViewById(R.id.ivBack);
 
-        youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
-        mStringYoutube = getIntent().getStringExtra("VIDEOURL");
-        Log.e("mStringYoutube:", "" + mStringYoutube);
+            youTubeView = (YouTubePlayerView) findViewById(R.id.youtube_view);
+            mStringYoutube = getIntent().getStringExtra("VIDEOURL");
+            Log.e("mStringYoutube:", "" + mStringYoutube);
 
-        youTubeView.initialize(ApplicationGlobal.YOUTUBE_API_KEY, this);
+            youTubeView.initialize(ApplicationGlobal.YOUTUBE_API_KEY, this);
 
-        playerStateChangeListener = new MyPlayerStateChangeListener();
-        playbackEventListener = new MyPlaybackEventListener();
-
+            playerStateChangeListener = new MyPlayerStateChangeListener();
+            playbackEventListener = new MyPlaybackEventListener();
+            ivBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
+        }catch(Exception e){
+            Rollbar.reportException(e, "minor", "YouTubeVideoPlay screen on Create");
+        }
     }
+
+
+
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer player, boolean wasRestored) {
@@ -48,6 +70,7 @@ public class YouTubeVideoPlay extends YouTubeBaseActivity implements YouTubePlay
 
         if (!wasRestored) {
             player.cueVideo(mStringYoutube); // Plays https://www.youtube.com/watch?v=fhWaJi1Hsfo
+
         }
     }
 
@@ -57,7 +80,7 @@ public class YouTubeVideoPlay extends YouTubeBaseActivity implements YouTubePlay
             errorReason.getErrorDialog(this, RECOVERY_REQUEST).show();
         } else {
             String error = String.format(getString(R.string.player_error), errorReason.toString());
-            Toast.makeText(this, error, Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -82,19 +105,19 @@ public class YouTubeVideoPlay extends YouTubeBaseActivity implements YouTubePlay
         @Override
         public void onPlaying() {
             // Called when playback starts, either due to user action or call to play().
-            showMessage("Playing");
+           // showMessage("Playing");
         }
 
         @Override
         public void onPaused() {
             // Called when playback is paused, either due to user action or call to pause().
-            showMessage("Paused");
+            //showMessage("Paused");
         }
 
         @Override
         public void onStopped() {
             // Called when playback stops for a reason other than being paused.
-            showMessage("Stopped");
+            //showMessage("Stopped");
         }
 
         @Override
@@ -121,6 +144,7 @@ public class YouTubeVideoPlay extends YouTubeBaseActivity implements YouTubePlay
         public void onLoaded(String s) {
             // Called when a video is done loading.
             // Playback methods such as play(), pause() or seekToMillis(int) may be called after this callback.
+            player.play();
         }
 
         @Override

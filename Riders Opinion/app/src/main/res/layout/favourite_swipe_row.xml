@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/tools"
     xmlns:swipe="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -18,6 +18,7 @@
 
 
         <FrameLayout
+            android:id="@+id/fmremove"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -73,12 +74,20 @@
     <!-- Top View,  Row itemView of RecyclerView -->
 
     <RelativeLayout
+        android:id="@+id/rllayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="5dp">
-
-        <FrameLayout
+        <ImageView
+            android:id="@+id/ivstart"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/ic_divider"/>
+        <FrameLayout
+            android:layout_below="@+id/ivstart"
+            android:layout_width="match_parent"
+            android:id="@+id/fmDestiList"
             android:layout_height="84dp">
 
             <com.facebook.drawee.view.SimpleDraweeView
@@ -88,7 +97,6 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="left|center_vertical"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/ic_dummy_publicprofile"
                 app:roundAsCircle="true" />
 
             <LinearLayout
@@ -105,55 +113,60 @@
                         android:id="@+id/tvTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="4dp"
-                        android:text="Kasauli"
-                        android:textSize="@dimen/title_text_size" />
+                        android:layout_marginBottom="0dp"
+                        android:text="dsfg"
+                        android:singleLine="true"
+                        android:textSize="16sp" />
 
                     <ImageView
                         android:id="@+id/ivStar1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="10dp"
                         android:layout_alignBottom="@id/tvTitle"
-                        android:layout_marginBottom="4dp"
-                        android:layout_marginLeft="12dp"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="1dp"
                         android:layout_toRightOf="@id/tvTitle"
-                        android:src="@drawable/icon_star_full_small" />
+                        android:src="@drawable/ic_ratting_grey" />
 
                     <ImageView
                         android:id="@+id/ivStar2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="10dp"
                         android:layout_alignBottom="@id/tvTitle"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="6dp"
                         android:layout_toRightOf="@id/ivStar1"
-                        android:src="@drawable/icon_star_full_small" />
+                        android:layout_marginRight="1dp"
+                        android:src="@drawable/ic_ratting_grey" />
 
                     <ImageView
                         android:id="@+id/ivStar3"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="10dp"
                         android:layout_alignBottom="@id/tvTitle"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="6dp"
                         android:layout_toRightOf="@id/ivStar2"
-                        android:src="@drawable/icon_star_full_small" />
+                        android:layout_marginRight="1dp"
+                        android:src="@drawable/ic_ratting_grey" />
 
                     <ImageView
                         android:id="@+id/ivStar4"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="10dp"
                         android:layout_alignBottom="@id/tvTitle"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="6dp"
                         android:layout_toRightOf="@id/ivStar3"
-                        android:src="@drawable/icon_star_half_small" />
+                        android:layout_marginRight="1dp"
+                        android:src="@drawable/ic_ratting_grey" />
 
                     <ImageView
                         android:id="@+id/ivStar5"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="10dp"
                         android:layout_alignBottom="@id/tvTitle"
-                        android:layout_marginBottom="4dp"
+                        android:layout_marginBottom="6dp"
                         android:layout_toRightOf="@id/ivStar4"
-                        android:src="@drawable/icon_star_empty_small" />
+                        android:src="@drawable/ic_ratting_grey" />
 
                     <ImageView
                         android:id="@+id/ivVideo"
@@ -176,13 +189,11 @@
 
                 <TextView
                     android:id="@+id/tvDesc"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
-
                     android:maxLines="2"
-                    android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout." />
+                    android:text="" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -201,11 +212,12 @@
                             android:background="@drawable/ic_favdestination_count">
 
                             <TextView
+                                android:id="@+id/tvRestaurant"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="10"
+                                android:text="0"
                                 android:textSize="7sp" />
                         </FrameLayout>
 
@@ -213,7 +225,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/ic_favdestination_meals" />
 
                         <View
@@ -236,11 +249,12 @@
                             android:background="@drawable/ic_favdestination_count">
 
                             <TextView
+                                android:id="@+id/tvPetrolPump"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="10"
+                                android:text="0"
                                 android:textSize="7sp" />
                         </FrameLayout>
 
@@ -248,7 +262,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/ic_favdestination_petrolpump" />
 
                         <View
@@ -271,11 +286,12 @@
                             android:background="@drawable/ic_favdestination_count">
 
                             <TextView
+                                android:id="@+id/tvServiceStation"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="10"
+                                android:text="0"
                                 android:textSize="7sp" />
                         </FrameLayout>
 
@@ -283,7 +299,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/ic_favdestination_mechanic" />
 
                         <View
@@ -306,12 +323,12 @@
                             android:background="@drawable/ic_favdestination_count">
 
                             <TextView
+                                android:id="@+id/tvHospitals"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="10"
-
+                                android:text="0"
                                 android:textSize="7sp" />
                         </FrameLayout>
 
@@ -319,7 +336,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/ic_favdestination_firstaid" />
 
                         <View
@@ -343,11 +361,12 @@
                             android:background="@drawable/ic_favdestination_count">
 
                             <TextView
+                                android:id="@+id/tvRiders"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="10"
+                                android:text="0"
                                 android:textSize="7sp" />
                         </FrameLayout>
 
@@ -355,7 +374,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-
+                            android:layout_marginLeft="3dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/ic_favdestination_rides" />
 
                         <View
@@ -379,11 +399,12 @@
                             android:background="@drawable/ic_favdestination_count">
 
                             <TextView
+                                android:id="@+id/tvOffers"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
                                 android:gravity="center"
-                                android:text="10"
+                                android:text="0"
                                 android:textSize="7sp" />
                         </FrameLayout>
 
@@ -391,7 +412,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-
+                            android:layout_marginLeft="2dp"
+                            android:layout_marginTop="2dp"
                             android:background="@drawable/ic_favdestination_offers" />
 
                         <View

@@ -39,238 +39,295 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/sdvDisplayPicture"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
-                android:layout_gravity="center"
-                android:layout_marginTop="32dp"
-                app:placeholderImage="@color/twenty_of_black"
-                app:roundAsCircle="true" />
-
-            <EditText
-                android:id="@+id/etName"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:layout_marginTop="32dp"
-                android:hint="Enter Name"
-                android:padding="12dp"
-                android:text="XYZ ROCKSS" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/etAddress"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:hint="Enter Address"
-                android:padding="12dp"
-                android:text="H.No.293, Sector 28, Chandigarh" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp">
+                    <com.facebook.drawee.view.SimpleDraweeView
+                        android:id="@+id/ivBannerImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:alpha="0.7"
+                        android:background="@drawable/com_facebook_profile_picture_blank_portrait"/>
+                    <FrameLayout
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        android:layout_centerInParent="true"
+                        >
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:id="@+id/sdvDisplayPicture"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_gravity="center"
+                            app:placeholderImage="@color/twenty_of_black"
+                            app:roundAsCircle="true"
+                            />
+                    </FrameLayout>
 
-            <EditText
-                android:id="@+id/etPhone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:hint="Enter Phone No."
-                android:inputType="phone"
-                android:padding="12dp"
-                android:text="9813198131" />
 
-            <EditText
-                android:id="@+id/etEmail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:hint="Enter Email"
-                android:inputType="textEmailAddress"
-                android:padding="12dp"
-                android:text="x@x.com" />
+                </RelativeLayout>
 
-            <EditText
-                android:id="@+id/etBikeBrand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:hint="Enter Bike Brand Name"
-                android:padding="12dp"
-                android:text="ROYAL ENFIELD" />
 
-            <EditText
-                android:id="@+id/etBikeModel"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:hint="Enter Bike Model"
-                android:padding="12dp"
-                android:text="CLASSIC 350" />
 
-            <TextView
-                android:id="@+id/tvUpdate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
-                android:layout_marginRight="32dp"
-                android:background="@color/light_brown"
-                android:gravity="center"
-                android:paddingBottom="12dp"
-                android:paddingTop="12dp"
-                android:text="UPDATE"
-                android:textColor="@color/white" />
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/etProfileName"
+                    android:drawableLeft="@drawable/ic_profile_tagline"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="32dp"
+                    android:focusable="true"
+                    android:hint="Enter NickName"
+                    android:padding="12dp"
+                    android:text="" />
 
+                <EditText
+                    android:id="@+id/etName"
+                    android:drawableLeft="@drawable/ic_profile_name"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="0dp"
+                    android:hint="Enter Name"
+                    android:padding="12dp"
+                    android:text="" />
+                <AutoCompleteTextView
+                    android:id="@+id/etAddress"
+                    android:drawableLeft="@drawable/ic_profile_location"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:padding="12dp"
+                    android:text=""
+                    android:focusableInTouchMode="true"
+                    android:hint="Start Location"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true">
+
+                    <requestFocus />
+                </AutoCompleteTextView>
+
+
+                <EditText
+                    android:id="@+id/etPhone"
+                    android:drawableLeft="@drawable/ic_profile_phone"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:hint="Enter Phone No."
+                    android:inputType="phone"
+                    android:maxLength="10"
+                    android:padding="12dp"
+                    android:text="" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:drawableLeft="@drawable/ic_profile_email"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:hint="Enter Email"
+                    android:inputType="textEmailAddress"
+                    android:padding="12dp"
+                    android:text="" />
+
+                <EditText
+                    android:id="@+id/etBikeBrand"
+                    android:drawableLeft="@drawable/ic_profile_bike"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:hint="Enter Bike Brand Name"
+                    android:textColorHint="#878787"
+                    android:editable="false"
+                    android:padding="12dp" />
+
+                <EditText
+                    android:id="@+id/etBikeModel"
+                    android:drawableLeft="@drawable/ic_profile_bikemodel"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:hint="Enter Bike Model"
+                    android:textColorHint="#878787"
+                    android:editable="false"
+                    android:padding="12dp" />
+                <EditText
+                    android:id="@+id/etBikeYear"
+                    android:drawableLeft="@drawable/ic_profile_bikemodel"
+                    android:drawablePadding="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:hint="Enter Bike Model Year"
+                    android:textColorHint="#878787"
+                    android:editable="false"
+                    android:padding="12dp" />
+
+                <EditText
+                    android:id="@+id/etDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:hint="MY INTERESTS"
+                    android:background="@drawable/search_edit_text"
+                    android:gravity="top"
+                    android:padding="10dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"></View>
+                <TextView
+                    android:id="@+id/tvUpdate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:background="@color/light_brown"
+                    android:gravity="center"
+                    android:paddingBottom="12dp"
+                    android:paddingTop="12dp"
+                    android:text="UPDATE"
+                    android:textColor="@color/white" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"></View>
+
+            </LinearLayout>
+
+        </ScrollView>
         <LinearLayout
             android:id="@+id/lvSlidingMenu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:background="@color/light_brown"
+            android:background="#8A3C16"
             android:clickable="true"
             android:orientation="vertical">
 
             <RelativeLayout
                 android:id="@+id/rlProfile"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="140dp"
                 android:background="@color/dark_brown"
                 android:paddingBottom="8dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingTop="8dp">
 
-                <com.facebook.drawee.view.SimpleDraweeView
-                    android:id="@+id/sdvDp"
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:id="@+id/btUpdateProfile"
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/icon_menu_edit" />
+
+                <Button
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_alignParentRight="true"
-                    app:placeholderImage="@color/white"
-                    app:roundAsCircle="true" />
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/btFullProfile"
+                    android:layout_marginTop="9dp"
+                    android:background="@drawable/icon_menu_logout" />
 
                 <TextView
                     android:id="@+id/tvName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/sdvDp"
+                    android:layout_alignParentTop="true"
+                    android:gravity="top|center"
                     android:singleLine="true"
-                    android:text="XYZ ROCKSS"
+                    android:text=""
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/title_text_size" />
 
-                <TextView
-                    android:id="@+id/tvAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignLeft="@id/tvName"
-                    android:layout_below="@id/tvName"
-                    android:layout_toLeftOf="@id/sdvDp"
-                    android:text="H.No.293, Sector 28, Chandigarh"
-                    android:textColor="@android:color/white" />
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/sdvDp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_below="@+id/tvName"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="7dp"
+                    app:placeholderImage="@color/white"
+                    app:roundAsCircle="true" />
+
+
+                <!--  <TextView
+                      android:id="@+id/tvAddress"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_alignLeft="@id/tvName"
+                      android:layout_below="@id/tvName"
+                      android:layout_toLeftOf="@id/sdvDp"
+                      android:text="H.No.293, Sector 28, Chandigarh"
+                      android:textColor="@android:color/white" />-->
 
 
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/tvDestinations"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:text="RIDING DESTINATIONS"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_text_size" />
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tvEvents"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:text="RIDING EVENTS"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_text_size" />
 
-            <TextView
-                android:id="@+id/tvModifyBike"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:text="MODIFY YOUR BIKE"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_text_size" />
+                <GridView
+                    android:id="@+id/gridView1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/rlProfile"
+                    android:horizontalSpacing="1dp"
+                    android:numColumns="2"
+                    android:stretchMode="columnWidth"
+                    android:verticalSpacing="1dp">
 
-            <TextView
-                android:id="@+id/tvMeetAndPlanRide"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:text="MEET 'N' PLAN A RIDE"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_text_size" />
+                </GridView>
 
-            <TextView
-                android:id="@+id/tvHealthyRiding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:text="HEALTHY RIDING"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_text_size" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/white"></View>
 
-            <TextView
-                android:id="@+id/tvGetDirections"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:text="GET DIRECTIONS"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_text_size" />
-
-            <TextView
-                android:id="@+id/tvNotifications"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:text="NOTIFICATIONS"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_text_size" />
-
-            <TextView
-                android:id="@+id/tvSettings"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:text="SETTINGS"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/title_text_size" />
-
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#8A3C16"></FrameLayout>
+            </LinearLayout>
         </LinearLayout>
-
     </android.support.v4.widget.DrawerLayout>
 
 

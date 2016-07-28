@@ -21,4 +21,14 @@
         android:padding="16dp"
         android:src="@drawable/icon_back" />
 
+    <Button
+        android:id="@+id/btMapNAv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="20dp"
+       android:layout_alignParentBottom="true"
+        android:background="@drawable/ic_get_direction_btn" />
+
+
 </RelativeLayout>

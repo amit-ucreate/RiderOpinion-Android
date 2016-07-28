@@ -27,12 +27,18 @@
         android:text=""
         android:textColor="@android:color/black"
         android:textSize="15sp" />
+
     <CheckBox
         android:id="@+id/cbBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|right"
-        android:layout_marginRight="10dp" >
-    </CheckBox>
-
+        android:layout_marginRight="10dp"></CheckBox>
+    <View
+        android:id="@+id/viewdestination"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+       android:layout_gravity="bottom"
+        android:background="@drawable/ic_dottedline">
+</View>
 </FrameLayout>

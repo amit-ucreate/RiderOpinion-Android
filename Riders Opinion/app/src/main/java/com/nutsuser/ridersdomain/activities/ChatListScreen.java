@@ -21,10 +21,6 @@ import com.nutsuser.ridersdomain.adapter.PagerAdapter;
  */
 public class ChatListScreen extends AppCompatActivity {
 
-    // ChatFragment mChatFragment;
-    ///ContactsFragment mContactsFragment;
-    //RecentsFragment mRecentsFragment;
-    // SettingFragment mSettingFragment;
     TextView mTextView;
 
     @Override
@@ -118,8 +114,9 @@ public class ChatListScreen extends AppCompatActivity {
                 Intent intent = new Intent(ChatListScreen.this, MainScreenActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("MainScreen", "OPEN");
+                intent.putExtra("MainScreenResponse", "OPEN");
                 startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

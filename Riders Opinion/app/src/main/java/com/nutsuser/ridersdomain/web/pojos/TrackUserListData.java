@@ -4,7 +4,12 @@ package com.nutsuser.ridersdomain.web.pojos;
  * Created by admin on 24-02-2016.
  */
 public class TrackUserListData {
-String userId;
+    String userId;
+    String latitude;
+    String longitude;
+    String rideDistance;
+    String username;
+    String image;
 
     public String getUserId() {
         return userId;
@@ -13,11 +18,6 @@ String userId;
     public void setUserId(String userId) {
         this.userId = userId;
     }
-
-    String latitude;
-    String longitude;
-    String rideDistance;
-    String username;
 
     public String getLatitude() {
         return latitude;
@@ -58,7 +58,5 @@ String userId;
     public void setImage(String image) {
         this.image = image;
     }
-
-    String image;
 
 }

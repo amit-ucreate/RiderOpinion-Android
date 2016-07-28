@@ -8,14 +8,13 @@ import android.util.Log;
  * Created by jass on 6/12/2015.
  */
 public class PrefsManager {
-
+    public static final String DEVICE_TOKEN = "devicetoken";
+    public static final String SERVICE_RUNNING = "service_running";
     private SharedPreferences mSharedPreferences;
     private SharedPreferences.Editor mEditor;
     private Context mContext;
     private String mPrefsName = "riders_opinion_prefs";
     private String mKeyToken = "token";
-    public static final String SERVICE_RUNNING = "service_running";
-
     private String mKeyName = "myName";
     private String mKeyPassword = "password";
     private String mKeyEmail = "email";
@@ -23,6 +22,41 @@ public class PrefsManager {
     private String mKeyCity = "city";
     private String mKeyImageUrl = "image_url";
     private String mKeyUserId = "my_user_id";
+    private String mKeyUserName = "user_name";
+    private String mKeyPasswordCometChat = "password_comet_chat";
+
+    private String mKeyBannerImageUrl = "banner_image_url";
+    private String mDistanceParameter= "M";
+    private String mVehicleId="vehicleId";
+
+    public String getDistanceParameter() {
+        return mSharedPreferences.getString(mDistanceParameter, "M");
+
+    }
+
+    public void setDistanceParameter(String distanceParameter) {
+        mEditor.putString(this.mDistanceParameter, distanceParameter);
+        mEditor.apply();
+
+    }
+
+    public String getUserName() {
+        return mSharedPreferences.getString(mKeyUserName, null);
+    }
+    public void setUserName(String token) {
+        mEditor.putString(mKeyUserName, token);
+        mEditor.apply();
+
+    }
+    public String getPasswordCometChat() {
+        return mSharedPreferences.getString(mKeyPasswordCometChat, null);
+    }
+    public void setPasswordCometChat(String pass) {
+        mEditor.putString(mKeyPasswordCometChat, pass);
+        mEditor.apply();
+
+    }
+
 
     public PrefsManager(Context context) {
 
@@ -31,8 +65,57 @@ public class PrefsManager {
         mEditor = mSharedPreferences.edit();
 
     }
+    public String getEventId() {
+        return mSharedPreferences.getString("eventId", null);
 
+    }
 
+    public void setEventId(String eventId) {
+        mEditor.putString("eventId", eventId);
+        mEditor.apply();
+
+    }
+
+    public String getHistoryCount() {
+        return mSharedPreferences.getString("historyCount", "");
+
+    }
+
+    public void setHistoryCount(String historyCount) {
+        mEditor.putString("historyCount", historyCount);
+        mEditor.apply();
+
+    }
+
+    public String getDreamId() {
+        return mSharedPreferences.getString("dreamId", null);
+
+    }
+
+    public void setDreamId(String dreamId) {
+        mEditor.putString("dreamId", dreamId);
+        mEditor.apply();
+
+    }
+    public String getDevicetoken() {
+        return mSharedPreferences.getString(PrefsManager.DEVICE_TOKEN, null);
+
+    }
+
+    public void setDevicetoken(String token) {
+        mEditor.putString(PrefsManager.DEVICE_TOKEN, token);
+        mEditor.apply();
+
+    }
+    public void setmKeyBannerImageUrl(String mKeyBannerImage) {
+
+        mEditor.putString(mKeyBannerImageUrl, mKeyBannerImage);
+        mEditor.apply();
+    }
+    public String getmKeyBannerImageUrl() {
+
+        return mSharedPreferences.getString(mKeyBannerImageUrl, "");
+    }
     public boolean isLoginDone() {
         return mSharedPreferences.getBoolean("loginDone", false);
 
@@ -80,9 +163,27 @@ public class PrefsManager {
     public void setCaseId(String id) {
         mEditor.putString("caseId", id);
         mEditor.apply();
+    }
+
+    public String getVehicleId() {
+        return mSharedPreferences.getString("mVehicleId", "");
 
     }
 
+    public void setVehicleId(String id) {
+        mEditor.putString("mVehicleId", id);
+        mEditor.apply();
+
+    }
+    public String getEventType() {
+        return mSharedPreferences.getString("eventType", "");
+
+    }
+
+    public void setEventType(String id) {
+        mEditor.putString("eventType", id);
+        mEditor.apply();
+    }
 
     public String getRadius() {
         return mSharedPreferences.getString("radius", "");
@@ -105,6 +206,17 @@ public class PrefsManager {
         mEditor.apply();
 
     }
+    public String getDistanceSettings() {
+        return mSharedPreferences.getString("mDistance", "");
+
+    }
+
+    public void setDistanceSettings(String token) {
+        mEditor.putString("mDistance", token);
+        mEditor.apply();
+
+    }
+
 
     public String getName() {
         return mSharedPreferences.getString(mKeyName, "");
